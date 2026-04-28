@@ -13,4 +13,9 @@ echo [3/3] Pushing to GitHub (emworktester-cloud/scholarship)...
 git push origin master
 
 echo Deployment to GitHub Complete!
+echo.
+echo =======================================
+echo LATEST COMMIT DEPLOYED:
+git log -1 --format="%%h - %%s"
+echo =======================================
 endlocal

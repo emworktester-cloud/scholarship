@@ -32,4 +32,4 @@ cmd /c "C:\Users\USER\.gemini\antigravity\scratch\scholar\deploy.bat ""your comm
 ## Notes
 - Build usually takes a few seconds to a minute via Vite `npm run build`.
 - Database pushes apply raw SQL via the `pg` client. Ensure SQL syntax is standard PostgreSQL.
-- **AI Rule**: After successfully deploying or pushing to Git, ALWAYS reply to the user with a summary of the actions taken and the result of the GitHub/DB push.
+- **AI Rule**: After successfully deploying or pushing to Git, ALWAYS reply to the user with a summary of the actions taken, the result of the GitHub/DB push, and the COMMIT HASH (รหัส commit) so the user can verify easily.
