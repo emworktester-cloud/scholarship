@@ -157,7 +157,7 @@ export function Sidebar() {
     <aside className="sidebar-scroll w-[264px] h-full bg-[#1e3a8a] text-white overflow-y-auto">
       {/* หัวเมนู */}
       <div className="px-5 pt-5 pb-2">
-        <p className="text-[10px] font-bold text-blue-300/60 uppercase tracking-[0.2em]">
+        <p className="text-[10px] font-bold text-sky-200/70 uppercase tracking-[0.2em]">
           เมนูหลัก
         </p>
       </div>
@@ -194,7 +194,7 @@ export function Sidebar() {
                 <span
                   className={cn(
                     'text-[13px] font-semibold flex-1 text-left truncate tracking-tight',
-                    hasActive ? 'text-white' : 'text-blue-100/80'
+                    hasActive ? 'text-white' : 'text-white/90'
                   )}
                 >
                   {mod.thaiLabel}
@@ -203,7 +203,7 @@ export function Sidebar() {
                   animate={{ rotate: isExp ? 180 : 0 }}
                   transition={{ duration: 0.12 }}
                 >
-                  <ChevronDown className="w-3.5 h-3.5 text-blue-300/50" />
+                  <ChevronDown className="w-3.5 h-3.5 text-white/50" />
                 </motion.div>
               </button>
 
@@ -220,7 +220,7 @@ export function Sidebar() {
                     <div className="ml-[22px] pl-3.5 border-l border-white/10 mt-1 mb-2">
                       {mod.groups.map((group) => (
                         <div key={group.id} className="mb-1">
-                          <p className="text-[10px] font-bold text-blue-300/40 uppercase tracking-wider px-3 py-1.5">
+                          <p className="text-[10px] font-bold text-sky-200/60 uppercase tracking-wider px-3 py-1.5">
                             {group.label}
                           </p>
                           <div className="space-y-px">
@@ -235,7 +235,7 @@ export function Sidebar() {
                                       'text-[12px]',
                                       active
                                         ? 'bg-[#3b82f6] text-white font-medium shadow-lg'
-                                        : 'text-blue-100/70 hover:text-white hover:bg-white/10'
+                                        : 'text-white/80 hover:text-white hover:bg-white/10'
                                     )}
                                   >
                                     <ItemIcon className="w-3.5 h-3.5 shrink-0" />
