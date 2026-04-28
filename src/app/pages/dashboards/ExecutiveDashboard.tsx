@@ -141,7 +141,7 @@ export default function ExecutiveDashboard() {
     <div className="space-y-6 p-6 min-h-full">
       {/* Permission Panel */}
       <PermissionPanel
-        pageName="Dashboard ผู้บริหาร"
+        pageName="Dashboard"
         moduleName="dashboard"
         defaultExpanded={true}
         permissions={[
@@ -174,7 +174,7 @@ export default function ExecutiveDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight font-k2d">
-            แดชบอร์ดผู้บริหาร
+            แดชบอร์ด
           </h1>
           <p className="text-sm md:text-base text-gray-600 mt-1 font-k2d">
             สวัสดี {user?.name} - ภาพรวมระบบทั้งหมด Real-time

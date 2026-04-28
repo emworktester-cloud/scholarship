@@ -94,7 +94,7 @@ const megaModules: MegaModule[] = [
   {
     id: 'analytics', thaiLabel: 'แดชบอร์ด & รายงาน', icon: BarChart3,
     groups: [
-      { id: '1.1', label: 'แดชบอร์ดผู้บริหาร', items: [
+      { id: '1.1', label: 'แดชบอร์ด', items: [
         { label: 'แดชบอร์ดรวม', path: '/analytics', icon: LayoutDashboard },
       ]},
       { id: '1.2', label: 'วิเคราะห์ & แนวโน้ม', items: [

@@ -14,9 +14,9 @@ To deploy or update the database schema directly to Supabase without manual CLI 
 cmd /c "cd c:\Users\USER\.gemini\antigravity\scratch\scholar && node scripts/db-deploy.js"
 ```
 
-## 2. GitHub Deployment (Zero-Touch)
+## 2. GitHub Deployment (Version Control Only)
 
-To push code changes to the remote GitHub repository (`emworktester-cloud/scholarship`) automatically, run the `deploy.bat` script.
+To push code changes to the remote GitHub repository (`emworktester-cloud/scholarship`) automatically, run the `deploy.bat` script. This is for version control only and WILL NOT trigger a Vercel deployment on the Free Tier.
 
 1. MUST check for build errors first before deploying:
 ```bash
@@ -29,7 +29,16 @@ Wait for the command to COMPLETE successfully. If it FAILS, you MUST fix the Typ
 cmd /c "C:\Users\USER\.gemini\antigravity\scratch\scholar\deploy.bat ""your commit message here"""
 ```
 
+## 3. Vercel Deployment (Production Hosting)
+
+Since Free Tier limits GitHub auto-deployments, you must deploy directly to Vercel via CLI using the `deploy-vercel.bat` script.
+
+1. Run the Vercel deploy script:
+```bash
+cmd /c "C:\Users\USER\.gemini\antigravity\scratch\scholar\deploy-vercel.bat"
+```
+
 ## Notes
 - Build usually takes a few seconds to a minute via Vite `npm run build`.
 - Database pushes apply raw SQL via the `pg` client. Ensure SQL syntax is standard PostgreSQL.
-- **AI Rule**: After successfully deploying or pushing to Git, ALWAYS reply to the user with a summary of the actions taken, the result of the GitHub/DB push, and the COMMIT HASH (รหัส commit) so the user can verify easily.
+- **AI Rule**: After successfully deploying or pushing to Git, ALWAYS reply to the user with a summary of the actions taken, the result of the GitHub/DB/Vercel push, and the COMMIT HASH (รหัส commit) so the user can verify easily.
