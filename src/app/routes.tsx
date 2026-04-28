@@ -33,7 +33,7 @@ import PublicHome from "./pages/public/PublicHome";
 import ApplicationSteps from "./pages/public/ApplicationSteps";
 
 export const router = createBrowserRouter([
-  // ===== Public Routes =====
+  // ===== Public =====
   {
     path: "/public",
     Component: PublicLayout,
@@ -62,59 +62,75 @@ export const router = createBrowserRouter([
       </AuthWrapper>
     ),
     children: [
-      // --- Redirect root to analytics ---
       { index: true, Component: Dashboard },
 
-      // ===== Module 1: Analytics (แดชบอร์ด & รายงาน) =====
+      // ===== 1. Analytics (แดชบอร์ด & รายงาน) =====
+      // 1.1 แดชบอร์ดผู้บริหาร
       { path: "analytics", Component: Dashboard },
+      // 1.2 วิเคราะห์ & แนวโน้ม
       { path: "analytics/reports", Component: Reports },
-      { path: "analytics/reports/progress", Component: Reports },
-      { path: "analytics/reports/trends", Component: Reports },
-      { path: "analytics/reports/individual", Component: Reports },
-      { path: "analytics/reports/export", Component: Reports },
+      { path: "analytics/progress", Component: Reports },
+      { path: "analytics/trends", Component: Reports },
+      // 1.3 ส่งออก & ตรวจสอบ
+      { path: "analytics/export", Component: Reports },
 
-      // ===== Module 2: Workspace (พื้นที่ปฏิบัติงาน) =====
+      // ===== 2. Workspace (พื้นที่ปฏิบัติงาน) =====
+      // 2.1 คิวงานของฉัน
       { path: "workspace", Component: Applications },
       { path: "workspace/all", Component: Applications },
-      { path: "workspace/broadcast", Component: Notifications },
       { path: "workspace/:id", Component: WorkspaceTaskDetail },
+      // 2.2 ลายเซ็นอิเล็กทรอนิกส์
+      { path: "workspace/e-sign", Component: Applications },
 
-      // ===== Module 3: Scholar Hub (ทะเบียน นทร.) =====
+      // ===== 3. Scholar Hub (ทะเบียน นทร.) =====
+      // 3.1 ข้อมูลส่วนบุคคล & สุขภาพ
       { path: "scholar-hub", Component: ScholarLifecycle },
       { path: "scholar-hub/during-study", Component: ScholarLifecycle },
       { path: "scholar-hub/post-graduation", Component: ScholarLifecycle },
+      { path: "scholar-hub/profile", Component: ScholarProfileView },
+      { path: "scholar-hub/profile/:id", Component: ScholarProfileView },
+      // 3.2 ทุน & ประวัติการศึกษา
       { path: "scholar-hub/tracking", Component: Tracking },
       { path: "scholar-hub/status", Component: ScholarStatus },
-      { path: "scholar-hub/profile/:id", Component: ScholarProfileView },
+      // 3.3 คลังเอกสาร & รูปภาพ
+      { path: "scholar-hub/documents", Component: SupportTools },
+      { path: "scholar-hub/photos", Component: SupportTools },
+      // 3.4 ชดใช้ทุน & จัดสรรสังกัด
+      { path: "scholar-hub/bond-calc", Component: Tracking },
 
-      // ===== Module 4: Finance & Bond (สัญญาและการเงิน) =====
+      // ===== 4. Finance & Bond (สัญญาและการเงิน) =====
+      // 4.1 สัญญา & ผู้ค้ำประกัน
       { path: "finance", Component: Awards },
+      { path: "finance/guarantor", Component: Awards },
+      // 4.2 การจ่ายเงิน & โลจิสติกส์
       { path: "finance/payment", Component: Payment },
       { path: "finance/budget", Component: Payment },
-      { path: "finance/installments", Component: Payment },
+      { path: "finance/logistics", Component: Payment },
 
-      // ===== Module 5: Master Data (ข้อมูลหลัก & Workflow) =====
-      { path: "master-data", Component: MasterData },
-      { path: "master-data/gov-orgs", Component: MasterData },
-      { path: "master-data/provinces", Component: MasterData },
-      { path: "master-data/repayment", Component: MasterData },
+      // ===== 5. Master Data (ข้อมูลหลัก & เวิร์กโฟลว์) =====
+      // 5.1 ตัวสร้างแบบฟอร์ม & Workflow
       { path: "master-data/workflows", Component: Workflows },
       { path: "master-data/forms", Component: FormBuilder },
       { path: "master-data/forms/:id", Component: FormBuilder },
       { path: "master-data/builder/:id?", Component: WorkflowBuilder },
+      // 5.2 ตารางข้อมูลอ้างอิง
+      { path: "master-data", Component: MasterData },
 
-      // ===== Module 6: System Admin (ระบบและความปลอดภัย) =====
+      // ===== 6. System Admin (ระบบและความปลอดภัย) =====
+      // 6.1 สิทธิ์ผู้ใช้ & โซนภูมิศาสตร์
       { path: "admin", Component: AccountAdmin },
       { path: "admin/security", Component: Security },
+      // 6.2 เชื่อมต่อระบบภายนอก
       { path: "admin/api", Component: API },
+      // 6.3 PDPA & บันทึกระบบ
       { path: "admin/cookie", Component: CookieManagement },
       { path: "admin/audit", Component: Audit },
 
-      // ===== Global Items (accessible from Topbar dropdown) =====
+      // ===== Global (Topbar dropdown) =====
       { path: "settings", Component: Settings },
       { path: "my-permissions", Component: MyPermissions },
 
-      // ===== Legacy Redirects (old paths still work) =====
+      // ===== Legacy backward-compat =====
       { path: "applications", Component: Applications },
       { path: "applications/:id", Component: ApplicationDetail },
       { path: "workflows", Component: Workflows },
@@ -125,7 +141,6 @@ export const router = createBrowserRouter([
       { path: "awards/:id", Component: ApplicationDetail },
       { path: "payment", Component: Payment },
       { path: "reports", Component: Reports },
-      { path: "master-data", Component: MasterData },
       { path: "audit", Component: Audit },
       { path: "api", Component: API },
       { path: "security", Component: Security },
