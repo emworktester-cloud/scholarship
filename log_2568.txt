@@ -1,0 +1,28 @@
+Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU.
+Starting to process C:\Users\USER\Downloads\2568 ภ.ง.ด.1...
+Processing 0168.1.pdf -> มกราคม
+Processing 0168.pdf -> มกราคม
+  -> Extracted 8 rows.
+Processing 0268.pdf -> กุมภาพันธ์
+  -> Extracted 8 rows.
+Processing 0368.pdf -> มีนาคม
+  -> Extracted 8 rows.
+Processing 0468.pdf -> เมษายน
+  -> Extracted 9 rows.
+Processing 0568.pdf -> พฤษภาคม
+  -> Extracted 4 rows.
+Processing 0668.pdf -> มิถุนายน
+  -> Extracted 4 rows.
+Processing 0768.pdf -> กรกฎาคม
+  -> Extracted 4 rows.
+Processing 0868.pdf -> สิงหาคม
+  -> Extracted 2 rows.
+Processing 0968.pdf -> กันยายน
+  -> Extracted 3 rows.
+Processing 1068.pdf -> ตุลาคม
+  -> Extracted 3 rows.
+Processing 1168.pdf -> พฤศจิกายน
+  -> Extracted 4 rows.
+Processing 1268.pdf -> ธันวาคม
+  -> Extracted 3 rows.
+Done!

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\USER\.gemini\antigravity\scratch\extract_2567_only.py", line 5, in <module>
+    import easyocr
+ModuleNotFoundError: No module named 'easyocr'
