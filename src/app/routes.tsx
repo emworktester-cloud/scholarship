@@ -26,11 +26,14 @@ import ScholarLifecycle from "./pages/ScholarLifecycle";
 import ScholarStatus from "./pages/ScholarStatus";
 import MyPermissions from "./pages/MyPermissions";
 import NotFound from "./pages/NotFound";
+import ScholarProfileView from "./pages/scholar-hub/ScholarProfileView";
+import WorkspaceTaskDetail from "./pages/workspace/WorkspaceTaskDetail";
 import PublicLayout from "./pages/public/PublicLayout";
 import PublicHome from "./pages/public/PublicHome";
 import ApplicationSteps from "./pages/public/ApplicationSteps";
 
 export const router = createBrowserRouter([
+  // ===== Public Routes =====
   {
     path: "/public",
     Component: PublicLayout,
@@ -39,6 +42,7 @@ export const router = createBrowserRouter([
       { path: "apply-steps", Component: ApplicationSteps },
     ],
   },
+  // ===== Login =====
   {
     path: "/login",
     element: (
@@ -47,6 +51,7 @@ export const router = createBrowserRouter([
       </AuthWrapper>
     ),
   },
+  // ===== Protected App Shell =====
   {
     path: "/",
     element: (
@@ -57,7 +62,59 @@ export const router = createBrowserRouter([
       </AuthWrapper>
     ),
     children: [
+      // --- Redirect root to analytics ---
       { index: true, Component: Dashboard },
+
+      // ===== Module 1: Analytics (แดชบอร์ด & รายงาน) =====
+      { path: "analytics", Component: Dashboard },
+      { path: "analytics/reports", Component: Reports },
+      { path: "analytics/reports/progress", Component: Reports },
+      { path: "analytics/reports/trends", Component: Reports },
+      { path: "analytics/reports/individual", Component: Reports },
+      { path: "analytics/reports/export", Component: Reports },
+
+      // ===== Module 2: Workspace (พื้นที่ปฏิบัติงาน) =====
+      { path: "workspace", Component: Applications },
+      { path: "workspace/all", Component: Applications },
+      { path: "workspace/broadcast", Component: Notifications },
+      { path: "workspace/:id", Component: WorkspaceTaskDetail },
+
+      // ===== Module 3: Scholar Hub (ทะเบียน นทร.) =====
+      { path: "scholar-hub", Component: ScholarLifecycle },
+      { path: "scholar-hub/during-study", Component: ScholarLifecycle },
+      { path: "scholar-hub/post-graduation", Component: ScholarLifecycle },
+      { path: "scholar-hub/tracking", Component: Tracking },
+      { path: "scholar-hub/status", Component: ScholarStatus },
+      { path: "scholar-hub/profile/:id", Component: ScholarProfileView },
+
+      // ===== Module 4: Finance & Bond (สัญญาและการเงิน) =====
+      { path: "finance", Component: Awards },
+      { path: "finance/payment", Component: Payment },
+      { path: "finance/budget", Component: Payment },
+      { path: "finance/installments", Component: Payment },
+
+      // ===== Module 5: Master Data (ข้อมูลหลัก & Workflow) =====
+      { path: "master-data", Component: MasterData },
+      { path: "master-data/gov-orgs", Component: MasterData },
+      { path: "master-data/provinces", Component: MasterData },
+      { path: "master-data/repayment", Component: MasterData },
+      { path: "master-data/workflows", Component: Workflows },
+      { path: "master-data/forms", Component: FormBuilder },
+      { path: "master-data/forms/:id", Component: FormBuilder },
+      { path: "master-data/builder/:id?", Component: WorkflowBuilder },
+
+      // ===== Module 6: System Admin (ระบบและความปลอดภัย) =====
+      { path: "admin", Component: AccountAdmin },
+      { path: "admin/security", Component: Security },
+      { path: "admin/api", Component: API },
+      { path: "admin/cookie", Component: CookieManagement },
+      { path: "admin/audit", Component: Audit },
+
+      // ===== Global Items (accessible from Topbar dropdown) =====
+      { path: "settings", Component: Settings },
+      { path: "my-permissions", Component: MyPermissions },
+
+      // ===== Legacy Redirects (old paths still work) =====
       { path: "applications", Component: Applications },
       { path: "applications/:id", Component: ApplicationDetail },
       { path: "workflows", Component: Workflows },
@@ -69,8 +126,6 @@ export const router = createBrowserRouter([
       { path: "payment", Component: Payment },
       { path: "reports", Component: Reports },
       { path: "master-data", Component: MasterData },
-      { path: "my-permissions", Component: MyPermissions },
-      { path: "settings", Component: Settings },
       { path: "audit", Component: Audit },
       { path: "api", Component: API },
       { path: "security", Component: Security },
@@ -80,6 +135,8 @@ export const router = createBrowserRouter([
       { path: "cookie-management", Component: CookieManagement },
       { path: "scholar-lifecycle", Component: ScholarLifecycle },
       { path: "scholar-status", Component: ScholarStatus },
+
+      // ===== 404 =====
       { path: "*", Component: NotFound },
     ],
   },

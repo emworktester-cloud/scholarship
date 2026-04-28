@@ -1,4 +1,4 @@
-import { Search, Bell, Globe, Menu, LogOut, User, Settings, Key, UserCog } from 'lucide-react';
+import { Search, Bell, Globe, Menu, LogOut, User, Settings, Key, UserCog, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -107,7 +107,11 @@ export function Topbar({ onToggleSidebar, onOpenQuickSearch }: TopbarProps) {
               <Settings className="mr-2 h-4 w-4" />
               ตั้งค่า
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate('/account-admin')}>
+            <DropdownMenuItem onClick={() => navigate('/my-permissions')}>
+              <Shield className="mr-2 h-4 w-4" />
+              สิทธิ์ของฉัน
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/admin')}>
               <UserCog className="mr-2 h-4 w-4" />
               จัดการบัญชีผู้ใช้
             </DropdownMenuItem>
