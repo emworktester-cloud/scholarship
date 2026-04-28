@@ -31,29 +31,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, selectedRole?: string) => {
     // Mock authentication - in real app, call API
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 800));
     
-    // Determine role based on email for demo purposes
-    let role = 'staff';
+    // Determine role based on selectedRole or email
+    let role = selectedRole || 'staff';
     let name = 'เจ้าหน้าที่';
     
-    if (email.includes('approver') || email.includes('อนุมัติ')) {
-      role = 'approver';
-      name = 'ผู้อนุมัติ';
-    } else if (email.includes('executive') || email.includes('ผู้บริหาร')) {
-      role = 'executive';
-      name = 'ผู้บริหาร';
+    if (selectedRole) {
+      if (selectedRole === 'approver') name = 'ผู้อนุมัติ';
+      else if (selectedRole === 'executive') name = 'ผู้บริหาร';
+      else if (selectedRole === 'scholar') name = 'นักเรียนทุน';
+      else name = 'เจ้าหน้าที่';
+    } else {
+      if (email.includes('approver') || email.includes('อนุมัติ')) {
+        role = 'approver';
+        name = 'ผู้อนุมัติ';
+      } else if (email.includes('executive') || email.includes('ผู้บริหาร')) {
+        role = 'executive';
+        name = 'ผู้บริหาร';
+      } else if (email.includes('scholar') || email.includes('นักเรียนทุน')) {
+        role = 'scholar';
+        name = 'นักเรียนทุน';
+      }
     }
     
     // Mock user data
     const mockUser: User = {
       id: '1',
-      email,
+      email: email || 'demo@example.com',
       name,
       role,
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + email,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + (email || name),
     };
 
     setUser(mockUser);

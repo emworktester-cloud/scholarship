@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { cn } from '../components/ui/utils';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../components/ui/dialog';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,23 +17,26 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isRoleDialogOpen, setIsRoleDialogOpen] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!email || !password) {
-      setError('กรุณากรอกอีเมลและรหัสผ่าน');
-      return;
-    }
+    // Allow any username/password for demo purposes
+    // Just open the role selection dialog
+    setIsRoleDialogOpen(true);
+  };
 
+  const handleRoleSelect = async (role: string) => {
+    setIsRoleDialogOpen(false);
     setIsLoading(true);
 
     try {
-      await login(email, password);
+      await login(email, password, role);
       navigate('/');
     } catch (err) {
-      setError('อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+      setError('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
     } finally {
       setIsLoading(false);
     }
@@ -232,6 +236,69 @@ export default function Login() {
           </div>
         </motion.div>
       </div>
+
+      {/* Role Selection Dialog */}
+      <Dialog open={isRoleDialogOpen} onOpenChange={setIsRoleDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold font-k2d text-center text-slate-900">
+              เลือกบทบาทการเข้าใช้งาน
+            </DialogTitle>
+            <DialogDescription className="text-center font-k2d">
+              เพื่อความสะดวกในการทดสอบระบบ กรุณาเลือก Role ที่ต้องการ
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-1 gap-3 py-4">
+            <Button
+              variant="outline"
+              className="h-14 justify-start px-6 hover:bg-blue-50 hover:text-[#1e3a8a] hover:border-[#1e3a8a]/30 transition-all font-k2d"
+              onClick={() => handleRoleSelect('staff')}
+            >
+              <User className="w-5 h-5 mr-3 text-slate-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-semibold text-base">เจ้าหน้าที่ (Staff)</span>
+                <span className="text-xs text-slate-500">สำหรับงานธุรการและรับเรื่อง</span>
+              </div>
+            </Button>
+            
+            <Button
+              variant="outline"
+              className="h-14 justify-start px-6 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all font-k2d"
+              onClick={() => handleRoleSelect('approver')}
+            >
+              <ShieldCheck className="w-5 h-5 mr-3 text-slate-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-semibold text-base">ผู้อนุมัติ (Approver)</span>
+                <span className="text-xs text-slate-500">พิจารณาและอนุมัติคำร้องต่างๆ</span>
+              </div>
+            </Button>
+
+            <Button
+              variant="outline"
+              className="h-14 justify-start px-6 hover:bg-amber-50 hover:text-amber-700 hover:border-amber-200 transition-all font-k2d"
+              onClick={() => handleRoleSelect('executive')}
+            >
+              <UserCog className="w-5 h-5 mr-3 text-slate-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-semibold text-base">ผู้บริหาร (Executive)</span>
+                <span className="text-xs text-slate-500">ดูภาพรวมและ Dashboard</span>
+              </div>
+            </Button>
+
+            <Button
+              variant="outline"
+              className="h-14 justify-start px-6 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-200 transition-all font-k2d"
+              onClick={() => handleRoleSelect('scholar')}
+            >
+              <GraduationCap className="w-5 h-5 mr-3 text-slate-500" />
+              <div className="flex flex-col items-start">
+                <span className="font-semibold text-base">นักเรียนทุน (Scholar)</span>
+                <span className="text-xs text-slate-500">ผู้รับทุน ส่งคำร้อง e-Form</span>
+              </div>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
