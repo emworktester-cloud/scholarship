@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 
 // Replace this URL or use process.env.DATABASE_URL
 // Password URL-encoded to handle special characters like @ and #
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:%5BP%40ssw0rd%23emwork111%5D@db.najaomciziqoxmolygfs.supabase.co:5432/postgres';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres.najaomciziqoxmolygfs:[YOUR-PASSWORD]@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres';
 
 async function deployDB() {
   console.log('🔄 Connecting to Supabase Database...');
@@ -24,7 +24,7 @@ async function deployDB() {
     await client.connect();
     console.log('✅ Connected successfully!');
 
-    const migrationFile = path.join(__dirname, '../supabase/migrations/20260427_init_v3.sql');
+    const migrationFile = path.join(__dirname, '../supabase/migrations/20260428_workflow_engine_v4.sql');
     
     if (!fs.existsSync(migrationFile)) {
       console.error('❌ Migration file not found at:', migrationFile);
