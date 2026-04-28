@@ -55,17 +55,31 @@ export function RootLayout() {
         onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} 
         onOpenQuickSearch={() => setIsQuickSearchOpen(true)}
       />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <AnimatePresence mode="wait">
           {sidebarOpen && (
-            <motion.div
-              initial={{ x: -260, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -260, opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-            >
-              <Sidebar />
-            </motion.div>
+            <>
+              {/* Mobile Overlay */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden"
+                onClick={() => setSidebarOpen(false)}
+              />
+              
+              {/* Sidebar Container */}
+              <motion.div
+                initial={{ x: -260, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -260, opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className="fixed md:relative inset-y-0 left-0 z-50 md:z-0 h-full border-r border-white/10 shadow-2xl md:shadow-none"
+              >
+                <Sidebar />
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
         <main className="flex-1 overflow-auto bg-gradient-to-br from-sky-50/50 via-blue-50/50 to-emerald-50/50">

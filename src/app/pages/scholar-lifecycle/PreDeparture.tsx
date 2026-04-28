@@ -27,6 +27,7 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '../../components/ui/table';
+import { FilterCombobox } from '../../components/ui/filter-combobox';
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
@@ -69,6 +70,10 @@ export default function PreDeparture() {
   const [addScholarOpen, setAddScholarOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('personal');
 
+  const [filterType, setFilterType] = useState<string>('all');
+  const [filterCountry, setFilterCountry] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+
   return (
     <div className="space-y-6">
       {/* Phase Description */}
@@ -103,9 +108,38 @@ export default function PreDeparture() {
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-64 pl-9 bg-white" />
               </div>
-              <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="ประเภททุน" /></SelectTrigger><SelectContent><SelectItem value="ocsc">ทุน ก.พ.</SelectItem><SelectItem value="ministry">ทุนกระทรวง</SelectItem></SelectContent></Select>
-              <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="ประเทศ" /></SelectTrigger><SelectContent><SelectItem value="us">สหรัฐอเมริกา</SelectItem><SelectItem value="uk">สหราชอาณาจักร</SelectItem><SelectItem value="jp">ญี่ปุ่น</SelectItem></SelectContent></Select>
-              <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="สถานะ" /></SelectTrigger><SelectContent><SelectItem value="processing">กำลังดำเนินการ</SelectItem><SelectItem value="waiting">รอเอกสาร</SelectItem><SelectItem value="ready">พร้อมเดินทาง</SelectItem></SelectContent></Select>
+              <FilterCombobox
+                className="w-40"
+                placeholder="ประเภททุน"
+                value={filterType}
+                onChange={setFilterType}
+                options={[
+                  { value: "ocsc", label: "ทุน ก.พ." },
+                  { value: "ministry", label: "ทุนกระทรวง" }
+                ]}
+              />
+              <FilterCombobox
+                className="w-40"
+                placeholder="ประเทศ"
+                value={filterCountry}
+                onChange={setFilterCountry}
+                options={[
+                  { value: "us", label: "สหรัฐอเมริกา" },
+                  { value: "uk", label: "สหราชอาณาจักร" },
+                  { value: "jp", label: "ญี่ปุ่น" }
+                ]}
+              />
+              <FilterCombobox
+                className="w-40"
+                placeholder="สถานะ"
+                value={filterStatus}
+                onChange={setFilterStatus}
+                options={[
+                  { value: "processing", label: "กำลังดำเนินการ" },
+                  { value: "waiting", label: "รอเอกสาร" },
+                  { value: "ready", label: "พร้อมเดินทาง" }
+                ]}
+              />
             </>
           )}
         </div>
@@ -122,7 +156,7 @@ export default function PreDeparture() {
               <User className="w-5 h-5 text-blue-600" />
               รายชื่อผู้รับทุน (ก่อนเดินทาง)
             </CardTitle>
-            <CardDescription>แสดงรายชื่อผู้รับทุนที่อยู่ระหว่างเตรียมตัวก่อนออกเดินทาง</CardDescription>
+            <CardDescription className="text-xs">แสดงรายชื่อผู้รับทุนที่อยู่ระหว่างเตรียมตัวก่อนออกเดินทาง</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <Table>

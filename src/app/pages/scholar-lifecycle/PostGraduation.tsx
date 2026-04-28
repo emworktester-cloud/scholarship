@@ -23,6 +23,7 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '../../components/ui/table';
+import { FilterCombobox } from '../../components/ui/filter-combobox';
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
@@ -64,6 +65,9 @@ export default function PostGraduation() {
   const [selectedScholar, setSelectedScholar] = useState<GraduatingScholar | null>(null);
   const [completionDialogOpen, setCompletionDialogOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('completion');
+
+  const [filterType, setFilterType] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   const postGradSections = [
     { id: 'completion', label: '1. แจ้งสำเร็จการศึกษา', icon: GraduationCap, desc: 'แจ้งสำเร็จหรือเสร็จสิ้นการศึกษากับ สนร./สอท./ก.พ.' },
@@ -108,8 +112,28 @@ export default function PostGraduation() {
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-56 pl-9 bg-white" />
               </div>
-              <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="ประเภททุน" /></SelectTrigger><SelectContent><SelectItem value="ocsc">ทุน ก.พ.</SelectItem><SelectItem value="ministry">ทุนกระทรวง</SelectItem></SelectContent></Select>
-              <Select><SelectTrigger className="w-36 bg-white"><SelectValue placeholder="สถานะปัจจุบัน" /></SelectTrigger><SelectContent><SelectItem value="pending-report">รอรายงานตัว</SelectItem><SelectItem value="pending-degree">พิจารณาคุณวุฒิ</SelectItem><SelectItem value="pending-placement">จัดสรรสังกัด</SelectItem><SelectItem value="service-started">เริ่มชดใช้ทุน</SelectItem></SelectContent></Select>
+              <FilterCombobox
+                className="w-40"
+                placeholder="ประเภททุน"
+                value={filterType}
+                onChange={setFilterType}
+                options={[
+                  { value: "ocsc", label: "ทุน ก.พ." },
+                  { value: "ministry", label: "ทุนกระทรวง" }
+                ]}
+              />
+              <FilterCombobox
+                className="w-44"
+                placeholder="สถานะปัจจุบัน"
+                value={filterStatus}
+                onChange={setFilterStatus}
+                options={[
+                  { value: "pending-report", label: "รอรายงานตัว" },
+                  { value: "pending-degree", label: "พิจารณาคุณวุฒิ" },
+                  { value: "pending-placement", label: "จัดสรรสังกัด" },
+                  { value: "service-started", label: "เริ่มชดใช้ทุน" }
+                ]}
+              />
             </>
           )}
         </div>
@@ -125,7 +149,7 @@ export default function PostGraduation() {
               <Award className="w-5 h-5 text-amber-600" />
               รายชื่อผู้รับทุน (สำเร็จการศึกษา)
             </CardTitle>
-            <CardDescription>แสดงรายชื่อผู้รับทุนที่สำเร็จการศึกษาและอยู่ระหว่างดำเนินการชดใช้ทุน</CardDescription>
+            <CardDescription className="text-xs">แสดงรายชื่อผู้รับทุนที่สำเร็จการศึกษาและอยู่ระหว่างดำเนินการชดใช้ทุน</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <Table>
@@ -263,7 +287,7 @@ export default function PostGraduation() {
                    return <><Icon className="w-5 h-5 text-amber-600" />{s.label.split('. ')[1]}</>;
                  })()}
                </CardTitle>
-               <CardDescription>
+               <CardDescription className="text-xs">
                  {postGradSections.find(x => x.id === expandedSection)?.desc}
                </CardDescription>
              </CardHeader>

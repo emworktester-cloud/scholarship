@@ -22,6 +22,7 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '../../components/ui/table';
+import { FilterCombobox } from '../../components/ui/filter-combobox';
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
@@ -122,6 +123,10 @@ export default function DuringStudy() {
   const [selectedRequestType, setSelectedRequestType] = useState<RequestType | null>(null);
   const [selectedScholar, setSelectedScholar] = useState<any>(null);
 
+  const [filterDegree, setFilterDegree] = useState<string>('all');
+  const [filterCountry, setFilterCountry] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+
   // Mock data for scholars in during-study phase
   const duringStudyScholars = [
     { id: 'SCH-001', name: 'น.ส.พรพิมล สุขใจ', degree: 'M.Sc. Data Science', university: 'MIT', country: 'สหรัฐอเมริกา', gpa: '3.85', status: 'ปกติ', nextReport: '15 พ.ค. 2569' },
@@ -166,16 +171,46 @@ export default function DuringStudy() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2"><User className="w-5 h-5 text-blue-600" />รายชื่อผู้รับทุน (ระหว่างศึกษา)</CardTitle>
-                  <CardDescription>แสดงรายชื่อนักเรียนทุนที่อยู่ระหว่างการศึกษาในปัจจุบัน</CardDescription>
+                  <CardDescription className="text-xs">แสดงรายชื่อนักเรียนทุนที่อยู่ระหว่างการศึกษาในปัจจุบัน</CardDescription>
                 </div>
                 <div className="flex gap-2">
                   <div className="relative">
                     <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                     <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-56 pl-9 bg-white" />
                   </div>
-                  <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="ระดับศึกษา" /></SelectTrigger><SelectContent><SelectItem value="ba">ปริญญาตรี</SelectItem><SelectItem value="ma">ปริญญาโท</SelectItem><SelectItem value="phd">ปริญญาเอก</SelectItem></SelectContent></Select>
-                  <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="ประเทศ" /></SelectTrigger><SelectContent><SelectItem value="us">สหรัฐอเมริกา</SelectItem><SelectItem value="uk">สหราชอาณาจักร</SelectItem><SelectItem value="jp">ญี่ปุ่น</SelectItem></SelectContent></Select>
-                  <Select><SelectTrigger className="w-32 bg-white"><SelectValue placeholder="สถานะ" /></SelectTrigger><SelectContent><SelectItem value="normal">ปกติ</SelectItem><SelectItem value="watch">เฝ้าระวัง</SelectItem><SelectItem value="critical">ต้องเฝ้าระวัง</SelectItem></SelectContent></Select>
+                  <FilterCombobox
+                    className="w-40"
+                    placeholder="ระดับศึกษา"
+                    value={filterDegree}
+                    onChange={setFilterDegree}
+                    options={[
+                      { value: "ba", label: "ปริญญาตรี" },
+                      { value: "ma", label: "ปริญญาโท" },
+                      { value: "phd", label: "ปริญญาเอก" }
+                    ]}
+                  />
+                  <FilterCombobox
+                    className="w-40"
+                    placeholder="ประเทศ"
+                    value={filterCountry}
+                    onChange={setFilterCountry}
+                    options={[
+                      { value: "us", label: "สหรัฐอเมริกา" },
+                      { value: "uk", label: "สหราชอาณาจักร" },
+                      { value: "jp", label: "ญี่ปุ่น" }
+                    ]}
+                  />
+                  <FilterCombobox
+                    className="w-40"
+                    placeholder="สถานะ"
+                    value={filterStatus}
+                    onChange={setFilterStatus}
+                    options={[
+                      { value: "normal", label: "ปกติ" },
+                      { value: "watch", label: "เฝ้าระวัง" },
+                      { value: "critical", label: "ต้องเฝ้าระวัง" }
+                    ]}
+                  />
                 </div>
               </div>
             </CardHeader>
@@ -230,7 +265,7 @@ export default function DuringStudy() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2"><MapPin className="w-5 h-5 text-blue-600" />การรายงานตัวเมื่อเดินทางถึง (ต่างประเทศ)</CardTitle>
-              <CardDescription>นทร. จัดส่งเอกสารรายงานตัวถึง สนร. หรือ สอท. เมื่อเดินทางถึงประเทศที่ศึกษา</CardDescription>
+              <CardDescription className="text-xs">นทร. จัดส่งเอกสารรายงานตัวถึง สนร. หรือ สอท. เมื่อเดินทางถึงประเทศที่ศึกษา</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-3 gap-3">
@@ -247,7 +282,7 @@ export default function DuringStudy() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2"><Eye className="w-5 h-5 text-green-600" />การติดตามการศึกษาและความเป็นอยู่ (โดย สนร.)</CardTitle>
-              <CardDescription>สนร. ติดตามการศึกษาและความเป็นอยู่ของ นทร. แล้วส่งรายงานแจ้ง ศกศ.</CardDescription>
+              <CardDescription className="text-xs">สนร. ติดตามการศึกษาและความเป็นอยู่ของ นทร. แล้วส่งรายงานแจ้ง ศกศ.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -283,7 +318,7 @@ export default function DuringStudy() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2"><ClipboardList className="w-5 h-5 text-blue-600" />รายงานผลการศึกษา</CardTitle>
-                  <CardDescription>นทร. รายงานผลการศึกษาแต่ละภาคเรียน ผ่าน สนร./สอท./สำนักงาน ก.พ.</CardDescription>
+                  <CardDescription className="text-xs">นทร. รายงานผลการศึกษาแต่ละภาคเรียน ผ่าน สนร./สอท./สำนักงาน ก.พ.</CardDescription>
                 </div>
                 <Button size="sm" onClick={() => toast.info('สร้างรายงานผลการศึกษาใหม่')}><Plus className="w-4 h-4 mr-1" />บันทึกผล</Button>
               </div>
@@ -331,7 +366,7 @@ export default function DuringStudy() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2"><Send className="w-5 h-5 text-purple-600" />คำขออนุมัติ/อนุญาตต่างๆ</CardTitle>
-              <CardDescription>นทร. ยื่นคำขอผ่าน สนร./สอท./สำนักงาน ก.พ. ระบบตรวจสอบ พิจารณา และแจ้งผล</CardDescription>
+              <CardDescription className="text-xs">นทร. ยื่นคำขอผ่าน สนร./สอท./สำนักงาน ก.พ. ระบบตรวจสอบ พิจารณา และแจ้งผล</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -374,7 +409,7 @@ export default function DuringStudy() {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2"><Flag className="w-5 h-5 text-red-600" />กรณีเฝ้าระวัง (Watch List)</CardTitle>
-                  <CardDescription>กรณี นทร. ประสบปัญหาต่างๆ ที่ สนร. รายงาน — แบ่งตามประเภทปัญหา</CardDescription>
+                  <CardDescription className="text-xs">กรณี นทร. ประสบปัญหาต่างๆ ที่ สนร. รายงาน — แบ่งตามประเภทปัญหา</CardDescription>
                 </div>
                 <Button size="sm" onClick={() => toast.info('เพิ่มรายการ Watch List')}><Plus className="w-4 h-4 mr-1" />เพิ่มรายการ</Button>
               </div>

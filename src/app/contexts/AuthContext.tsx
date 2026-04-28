@@ -57,13 +57,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     }
     
+    // Define beautiful avatar seeds per role
+    const avatarSeeds: Record<string, string> = {
+      staff: 'Felix',
+      approver: 'Alexander',
+      executive: 'Sophia',
+      scholar: 'Aneka'
+    };
+
+    const seed = avatarSeeds[role] || name;
+    
     // Mock user data
     const mockUser: User = {
       id: '1',
       email: email || 'demo@example.com',
       name,
       role,
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + (email || name),
+      avatar: `https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=e2e8f0,f8fafc`,
     };
 
     setUser(mockUser);

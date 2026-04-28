@@ -124,7 +124,7 @@ export default function Login() {
           className="w-full max-w-[440px] bg-white/80 backdrop-blur-xl p-8 sm:p-12 shadow-2xl shadow-blue-900/5 rounded-[2rem] border border-white"
         >
           {/* Mobile Logo */}
-          <div className="lg:hidden flex flex-col items-center mb-10 text-center">
+          <div className="lg:hidden flex flex-col items-center mb-8 text-center">
             <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg mb-6 p-3 border border-gray-100 relative">
               <div className="absolute -inset-0.5 bg-gradient-to-b from-[#d4af37]/50 to-transparent rounded-2xl opacity-50"></div>
               <img
@@ -133,13 +133,16 @@ export default function Login() {
                 className="relative z-10 w-full h-full object-contain"
               />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 leading-tight font-k2d">GSMS</h2>
-            <p className="text-sm text-slate-500 mt-1 font-k2d">ระบบบริหารจัดการทุนรัฐบาล</p>
+            <h2 className="text-2xl font-bold text-slate-900 leading-normal font-k2d">GSMS</h2>
+            <p className="text-sm text-slate-500 mt-2 font-k2d leading-normal">ระบบบริหารจัดการทุนรัฐบาล</p>
+            <p className="text-[13px] text-slate-400 mt-4 font-k2d leading-relaxed max-w-[260px]">
+              กรุณากรอก Username และ Password<br/>เพื่อเข้าใช้งานระบบ
+            </p>
           </div>
 
-          <div className="mb-10 text-center">
-            <h2 className="text-[27px] lg:text-[33px] font-bold text-[#0f172a] tracking-tight font-k2d">เข้าสู่ระบบ</h2>
-            <p className="text-slate-500 mt-3 text-sm font-k2d leading-relaxed">กรุณากรอกข้อมูลสำหรับลงชื่อเข้าใช้งานระบบ</p>
+          <div className="hidden lg:block mb-10 text-center">
+            <h2 className="text-[28px] lg:text-[33px] font-bold text-[#0f172a] font-k2d leading-normal">เข้าสู่ระบบ</h2>
+            <p className="text-slate-500 mt-4 text-sm font-k2d leading-normal">กรุณากรอกข้อมูลสำหรับลงชื่อเข้าใช้งานระบบ</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

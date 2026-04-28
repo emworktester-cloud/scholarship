@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   Plane, GraduationCap, Award, ChevronRight,
@@ -56,7 +57,25 @@ const phases = [
 ];
 
 export default function ScholarLifecycle() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [activePhase, setActivePhase] = useState('pre-departure');
+
+  useEffect(() => {
+    if (location.pathname.includes('/during-study')) {
+      setActivePhase('during-study');
+    } else if (location.pathname.includes('/post-graduation')) {
+      setActivePhase('post-graduation');
+    } else {
+      setActivePhase('pre-departure');
+    }
+  }, [location.pathname]);
+
+  const handlePhaseChange = (phaseId: string) => {
+    setActivePhase(phaseId);
+    if (phaseId === 'pre-departure') navigate('/scholar-hub');
+    else navigate(`/scholar-hub/${phaseId}`);
+  };
 
   const renderContent = () => {
     switch (activePhase) {
@@ -70,13 +89,13 @@ export default function ScholarLifecycle() {
   return (
     <div className="min-h-full">
       <PageHeader
-        title="บันทึกข้อมูลผู้รับทุน"
-        breadcrumbs={[{ label: 'แดชบอร์ด', path: '/' }, { label: 'บันทึกข้อมูลผู้รับทุน' }]}
+        title="ข้อมูลนักเรียนทุน"
+        breadcrumbs={[{ label: 'แดชบอร์ด', path: '/' }, { label: 'ข้อมูลนักเรียนทุน' }]}
       />
 
       <div className="p-8 space-y-6">
         <PermissionPanel
-          pageName="บันทึกข้อมูลผู้รับทุน"
+          pageName="ข้อมูลนักเรียนทุน"
           moduleName="scholar-lifecycle"
           defaultExpanded={false}
           permissions={[
@@ -94,12 +113,12 @@ export default function ScholarLifecycle() {
         />
 
         {/* Phase Navigation - Compact Style */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col md:flex-row md:items-center gap-3">
           {phases.map((phase, i) => {
             const PhaseIcon = phase.icon;
             const isActive = activePhase === phase.id;
             return (
-              <div key={phase.id} className="flex items-center flex-1 min-w-0">
+              <div key={phase.id} className="flex flex-col md:flex-row md:items-center flex-1 min-w-0">
                 <motion.div
                   className={cn(
                     'flex-1 p-3 rounded-xl border cursor-pointer transition-all',
@@ -107,7 +126,7 @@ export default function ScholarLifecycle() {
                       ? `border-transparent bg-gradient-to-r ${phase.activeGradient} text-white shadow-md`
                       : `bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm`
                   )}
-                  onClick={() => setActivePhase(phase.id)}
+                  onClick={() => handlePhaseChange(phase.id)}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                 >
@@ -132,7 +151,7 @@ export default function ScholarLifecycle() {
                   </div>
                 </motion.div>
                 {i < phases.length - 1 && (
-                  <div className="mx-2 shrink-0">
+                  <div className="hidden md:block mx-2 shrink-0">
                     <ArrowRight className="w-4 h-4 text-gray-300" />
                   </div>
                 )}

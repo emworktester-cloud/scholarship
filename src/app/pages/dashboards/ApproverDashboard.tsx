@@ -115,21 +115,21 @@ export default function ApproverDashboard() {
   return (
     <div className="space-y-6 p-6 min-h-full">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight font-k2d">
             แดชบอร์ดผู้อนุมัติ
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-sm md:text-base text-gray-600 mt-1 font-k2d">
             สวัสดี {user?.name} - พิจารณาอนุมัติคำขอต่างๆ ได้ที่นี่
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" size="sm" className="font-k2d">
             <Filter className="w-4 h-4 mr-2" />
             กรองข้อมูล
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="font-k2d">
             <Download className="w-4 h-4 mr-2" />
             ส่งออกรายงาน
           </Button>
