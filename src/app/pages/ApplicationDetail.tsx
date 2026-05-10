@@ -84,6 +84,7 @@ import {
   TableHeader,
   TableRow,
 } from '../components/ui/table';
+import { DatePicker } from '../components/ui/date-picker';
 import { toast } from 'sonner';
 
 export default function ApplicationDetail() {
@@ -375,7 +376,7 @@ export default function ApplicationDetail() {
                   </div>
                   <div className="space-y-2">
                     <Label>กำหนดส่ง</Label>
-                    <Input type="date" />
+                    <DatePicker />
                   </div>
                   <div className="space-y-2">
                     <Label>ข้อความถึงผู้สมัคร</Label>

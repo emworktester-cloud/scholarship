@@ -19,6 +19,7 @@ import {
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
+import { DatePicker } from '../../components/ui/date-picker';
 import { toast } from 'sonner';
 
 // ===== Marital Status Types =====
@@ -191,7 +192,7 @@ export function MaritalStatus() {
             <div className="space-y-1.5"><Label className="text-xs">นักเรียนทุน <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="s1">SCH-2569-001 น.ส.พรพิมล</SelectItem><SelectItem value="s2">SCH-2568-015 นายกิตติพงษ์</SelectItem></SelectContent></Select></div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label className="text-xs">สถานภาพสมรส <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent>{maritalStatusTypes.map(s => <SelectItem key={s.code} value={s.code}>{s.name}</SelectItem>)}</SelectContent></Select></div>
-              <div className="space-y-1.5"><Label className="text-xs">วันที่เปลี่ยนแปลง</Label><Input type="date" /></div>
+              <div className="space-y-1.5"><Label className="text-xs">วันที่เปลี่ยนแปลง</Label><DatePicker /></div>
             </div>
             <div className="space-y-1.5"><Label className="text-xs">ชื่อคู่สมรส/อดีตคู่สมรส</Label><Input placeholder="ชื่อ-นามสกุล" /></div>
             <div className="space-y-1.5"><Label className="text-xs">หมายเหตุ</Label><Textarea placeholder="รายละเอียดเพิ่มเติม..." className="min-h-[50px]" /></div>

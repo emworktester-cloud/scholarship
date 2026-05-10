@@ -20,6 +20,7 @@ import {
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
+import { DatePicker } from '../../components/ui/date-picker';
 import { toast } from 'sonner';
 
 // ===== Physical Status Types =====
@@ -217,7 +218,7 @@ export function PhysicalStatus() {
             <div className="space-y-1.5"><Label className="text-xs">รายละเอียดเพิ่มเติม</Label><Textarea placeholder="อธิบายรายละเอียด..." className="min-h-[70px]" /></div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label className="text-xs">เลขที่ใบรับรองความพิการ</Label><Input placeholder="พก.xxxx/xxxx" /></div>
-              <div className="space-y-1.5"><Label className="text-xs">วันที่ออกใบรับรอง</Label><Input type="date" /></div>
+              <div className="space-y-1.5"><Label className="text-xs">วันที่ออกใบรับรอง</Label><DatePicker /></div>
             </div>
             <div className="border-2 border-dashed border-gray-200 rounded-lg p-3 hover:border-blue-300 transition-colors cursor-pointer" onClick={() => toast.info('อัปโหลดเอกสาร')}>
               <div className="flex items-center gap-2 text-xs text-gray-500"><Upload className="w-4 h-4 text-gray-400" /><span>อัปโหลดใบรับรองแพทย์/เอกสารประกอบ</span><Badge variant="outline" className="text-[8px] ml-auto">.pdf .jpg .png</Badge></div>

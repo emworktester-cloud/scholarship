@@ -224,8 +224,7 @@ export default function WorkspaceTaskDetail() {
 
         </motion.div>
       </div>
-
-      {/* Workflow Dialog */}
+          {/* Workflow Dialog */}
       <Dialog open={workflowDialogOpen} onOpenChange={setWorkflowDialogOpen}>
         <DialogContent className="sm:max-w-md p-0 overflow-hidden">
           <div className="bg-gradient-to-r from-indigo-600 to-blue-700 px-6 py-5 text-white">
@@ -274,6 +273,7 @@ export default function WorkspaceTaskDetail() {
           </div>
         </DialogContent>
       </Dialog>
+
     </div>
   );
 }

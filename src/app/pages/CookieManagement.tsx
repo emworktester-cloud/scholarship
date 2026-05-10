@@ -29,6 +29,7 @@ import {
   Dialog, DialogContent, DialogDescription, DialogFooter,
   DialogHeader, DialogTitle,
 } from '../components/ui/dialog';
+import { DatePicker } from '../components/ui/date-picker';
 import { toast } from 'sonner';
 
 // ===== Cookie Definitions =====
@@ -407,7 +408,7 @@ export default function CookieManagement() {
                   <div className="space-y-2"><Label>เนื้อหา (HTML)</Label><Textarea className="min-h-[200px] font-mono text-xs" defaultValue="<h3>นโยบายการใช้คุกกี้</h3>..." /></div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-2"><Label>อีเมล DPO</Label><Input defaultValue="dpo@ocsc.go.th" /></div>
-                    <div className="space-y-2"><Label>วันที่ปรับปรุง</Label><Input type="date" defaultValue="2026-02-25" /></div>
+                    <div className="space-y-2"><Label>วันที่ปรับปรุง</Label><DatePicker defaultValue="2026-02-25" /></div>
                   </div>
                 </div>
                 <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">

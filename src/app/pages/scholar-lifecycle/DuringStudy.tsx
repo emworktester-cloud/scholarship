@@ -27,6 +27,8 @@ import { FilterCombobox } from '../../components/ui/filter-combobox';
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
+import { DatePicker } from '../../components/ui/date-picker';
+import { CountryFlag } from '../../components/ui/country-flag';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '../../components/ui/accordion';
@@ -126,6 +128,7 @@ const detailSections = [
   { id: 'academic', label: 'ผลการศึกษา/GPAX', icon: ClipboardList },
   { id: 'watchlist', label: 'การเฝ้าระวัง', icon: Flag },
   { id: 'special', label: 'กลุ่มพิเศษ', icon: Shield },
+  { id: 'transition', label: 'การเปลี่ยนระยะ (Transition)', icon: ArrowRightLeft },
 ];
 
 export default function DuringStudy() {
@@ -141,6 +144,8 @@ export default function DuringStudy() {
 
   const [snrReportDialogOpen, setSnrReportDialogOpen] = useState(false);
   const [editingSnrReport, setEditingSnrReport] = useState<any>(null);
+  const [transitionToPrevOpen, setTransitionToPrevOpen] = useState(false);
+  const [transitionToNextOpen, setTransitionToNextOpen] = useState(false);
 
   const [academicDialogOpen, setAcademicDialogOpen] = useState(false);
   const [editingAcademic, setEditingAcademic] = useState<any>(null);
@@ -220,20 +225,30 @@ export default function DuringStudy() {
           </div>
 
           {/* Scholar Info Header Card */}
-          <Card className="border-0 shadow-lg overflow-hidden">
+          <Card className="border-0 shadow-lg overflow-hidden mb-6">
             <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-5 text-white">
-              <div className="flex items-center gap-4">
-                <Avatar className="h-14 w-14 border-2 border-white/30">
-                  <AvatarFallback className="bg-white/20 text-white text-lg font-bold">{selectedScholar.name.slice(0,2)}</AvatarFallback>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <Avatar className="h-16 w-16 border-2 border-white/30 shadow-md">
+                  <AvatarFallback className="bg-white/20 text-white text-xl font-bold">{selectedScholar.name.slice(0,2)}</AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
-                  <h2 className="text-lg font-bold">{selectedScholar.name}</h2>
-                  <p className="text-green-100 text-xs">{selectedScholar.id} • {selectedScholar.degree} • {selectedScholar.university}</p>
-                  <div className="flex items-center gap-3 mt-1.5">
-                    <Badge className={cn("text-[10px]", selectedScholar.status === 'ปกติ' ? 'bg-emerald-100 text-emerald-800' : selectedScholar.status === 'ต้องเฝ้าระวัง' ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800')}>{selectedScholar.status}</Badge>
-                    <span className="text-green-200 text-xs flex items-center gap-1"><Globe className="w-3 h-3" />{selectedScholar.country}</span>
-                    <span className="text-green-200 text-xs flex items-center gap-1"><GraduationCap className="w-3 h-3" />{selectedScholar.scholarType}</span>
-                    <span className="text-green-200 text-xs font-mono">GPA: {selectedScholar.gpa}</span>
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <h2 className="text-xl font-bold tracking-tight">{selectedScholar.name}</h2>
+                      <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-1">
+                        <Badge variant="outline" className="bg-white/10 text-white border-white/20 text-[10px] font-mono">{selectedScholar.id}</Badge>
+                        <Badge variant="outline" className="bg-white/10 text-white border-white/20 text-[10px]">{selectedScholar.scholarshipType || selectedScholar.scholarType}</Badge>
+                        <Badge variant="outline" className="bg-white/10 text-white border-white/20 text-[10px]">{selectedScholar.degree}</Badge>
+                      </div>
+                    </div>
+                    <Badge className={cn("text-[11px] px-3 py-1 self-center sm:self-start border shadow-sm", selectedScholar.status === 'ปกติ' ? 'bg-emerald-500 text-white border-emerald-400' : selectedScholar.status === 'ต้องเฝ้าระวัง' ? 'bg-rose-500 text-white border-rose-400' : 'bg-amber-500 text-white border-amber-400')}>
+                      {selectedScholar.status}
+                    </Badge>
+                  </div>
+                  <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-5 gap-y-2 mt-4 text-green-50">
+                    <span className="text-xs flex items-center gap-1.5"><Globe className="w-3.5 h-3.5 text-green-200" />{selectedScholar.country}</span>
+                    <span className="text-xs flex items-center gap-1.5"><Building className="w-3.5 h-3.5 text-green-200" />{selectedScholar.university}</span>
+                    <span className="text-xs font-mono bg-black/10 px-2 py-0.5 rounded">GPA: {selectedScholar.gpa}</span>
                   </div>
                 </div>
               </div>
@@ -269,7 +284,7 @@ export default function DuringStudy() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="p-3 bg-blue-50 rounded-lg border border-blue-200"><Label className="text-[10px] text-blue-500">สนร./สอท. ที่รายงานตัว</Label><p className="text-sm font-semibold text-blue-700 mt-1">{selectedScholar.snr}</p></div>
                       <div className="p-3 bg-blue-50 rounded-lg border border-blue-200"><Label className="text-[10px] text-blue-500">วันที่รายงานตัว</Label><p className="text-sm font-semibold text-blue-700 mt-1">{selectedScholar.reportedDate}</p></div>
                     </div>
@@ -319,13 +334,13 @@ export default function DuringStudy() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
                       <div className="p-3 bg-blue-50 rounded-lg border border-blue-200 text-center"><Label className="text-[10px] text-blue-500">GPAX ล่าสุด</Label><p className="text-2xl font-bold text-blue-700">{selectedScholar.gpa}</p></div>
                       <div className="p-3 bg-green-50 rounded-lg border border-green-200 text-center"><Label className="text-[10px] text-green-500">กำหนดส่งรายงาน</Label><p className="text-sm font-semibold text-green-700 mt-1">{selectedScholar.nextReport}</p></div>
                       <div className="p-3 bg-purple-50 rounded-lg border border-purple-200 text-center"><Label className="text-[10px] text-purple-500">สถานศึกษา</Label><p className="text-sm font-semibold text-purple-700 mt-1">{selectedScholar.university}</p></div>
                     </div>
                     {scholarReports.length > 0 ? (
-                      <Table>
+                      <div className="overflow-x-auto"><Table>
                         <TableHeader><TableRow><TableHead>ภาคเรียน</TableHead><TableHead>GPA</TableHead><TableHead>CGPA</TableHead><TableHead>วันที่ส่ง</TableHead><TableHead>สถานะ</TableHead><TableHead className="w-[80px]"></TableHead></TableRow></TableHeader>
                         <TableBody>
                           {scholarReports.map(r => { const st = reportStatusConfig[r.status]; return (
@@ -339,7 +354,7 @@ export default function DuringStudy() {
                             </TableRow>
                           ); })}
                         </TableBody>
-                      </Table>
+                      </Table></div>
                     ) : <p className="text-xs text-gray-400 text-center py-6">ยังไม่มีรายงานผลการศึกษา</p>}
                   </CardContent>
                 </Card>
@@ -362,10 +377,6 @@ export default function DuringStudy() {
                             <CardContent className="p-4 flex items-center justify-between">
                               <div className="flex items-start gap-3"><div className={cn("w-9 h-9 rounded-lg flex items-center justify-center", severityBg[item.severity])}><CatIcon className="w-4 h-4 text-white" /></div>
                               <div><p className="text-xs font-medium">{item.description}</p><p className="text-[10px] text-gray-400 mt-1">ประเภท: {cat?.label} • ความรุนแรง: {severityLabel[item.severity]} • {item.reportedDate}</p></div></div>
-                              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Button variant="ghost" size="icon" className="h-6 w-6 text-blue-600 hover:text-blue-700 hover:bg-blue-50" onClick={() => toast.info(`ดูรายการ ${item.id}`)}><Eye className="w-3.5 h-3.5" /></Button>
-                                <Button variant="ghost" size="icon" className="h-6 w-6 text-amber-600 hover:text-amber-700 hover:bg-amber-50" onClick={() => { setEditingWatchList(item); setWatchListDialogOpen(true); }}><Edit className="w-3.5 h-3.5" /></Button>
-                              </div>
                             </CardContent>
                           </Card>
                         ); })}
@@ -385,7 +396,7 @@ export default function DuringStudy() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
                         <Label className="text-[10px] text-indigo-500">ประเภทกลุ่มพิเศษ</Label>
                         <p className="text-sm font-semibold text-indigo-700 mt-1">ข้าราชการลาศึกษา</p>
@@ -402,6 +413,67 @@ export default function DuringStudy() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* Section: การเปลี่ยนระยะ */}
+              {detailSection === 'transition' && (
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div><CardTitle className="text-base flex items-center gap-2"><ArrowRightLeft className="w-5 h-5 text-indigo-600" />การเปลี่ยนระยะ (Transition)</CardTitle><CardDescription className="text-xs">ย้ายข้อมูลไป ระยะที่ 3 หรือย้อนกลับ ระยะที่ 1</CardDescription></div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                   <div className="p-4 bg-purple-50 border border-purple-200 rounded-xl flex items-start gap-4">
+                     <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+                       <GraduationCap className="w-5 h-5 text-purple-600" />
+                     </div>
+                     <div>
+                       <h4 className="text-sm font-bold text-purple-900">ย้ายข้อมูลไประยะที่ 3 (หลังจบการศึกษา)</h4>
+                       <p className="text-xs text-purple-700 mt-1 leading-relaxed">
+                         เมื่อนักเรียนทุนรายงานผลการศึกษาเทอมสุดท้าย และส่งเอกสารสำเร็จการศึกษาครบถ้วนแล้ว คุณสามารถย้ายข้อมูลไประยะที่ 3
+                         เพื่อเข้าสู่กระบวนการรายงานตัวกลับเข้ารับราชการและคำนวณการชดใช้ทุน
+                       </p>
+                       <Button className="mt-4 bg-purple-600 hover:bg-purple-700 text-white shadow-sm" onClick={() => setTransitionToNextOpen(true)}>
+                         จบการศึกษา (ย้ายไประยะที่ 3)
+                       </Button>
+                     </div>
+                   </div>
+
+                   <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-4 opacity-80 hover:opacity-100 transition-opacity">
+                     <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                       <ArrowRightLeft className="w-5 h-5 text-amber-600" />
+                     </div>
+                     <div>
+                       <h4 className="text-sm font-bold text-amber-900">ย้ายข้อมูลกลับไประยะที่ 1 (ก่อนเดินทาง)</h4>
+                       <p className="text-xs text-amber-700 mt-1 leading-relaxed">
+                         หากพบข้อผิดพลาดหรือนักเรียนทุนมีการยกเลิกการเดินทาง คุณสามารถย้ายข้อมูลกลับไประยะที่ 1 ได้
+                       </p>
+                       <Button variant="outline" className="mt-4 border-amber-300 text-amber-700 hover:bg-amber-100" onClick={() => setTransitionToPrevOpen(true)}>
+                         ย้ายกลับระยะที่ 1
+                       </Button>
+                     </div>
+                   </div>
+
+                   <div>
+                     <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                       <Clock className="w-4 h-4 text-gray-500" />
+                       ประวัติการเปลี่ยนระยะ (Transition Log)
+                     </h4>
+                     <div className="space-y-3">
+                       <div className="p-3 border rounded-lg bg-gray-50 flex items-start gap-3 opacity-70">
+                         <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center shrink-0 mt-0.5">
+                           <CheckCircle className="w-4 h-4 text-indigo-600" />
+                         </div>
+                         <div>
+                           <p className="text-sm font-medium text-gray-800">เริ่มระยะที่ 2 (ระหว่างศึกษา)</p>
+                           <p className="text-xs text-gray-500 mt-0.5">ดำเนินการเมื่อ: 10/05/2569 14:00 น. โดย สมศรี ใจดี (จนท. ก.พ.)</p>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
         </div>
@@ -415,6 +487,47 @@ export default function DuringStudy() {
           <TabsTrigger value="arrival"><MapPin className="w-3.5 h-3.5 mr-1" />รายงานจาก สนร.</TabsTrigger>
         </TabsList>
         <TabsContent value="scholars" className="space-y-4">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 mb-1">
+            <div className="flex gap-2 w-full xl:w-auto flex-wrap">
+              <div className="relative flex-grow sm:flex-grow-0 sm:min-w-[200px]">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-full xl:w-56 pl-9 bg-white border-gray-200" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+              </div>
+              <FilterCombobox
+                className="w-full sm:w-[180px] bg-white border-gray-200"
+                placeholder="ระดับศึกษา"
+                value={filterDegree}
+                onChange={setFilterDegree}
+                options={[
+                  { value: "ba", label: "ปริญญาตรี" },
+                  { value: "ma", label: "ปริญญาโท" },
+                  { value: "phd", label: "ปริญญาเอก" }
+                ]}
+              />
+              <FilterCombobox
+                className="w-full sm:w-[180px] bg-white border-gray-200"
+                placeholder="ประเทศ"
+                value={filterCountry}
+                onChange={setFilterCountry}
+                options={[
+                  { value: "us", label: "สหรัฐอเมริกา" },
+                  { value: "uk", label: "สหราชอาณาจักร" },
+                  { value: "jp", label: "ญี่ปุ่น" }
+                ]}
+              />
+              <FilterCombobox
+                className="w-full sm:w-[180px] bg-white border-gray-200"
+                placeholder="สถานะ"
+                value={filterStatus}
+                onChange={setFilterStatus}
+                options={[
+                  { value: "normal", label: "ปกติ" },
+                  { value: "warning", label: "ต้องเฝ้าระวัง" },
+                  { value: "special", label: "กลุ่มพิเศษ" }
+                ]}
+              />
+            </div>
+          </div>
           <Card className="overflow-hidden border-0 shadow-lg shadow-green-900/5">
             <CardHeader className="pb-3 border-b border-gray-100 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-t-xl">
               <div className="flex items-center justify-between">
@@ -422,49 +535,10 @@ export default function DuringStudy() {
                   <CardTitle className="text-base flex items-center gap-2 text-white"><User className="w-5 h-5" />รายชื่อผู้รับทุน (ระหว่างศึกษา)</CardTitle>
                   <CardDescription className="text-xs text-green-100">แสดงรายชื่อนักเรียนทุนที่อยู่ระหว่างการศึกษาในปัจจุบัน • {filteredDuringStudyScholars.length}/{duringStudyScholars.length} ราย</CardDescription>
                 </div>
-                <div className="flex gap-2">
-                  <div className="relative">
-                    <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-green-200" />
-                    <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-56 pl-9 bg-white/10 border-white/20 text-white placeholder:text-green-200 focus-visible:ring-white/30" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-                  </div>
-                  <FilterCombobox
-                    className="w-40"
-                    placeholder="ระดับศึกษา"
-                    value={filterDegree}
-                    onChange={setFilterDegree}
-                    options={[
-                      { value: "ba", label: "ปริญญาตรี" },
-                      { value: "ma", label: "ปริญญาโท" },
-                      { value: "phd", label: "ปริญญาเอก" }
-                    ]}
-                  />
-                  <FilterCombobox
-                    className="w-40"
-                    placeholder="ประเทศ"
-                    value={filterCountry}
-                    onChange={setFilterCountry}
-                    options={[
-                      { value: "us", label: "สหรัฐอเมริกา" },
-                      { value: "uk", label: "สหราชอาณาจักร" },
-                      { value: "jp", label: "ญี่ปุ่น" }
-                    ]}
-                  />
-                  <FilterCombobox
-                    className="w-40"
-                    placeholder="สถานะ"
-                    value={filterStatus}
-                    onChange={setFilterStatus}
-                    options={[
-                      { value: "normal", label: "ปกติ" },
-                      { value: "watch", label: "เฝ้าระวัง" },
-                      { value: "critical", label: "ต้องเฝ้าระวัง" }
-                    ]}
-                  />
-                </div>
               </div>
             </CardHeader>
             <CardContent className="p-0">
-              <Table>
+              <div className="overflow-x-auto"><Table>
                 <TableHeader className="bg-gradient-to-r from-slate-50 to-green-50/30 border-b border-slate-200">
                   <TableRow className="hover:bg-transparent">
                     <TableHead className="font-bold text-slate-700 py-3.5">รหัส / ชื่อ-สกุล</TableHead>
@@ -483,19 +557,9 @@ export default function DuringStudy() {
                       idx % 2 === 0 ? "bg-white hover:bg-green-50/60" : "bg-slate-50/40 hover:bg-green-50/60"
                     )} onClick={() => { setSelectedScholar(s); toast.info(`ดูรายละเอียด: ${s.name}`); }}>
                       <TableCell className="py-3.5">
-                        <div className="flex items-center gap-3">
-                          <Avatar className="h-9 w-9 shrink-0">
-                            <AvatarFallback className={cn(
-                              "text-white text-xs font-bold",
-                              s.status === 'ปกติ' ? "bg-gradient-to-br from-green-500 to-emerald-600" :
-                              s.status === 'ต้องเฝ้าระวัง' ? "bg-gradient-to-br from-red-500 to-rose-600" :
-                              "bg-gradient-to-br from-amber-500 to-orange-600"
-                            )}>{s.name.slice(0, 2)}</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-sm font-semibold text-gray-900 group-hover:text-green-700 transition-colors">{s.name}</p>
-                            <p className="text-[10px] text-gray-400 font-mono">{s.id}</p>
-                          </div>
+                        <div className="flex flex-col">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-700 transition-colors">{s.name}</p>
+                          <p className="text-[10px] text-gray-400 font-mono mt-0.5">{s.id}</p>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -504,7 +568,7 @@ export default function DuringStudy() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1.5">
-                          <Globe className="w-3.5 h-3.5 text-green-400" />
+                          <CountryFlag countryName={s.country} />
                           <span className="text-xs text-gray-700">{s.country}</span>
                         </div>
                       </TableCell>
@@ -543,15 +607,12 @@ export default function DuringStudy() {
                           <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-amber-600 hover:text-amber-800 hover:bg-amber-100 rounded-lg" onClick={(e) => { e.stopPropagation(); toast.info(`แก้ไขข้อมูล ${s.name}`); }} title="แก้ไข">
                             <Edit className="w-4 h-4" />
                           </Button>
-                          <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-lg" onClick={(e) => { e.stopPropagation(); toast.error(`ลบข้อมูล ${s.name}`, { description: 'ฟีเจอร์นี้ยังไม่เปิดใช้งานในโหมดทดสอบ' }); }} title="ลบ">
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
-              </Table>
+              </Table></div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -564,7 +625,7 @@ export default function DuringStudy() {
               <CardDescription className="text-xs">นทร. จัดส่งเอกสารรายงานตัวถึง สนร. หรือ สอท. เมื่อเดินทางถึงประเทศที่ศึกษา</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <div className="space-y-1.5"><Label className="text-xs">วันที่เดินทางถึง</Label><div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" className="pl-9" /></div></div>
                 <div className="space-y-1.5"><Label className="text-xs">สนร./สอท. ที่รายงานตัว</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="washington">สนร. วอชิงตัน</SelectItem><SelectItem value="london">สนร. ลอนดอน</SelectItem><SelectItem value="tokyo">สนร. โตเกียว</SelectItem><SelectItem value="canberra">สนร. แคนเบอร์รา</SelectItem><SelectItem value="paris">สนร. ปารีส</SelectItem><SelectItem value="beijing">สนร. ปักกิ่ง</SelectItem><SelectItem value="embassy">สอท.</SelectItem></SelectContent></Select></div>
                 <div className="space-y-1.5"><Label className="text-xs">สถานะการรายงานตัว</Label><Select><SelectTrigger><SelectValue placeholder="สถานะ" /></SelectTrigger><SelectContent><SelectItem value="reported">รายงานตัวแล้ว</SelectItem><SelectItem value="pending">รอรายงานตัว</SelectItem></SelectContent></Select></div>
@@ -629,7 +690,7 @@ export default function DuringStudy() {
               </div>
             </CardHeader>
             <CardContent className="p-0">
-              <Table>
+              <div className="overflow-x-auto"><Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>นักเรียนทุน</TableHead>
@@ -662,7 +723,7 @@ export default function DuringStudy() {
                     );
                   })}
                 </TableBody>
-              </Table>
+              </Table></div>
             </CardContent>
           </Card>
           <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700 flex items-start gap-2">
@@ -789,7 +850,7 @@ export default function DuringStudy() {
       {/* Request Dialog */}
       <Dialog open={requestDialogOpen} onOpenChange={setRequestDialogOpen}>
         {selectedRequestType && (
-          <DialogContent className="sm:max-w-xl p-0 gap-0 overflow-hidden">
+          <DialogContent className="sm:max-w-xl p-0 gap-0  max-h-[85vh] overflow-y-auto ">
             <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
               <DialogTitle className="text-white text-lg flex items-center gap-2">
                 <selectedRequestType.icon className="w-5 h-5" />
@@ -798,18 +859,31 @@ export default function DuringStudy() {
               <DialogDescription className="text-purple-100 mt-1">{selectedRequestType.description} — ยื่นผ่าน สนร./สอท./สำนักงาน ก.พ.</DialogDescription>
             </div>
             <div className="px-6 py-5 space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label className="text-xs">นักเรียนทุน</Label>
-                  <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <User className="w-4 h-4 text-gray-400" />
-                    {selectedScholar ? `${selectedScholar.id} • ${selectedScholar.name}` : 'ระบุอัตโนมัติจากระบบ'}
-                  </div>
+                  {selectedScholar ? (
+                    <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <User className="w-4 h-4 text-gray-400" />
+                      {selectedScholar.id} • {selectedScholar.name}
+                    </div>
+                  ) : (
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="เลือกนักเรียนทุน" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {duringStudyScholars.map(s => (
+                          <SelectItem key={s.id} value={s.id}>{s.id} • {s.name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
                 </div>
                 <div className="space-y-1.5"><Label className="text-xs">หน่วยงานที่ยื่น</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="snr">สนร.</SelectItem><SelectItem value="sot">สอท.</SelectItem><SelectItem value="ocsc">สำนักงาน ก.พ.</SelectItem></SelectContent></Select></div>
               </div>
               <div className="space-y-1.5"><Label className="text-xs">เหตุผลประกอบคำขอ <span className="text-red-500">*</span></Label><Textarea placeholder="ระบุเหตุผล..." className="min-h-[80px]" /></div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5"><Label className="text-xs">วันที่ยื่นคำขอ</Label><div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" className="pl-9" /></div></div>
                 <div className="space-y-1.5"><Label className="text-xs">วันที่ต้องการ</Label><div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" className="pl-9" /></div></div>
               </div>
@@ -825,7 +899,7 @@ export default function DuringStudy() {
 
       {/* SNR Report Dialog */}
       <Dialog open={snrReportDialogOpen} onOpenChange={setSnrReportDialogOpen}>
-        <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-xl p-0  max-h-[85vh] overflow-y-auto ">
           <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-5 text-white">
             <DialogTitle className="text-white text-lg flex items-center gap-2">
               <Eye className="w-5 h-5" />
@@ -834,7 +908,7 @@ export default function DuringStudy() {
             <DialogDescription className="text-green-100 mt-1">รายงานการติดตามความเป็นอยู่ของ นทร.</DialogDescription>
           </div>
           <div className="px-6 py-5 space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label className="text-xs">ประเภทรายงาน <span className="text-red-500">*</span></Label>
                 <Select defaultValue={editingSnrReport?.type || 'รายงานประจำเดือน'}>
                   <SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger>
@@ -849,7 +923,7 @@ export default function DuringStudy() {
               </div>
             </div>
             <div className="space-y-1.5"><Label className="text-xs">วันที่รายงาน <span className="text-red-500">*</span></Label>
-              <div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" defaultValue={editingSnrReport?.date ? "25/02/2569" : ""} className="pl-9" /></div>
+              <DatePicker defaultValue={editingSnrReport?.date ? "2026-02-25" : ""} />
             </div>
             <div className="space-y-1.5"><Label className="text-xs">สรุปสาระสำคัญ <span className="text-red-500">*</span></Label>
               <Textarea placeholder="ระบุข้อความสรุปรายงาน..." className="min-h-[80px]" defaultValue={editingSnrReport?.summary || ''} />
@@ -865,7 +939,7 @@ export default function DuringStudy() {
 
       {/* Academic Report Dialog */}
       <Dialog open={academicDialogOpen} onOpenChange={setAcademicDialogOpen}>
-        <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-xl p-0  max-h-[85vh] overflow-y-auto ">
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 text-white">
             <DialogTitle className="text-white text-lg flex items-center gap-2">
               <ClipboardList className="w-5 h-5" />
@@ -874,19 +948,32 @@ export default function DuringStudy() {
             <DialogDescription className="text-blue-100 mt-1">รายงานผลการศึกษาประจำภาคเรียน</DialogDescription>
           </div>
           <div className="px-6 py-5 space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label className="text-xs">นักเรียนทุน</Label>
-                <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <User className="w-4 h-4 text-gray-400" />
-                  {selectedScholar ? `${selectedScholar.id} • ${selectedScholar.name}` : 'ระบุอัตโนมัติจากระบบ'}
-                </div>
+                {selectedScholar ? (
+                  <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <User className="w-4 h-4 text-gray-400" />
+                    {selectedScholar.id} • {selectedScholar.name}
+                  </div>
+                ) : (
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="เลือกนักเรียนทุน" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {duringStudyScholars.map(s => (
+                        <SelectItem key={s.id} value={s.id}>{s.id} • {s.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
               <div className="space-y-1.5"><Label className="text-xs">ภาคเรียน/ปีการศึกษา <span className="text-red-500">*</span></Label>
                 <Input defaultValue={editingAcademic?.semester || ''} placeholder="เช่น Fall 2025" />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label className="text-xs">GPA ภาคเรียนนี้ <span className="text-red-500">*</span></Label>
                 <Input type="number" step="0.01" defaultValue={editingAcademic?.gpa || ''} placeholder="0.00" />
               </div>
@@ -915,7 +1002,7 @@ export default function DuringStudy() {
 
       {/* Watch List Dialog */}
       <Dialog open={watchListDialogOpen} onOpenChange={setWatchListDialogOpen}>
-        <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-xl p-0  max-h-[85vh] overflow-y-auto ">
           <div className="bg-gradient-to-r from-red-600 to-rose-600 px-6 py-5 text-white">
             <DialogTitle className="text-white text-lg flex items-center gap-2">
               <Flag className="w-5 h-5" />
@@ -924,13 +1011,26 @@ export default function DuringStudy() {
             <DialogDescription className="text-red-100 mt-1">บันทึกข้อมูลและปรับสถานะกรณีปัญหา นทร.</DialogDescription>
           </div>
           <div className="px-6 py-5 space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label className="text-xs">นักเรียนทุน</Label>
-                <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <User className="w-4 h-4 text-gray-400" />
-                  {selectedScholar ? `${selectedScholar.id} • ${selectedScholar.name}` : 'ระบุอัตโนมัติจากระบบ'}
-                </div>
+                {selectedScholar ? (
+                  <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <User className="w-4 h-4 text-gray-400" />
+                    {selectedScholar.id} • {selectedScholar.name}
+                  </div>
+                ) : (
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="เลือกนักเรียนทุน" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {duringStudyScholars.map(s => (
+                        <SelectItem key={s.id} value={s.id}>{s.id} • {s.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
               <div className="space-y-1.5"><Label className="text-xs">ประเภทปัญหา <span className="text-red-500">*</span></Label>
                 <Select defaultValue={editingWatchList?.category || ''}>
@@ -976,7 +1076,7 @@ export default function DuringStudy() {
 
       {/* e-Form Selection Dialog */}
       <Dialog open={eformSelectionDialogOpen} onOpenChange={setEformSelectionDialogOpen}>
-        <DialogContent className="sm:max-w-3xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-3xl p-0  max-h-[85vh] overflow-y-auto ">
           <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
             <DialogTitle className="text-white text-lg flex items-center gap-2">
               <Send className="w-5 h-5" />
@@ -985,7 +1085,7 @@ export default function DuringStudy() {
             <DialogDescription className="text-purple-100 mt-1">กรุณาเลือกประเภทคำขอที่ต้องการยื่น เพื่อดำเนินการต่อไป</DialogDescription>
           </div>
           <div className="p-6 bg-slate-50">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {requestTypes.filter(rt => ['extend', 'suspend', 'home-visit', 'thesis-outside', 'change-address', 'change-major'].includes(rt.id)).map((rt) => {
                 const Icon = rt.icon;
                 return (
@@ -1017,7 +1117,7 @@ export default function DuringStudy() {
 
       {/* Arrival Report Edit Dialog */}
       <Dialog open={arrivalReportDialogOpen} onOpenChange={setArrivalReportDialogOpen}>
-        <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-xl p-0  max-h-[85vh] overflow-y-auto ">
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 text-white">
             <DialogTitle className="text-white text-lg flex items-center gap-2">
               <MapPin className="w-5 h-5" />
@@ -1026,7 +1126,7 @@ export default function DuringStudy() {
             <DialogDescription className="text-blue-100 mt-1">อัปเดตข้อมูลการรายงานตัว ณ ประเทศที่ศึกษา</DialogDescription>
           </div>
           <div className="px-6 py-5 space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5"><Label className="text-xs">สนร./สอท. ที่รายงานตัว <span className="text-red-500">*</span></Label>
                 <Select defaultValue={selectedScholar?.snr || ''}>
                   <SelectTrigger><SelectValue placeholder="เลือก สนร./สอท." /></SelectTrigger>
@@ -1039,7 +1139,7 @@ export default function DuringStudy() {
                 </Select>
               </div>
               <div className="space-y-1.5"><Label className="text-xs">วันที่รายงานตัว <span className="text-red-500">*</span></Label>
-                <div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" defaultValue={selectedScholar?.reportedDate ? "20/08/2568" : ""} className="pl-9" /></div>
+                <DatePicker defaultValue={selectedScholar?.reportedDate ? "2025-08-20" : ""} />
               </div>
             </div>
             <div className="space-y-1.5"><Label className="text-xs">สถานะการรายงานตัว <span className="text-red-500">*</span></Label>
@@ -1059,6 +1159,73 @@ export default function DuringStudy() {
           <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">
             <Button variant="outline" onClick={() => setArrivalReportDialogOpen(false)}>ยกเลิก</Button>
             <Button onClick={() => { setArrivalReportDialogOpen(false); toast.success('บันทึกข้อมูลรายงานตัวเรียบร้อย'); }}><Save className="w-4 h-4 mr-1" />บันทึก</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+      {/* Transition to Prev Dialog */}
+      <Dialog open={transitionToPrevOpen} onOpenChange={setTransitionToPrevOpen}>
+        <DialogContent className="sm:max-w-md p-0  max-h-[85vh] overflow-y-auto ">
+          <div className="bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-5 text-white">
+            <DialogTitle className="text-white text-lg flex items-center gap-2">
+              <ArrowRightLeft className="w-5 h-5" />
+              ยืนยันการย้ายกลับระยะที่ 1
+            </DialogTitle>
+            <DialogDescription className="text-amber-100 mt-1">
+              ยืนยันการย้ายข้อมูล {selectedScholar?.name} กลับไประยะก่อนเดินทาง
+            </DialogDescription>
+          </div>
+          <div className="px-6 py-5 space-y-4 text-sm text-gray-700">
+            <p>เมื่อยืนยันการย้ายระยะแล้ว ข้อมูลของนักเรียนทุนรายนี้จะ:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>ถูกนำออกจากหน้ารายการ <strong>"ระยะที่ 2 (ระหว่างศึกษา)"</strong></li>
+              <li>กลับไปปรากฏในหน้ารายการ <strong>"ระยะที่ 1 (ก่อนเดินทาง)"</strong></li>
+            </ul>
+          </div>
+          <div className="border-t bg-gray-50 px-6 py-4 flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setTransitionToPrevOpen(false)}>ยกเลิก</Button>
+            <Button className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => {
+              setTransitionToPrevOpen(false);
+              setSelectedScholar(null);
+              toast.success(`ย้ายข้อมูล ${selectedScholar?.name} กลับระยะที่ 1 เรียบร้อยแล้ว`, {
+                description: 'ดำเนินการโดย สมศรี ใจดี (10/05/2569 14:15 น.)'
+              });
+            }}>
+              ยืนยันการย้ายกลับ
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Transition to Next Dialog */}
+      <Dialog open={transitionToNextOpen} onOpenChange={setTransitionToNextOpen}>
+        <DialogContent className="sm:max-w-md p-0  max-h-[85vh] overflow-y-auto ">
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
+            <DialogTitle className="text-white text-lg flex items-center gap-2">
+              <GraduationCap className="w-5 h-5" />
+              ยืนยันการจบการศึกษา (ย้ายไประยะที่ 3)
+            </DialogTitle>
+            <DialogDescription className="text-purple-100 mt-1">
+              ยืนยันการย้ายข้อมูล {selectedScholar?.name} ไประยะหลังศึกษา
+            </DialogDescription>
+          </div>
+          <div className="px-6 py-5 space-y-4 text-sm text-gray-700">
+            <p>เมื่อยืนยันการจบการศึกษา ข้อมูลของนักเรียนทุนรายนี้จะ:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>ถูกนำออกจากหน้ารายการ <strong>"ระยะที่ 2 (ระหว่างศึกษา)"</strong></li>
+              <li>ไปปรากฏในหน้ารายการ <strong>"ระยะที่ 3 (หลังจบการศึกษา)"</strong> เพื่อรอดำเนินการรายงานตัวเข้าปฏิบัติราชการ</li>
+            </ul>
+          </div>
+          <div className="border-t bg-gray-50 px-6 py-4 flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setTransitionToNextOpen(false)}>ยกเลิก</Button>
+            <Button className="bg-purple-600 hover:bg-purple-700 text-white" onClick={() => {
+              setTransitionToNextOpen(false);
+              setSelectedScholar(null);
+              toast.success(`บันทึกจบการศึกษา ${selectedScholar?.name} ไประยะที่ 3 เรียบร้อยแล้ว`, {
+                description: 'ดำเนินการโดย สมศรี ใจดี (10/05/2569 14:15 น.)'
+              });
+            }}>
+              ยืนยันจบการศึกษา
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

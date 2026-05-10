@@ -50,6 +50,7 @@ import {
   FileText,
   X,
 } from 'lucide-react';
+import { DatePicker } from '../components/ui/date-picker';
 import { toast } from 'sonner';
 
 interface FormField {
@@ -190,7 +191,7 @@ export default function FormBuilder() {
       case 'textarea':
         return <Textarea placeholder={field.placeholder || `กรอก${field.label}`} disabled className="min-h-20" />;
       case 'date':
-        return <Input type="date" disabled />;
+        return <DatePicker disabled />;
       case 'select':
         return (
           <Select disabled>

@@ -40,6 +40,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../components/ui/dialog';
+import { DatePicker } from '../components/ui/date-picker';
 import { Label } from '../components/ui/label';
 import {
   Select,
@@ -61,9 +62,9 @@ const payments = [
     installment: 1,
     totalInstallments: 8,
     amount: 625000,
-    dueDate: '31 มีนาคม 2026',
+    dueDate: '31 มีนาคม 2569',
     status: 'paid',
-    paidDate: '28 มีนาคม 2026',
+    paidDate: '28 มีนาคม 2569',
     condition: 'ส่งรายงานภาคเรียนที่ 1',
     conditionMet: true,
   },
@@ -74,7 +75,7 @@ const payments = [
     installment: 2,
     totalInstallments: 8,
     amount: 625000,
-    dueDate: '30 กันยายน 2026',
+    dueDate: '30 กันยายน 2569',
     status: 'pending',
     paidDate: null,
     condition: 'ส่งรายงานภาคเรียนที่ 2 + GPA >= 3.0',
@@ -87,7 +88,7 @@ const payments = [
     installment: 1,
     totalInstallments: 1,
     amount: 2000000,
-    dueDate: '15 มิถุนายน 2026',
+    dueDate: '15 มิถุนายน 2569',
     status: 'approved',
     paidDate: null,
     condition: 'เริ่มโครงการวิจัย',
@@ -100,7 +101,7 @@ const payments = [
     installment: 3,
     totalInstallments: 8,
     amount: 625000,
-    dueDate: '31 มีนาคม 2027',
+    dueDate: '31 มีนาคม 2570',
     status: 'scheduled',
     paidDate: null,
     condition: 'ส่งรายงานภาคเรียนที่ 3',
@@ -258,7 +259,7 @@ export default function Payment() {
                                     <Input type="number" placeholder="625000" className="w-full" />
                                   </TableCell>
                                   <TableCell>
-                                    <Input type="date" className="w-full" />
+                                    <DatePicker className="w-full" />
                                   </TableCell>
                                   <TableCell>
                                     <Input
@@ -296,7 +297,7 @@ export default function Payment() {
                         </div>
                         <div className="space-y-2">
                           <Label>วันที่กำหนดจ่าย</Label>
-                          <Input type="date" />
+                          <DatePicker />
                         </div>
                       </div>
                       <div className="space-y-2">
@@ -578,7 +579,7 @@ export default function Payment() {
                                   <div className="space-y-4 py-4">
                                     <div className="space-y-2">
                                       <Label>วันที่จ่ายเงิน</Label>
-                                      <Input type="date" />
+                                      <DatePicker />
                                     </div>
                                     <div className="space-y-2">
                                       <Label>แนบหลักฐานการโอนเงิน</Label>

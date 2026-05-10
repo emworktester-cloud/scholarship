@@ -46,9 +46,9 @@ import { PermissionPanel } from '../components/rbac/PermissionPanel';
 // Mock data for task inbox
 const tasks = [
   {
-    id: 'APP-2026-001',
+    id: 'REQ-2026-001',
     applicant: 'นายสมชาย ใจดี',
-    scholarshipType: 'ทุนการศึกษาระดับปริญญาเอก',
+    requestType: 'ขอขยายระยะเวลาศึกษา',
     status: 'รอตรวจเอกสาร',
     priority: 'high',
     sla: 'เหลือ 2 ชั่วโมง',
@@ -60,9 +60,9 @@ const tasks = [
     tags: ['เอกสารไม่ครบ'],
   },
   {
-    id: 'APP-2026-002',
+    id: 'REQ-2026-002',
     applicant: 'นางสาวสมหญิง รักเรียน',
-    scholarshipType: 'ทุนวิจัย',
+    requestType: 'การย้ายสถานศึกษา',
     status: 'รอพิจารณา',
     priority: 'medium',
     sla: 'เหลือ 1 วัน',
@@ -74,9 +74,9 @@ const tasks = [
     tags: [],
   },
   {
-    id: 'APP-2026-003',
+    id: 'REQ-2026-003',
     applicant: 'นายประยุทธ์ ขยัน',
-    scholarshipType: 'ทุนฝึกอบรม',
+    requestType: 'ขออนุมัติไปร่วมประชุมทางวิชาการ',
     status: 'รออนุมัติ',
     priority: 'low',
     sla: 'เหลือ 3 วัน',
@@ -88,9 +88,9 @@ const tasks = [
     tags: ['เร่งด่วน'],
   },
   {
-    id: 'APP-2026-004',
+    id: 'REQ-2026-004',
     applicant: 'นางสาวกนกวรรณ ดี',
-    scholarshipType: 'ทุนการศึกษาระดับปริญญาโท',
+    requestType: 'ขอเลื่อนกำหนดการเดินทาง',
     status: 'รอตอบข้อมูลเพิ่ม',
     priority: 'high',
     sla: 'เหลือ 5 ชั่วโมง',
@@ -241,7 +241,7 @@ export default function Applications() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <Input
-                placeholder="ค้นหาใบสมัคร / รหัสเคส / ชื่อ / เลขบัตร / ประเภททุน"
+                placeholder="ค้นหาคำขอ / รหัสเคส / ชื่อผู้ยื่น"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -249,14 +249,14 @@ export default function Applications() {
             </div>
             <Select value={filterType} onValueChange={setFilterType}>
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="ประเภททุน" />
+                <SelectValue placeholder="ประเภทคำขอ" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">ทุกประเภท</SelectItem>
-                <SelectItem value="phd">ปริญญาเอก</SelectItem>
-                <SelectItem value="master">ปริญญาโท</SelectItem>
-                <SelectItem value="research">วิจัย</SelectItem>
-                <SelectItem value="training">ฝึกอบรม</SelectItem>
+                <SelectItem value="extend">ขอขยายเวลาศึกษา</SelectItem>
+                <SelectItem value="transfer">การย้ายสถานศึกษา</SelectItem>
+                <SelectItem value="conference">ร่วมประชุมวิชาการ</SelectItem>
+                <SelectItem value="delay">ขอเลื่อนเดินทาง</SelectItem>
               </SelectContent>
             </Select>
             <Select value={filterAssignee} onValueChange={setFilterAssignee}>
@@ -351,8 +351,8 @@ export default function Applications() {
                     <TableHead className="w-12"></TableHead>
                     <TableHead>ความสำคัญ</TableHead>
                     <TableHead>รหัสเคส</TableHead>
-                    <TableHead>ผู้สมัคร</TableHead>
-                    <TableHead>ประเภททุน</TableHead>
+                    <TableHead>ผู้ยื่นคำขอ</TableHead>
+                    <TableHead>ประเภทคำขอ</TableHead>
                     <TableHead>สถานะ</TableHead>
                     <TableHead>SLA</TableHead>
                     <TableHead>ผู้รับผิดชอบ</TableHead>
@@ -392,7 +392,7 @@ export default function Applications() {
                       </TableCell>
                       <TableCell className="font-medium">{task.applicant}</TableCell>
                       <TableCell>
-                        <span className="text-sm text-gray-600">{task.scholarshipType}</span>
+                        <span className="text-sm text-gray-600">{task.requestType}</span>
                       </TableCell>
                       <TableCell>
                         <Badge variant="secondary">{task.status}</Badge>

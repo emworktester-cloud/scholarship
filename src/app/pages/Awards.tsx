@@ -53,6 +53,7 @@ import {
   SelectValue,
 } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
+import { DatePicker } from '../components/ui/date-picker';
 import { Link } from 'react-router';
 import { toast } from 'sonner';
 
@@ -69,7 +70,7 @@ const awards = [
     paymentType: 'installment',
     contractStatus: 'signed',
     university: 'Stanford University',
-    createdDate: '15/02/2026',
+    createdDate: '15/02/2569',
   },
   {
     id: 'AWD-2026-002',
@@ -83,7 +84,7 @@ const awards = [
     paymentType: 'lumpsum',
     contractStatus: 'pending',
     university: 'MIT',
-    createdDate: '10/02/2026',
+    createdDate: '10/02/2569',
   },
   {
     id: 'AWD-2026-003',
@@ -97,7 +98,7 @@ const awards = [
     paymentType: 'lumpsum',
     contractStatus: 'signed',
     university: 'University of Oxford',
-    createdDate: '05/02/2026',
+    createdDate: '05/02/2569',
   },
 ];
 
@@ -259,11 +260,11 @@ export default function Awards() {
                     </div>
                     <div className="space-y-2">
                       <Label className="text-slate-700 font-semibold">วันที่เริ่มต้น</Label>
-                      <Input type="date" className="h-11 border-slate-300 bg-white shadow-sm focus-visible:ring-blue-600" />
+                      <DatePicker className="h-11 border-slate-300 bg-white shadow-sm focus-visible:ring-blue-600" />
                     </div>
                     <div className="space-y-2">
                       <Label className="text-slate-700 font-semibold">วันที่สิ้นสุด</Label>
-                      <Input type="date" className="h-11 border-slate-300 bg-white shadow-sm focus-visible:ring-blue-600" />
+                      <DatePicker className="h-11 border-slate-300 bg-white shadow-sm focus-visible:ring-blue-600" />
                     </div>
                   </div>
                 </div>

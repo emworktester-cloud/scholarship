@@ -22,6 +22,7 @@ import {
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle,
 } from '../../components/ui/dialog';
+import { DatePicker } from '../../components/ui/date-picker';
 import { Separator } from '../../components/ui/separator';
 import { toast } from 'sonner';
 import scholarStatusImage from '../../../assets/3bdd7891eaf88ab3a0918ede83fd760b7af0d380.png';
@@ -269,7 +270,7 @@ export function ScholarStatusMatrix() {
               <div className="space-y-1.5"><Label className="text-xs">ระยะ</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="pre">ก่อนเดินทาง</SelectItem><SelectItem value="during">ระหว่างศึกษา</SelectItem><SelectItem value="post">สำเร็จ/เสร็จสิ้น</SelectItem></SelectContent></Select></div>
             </div>
             <div className="space-y-1.5"><Label className="text-xs">สถานะย่อย</Label><Input placeholder="เช่น ยืนยันรับทุน, สละสิทธิ, ป่วย ฯลฯ" /></div>
-            <div className="space-y-1.5"><Label className="text-xs">วันที่มีผล <span className="text-red-500">*</span></Label><Input type="date" /></div>
+            <div className="space-y-1.5"><Label className="text-xs">วันที่มีผล <span className="text-red-500">*</span></Label><DatePicker /></div>
             <div className="space-y-1.5"><Label className="text-xs">หมายเหตุ</Label><Textarea placeholder="รายละเอียดเพิ่มเติม..." className="min-h-[60px]" /></div>
             <div className="border-2 border-dashed border-gray-200 rounded-lg p-3 hover:border-blue-300 transition-colors cursor-pointer" onClick={() => toast.info('อัปโหลดเอกสาร')}>
               <div className="flex items-center gap-2 text-xs text-gray-500"><Upload className="w-4 h-4 text-gray-400" /><span>อัปโหลดเอกสารประกอบ</span><Badge variant="outline" className="text-[8px] ml-auto">.pdf .jpg .png</Badge></div>

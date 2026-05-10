@@ -22,6 +22,7 @@ import {
 } from '../../components/ui/select';
 import { Textarea } from '../../components/ui/textarea';
 import { Separator } from '../../components/ui/separator';
+import { DatePicker } from '../../components/ui/date-picker';
 import { toast } from 'sonner';
 
 // Mock data for scholars
@@ -285,7 +286,7 @@ export function ScholarRegistry() {
                         <div className="grid grid-cols-3 gap-4">
                           <div className="space-y-2">
                             <Label className="text-gray-600">วันเกิด</Label>
-                            <Input type="date" />
+                            <DatePicker />
                           </div>
                           <div className="space-y-2">
                             <Label className="text-gray-600">เพศ</Label>

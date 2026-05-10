@@ -9,7 +9,8 @@ import {
   Building, BookOpen, Calendar, MapPin, Languages,
   Stethoscope, Swords, Plane, Stamp, FileImage,
   ClipboardList, CreditCard, Fingerprint, Info, X,
-  ArrowRightLeft, Send, XCircle, Pause
+  ArrowRightLeft
+, Send, XCircle, Pause, GraduationCap
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card';
@@ -22,8 +23,10 @@ import { Separator } from '../../components/ui/separator';
 import { Progress } from '../../components/ui/progress';
 import { Switch } from '../../components/ui/switch';
 import { Checkbox } from '../../components/ui/checkbox';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { Avatar, AvatarFallback } from '../../components/ui/avatar';
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '../../components/ui/select';
 import { DatePicker } from '../../components/ui/date-picker';
 import { CountryFlag } from '../../components/ui/country-flag';
 import {
@@ -55,6 +58,7 @@ const scholars: Scholar[] = [
   { id: 'SCH-2569-003', name: 'น.ส.นภา รักเรียน', status: 'ครบถ้วน', phase: 'ก่อนเดินทาง', completeness: 100, scholarshipType: 'ทุน ก.พ.', destination: 'ออสเตรเลีย' },
   { id: 'SCH-2569-004', name: 'นายสมศักดิ์ มุ่งมั่น', status: 'กำลังดำเนินการ', phase: 'ก่อนเดินทาง', completeness: 60, scholarshipType: 'ทุน กต.', destination: 'ฝรั่งเศส' },
 ];
+
 
 // ===== Request types pre departure =====
 interface RequestType {
@@ -90,10 +94,10 @@ export default function PreDeparture() {
   const [addScholarOpen, setAddScholarOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('personal');
   const [transitionDialogOpen, setTransitionDialogOpen] = useState(false);
-  
   const [activeTab, setActiveTab] = useState('scholars');
   const [requestDialogOpen, setRequestDialogOpen] = useState(false);
   const [selectedRequestType, setSelectedRequestType] = useState<RequestType | null>(null);
+
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
@@ -210,14 +214,14 @@ export default function PreDeparture() {
       </div>
 
       {!selectedScholar ? (
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-5">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-5">
           <TabsList className="flex flex-wrap h-auto gap-1 p-1">
             <TabsTrigger value="scholars"><User className="w-3.5 h-3.5 mr-1" />รายชื่อผู้รับทุน</TabsTrigger>
             <TabsTrigger value="requests"><Send className="w-3.5 h-3.5 mr-1" />คำขอ e-Form</TabsTrigger>
           </TabsList>
 
           <TabsContent value="scholars" className="space-y-4">
-            <Card className="overflow-hidden border-0 shadow-lg shadow-blue-900/5">
+          <Card className="overflow-hidden border-0 shadow-lg shadow-blue-900/5">
           <CardHeader className="pb-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-xl">
             <CardTitle className="text-base flex items-center gap-2 text-white">
               <User className="w-5 h-5" />
@@ -300,39 +304,7 @@ export default function PreDeparture() {
               </TableBody>
             </Table></div>
           </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* ===== Tab: Requests ===== */}
-          <TabsContent value="requests" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2"><Send className="w-5 h-5 text-purple-600" />คำขออนุมัติ/อนุญาตต่างๆ (ก่อนเดินทาง)</CardTitle>
-                <CardDescription className="text-xs">ยื่นคำขอในระยะก่อนเดินทาง ระบบตรวจสอบ พิจารณา และแจ้งผล</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {requestTypes.map(req => {
-                    const RIcon = req.icon;
-                    return (
-                      <div key={req.id} onClick={() => { setSelectedRequestType(req); setRequestDialogOpen(true); }} className="p-3 rounded-lg border border-gray-100 hover:border-purple-200 bg-white hover:bg-purple-50 transition-all cursor-pointer group shadow-sm hover:shadow-md">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                            <RIcon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-800 group-hover:text-purple-700">{req.label}</p>
-                            <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-1">{req.description}</p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        </Card>
       ) : (
         <div className="space-y-6">
 
@@ -468,6 +440,7 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">วันเกิด</Label><DatePicker className="border-gray-300 focus-visible:ring-blue-500" defaultValue="1997-06-15" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">เพศ</Label><Select defaultValue="female"><SelectTrigger className="border-gray-300 focus:ring-blue-500"><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="male">ชาย</SelectItem><SelectItem value="female">หญิง</SelectItem></SelectContent></Select></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">สัญชาติ</Label><Input defaultValue="ไทย" className="border-gray-300 focus-visible:ring-blue-500" /></div>
+                    </div>
                     {/* Move Edit Actions to bottom */}
                     {expandedSection !== 'documents' && (
                       <div className="flex justify-end gap-2 pt-6 border-t mt-6">
@@ -522,7 +495,7 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">สาขาวิชา</Label><Input placeholder="สาขา" className="border-gray-300" defaultValue="วิศวกรรมคอมพิวเตอร์" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">GPA</Label><Input placeholder="0.00" type="number" step="0.01" className="border-gray-300" defaultValue="3.85" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">ปีที่จบ (พ.ศ.)</Label><Input placeholder="พ.ศ." className="border-gray-300" defaultValue="2562" /></div>
-
+                    </div>
                     {/* Move Edit Actions to bottom */}
                     {expandedSection !== 'documents' && (
                       <div className="flex justify-end gap-2 pt-6 border-t mt-6">
@@ -574,7 +547,7 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">อีเมลส่วนตัว</Label><Input placeholder="email@example.com" type="email" className="border-gray-300" defaultValue="pornpimon@example.com" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">LINE ID</Label><Input placeholder="LINE ID" className="border-gray-300" defaultValue="pornpimon.s" /></div>
                     <div className="col-span-3 space-y-1.5"><Label className="text-xs text-gray-700">ที่อยู่ปัจจุบัน</Label><Textarea placeholder="ที่อยู่" className="min-h-[60px] border-gray-300" defaultValue="123/45 ซอยลาดพร้าว 87 บางกะปิ กรุงเทพมหานคร 10240" /></div>
-
+                    </div>
                     {/* Move Edit Actions to bottom */}
                     {expandedSection !== 'documents' && (
                       <div className="flex justify-end gap-2 pt-6 border-t mt-6">
@@ -625,7 +598,7 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">คะแนนรวม</Label><Input placeholder="คะแนน" type="number" step="0.5" className="border-gray-300" defaultValue="7.5" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">วันที่สอบ</Label><DatePicker className="border-gray-300" defaultValue="2025-01-10" /></div>
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">วันหมดอายุ</Label><DatePicker className="border-gray-300" defaultValue="2027-01-10" /></div>
-
+                    </div>
                     {/* Move Edit Actions to bottom */}
                     {expandedSection !== 'documents' && (
                       <div className="flex justify-end gap-2 pt-6 border-t mt-6">
@@ -1094,67 +1067,6 @@ export default function PreDeparture() {
             <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => { setAddScholarOpen(false); toast.success('บันทึกข้อมูลนักเรียนทุนใหม่เรียบร้อย'); }}>บันทึกข้อมูล</Button>
           </div>
         </DialogContent>
-      </Dialog>
-
-      {/* Request Dialog (e-Form) */}
-      <Dialog open={requestDialogOpen} onOpenChange={setRequestDialogOpen}>
-        {selectedRequestType && (
-          <DialogContent className="sm:max-w-xl p-0 gap-0 max-h-[85vh] overflow-y-auto">
-            <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
-              <DialogTitle className="text-white text-lg flex items-center gap-2">
-                <selectedRequestType.icon className="w-5 h-5" />
-                {selectedRequestType.label}
-              </DialogTitle>
-              <DialogDescription className="text-purple-100 mt-1">{selectedRequestType.description} — ยื่นในระยะก่อนเดินทาง</DialogDescription>
-            </div>
-            <div className="px-6 py-5 space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label className="text-xs">นักเรียนทุน</Label>
-                  {selectedScholar ? (
-                    <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <User className="w-4 h-4 text-gray-400" />
-                      {selectedScholar.id} • {selectedScholar.name}
-                    </div>
-                  ) : (
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="เลือกนักเรียนทุน" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {scholars.map(s => (
-                          <SelectItem key={s.id} value={s.id}>{s.id} • {s.name}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-xs">หน่วยงานที่รับผิดชอบ</Label>
-                  <Select defaultValue="ocsc">
-                    <SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="ocsc">สำนักงาน ก.พ.</SelectItem>
-                      <SelectItem value="ministry">ต้นสังกัด</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-1.5"><Label className="text-xs">เหตุผลประกอบคำขอ <span className="text-red-500">*</span></Label><Textarea placeholder="ระบุเหตุผล..." className="min-h-[80px]" /></div>
-              <div className="space-y-1.5"><Label className="text-xs">เอกสารแนบประกอบพิจารณา (ถ้ามี)</Label>
-                <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer">
-                  <Upload className="w-6 h-6 text-gray-400 mb-2" />
-                  <p className="text-sm font-medium text-gray-700">คลิกเพื่ออัปโหลด หรือลากไฟล์มาวาง</p>
-                  <p className="text-[10px] text-gray-500 mt-1">รองรับ PDF, JPG, PNG (ไม่เกิน 5MB)</p>
-                </div>
-              </div>
-            </div>
-            <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setRequestDialogOpen(false)}>ยกเลิก</Button>
-              <Button onClick={() => { setRequestDialogOpen(false); /* toast.success('ส่งคำขอเรียบร้อย'); */ }}><Send className="w-4 h-4 mr-1" />ส่งคำขอ</Button>
-            </div>
-          </DialogContent>
-        )}
       </Dialog>
 
       {/* Import Preview Full-screen Dialog */}

@@ -14,6 +14,7 @@ import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
+import { CountryFlag } from '../../components/ui/country-flag';
 
 // Animation variants
 const fadeInUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.2 } };
@@ -296,7 +297,7 @@ export default function PublicHome() {
                 <Card className="hover:shadow-lg transition-all hover:-translate-y-0.5 cursor-pointer border border-gray-100">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">{c.flag}</span>
+                      <CountryFlag countryName={c.country} width="40px" height="30px" />
                       <div>
                         <p className="font-bold text-gray-900 text-sm">{c.country}</p>
                         <p className="text-xl font-bold text-blue-700">{c.count} <span className="text-xs font-normal text-gray-400">ราย</span></p>

@@ -15,6 +15,8 @@ import { Progress } from '../../components/ui/progress';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '../../components/ui/select';
+import { DatePicker } from '../../components/ui/date-picker';
+import { format } from 'date-fns';
 import { toast } from 'sonner';
 
 interface CalculationResult {
@@ -185,8 +187,8 @@ export default function ScholarshipCalculator() {
           </CardHeader>
           <CardContent className="pt-5 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2"><Label>วันที่เริ่มรับทุน</Label><Input type="date" value={manualStartDate} onChange={e => setManualStartDate(e.target.value)} /></div>
-              <div className="space-y-2"><Label>วันที่สิ้นสุดรับทุน</Label><Input type="date" value={manualEndDate} onChange={e => setManualEndDate(e.target.value)} /></div>
+              <div className="space-y-2"><Label>วันที่เริ่มรับทุน</Label><DatePicker value={manualStartDate ? new Date(manualStartDate) : undefined} onChange={d => setManualStartDate(d ? format(d, 'yyyy-MM-dd') : '')} /></div>
+              <div className="space-y-2"><Label>วันที่สิ้นสุดรับทุน</Label><DatePicker value={manualEndDate ? new Date(manualEndDate) : undefined} onChange={d => setManualEndDate(d ? format(d, 'yyyy-MM-dd') : '')} /></div>
               <div className="space-y-2"><Label>ประเภททุน</Label>
                 <Select value={manualType} onValueChange={setManualType}><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent>{conditionRules.map(c => <SelectItem key={c.type} value={c.type}>{c.type} (×{c.multiplier})</SelectItem>)}</SelectContent></Select>
               </div>

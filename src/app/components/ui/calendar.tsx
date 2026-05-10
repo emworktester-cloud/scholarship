@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
+import { th } from "date-fns/locale";
 
 import { cn } from "./utils";
 import { buttonVariants } from "./button";
@@ -15,6 +16,14 @@ function Calendar({
 }: React.ComponentProps<typeof DayPicker>) {
   return (
     <DayPicker
+      locale={th}
+      formatters={{
+        formatCaption: (date, options) => {
+          const month = date.toLocaleDateString('th-TH', { month: 'long' });
+          const yearBE = date.getFullYear() + 543;
+          return `${month} ${yearBE}`;
+        }
+      }}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
