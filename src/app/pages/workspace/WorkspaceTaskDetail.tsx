@@ -27,6 +27,7 @@ interface ApprovalLog { id: string; actor_name: string; action: string; comment:
 
 const mockTask: TaskDetail = {
   id: '42', form_type: 'EXTENSION', form_type_label: 'ขอขยายเวลาการศึกษา (EF-06)',
+  form_name: 'แบบคำขอขยายระยะเวลาศึกษา (แบบ นทร./ก.พ. 05)',
   current_status: 'PENDING', scholar_name: 'น.ส.พรพิมล สุขใจ', scholar_id: 'SCH-2569-001',
   submitted_at: '25/04/2569 10:30', submitted_by: 'น.ส.พรพิมล สุขใจ', zone: 'สนร. วอชิงตัน',
   payload: {
@@ -97,7 +98,8 @@ export default function WorkspaceTaskDetail() {
           </div>
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-xl font-bold text-gray-900 tracking-tight mb-1">{task.form_type_label}</h1>
+              <h1 className="text-xl font-bold text-gray-900 tracking-tight mb-0.5">{task.form_type_label}</h1>
+              <p className="text-sm text-gray-500 mb-1">ชื่อแบบฟอร์ม: <span className="font-medium text-gray-700">{task.form_name}</span></p>
               <div className="flex items-center gap-3 text-sm text-gray-500">
                 <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" />{task.scholar_name}</span>
                 <span>•</span><span className="font-mono text-xs">{task.scholar_id}</span>
@@ -133,7 +135,7 @@ export default function WorkspaceTaskDetail() {
               <div className="col-span-2 space-y-6">
                 <Card className="border-gray-100"><CardHeader className="pb-3"><CardTitle className="text-sm font-bold text-gray-700">สรุปคำร้อง</CardTitle></CardHeader>
                   <CardContent><div className="grid grid-cols-2 gap-4">
-                    {[['ประเภท', task.form_type_label], ['โซน', task.zone], ['ส่งโดย', task.submitted_by], ['วันที่ส่ง', task.submitted_at]].map(([l, v]) => (
+                    {[['ประเภทคำขอ', task.form_type_label], ['ชื่อแบบฟอร์ม', task.form_name], ['โซน', task.zone], ['ส่งโดย', task.submitted_by], ['วันที่ส่ง', task.submitted_at]].map(([l, v]) => (
                       <div key={l}><p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">{l}</p><p className="text-sm font-medium text-gray-800 mt-0.5">{v}</p></div>
                     ))}
                   </div></CardContent>

@@ -31,6 +31,80 @@ import WorkspaceTaskDetail from "./pages/workspace/WorkspaceTaskDetail";
 import PublicLayout from "./pages/public/PublicLayout";
 import PublicHome from "./pages/public/PublicHome";
 import ApplicationSteps from "./pages/public/ApplicationSteps";
+import ScholarshipCalculator from "./pages/support/ScholarshipCalculator";
+import DocumentManager from "./pages/support/DocumentManager";
+import PhotoManager from "./pages/support/PhotoManager";
+import ESignature from "./pages/support/ESignature";
+import OverviewDashboard from "./pages/reports/OverviewDashboard";
+import ScholarProgress from "./pages/reports/ScholarProgress";
+import TrendAnalysis from "./pages/reports/TrendAnalysis";
+import ExportAuditTrail from "./pages/reports/ExportAuditTrail";
+import { PageHeader } from "./components/shared/PageHeader";
+
+const AnalyticsOverviewPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="ภาพรวมรายงาน" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'วิเคราะห์ & แนวโน้ม' }, { label: 'ภาพรวมรายงาน' }]} />
+    <div className="p-8"><OverviewDashboard /></div>
+  </div>
+);
+
+const AnalyticsProgressPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="ความก้าวหน้า นทร." breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'วิเคราะห์ & แนวโน้ม' }, { label: 'ความก้าวหน้า นทร.' }]} />
+    <div className="p-8"><ScholarProgress /></div>
+  </div>
+);
+
+const AnalyticsTrendsPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="วิเคราะห์แนวโน้ม" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'วิเคราะห์ & แนวโน้ม' }, { label: 'วิเคราะห์แนวโน้ม' }]} />
+    <div className="p-8"><TrendAnalysis /></div>
+  </div>
+);
+
+const AnalyticsExportPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="ส่งออกรายงาน" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'ส่งออก & ตรวจสอบ' }, { label: 'ส่งออกรายงาน' }]} />
+    <div className="p-8"><ExportAuditTrail /></div>
+  </div>
+);
+
+const DocumentManagerPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="คลังเอกสาร" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'ทะเบียน นทร.' }, { label: 'คลังเอกสาร' }]} />
+    <div className="p-8"><DocumentManager /></div>
+  </div>
+);
+
+const PhotoManagerPage = () => (
+  <div className="min-h-full">
+    <PageHeader title="จัดการรูปภาพ" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'ทะเบียน นทร.' }, { label: 'จัดการรูปภาพ' }]} />
+    <div className="p-8"><PhotoManager /></div>
+  </div>
+);
+
+const ESignaturePage = () => (
+  <div className="min-h-full">
+    <PageHeader title="ลงนามเอกสาร (e-Sign)" breadcrumbs={[{ label: 'แดชบอร์ด', href: '/' }, { label: 'งานของฉัน' }, { label: 'ลงนามเอกสาร' }]} />
+    <div className="p-8"><ESignature /></div>
+  </div>
+);
+
+const BondCalcPage = () => (
+  <div className="min-h-full">
+    <PageHeader 
+      title="คำนวณวันรับทุน/ชดใช้ทุน" 
+      breadcrumbs={[
+        { label: 'แดชบอร์ด', href: '/' },
+        { label: 'ทะเบียน นทร.', href: '/scholar-hub' },
+        { label: 'คำนวณชดใช้ทุน' }
+      ]} 
+    />
+    <div className="p-8">
+      <ScholarshipCalculator />
+    </div>
+  </div>
+);
 
 export const router = createBrowserRouter([
   // ===== Public =====
@@ -68,11 +142,11 @@ export const router = createBrowserRouter([
       // 1.1 แดชบอร์ดผู้บริหาร
       { path: "analytics", Component: Dashboard },
       // 1.2 วิเคราะห์ & แนวโน้ม
-      { path: "analytics/reports", Component: Reports },
-      { path: "analytics/progress", Component: Reports },
-      { path: "analytics/trends", Component: Reports },
+      { path: "analytics/reports", Component: AnalyticsOverviewPage },
+      { path: "analytics/progress", Component: AnalyticsProgressPage },
+      { path: "analytics/trends", Component: AnalyticsTrendsPage },
       // 1.3 ส่งออก & ตรวจสอบ
-      { path: "analytics/export", Component: Reports },
+      { path: "analytics/export", Component: AnalyticsExportPage },
 
       // ===== 2. Workspace (พื้นที่ปฏิบัติงาน) =====
       // 2.1 คิวงานของฉัน
@@ -80,7 +154,7 @@ export const router = createBrowserRouter([
       { path: "workspace/all", Component: Applications },
       { path: "workspace/:id", Component: WorkspaceTaskDetail },
       // 2.2 ลายเซ็นอิเล็กทรอนิกส์
-      { path: "workspace/e-sign", Component: Applications },
+      { path: "workspace/e-sign", Component: ESignaturePage },
 
       // ===== 3. Scholar Hub (ทะเบียน นทร.) =====
       // 3.1 ข้อมูลส่วนบุคคล & สุขภาพ
@@ -93,10 +167,14 @@ export const router = createBrowserRouter([
       { path: "scholar-hub/tracking", Component: Tracking },
       { path: "scholar-hub/status", Component: ScholarStatus },
       // 3.3 คลังเอกสาร & รูปภาพ
-      { path: "scholar-hub/documents", Component: SupportTools },
-      { path: "scholar-hub/photos", Component: SupportTools },
+      { path: "scholar-hub/documents", Component: DocumentManagerPage },
+      { path: "scholar-hub/photos", Component: PhotoManagerPage },
+      { path: "scholar-hub/calculator", Component: SupportTools },
+      { path: "scholar-hub/esignature", Component: SupportTools },
+      { path: "scholar-hub/config", Component: SupportTools },
+      { path: "scholar-hub/safety", Component: SupportTools },
       // 3.4 ชดใช้ทุน & จัดสรรสังกัด
-      { path: "scholar-hub/bond-calc", Component: Tracking },
+      { path: "scholar-hub/bond-calc", Component: BondCalcPage },
 
       // ===== 4. Finance & Bond (สัญญาและการเงิน) =====
       // 4.1 สัญญา & ผู้ค้ำประกัน

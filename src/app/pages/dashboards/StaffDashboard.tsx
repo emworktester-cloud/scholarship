@@ -73,7 +73,8 @@ export default function StaffDashboard() {
 
   const pendingApplications = [
     {
-      id: 'APP-2026-001',
+      id: 'REQ-2026-001',
+      formName: 'แบบรายงานตัวผู้รับทุน',
       applicant: 'นายสมชาย ใจดี',
       type: 'ทุนการศึกษาระดับปริญญาโท',
       submittedDate: '2026-02-18',
@@ -82,7 +83,8 @@ export default function StaffDashboard() {
       status: 'รอตรวจสอบเอกสาร'
     },
     {
-      id: 'APP-2026-002',
+      id: 'REQ-2026-002',
+      formName: 'คำขออนุมัติเดินทางไปศึกษาต่อ',
       applicant: 'นางสาวสมหญิง รักเรียน',
       type: 'ทุนวิจัย',
       submittedDate: '2026-02-19',
@@ -91,7 +93,8 @@ export default function StaffDashboard() {
       status: 'รอยืนยันข้อมูล'
     },
     {
-      id: 'APP-2026-003',
+      id: 'REQ-2026-003',
+      formName: 'แบบรายงานความก้าวหน้าการศึกษา',
       applicant: 'นายประยุทธ์ ขยัน',
       type: 'ทุนฝึกอบรม',
       submittedDate: '2026-02-20',
@@ -342,9 +345,9 @@ export default function StaffDashboard() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-lg">
                   <FileText className="w-5 h-5 text-blue-600" />
-                  ใบสมัครที่ต้องตรวจสอบ
+                  คำขอที่รอตรวจสอบ
                 </CardTitle>
                 <Button
                   variant="ghost"
@@ -368,24 +371,33 @@ export default function StaffDashboard() {
                     className="p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all cursor-pointer group"
                     onClick={() => handleViewApplication(app.id)}
                   >
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-semibold text-gray-900">{app.id}</span>
-                          <Badge
-                            variant={
-                              app.priority === 'high'
-                                ? 'destructive'
-                                : app.priority === 'medium'
-                                ? 'default'
-                                : 'secondary'
-                            }
-                          >
-                            {app.priority === 'high' ? 'เร่งด่วน' : app.priority === 'medium' ? 'ปานกลาง' : 'ปกติ'}
-                          </Badge>
+                        <div className="flex flex-col gap-1.5 mb-3">
+                          <div className="flex items-start justify-between">
+                            <span className="font-bold text-gray-900 text-base leading-snug">{app.formName}</span>
+                            <Badge
+                              variant={
+                                app.priority === 'high'
+                                  ? 'destructive'
+                                  : app.priority === 'medium'
+                                  ? 'default'
+                                  : 'secondary'
+                              }
+                              className="shrink-0 ml-2"
+                            >
+                              {app.priority === 'high' ? 'เร่งด่วน' : app.priority === 'medium' ? 'ปานกลาง' : 'ปกติ'}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center">
+                            <span className="font-mono text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200/60 shadow-sm">{app.id}</span>
+                          </div>
                         </div>
-                        <p className="text-sm font-medium text-gray-700">{app.applicant}</p>
-                        <p className="text-sm text-gray-600 mt-1">{app.type}</p>
+                        <p className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
+                          <User className="w-4 h-4 text-gray-400" />
+                          {app.applicant}
+                        </p>
+                        <p className="text-sm text-gray-600 mt-1 pl-5">{app.type}</p>
                         <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                           <span>ส่งเมื่อ: {app.submittedDate}</span>
                           <span className="flex items-center gap-1">

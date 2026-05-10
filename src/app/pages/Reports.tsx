@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   FileText, Download, Calendar, Lock, Filter, Award,
@@ -60,7 +61,31 @@ const colorMap: Record<string, { bg: string; text: string; icon: string }> = {
 };
 
 export default function Reports() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const [activeTab, setActiveTab] = useState(() => {
+    if (location.pathname.includes('/progress')) return 'progress';
+    if (location.pathname.includes('/trends')) return 'trend';
+    if (location.pathname.includes('/export')) return 'custom';
+    return 'overview';
+  });
+
+  useEffect(() => {
+    if (location.pathname.includes('/progress')) setActiveTab('progress');
+    else if (location.pathname.includes('/trends')) setActiveTab('trend');
+    else if (location.pathname.includes('/export')) setActiveTab('custom');
+    else setActiveTab('overview');
+  }, [location.pathname]);
+
+  const handleTabChange = (val: string) => {
+    setActiveTab(val);
+    // Optional: Sync URL back when tab is manually clicked
+    if (val === 'progress') navigate('/analytics/progress', { replace: true });
+    else if (val === 'trend') navigate('/analytics/trends', { replace: true });
+    else if (val === 'custom') navigate('/analytics/export', { replace: true });
+    else if (val === 'overview') navigate('/analytics/reports', { replace: true });
+  };
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
   const [selectedReport, setSelectedReport] = useState<(typeof reportTemplates)[0] | null>(null);
   const [exportFormat, setExportFormat] = useState('pdf');
@@ -123,7 +148,7 @@ export default function Reports() {
         />
 
         {/* Main Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
           <TabsList className="flex flex-wrap h-auto gap-1 p-1">
             <TabsTrigger value="overview"><PieChartIcon className="w-4 h-4 mr-1.5" />ภาพรวมสถิติ</TabsTrigger>
             <TabsTrigger value="progress"><GraduationCap className="w-4 h-4 mr-1.5" />ความก้าวหน้า/ชดใช้ทุน</TabsTrigger>

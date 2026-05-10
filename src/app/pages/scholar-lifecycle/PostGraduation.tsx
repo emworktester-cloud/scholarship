@@ -6,7 +6,7 @@ import {
   GraduationCap, Building, Calendar, Award, Calculator,
   Plane, Send, MapPin, FileCheck, Briefcase, Shield,
   Scale, Info, AlertTriangle, Search, Edit, Trash2, Globe,
-  ArrowRightLeft, ChevronRight
+  ArrowRightLeft, ChevronRight, Bell
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -32,6 +32,7 @@ import { CountryFlag } from '../../components/ui/country-flag';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '../../components/ui/accordion';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { toast } from 'sonner';
 
 // ===== Mock scholars graduating =====
@@ -64,10 +65,14 @@ const statusConfig = {
 };
 
 export default function PostGraduation() {
+  const [activeTab, setActiveTab] = useState('scholars');
   const [selectedScholar, setSelectedScholar] = useState<GraduatingScholar | null>(null);
   const [completionDialogOpen, setCompletionDialogOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('completion');
   const [transitionToPrevOpen, setTransitionToPrevOpen] = useState(false);
+  const [eformSelectionDialogOpen, setEformSelectionDialogOpen] = useState(false);
+  const [requestDialogOpen, setRequestDialogOpen] = useState(false);
+  const [selectedRequestType, setSelectedRequestType] = useState<any>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
@@ -94,7 +99,16 @@ export default function PostGraduation() {
     { id: 'affiliation', label: '4. จัดสรรสังกัด', icon: Building, desc: 'จัดสรรสังกัดให้ นทร. ทุนรัฐบาลที่ไม่มีหน่วยงานต้นสังกัด' },
     { id: 'service-calc', label: '5. การคำนวณวันชดใช้ทุน', icon: Calculator, desc: 'คำนวณตามเงื่อนไขสัญญารับทุน' },
     { id: 'upload-all', label: '6. เอกสารประกอบ', icon: Upload, desc: 'รวมเอกสารทั้งหมดของระยะสำเร็จการศึกษา' },
-    { id: 'transition', label: '7. การเปลี่ยนระยะ', icon: ArrowRightLeft, desc: 'ย้ายข้อมูลกลับไประยะที่ 2 (ระหว่างศึกษา)' },
+    { id: 'eform', label: '7. คำขอ e-Form', icon: Send, desc: 'ยื่นคำขออนุมัติ/อนุญาตในระยะสำเร็จการศึกษา' },
+    { id: 'transition', label: '8. การเปลี่ยนระยะ', icon: ArrowRightLeft, desc: 'ย้ายข้อมูลกลับไประยะที่ 2 (ระหว่างศึกษา)' },
+  ];
+
+  const postGradRequestTypes = [
+    { id: 'delay', label: 'ขอผ่อนผันการชดใช้ทุน', icon: Clock, description: 'ขอผ่อนผันการชดใช้ทุน (ศึกษาต่อทุนอื่น/เหตุผลอื่นๆ)' },
+    { id: 'transfer', label: 'คำขอโอนย้ายสังกัด/ส่วนราชการ', icon: Building, description: 'ขอโอนย้ายไปยังหน่วยงานอื่น' },
+    { id: 'exempt', label: 'ขออนุญาตลาออกจากราชการ/ชดใช้เป็นเงิน', icon: Calculator, description: 'ขอชดใช้ทุนเป็นเงินและลาออก' },
+    { id: 'extend_report', label: 'ขอขยายเวลารายงานตัว', icon: Calendar, description: 'ขอขยายเวลารายงานตัวเข้าปฏิบัติราชการ' },
+    { id: 'other', label: 'คำขออื่นๆ (โปรดระบุ)', icon: Send, description: 'คำขออื่นๆ นอกเหนือจากที่ระบุ' },
   ];
 
   return (
@@ -163,7 +177,14 @@ export default function PostGraduation() {
       </div>
 
       {!selectedScholar ? (
-        <Card className="overflow-hidden border-0 shadow-lg shadow-amber-900/5">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="gap-0 space-y-0">
+          <TabsList className="flex flex-wrap h-auto gap-1 p-1">
+            <TabsTrigger value="scholars"><User className="w-3.5 h-3.5 mr-1" />รายชื่อผู้รับทุน</TabsTrigger>
+            <TabsTrigger value="requests"><Send className="w-3.5 h-3.5 mr-1" />คำขอ e-Form</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="scholars" className="mt-4 space-y-2">
+            <Card className="overflow-hidden border-0 shadow-lg shadow-amber-900/5">
           <CardHeader className="pb-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-t-xl">
             <CardTitle className="text-base flex items-center gap-2 text-white">
               <Award className="w-5 h-5" />
@@ -233,8 +254,49 @@ export default function PostGraduation() {
                 })}
               </TableBody>
             </Table></div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          </TabsContent>
+
+          <TabsContent value="requests" className="mt-4 space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base flex items-center gap-2"><Send className="w-5 h-5 text-purple-600" />คำขออนุมัติ/อนุญาตต่างๆ (ระยะสำเร็จการศึกษา)</CardTitle>
+                <CardDescription className="text-xs">นทร. ยื่นคำขอผ่าน สนร./สอท./สำนักงาน ก.พ. สำหรับการผ่อนผัน โอนย้าย หรือขยายเวลารายงานตัว</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {postGradRequestTypes.map((rt, i) => {
+                    const Icon = rt.icon;
+                    return (
+                      <motion.div key={rt.id} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }}>
+                        <div
+                          className="p-3 border rounded-xl hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group"
+                          onClick={() => { setSelectedRequestType(rt); setRequestDialogOpen(true); }}
+                        >
+                          <div className="flex items-start gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-purple-100 group-hover:to-indigo-100 flex items-center justify-center transition-colors">
+                              <Icon className="w-4 h-4 text-gray-500 group-hover:text-purple-600 transition-colors" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-semibold truncate">{rt.label}</p>
+                              <p className="text-[10px] text-gray-500 mt-0.5">{rt.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="p-3 bg-purple-50 border border-purple-200 rounded-lg text-xs text-purple-700 flex items-start gap-2">
+              <Bell className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" />
+              <p>ระบบแจ้งเตือนการดำเนินการในเรื่องที่เกี่ยวข้องโดยอัตโนมัติ: การขอผ่อนผันการชดใช้ทุน, โอนย้ายสังกัด, ขอขยายเวลารายงานตัว ฯลฯ — ทุกหัวข้อสามารถ Upload file ได้ (.pdf .jpg)</p>
+            </div>
+          </TabsContent>
+        </Tabs>
       ) : (
         <div className="space-y-6">
 
@@ -336,7 +398,7 @@ export default function PostGraduation() {
                  {postGradSections.find(x => x.id === expandedSection)?.desc}
                </CardDescription>
              </CardHeader>
-             <CardContent className="p-6">
+             <CardContent className="p-6 pt-0">
                <div className="space-y-4">
                {expandedSection === 'completion' && (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
@@ -444,6 +506,46 @@ export default function PostGraduation() {
             <div className="space-y-1.5"><Label className="text-xs">หมายเหตุเงื่อนไขสัญญา</Label><Textarea placeholder="เงื่อนไขพิเศษตามสัญญา..." className="min-h-[50px]" /></div>
                  </motion.div>
                )}
+
+                {expandedSection === 'eform' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+                    <div className="flex justify-between items-center bg-blue-50 p-4 rounded-xl border border-blue-100">
+                      <div>
+                        <h4 className="font-semibold text-blue-900 text-sm">การจัดการคำขอ e-Form</h4>
+                        <p className="text-xs text-blue-700 mt-1">ยื่นคำขออนุมัติ หรือแจ้งข้อมูลเพิ่มเติมสำหรับระยะสำเร็จการศึกษา</p>
+                      </div>
+                      <Button onClick={() => setEformSelectionDialogOpen(true)} className="shadow-sm">
+                        <Plus className="w-4 h-4 mr-2" />
+                        ยื่นคำขอใหม่
+                      </Button>
+                    </div>
+                    
+                    <div className="mt-4">
+                      <h4 className="text-sm font-medium text-gray-800 mb-3">ประวัติคำขอของ {selectedScholar?.name}</h4>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>รหัสคำขอ</TableHead>
+                            <TableHead>ประเภทคำขอ</TableHead>
+                            <TableHead>วันที่ส่ง</TableHead>
+                            <TableHead>สถานะ</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          <TableRow className="hover:bg-gray-50/50 text-xs">
+                            <TableCell className="font-mono text-gray-500">REQ-2026-088</TableCell>
+                            <TableCell className="font-medium">ขอผ่อนผันการชดใช้ทุน (ศึกษาต่อทุนอื่น)</TableCell>
+                            <TableCell>10/01/2569</TableCell>
+                            <TableCell><Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">อนุมัติแล้ว</Badge></TableCell>
+                          </TableRow>
+                          <TableRow className="hover:bg-gray-50/50 text-xs">
+                            <TableCell colSpan={4} className="text-center text-gray-400 py-6">ไม่มีข้อมูลคำขอเพิ่มเติม</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </motion.div>
+                )}
 
                {expandedSection === 'upload-all' && (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
@@ -567,6 +669,97 @@ export default function PostGraduation() {
             </Button>
           </div>
         </DialogContent>
+      </Dialog>
+
+      {/* e-Form Selection Dialog */}
+      <Dialog open={eformSelectionDialogOpen} onOpenChange={setEformSelectionDialogOpen}>
+        <DialogContent className="sm:max-w-3xl p-0 max-h-[85vh] overflow-y-auto">
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
+            <DialogTitle className="text-white text-lg flex items-center gap-2">
+              <Send className="w-5 h-5" />
+              เลือกประเภทคำขอ e-Form (ระยะที่ 3 สำเร็จการศึกษา)
+            </DialogTitle>
+            <DialogDescription className="text-purple-100 mt-1">กรุณาเลือกประเภทคำขอที่ต้องการยื่น เพื่อดำเนินการต่อไป</DialogDescription>
+          </div>
+          <div className="p-6 bg-slate-50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {postGradRequestTypes.map((rt) => {
+                const Icon = rt.icon;
+                return (
+                  <div key={rt.id} 
+                    className="p-3 border rounded-xl bg-white hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group flex items-start gap-3"
+                    onClick={() => {
+                      setEformSelectionDialogOpen(false);
+                      setSelectedRequestType(rt);
+                      setRequestDialogOpen(true);
+                    }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center shrink-0 group-hover:bg-purple-100">
+                      <Icon className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">{rt.label}</p>
+                      <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-2">{rt.description}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="border-t bg-white px-6 py-3 flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setEformSelectionDialogOpen(false)}>ยกเลิก</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* New Request Dialog */}
+      <Dialog open={requestDialogOpen} onOpenChange={setRequestDialogOpen}>
+        {selectedRequestType && (
+          <DialogContent className="sm:max-w-xl p-0 gap-0 max-h-[85vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
+              <DialogTitle className="text-white text-lg flex items-center gap-2">
+                <selectedRequestType.icon className="w-5 h-5" />
+                {selectedRequestType.label}
+              </DialogTitle>
+              <DialogDescription className="text-purple-100 mt-1">{selectedRequestType.description} — ยื่นผ่าน สนร./สอท./สำนักงาน ก.พ.</DialogDescription>
+            </div>
+            <div className="px-6 py-5 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">นักเรียนทุน</Label>
+                  {selectedScholar ? (
+                    <div className="p-2.5 bg-gray-50 border rounded-md text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <User className="w-4 h-4 text-gray-400" />
+                      {selectedScholar.id} • {selectedScholar.name}
+                    </div>
+                  ) : (
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="เลือกนักเรียนทุน" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {graduatingScholars.map(s => (
+                          <SelectItem key={s.id} value={s.id}>{s.id} • {s.name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                </div>
+                <div className="space-y-1.5"><Label className="text-xs">หน่วยงานที่ยื่น</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="snr">สนร.</SelectItem><SelectItem value="sot">สอท.</SelectItem><SelectItem value="ocsc">สำนักงาน ก.พ.</SelectItem></SelectContent></Select></div>
+              </div>
+              <div className="space-y-1.5"><Label className="text-xs">เหตุผลประกอบคำขอ <span className="text-red-500">*</span></Label><Textarea placeholder="ระบุเหตุผล..." className="min-h-[80px]" /></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1.5"><Label className="text-xs">วันที่ยื่นคำขอ</Label><div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" className="pl-9" /></div></div>
+                <div className="space-y-1.5"><Label className="text-xs">วันที่ต้องการ</Label><div className="relative"><Calendar className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" /><Input type="text" placeholder="DD/MM/YYYY" className="pl-9" /></div></div>
+              </div>
+              <FileUploadArea label="อัปโหลดเอกสารประกอบ" accept=".pdf,.jpg,.png" />
+            </div>
+            <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setRequestDialogOpen(false)}>ยกเลิก</Button>
+              <Button onClick={() => { setRequestDialogOpen(false); toast.success(`ส่งคำขอ "${selectedRequestType.label}" เรียบร้อยแล้ว`); }}><Send className="w-4 h-4 mr-1" />ส่งคำขอ</Button>
+            </div>
+          </DialogContent>
+        )}
       </Dialog>
     </div>
   );

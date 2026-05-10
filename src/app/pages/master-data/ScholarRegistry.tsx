@@ -228,7 +228,7 @@ export function ScholarRegistry() {
                       {[
                         { step: 1, label: 'ข้อมูลส่วนตัว' },
                         { step: 2, label: 'ข้อมูลการติดต่อ' },
-                        { step: 3, label: 'ห���่วยงาน' },
+                        { step: 3, label: 'หน่วยงาน' },
                       ].map((s, i) => (
                         <div key={s.step} className="flex items-center gap-2">
                           <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${

@@ -152,7 +152,7 @@ export default function ScholarshipCalculator() {
                             <p className="text-[10px] text-amber-500">≈ {(r.totalServiceDays / 365).toFixed(1)} ปี</p>
                           </div>
                           <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-                            <Label className="text-[10px] text-green-500 uppercase flex items-center gap-1"><CalendarCheck className="w-3 h-3" />สิ้นสุดชดใช้</Label>
+                            <Label className="text-[10px] text-green-500 uppercase flex items-center gap-1"><CalendarCheck className="w-3 h-3" />วันสิ้นสุดชดใช้ทุน</Label>
                             <p className="text-xs font-medium mt-1">{r.serviceStartDate !== '-' ? r.serviceStartDate : 'รอเริ่ม'}</p>
                             <p className="text-xs font-medium">{r.serviceEndDate !== '-' ? `ถึง ${r.serviceEndDate}` : ''}</p>
                           </div>
@@ -201,7 +201,7 @@ export default function ScholarshipCalculator() {
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-3 bg-white rounded-lg border"><p className="text-[10px] text-gray-500">จำนวนวันรับทุน</p><p className="text-2xl font-bold text-blue-700">{manualResult.days.toLocaleString()}</p><p className="text-[10px] text-gray-400">วัน ({(manualResult.days / 365).toFixed(1)} ปี)</p></div>
                   <div className="text-center p-3 bg-white rounded-lg border"><p className="text-[10px] text-gray-500">จำนวนวันชดใช้ทุน (×2)</p><p className="text-2xl font-bold text-purple-700">{manualResult.serviceDays.toLocaleString()}</p><p className="text-[10px] text-gray-400">วัน ({(manualResult.serviceDays / 365).toFixed(1)} ปี)</p></div>
-                  <div className="text-center p-3 bg-white rounded-lg border"><p className="text-[10px] text-gray-500">วันสิ้��สุดชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">{manualResult.serviceEndDate}</p></div>
+                  <div className="text-center p-3 bg-white rounded-lg border"><p className="text-[10px] text-gray-500">วันสิ้นสุดชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">{manualResult.serviceEndDate}</p></div>
                 </div>
               </motion.div>
             )}

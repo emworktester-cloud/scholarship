@@ -124,7 +124,8 @@ export default function ApplicationDetail() {
 
   // Mock data
   const application = {
-    id: id || 'APP-2026-001',
+    id: id || 'REQ-2026-001',
+    formName: 'แบบรายงานตัวผู้รับทุน',
     applicant: {
       name: 'นายสมชาย ใจดี',
       idCard: '1-1234-56789-01-2',
@@ -296,8 +297,8 @@ export default function ApplicationDetail() {
 
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl font-bold">{application.applicant.name}</h1>
+              <div className="flex items-center gap-3 mb-1">
+                <h1 className="text-3xl font-bold">{application.formName}</h1>
                 <button
                   onClick={() => setWatched(!watched)}
                   className="text-white/80 hover:text-white transition-colors"
@@ -305,8 +306,12 @@ export default function ApplicationDetail() {
                   <Star className={`w-6 h-6 ${watched ? 'fill-yellow-400 text-yellow-400' : ''}`} />
                 </button>
               </div>
+              <div className="flex items-center gap-2 mb-3">
+                <User className="w-5 h-5 text-white/80" />
+                <span className="text-xl font-medium text-white/90">{application.applicant.name}</span>
+              </div>
               <div className="flex items-center gap-4 text-sm opacity-90">
-                <span>{application.id}</span>
+                <span className="font-mono bg-white/20 px-2 py-0.5 rounded text-white font-semibold shadow-sm">{application.id}</span>
                 <span>•</span>
                 <span>{application.scholarship.type}</span>
                 <span>•</span>
@@ -333,10 +338,10 @@ export default function ApplicationDetail() {
 
         {/* Quick Actions Bar */}
         <div className="px-8 py-3 bg-white/10 backdrop-blur-sm border-t border-white/20">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Dialog open={requestInfoOpen} onOpenChange={setRequestInfoOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" variant="secondary">
+                <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-sm transition-all hover:-translate-y-0.5">
                   <Send className="w-4 h-4 mr-2" />
                   ขอข้อมูลเพิ่ม
                 </Button>
@@ -385,7 +390,7 @@ export default function ApplicationDetail() {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setRequestInfoOpen(false)}>ยกเลิก</Button>
-                  <Button onClick={() => { setRequestInfoOpen(false); toast.success('ส่งคำขอข้อมูลเพิ่มเติมเรียบร้อย'); }}>
+                  <Button className="bg-amber-500 hover:bg-amber-600 text-white" onClick={() => { setRequestInfoOpen(false); toast.success('ส่งคำขอข้อมูลเพิ่มเติมเรียบร้อย'); }}>
                     <Send className="w-4 h-4 mr-2" />
                     ส่งคำขอ
                   </Button>
@@ -393,20 +398,22 @@ export default function ApplicationDetail() {
               </DialogContent>
             </Dialog>
 
-            <Button size="sm" variant="secondary" onClick={() => toast.success('ส่งพิจารณาเรียบร้อย')}>
+            <Button size="sm" className="bg-white text-blue-700 hover:bg-blue-50 border-0 shadow-sm transition-all hover:-translate-y-0.5 font-medium" onClick={() => toast.success('ส่งพิจารณาเรียบร้อย')}>
               <CheckCircle className="w-4 h-4 mr-2" />
               ส่งพิจารณา
             </Button>
-            <Button size="sm" variant="secondary" onClick={() => toast.success('ส่งอนุมัติเรียบร้อย')}>
+            <Button size="sm" className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 shadow-sm transition-all hover:-translate-y-0.5" onClick={() => toast.success('ส่งอนุมัติเรียบร้อย')}>
               <CheckCircle2 className="w-4 h-4 mr-2" />
               ส่งอนุมัติ
             </Button>
-            <Separator orientation="vertical" className="h-6 bg-white/30" />
-            <Button size="sm" variant="ghost" className="text-white hover:bg-white/20" onClick={() => setActiveTab('communication')}>
+            
+            <Separator orientation="vertical" className="h-6 bg-white/30 mx-1" />
+            
+            <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 transition-colors" onClick={() => setActiveTab('communication')}>
               <MessageSquare className="w-4 h-4 mr-2" />
               หมายเหตุภายใน
             </Button>
-            <Button size="sm" variant="ghost" className="text-white hover:bg-white/20" onClick={() => { toast.info('พิมพ์เอกสาร...'); }}>
+            <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 transition-colors" onClick={() => { toast.info('พิมพ์เอกสาร...'); }}>
               <Printer className="w-4 h-4 mr-2" />
               พิมพ์
             </Button>
@@ -783,7 +790,7 @@ export default function ApplicationDetail() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>ตรวจสอ��เอกสารและคุณสมบัติ</CardTitle>
+                  <CardTitle>ตรวจสอบเอกสารและคุณสมบัติ</CardTitle>
                   <Badge variant={checkedCount === checklistItems.length ? 'default' : 'secondary'}
                     className={checkedCount === checklistItems.length ? 'bg-green-100 text-green-700' : ''}>
                     {checkedCount}/{checklistItems.length} รายการ

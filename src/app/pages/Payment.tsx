@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   DollarSign,
@@ -110,10 +111,33 @@ const payments = [
 ];
 
 export default function Payment() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [createPlanOpen, setCreatePlanOpen] = useState(false);
   const [recordPaymentOpen, setRecordPaymentOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('all');
+  
+  const [mainTab, setMainTab] = useState(() => {
+    if (location.pathname.includes('/budget')) return 'budget';
+    if (location.pathname.includes('/logistics')) return 'logistics';
+    return 'payment';
+  });
+  
+  const [paymentStatusTab, setPaymentStatusTab] = useState('all');
+
+  useEffect(() => {
+    if (location.pathname.includes('/budget')) setMainTab('budget');
+    else if (location.pathname.includes('/logistics')) setMainTab('logistics');
+    else setMainTab('payment');
+  }, [location.pathname]);
+
+  const handleMainTabChange = (val: string) => {
+    setMainTab(val);
+    if (val === 'budget') navigate('/finance/budget', { replace: true });
+    else if (val === 'logistics') navigate('/finance/logistics', { replace: true });
+    else navigate('/finance/payment', { replace: true });
+  };
+
   const [planType, setPlanType] = useState('installment');
   const [numInstallments, setNumInstallments] = useState(4);
 
@@ -472,9 +496,17 @@ export default function Payment() {
           </CardContent>
         </Card>
 
-        {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList>
+        {/* Main Tabs */}
+        <Tabs value={mainTab} onValueChange={handleMainTabChange} className="space-y-4">
+          <TabsList className="bg-gray-100 p-1">
+            <TabsTrigger value="payment" className="data-[state=active]:bg-white">แผนการจ่ายเงิน</TabsTrigger>
+            <TabsTrigger value="budget" className="data-[state=active]:bg-white">งบประมาณ</TabsTrigger>
+            <TabsTrigger value="logistics" className="data-[state=active]:bg-white">จัดส่งเอกสาร/ของ</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="payment" className="space-y-4">
+            <Tabs value={paymentStatusTab} onValueChange={setPaymentStatusTab} className="space-y-4">
+              <TabsList>
             <TabsTrigger value="all">
               ทั้งหมด
               <Badge variant="secondary" className="ml-2">156</Badge>
@@ -496,10 +528,9 @@ export default function Payment() {
               เกินกำหนด
               <Badge variant="destructive" className="ml-2">3</Badge>
             </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value={activeTab}>
-            <Card>
+              </TabsList>
+              <TabsContent value={paymentStatusTab}>
+                <Card>
               <CardContent className="p-0">
                 <Table>
                   <TableHeader>
@@ -616,6 +647,28 @@ export default function Payment() {
                     ))}
                   </TableBody>
                 </Table>
+              </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </TabsContent>
+
+          <TabsContent value="budget">
+            <Card>
+              <CardContent className="p-10 text-center text-gray-500">
+                <DollarSign className="w-10 h-10 mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-semibold text-gray-700">ระบบจัดการงบประมาณ</h3>
+                <p className="mt-2">ฟังก์ชันนี้อยู่ระหว่างการพัฒนา จะใช้สำหรับติดตามและจัดสรรงบประมาณโครงการ</p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="logistics">
+            <Card>
+              <CardContent className="p-10 text-center text-gray-500">
+                <File className="w-10 h-10 mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-semibold text-gray-700">ระบบจัดส่งเอกสารและสิ่งของ</h3>
+                <p className="mt-2">ฟังก์ชันนี้อยู่ระหว่างการพัฒนา จะใช้สำหรับติดตามการส่งเอกสารหรือของไปยังนักเรียนทุน</p>
               </CardContent>
             </Card>
           </TabsContent>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   Search,
@@ -101,18 +101,88 @@ const tasks = [
     hasNewDocs: true,
     tags: ['รอผู้สมัคร'],
   },
+  {
+    id: 'REQ-2026-005',
+    applicant: 'นายสมเกียรติ ยิ่งใหญ่',
+    requestType: 'ลงนามลายเซ็นอิเล็กทรอนิกส์ (e-Sign)',
+    status: 'รอตรวจเอกสาร',
+    priority: 'high',
+    sla: 'เหลือ 1 ชั่วโมง',
+    slaStatus: 'critical',
+    assignee: 'คุณ',
+    updatedAt: '5 นาทีที่แล้ว',
+    watched: false,
+    hasNewDocs: false,
+    tags: ['e-Sign'],
+  },
 ];
 
 export default function Applications() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState('all');
-  const [filterAssignee, setFilterAssignee] = useState('all');
+  const [filterType, setFilterType] = useState(() => {
+    if (location.pathname.includes('/e-sign')) return 'e-sign';
+    return 'all';
+  });
+  const [filterAssignee, setFilterAssignee] = useState(() => {
+    if (location.pathname.endsWith('/all')) return 'all';
+    if (location.pathname.includes('/workspace')) return 'me';
+    return 'all';
+  });
   const [activeTab, setActiveTab] = useState('all');
+
+  React.useEffect(() => {
+    if (location.pathname.endsWith('/all')) {
+      setFilterAssignee('all');
+      setFilterType('all');
+    } else if (location.pathname.includes('/e-sign')) {
+      setFilterType('e-sign');
+      setFilterAssignee('me');
+    } else if (location.pathname.includes('/workspace')) {
+      setFilterAssignee('me');
+      setFilterType('all');
+    }
+  }, [location.pathname]);
+
+  const filteredTasks = tasks.filter(task => {
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      if (!task.id.toLowerCase().includes(q) &&
+          !task.applicant.toLowerCase().includes(q) &&
+          !task.requestType.toLowerCase().includes(q)) {
+        return false;
+      }
+    }
+
+    if (filterType !== 'all') {
+      if (filterType === 'extend' && !task.requestType.includes('ขอขยายระยะเวลาศึกษา')) return false;
+      if (filterType === 'transfer' && !task.requestType.includes('การย้ายสถานศึกษา')) return false;
+      if (filterType === 'conference' && !task.requestType.includes('ประชุม')) return false;
+      if (filterType === 'delay' && !task.requestType.includes('ขอเลื่อน')) return false;
+      if (filterType === 'e-sign' && !task.requestType.includes('ลายเซ็น')) return false;
+    }
+
+    if (filterAssignee !== 'all') {
+      if (filterAssignee === 'me' && task.assignee !== 'คุณ') return false;
+      if (filterAssignee === 'team' && task.assignee === 'คุณ') return false;
+    }
+
+    if (activeTab !== 'all') {
+      if (activeTab === 'checking' && task.status !== 'รอตรวจเอกสาร') return false;
+      if (activeTab === 'requesting' && task.status !== 'รอตอบข้อมูลเพิ่ม') return false;
+      if (activeTab === 'reviewing' && task.status !== 'รอพิจารณา') return false;
+      if (activeTab === 'approving' && task.status !== 'รออนุมัติ') return false;
+      if (activeTab === 'overdue' && task.slaStatus !== 'critical') return false;
+    }
+
+    return true;
+  });
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      setSelectedTasks(tasks.map(t => t.id));
+      setSelectedTasks(filteredTasks.map(t => t.id));
     } else {
       setSelectedTasks([]);
     }
@@ -170,7 +240,7 @@ export default function Applications() {
   return (
     <div className="min-h-full">
       <PageHeader
-        title="คิวงาน"
+        title={location.pathname.includes('/e-sign') ? "ลายเซ็นอิเล็กทรอนิกส์" : location.pathname.endsWith('/all') ? "คำร้องทั้งหมด" : "งานรอดำเนินการ"}
         breadcrumbs={[
           { label: 'แดชบอร์ด', href: '/' },
           { label: 'คิวงาน' }
@@ -186,6 +256,15 @@ export default function Applications() {
       />
 
       <div className="p-8 space-y-6">
+        {/* Main Workspace Navigation Tabs */}
+        <Tabs value={location.pathname} onValueChange={(val) => navigate(val)} className="w-full">
+          <TabsList className="mb-2 grid w-full max-w-md grid-cols-3">
+            <TabsTrigger value="/workspace">คิวงานของฉัน</TabsTrigger>
+            <TabsTrigger value="/workspace/all">งานทั้งหมด</TabsTrigger>
+            <TabsTrigger value="/workspace/e-sign">e-Sign</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
         {/* Permission Panel */}
         <PermissionPanel
           pageName="คิวงาน"
@@ -257,6 +336,7 @@ export default function Applications() {
                 <SelectItem value="transfer">การย้ายสถานศึกษา</SelectItem>
                 <SelectItem value="conference">ร่วมประชุมวิชาการ</SelectItem>
                 <SelectItem value="delay">ขอเลื่อนเดินทาง</SelectItem>
+                <SelectItem value="e-sign">ลายเซ็นอิเล็กทรอนิกส์</SelectItem>
               </SelectContent>
             </Select>
             <Select value={filterAssignee} onValueChange={setFilterAssignee}>
@@ -344,7 +424,7 @@ export default function Applications() {
                   <TableRow>
                     <TableHead className="w-12">
                       <Checkbox
-                        checked={selectedTasks.length === tasks.length}
+                        checked={selectedTasks.length === filteredTasks.length && filteredTasks.length > 0}
                         onCheckedChange={handleSelectAll}
                       />
                     </TableHead>
@@ -361,8 +441,15 @@ export default function Applications() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {tasks.map((task) => (
-                    <TableRow key={task.id} className="group hover:bg-blue-50/50 transition-colors">
+                  {filteredTasks.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={10} className="text-center py-10 text-gray-500">
+                        ไม่พบข้อมูลที่ตรงกับเงื่อนไขการค้นหา
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    filteredTasks.map((task) => (
+                      <TableRow key={task.id} className="group hover:bg-blue-50/50 transition-colors">
                       <TableCell>
                         <Checkbox
                           checked={selectedTasks.includes(task.id)}
@@ -440,7 +527,7 @@ export default function Applications() {
                         </div>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )))}
                 </TableBody>
               </Table>
             </motion.div>

@@ -95,12 +95,19 @@ export function GovernmentOrgs() {
                   <DialogTrigger asChild>
                     <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มหน่วยงาน</Button>
                   </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>เพิ่มหน่วยงานใหม่</DialogTitle>
-                      <DialogDescription>กรอกข้อมูลหน่วยงานราชการ</DialogDescription>
-                    </DialogHeader>
-                    <div className="grid grid-cols-2 gap-4 py-4">
+                  <DialogContent className="p-0 gap-0 overflow-hidden">
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                          <Building className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <DialogTitle className="text-white text-lg">เพิ่มหน่วยงานใหม่</DialogTitle>
+                          <DialogDescription className="text-blue-100 mt-1">กรอกข้อมูลหน่วยงานราชการ</DialogDescription>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 px-6 py-5 max-h-[60vh] overflow-y-auto">
                       <div className="space-y-2">
                         <Label>รหัสหน่วยงาน</Label>
                         <Input placeholder="รหัส" />
@@ -149,10 +156,10 @@ export function GovernmentOrgs() {
                         </Select>
                       </div>
                     </div>
-                    <DialogFooter>
+                    <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
                       <Button variant="outline" onClick={() => setAddOrgOpen(false)}>ยกเลิก</Button>
-                      <Button onClick={() => { setAddOrgOpen(false); toast.success('เพิ่มหน่วยงานใหม่เรียบร้อย'); }}>บันทึก</Button>
-                    </DialogFooter>
+                      <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => { setAddOrgOpen(false); toast.success('เพิ่มหน่วยงานใหม่เรียบร้อย'); }}>บันทึก</Button>
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>
@@ -248,12 +255,19 @@ export function GovernmentOrgs() {
                   <DialogTrigger asChild>
                     <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มตำแหน่ง</Button>
                   </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>เพิ่มตำแหน่งข้าราชการ</DialogTitle>
-                      <DialogDescription>กรอกข้อมูลตำแหน่งและระดับ</DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 py-4">
+                  <DialogContent className="p-0 gap-0 overflow-hidden">
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                          <Landmark className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <DialogTitle className="text-white text-lg">เพิ่มตำแหน่งข้าราชการ</DialogTitle>
+                          <DialogDescription className="text-blue-100 mt-1">กรอกข้อมูลตำแหน่งและระดับ</DialogDescription>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
                       <div className="space-y-2"><Label>ชื่อตำแหน่ง</Label><Input placeholder="ชื่อตำแหน่ง" /></div>
                       <div className="space-y-2">
                         <Label>ประเภทตำแหน่ง</Label>
@@ -269,10 +283,10 @@ export function GovernmentOrgs() {
                       </div>
                       <div className="space-y-2"><Label>ช่วงระดับ</Label><Input placeholder="เช่น ปฏิบัติการ - ชำนาญการพิเศษ" /></div>
                     </div>
-                    <DialogFooter>
+                    <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
                       <Button variant="outline" onClick={() => setAddPosOpen(false)}>ยกเลิก</Button>
-                      <Button onClick={() => { setAddPosOpen(false); toast.success('เพิ่มตำแหน่งเรียบร้อย'); }}>บันทึก</Button>
-                    </DialogFooter>
+                      <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => { setAddPosOpen(false); toast.success('เพิ่มตำแหน่งเรียบร้อย'); }}>บันทึก</Button>
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>

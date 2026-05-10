@@ -256,24 +256,26 @@ export default function DuringStudy() {
           </Card>
 
           {/* Sidebar + Content */}
-          <div className="grid grid-cols-12 gap-4">
+          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-4">
             {/* Sidebar */}
-            <div className="col-span-3 space-y-1">
+            <div className="lg:col-span-3">
+              <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 no-scrollbar whitespace-nowrap lg:whitespace-normal">
               {detailSections.map(sec => {
                 const SIcon = sec.icon;
                 const isActive = detailSection === sec.id;
                 return (
-                  <button key={sec.id} onClick={() => setDetailSection(sec.id)} className={cn("w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-sm transition-all", isActive ? "bg-green-600 text-white shadow-md" : "text-gray-600 hover:bg-green-50 hover:text-green-700")}>
+                  <button key={sec.id} onClick={() => setDetailSection(sec.id)} className={cn("flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-sm transition-all shrink-0 lg:w-full", isActive ? "bg-green-600 text-white shadow-md" : "text-gray-600 hover:bg-green-50 hover:text-green-700")}>
                     <SIcon className="w-4 h-4 shrink-0" />
                     <span className="truncate">{sec.label}</span>
                     {sec.id === 'watchlist' && scholarWatchItems.length > 0 && <Badge className="ml-auto bg-red-500 text-white text-[8px] px-1.5">{scholarWatchItems.length}</Badge>}
                   </button>
                 );
               })}
+              </nav>
             </div>
 
             {/* Content area */}
-            <div className="col-span-9 space-y-4">
+            <div className="lg:col-span-9 space-y-4">
               {/* Section: รายงานตัว */}
               {detailSection === 'report' && (
                 <Card>
@@ -478,7 +480,7 @@ export default function DuringStudy() {
           </div>
         </div>
       ) : (
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-5">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="gap-0 space-y-0">
         <TabsList className="flex flex-wrap h-auto gap-1 p-1">
           <TabsTrigger value="scholars"><User className="w-3.5 h-3.5 mr-1" />รายชื่อผู้รับทุน</TabsTrigger>
           <TabsTrigger value="requests"><Send className="w-3.5 h-3.5 mr-1" />คำขอ e-Form</TabsTrigger>
@@ -486,8 +488,8 @@ export default function DuringStudy() {
           <TabsTrigger value="reports"><ClipboardList className="w-3.5 h-3.5 mr-1" />รายงานผลการศึกษา</TabsTrigger>
           <TabsTrigger value="arrival"><MapPin className="w-3.5 h-3.5 mr-1" />รายงานจาก สนร.</TabsTrigger>
         </TabsList>
-        <TabsContent value="scholars" className="space-y-4">
-          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 mb-1">
+        <TabsContent value="scholars" className="mt-4 space-y-2">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 mb-2">
             <div className="flex gap-2 w-full xl:w-auto flex-wrap">
               <div className="relative flex-grow sm:flex-grow-0 sm:min-w-[200px]">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />

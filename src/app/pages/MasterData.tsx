@@ -293,12 +293,19 @@ function ScholarshipTypesSection({
             <DialogTrigger asChild>
               <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มประเภททุน</Button>
             </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>เพิ่มประเภททุนใหม่</DialogTitle>
-                <DialogDescription>กรอกข้อมูลประเภททุนที่ต้องการเพิ่มเข้าระบบ</DialogDescription>
-              </DialogHeader>
-              <div className="space-y-4 py-4">
+            <DialogContent className="p-0 gap-0 overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-white text-lg">เพิ่มประเภททุนใหม่</DialogTitle>
+                    <DialogDescription className="text-blue-100 mt-1">กรอกข้อมูลประเภททุนที่ต้องการเพิ่มเข้าระบบ</DialogDescription>
+                  </div>
+                </div>
+              </div>
+              <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
                 <div className="space-y-2"><Label>รหัสประเภททุน</Label><Input placeholder="เช่น PHD, MASTER" /></div>
                 <div className="space-y-2"><Label>ชื่อประเภททุน</Label><Input placeholder="เช่น ทุนการศึกษาระดับปริญญาเอก" /></div>
                 <div className="space-y-2"><Label>คำอธิบาย</Label><Textarea placeholder="รายละเอียดประเภททุน..." /></div>
@@ -313,10 +320,10 @@ function ScholarshipTypesSection({
                   </Select>
                 </div>
               </div>
-              <DialogFooter>
+              <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
                 <Button variant="outline" onClick={() => setAddDialogOpen(false)}>ยกเลิก</Button>
-                <Button onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มประเภททุนใหม่เรียบร้อย'); }}>บันทึก</Button>
-              </DialogFooter>
+                <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มประเภททุนใหม่เรียบร้อย'); }}>บันทึก</Button>
+              </div>
             </DialogContent>
           </Dialog>
         </div>
@@ -389,7 +396,32 @@ function StatusesSection() {
             <Settings className="w-5 h-5 text-green-600" />
             สถานะระบบ (รวม {statuses.length} สถานะ)
           </CardTitle>
-          <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสถานะ</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสถานะ</Button>
+            </DialogTrigger>
+            <DialogContent className="p-0 gap-0 overflow-hidden">
+              <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-5 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                    <Settings className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-white text-lg">เพิ่มสถานะระบบ</DialogTitle>
+                    <DialogDescription className="text-green-100 mt-1">กรอกข้อมูลสถานะที่ต้องการเพิ่ม</DialogDescription>
+                  </div>
+                </div>
+              </div>
+              <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div className="space-y-2"><Label>รหัสสถานะ</Label><Input placeholder="รหัส" /></div>
+                <div className="space-y-2"><Label>ชื่อสถานะ</Label><Input placeholder="ชื่อ" /></div>
+                <div className="space-y-2"><Label>คำอธิบาย</Label><Input placeholder="คำอธิบาย" /></div>
+              </div>
+              <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                <Button className="bg-green-600 hover:bg-green-700">บันทึก</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </CardHeader>
       <CardContent>
@@ -440,7 +472,31 @@ function UniversitiesSection() {
             <Landmark className="w-5 h-5 text-cyan-600" />
             สถาบันการศึกษา ({universities.length} สถาบัน)
           </CardTitle>
-          <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสถาบัน</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสถาบัน</Button>
+            </DialogTrigger>
+            <DialogContent className="p-0 gap-0 overflow-hidden">
+              <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 px-6 py-5 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                    <Landmark className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-white text-lg">เพิ่มสถาบันการศึกษา</DialogTitle>
+                    <DialogDescription className="text-cyan-100 mt-1">กรอกข้อมูลสถาบันการศึกษา</DialogDescription>
+                  </div>
+                </div>
+              </div>
+              <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div className="space-y-2"><Label>ชื่อสถาบัน</Label><Input placeholder="ชื่อสถาบัน" /></div>
+                <div className="space-y-2"><Label>ประเทศ</Label><Input placeholder="ประเทศ" /></div>
+              </div>
+              <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                <Button className="bg-cyan-600 hover:bg-cyan-700">บันทึก</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </CardHeader>
       <CardContent>
@@ -517,7 +573,31 @@ function DepartmentsSection() {
             <BookOpen className="w-5 h-5 text-purple-600" />
             สาขาวิชา ({departments.length} สาขา)
           </CardTitle>
-          <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสาขาวิชา</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm"><Plus className="w-4 h-4 mr-2" />เพิ่มสาขาวิชา</Button>
+            </DialogTrigger>
+            <DialogContent className="p-0 gap-0 overflow-hidden">
+              <div className="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-5 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-white text-lg">เพิ่มสาขาวิชา</DialogTitle>
+                    <DialogDescription className="text-purple-100 mt-1">กรอกข้อมูลสาขาวิชา</DialogDescription>
+                  </div>
+                </div>
+              </div>
+              <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div className="space-y-2"><Label>ชื่อสาขา</Label><Input placeholder="ชื่อสาขา" /></div>
+                <div className="space-y-2"><Label>หมวดหมู่</Label><Input placeholder="หมวดหมู่" /></div>
+              </div>
+              <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                <Button className="bg-purple-600 hover:bg-purple-700">บันทึก</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </CardHeader>
       <CardContent>

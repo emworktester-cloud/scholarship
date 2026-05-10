@@ -132,7 +132,31 @@ export function ProvincesDistricts() {
               <>
                 <div className="flex items-center justify-between">
                   <h3 className="font-medium">จังหวัด (77 จังหวัด)</h3>
-                  <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มจังหวัด</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มจังหวัด</Button>
+                    </DialogTrigger>
+                    <DialogContent className="p-0 gap-0 overflow-hidden">
+                      <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                            <MapPin className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <DialogTitle className="text-white text-lg">เพิ่มจังหวัด</DialogTitle>
+                            <DialogDescription className="text-blue-100 mt-1">กรอกข้อมูลจังหวัด</DialogDescription>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                        <div className="space-y-2"><Label>ชื่อจังหวัด</Label><Input placeholder="ชื่อจังหวัด" /></div>
+                        <div className="space-y-2"><Label>ภาค</Label><Input placeholder="ภาค" /></div>
+                      </div>
+                      <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                        <Button className="bg-blue-600 hover:bg-blue-700">บันทึก</Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-1 relative">
@@ -189,7 +213,31 @@ export function ProvincesDistricts() {
               <>
                 <div className="flex items-center justify-between">
                   <h3 className="font-medium">อำเภอ/เขต</h3>
-                  <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มอำเภอ</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มอำเภอ</Button>
+                    </DialogTrigger>
+                    <DialogContent className="p-0 gap-0 overflow-hidden">
+                      <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-5 text-white">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                            <ChevronRight className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <DialogTitle className="text-white text-lg">เพิ่มอำเภอ</DialogTitle>
+                            <DialogDescription className="text-green-100 mt-1">กรอกข้อมูลอำเภอ</DialogDescription>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                        <div className="space-y-2"><Label>ชื่ออำเภอ</Label><Input placeholder="ชื่ออำเภอ" /></div>
+                        <div className="space-y-2"><Label>จังหวัด</Label><Input placeholder="จังหวัด" /></div>
+                      </div>
+                      <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                        <Button className="bg-green-600 hover:bg-green-700">บันทึก</Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-1 relative">
@@ -241,7 +289,31 @@ export function ProvincesDistricts() {
               <>
                 <div className="flex items-center justify-between">
                   <h3 className="font-medium">ประเทศที่รับทุนศึกษา ({countries.length} ประเทศ)</h3>
-                  <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มประเทศ</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มประเทศ</Button>
+                    </DialogTrigger>
+                    <DialogContent className="p-0 gap-0 overflow-hidden">
+                      <div className="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-5 text-white">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                            <Globe className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <DialogTitle className="text-white text-lg">เพิ่มประเทศ</DialogTitle>
+                            <DialogDescription className="text-purple-100 mt-1">กรอกข้อมูลประเทศ</DialogDescription>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                        <div className="space-y-2"><Label>ชื่อประเทศ</Label><Input placeholder="ชื่อประเทศ" /></div>
+                        <div className="space-y-2"><Label>ภูมิภาค</Label><Input placeholder="ภูมิภาค" /></div>
+                      </div>
+                      <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
+                        <Button className="bg-purple-600 hover:bg-purple-700">บันทึก</Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-1 relative">

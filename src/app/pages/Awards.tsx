@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   Award,
@@ -54,7 +54,7 @@ import {
 } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
 import { DatePicker } from '../components/ui/date-picker';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
 const awards = [
@@ -103,9 +103,29 @@ const awards = [
 ];
 
 export default function Awards() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState(() => {
+    if (location.pathname.includes('/guarantor')) return 'guarantor';
+    return 'all';
+  });
+  
+  useEffect(() => {
+    if (location.pathname.includes('/guarantor')) {
+      setActiveTab('guarantor');
+    } else {
+      setActiveTab('all');
+    }
+  }, [location.pathname]);
+
+  const handleTabChange = (val: string) => {
+    setActiveTab(val);
+    if (val === 'guarantor') navigate('/finance/guarantor', { replace: true });
+    else navigate('/finance', { replace: true });
+  };
+  
   const [paymentType, setPaymentType] = useState('installment');
 
   const formatCurrency = (amount: number) => {
@@ -527,7 +547,7 @@ export default function Awards() {
         </Card>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-4">
           <TabsList>
             <TabsTrigger value="all">
               ทั้งหมด
@@ -544,6 +564,10 @@ export default function Awards() {
             <ProtectedTabsTrigger value="completed" permission="awards:view">
               สำเร็จการศึกษา
               <Badge variant="secondary" className="ml-2">89</Badge>
+            </ProtectedTabsTrigger>
+            <ProtectedTabsTrigger value="guarantor" permission="contracts:view">
+              ข้อมูลผู้ค้ำประกัน
+              <Badge variant="secondary" className="ml-2">120</Badge>
             </ProtectedTabsTrigger>
           </TabsList>
 
@@ -617,6 +641,15 @@ export default function Awards() {
                     ))}
                   </TableBody>
                 </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="guarantor">
+            <Card>
+              <CardContent className="p-10 text-center text-gray-500">
+                <User className="w-10 h-10 mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-semibold text-gray-700">ข้อมูลผู้ค้ำประกัน</h3>
+                <p className="mt-2">ฟังก์ชันนี้อยู่ระหว่างการพัฒนา จะแสดงรายชื่อผู้ค้ำประกัน สัญญา และสถานะการค้ำประกันทั้งหมด</p>
               </CardContent>
             </Card>
           </TabsContent>

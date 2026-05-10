@@ -164,12 +164,19 @@ export function RepaymentConditions() {
                 <DialogTrigger asChild>
                   <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มเงื่อนไข</Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-xl">
-                  <DialogHeader>
-                    <DialogTitle>เพิ่มเงื่อนไขชดใช้ทุน</DialogTitle>
-                    <DialogDescription>กำหนดเงื่อนไขการชดใช้ทุนใหม่</DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
+                <DialogContent className="max-w-xl p-0 gap-0 overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <Scale className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <DialogTitle className="text-white text-lg">เพิ่มเงื่อนไขชดใช้ทุน</DialogTitle>
+                        <DialogDescription className="text-blue-100 mt-1">กำหนดเงื่อนไขการชดใช้ทุนใหม่</DialogDescription>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2"><Label>รหัส</Label><Input placeholder="RC-XXX" /></div>
                       <div className="space-y-2"><Label>ชื่อเงื่อนไข</Label><Input placeholder="ชื่อเงื่อนไข" /></div>
@@ -192,10 +199,10 @@ export function RepaymentConditions() {
                       <div className="space-y-2"><Label>อัตราเบี้ยปรับ (%)</Label><Input type="number" placeholder="10" /></div>
                     </div>
                   </div>
-                  <DialogFooter>
+                  <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
                     <Button variant="outline" onClick={() => setAddDialogOpen(false)}>ยกเลิก</Button>
-                    <Button onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มเงื่อนไขชดใช้ทุนเรียบร้อย'); }}>บันทึก</Button>
-                  </DialogFooter>
+                    <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มเงื่อนไขชดใช้ทุนเรียบร้อย'); }}>บันทึก</Button>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>

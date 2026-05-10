@@ -1,7 +1,37 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap, Fingerprint } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap, Fingerprint, Globe, Award, BookOpen } from 'lucide-react';
+
+/* ─── animated floating icon ─── */
+function FloatingIcon({ icon: Icon, className, delay = 0 }: { icon: React.ElementType; className?: string; delay?: number }) {
+    return (
+        <div
+            className={`absolute opacity-0 pointer-events-none ${className}`}
+            style={{
+                animation: `floatUp 12s ease-in-out ${delay}s infinite`,
+            }}
+        >
+            <Icon className="w-8 h-8 text-white/20" />
+        </div>
+    );
+}
+
+/* ─── animated particle ─── */
+function Particle({ size, x, y, delay, duration }: { size: number; x: string; y: string; delay: number; duration: number }) {
+    return (
+        <div
+            className="absolute rounded-full bg-white/10 pointer-events-none"
+            style={{
+                width: size,
+                height: size,
+                left: x,
+                top: y,
+                animation: `particleDrift ${duration}s ease-in-out ${delay}s infinite alternate`,
+            }}
+        />
+    );
+}
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -44,18 +74,100 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex bg-[#f8fafc]">
+      <style>{`
+          @keyframes floatUp {
+              0%, 100% { opacity: 0; transform: translateY(0) rotate(0deg); }
+              10% { opacity: 0.3; }
+              50% { opacity: 0.15; transform: translateY(-200px) rotate(180deg); }
+              90% { opacity: 0.3; }
+          }
+          @keyframes particleDrift {
+              0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+              50% { opacity: 0.25; }
+              100% { transform: translate(30px, -40px) scale(1.5); opacity: 0.05; }
+          }
+          @keyframes shimmer {
+              0% { transform: translateX(-100%) rotate(15deg); }
+              100% { transform: translateX(200%) rotate(15deg); }
+          }
+          @keyframes waveMove {
+              0% { transform: translateX(0) translateY(0); }
+              50% { transform: translateX(-25px) translateY(-10px); }
+              100% { transform: translateX(0) translateY(0); }
+          }
+          @keyframes pulseGlow {
+              0%, 100% { opacity: 0.4; transform: scale(1); }
+              50% { opacity: 0.7; transform: scale(1.1); }
+          }
+          @keyframes orbitSlow {
+              0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+              100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+          }
+          @keyframes gradientShift {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+          }
+          .login-left-panel {
+              background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 25%, #172554 50%, #1e3a8a 75%, #0f172a 100%);
+              background-size: 200% 200%;
+              animation: gradientShift 15s ease infinite;
+          }
+      `}</style>
+
       {/* Left Side - Institutional Premium Branding */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="hidden lg:flex lg:w-[55%] relative bg-[#0f172a] items-center justify-center p-12 overflow-hidden"
+        className="hidden lg:flex lg:w-[55%] relative items-center justify-center p-12 overflow-hidden login-left-panel"
       >
         {/* Subtle Institutional Background Pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
 
-        {/* Elegant Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#0f172a]/90"></div>
+        {/* Radial glow spots */}
+        <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.5) 0%, transparent 70%)', animation: 'pulseGlow 6s ease-in-out infinite' }} />
+        <div className="absolute bottom-[-15%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)', animation: 'pulseGlow 8s ease-in-out 2s infinite' }} />
+        <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.3) 0%, transparent 70%)', animation: 'pulseGlow 10s ease-in-out 4s infinite' }} />
+
+        {/* Wave shapes */}
+        <svg className="absolute bottom-0 left-0 w-full pointer-events-none" viewBox="0 0 1440 320" style={{ animation: 'waveMove 8s ease-in-out infinite' }}>
+            <path fill="rgba(255,255,255,0.03)" d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,218.7C672,213,768,171,864,165.3C960,160,1056,192,1152,186.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-full pointer-events-none" viewBox="0 0 1440 320" style={{ animation: 'waveMove 12s ease-in-out 2s infinite' }}>
+            <path fill="rgba(255,255,255,0.02)" d="M0,288L48,272C96,256,192,224,288,213.3C384,203,480,213,576,229.3C672,245,768,267,864,261.3C960,256,1056,224,1152,213.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
+        </svg>
+
+        {/* Shimmer streak */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 left-0 w-[200px] h-full" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)', animation: 'shimmer 8s ease-in-out infinite' }} />
+        </div>
+
+        {/* Floating icons */}
+        <FloatingIcon icon={GraduationCap} className="bottom-[10%] left-[15%]" delay={0} />
+        <FloatingIcon icon={Globe} className="bottom-[5%] left-[45%]" delay={2} />
+        <FloatingIcon icon={FileText} className="bottom-[15%] left-[70%]" delay={4} />
+        <FloatingIcon icon={Award} className="bottom-[8%] left-[30%]" delay={6} />
+        <FloatingIcon icon={BookOpen} className="bottom-[12%] left-[60%]" delay={8} />
+        <FloatingIcon icon={GraduationCap} className="bottom-[20%] left-[85%]" delay={3} />
+        <FloatingIcon icon={Globe} className="bottom-[18%] left-[25%]" delay={7} />
+
+        {/* Orbiting element */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div style={{ animation: 'orbitSlow 30s linear infinite' }}>
+                <div className="w-3 h-3 rounded-full bg-white/10 blur-[1px]" />
+            </div>
+        </div>
+
+        {/* Particles */}
+        <Particle size={4} x="10%" y="20%" delay={0} duration={7} />
+        <Particle size={6} x="30%" y="60%" delay={1} duration={9} />
+        <Particle size={3} x="70%" y="30%" delay={2} duration={6} />
+        <Particle size={5} x="50%" y="80%" delay={3} duration={8} />
+        <Particle size={4} x="85%" y="45%" delay={1.5} duration={10} />
+        <Particle size={3} x="20%" y="75%" delay={4} duration={7} />
+        <Particle size={5} x="60%" y="15%" delay={2.5} duration={9} />
+        <Particle size={4} x="40%" y="40%" delay={0.5} duration={11} />
 
         <div className="relative z-10 w-full max-w-[800px] flex flex-col justify-center h-full">
           {/* Logo & Identity */}
@@ -86,7 +198,7 @@ export default function Login() {
             {/* Core Features */}
             <div className="space-y-8">
               {[
-                { icon: FileText, title: 'ยกระดับการจัดการใบสมัคร', desc: 'บริหารจัดการเอกสารในรูปแบบดิจิทัลเต็มรูปแบบ มั่นคง ปลอดภัย' },
+                { icon: FileText, title: 'จัดการข้อมูลนักเรียนทุนแบบเบ็ดเสร็จ ณ จุดเดียว', desc: 'ยกระดับการจัดเก็บข้อมูลนักเรียนทุนดิจิทัลแบบครบวงจร' },
                 { icon: CheckCircle2, title: 'ติดตามสถานะเรียลไทม์', desc: 'ระบบตรวจสอบผลการพิจารณาที่มีความแม่นยำและโปร่งใส' },
                 { icon: ShieldCheck, title: 'มาตรฐานความปลอดภัยระดับสูง', desc: 'ปกป้องข้อมูลส่วนบุคคลตามมาตรฐานความปลอดภัยทางไซเบอร์ของภาครัฐ' },
               ].map((item, index) => (
@@ -113,9 +225,7 @@ export default function Login() {
 
       {/* Right Side - Redesigned Clean Login Form */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative overflow-hidden">
-        {/* Subtle decorative elements for the right side */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-50/40 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+        {/* Removed decorative blobs for a cleaner look */}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -245,7 +355,7 @@ export default function Login() {
               className="flex-1 h-12 bg-white hover:bg-slate-50 border-slate-200 text-slate-700 rounded-2xl transition-all flex items-center justify-center gap-2 font-k2d font-medium shadow-sm"
               onClick={() => setIsRoleDialogOpen(true)}
             >
-              <Fingerprint className="w-5 h-5 text-[#1e3a8a]" />
+              <img src="/thaid-logo.png" alt="ThaID Logo" className="w-6 h-6 object-cover rounded-full" />
               ThaID
             </Button>
             <Button

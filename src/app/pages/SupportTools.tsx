@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import {
   Calculator, FolderOpen, Image, PenTool, Settings, Siren,
   Wrench,
@@ -16,7 +17,31 @@ import SystemConfig from './support/SystemConfig';
 import SafetyAlerts from './support/SafetyAlerts';
 
 export default function SupportTools() {
-  const [activeTab, setActiveTab] = useState('calculator');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(() => {
+    if (location.pathname.includes('/documents')) return 'documents';
+    if (location.pathname.includes('/photos')) return 'photos';
+    if (location.pathname.includes('/calculator')) return 'calculator';
+    if (location.pathname.includes('/esignature')) return 'esignature';
+    if (location.pathname.includes('/config')) return 'config';
+    if (location.pathname.includes('/safety')) return 'safety';
+    return 'documents';
+  });
+
+  useEffect(() => {
+    if (location.pathname.includes('/documents')) setActiveTab('documents');
+    else if (location.pathname.includes('/photos')) setActiveTab('photos');
+    else if (location.pathname.includes('/calculator')) setActiveTab('calculator');
+    else if (location.pathname.includes('/esignature')) setActiveTab('esignature');
+    else if (location.pathname.includes('/config')) setActiveTab('config');
+    else if (location.pathname.includes('/safety')) setActiveTab('safety');
+  }, [location.pathname]);
+
+  const handleTabChange = (val: string) => {
+    setActiveTab(val);
+    navigate(`/scholar-hub/${val}`, { replace: true });
+  };
 
   return (
     <div className="min-h-full">
@@ -40,7 +65,7 @@ export default function SupportTools() {
           ]}
         />
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
           <TabsList className="flex flex-wrap h-auto gap-1 p-1">
             <TabsTrigger value="calculator"><Calculator className="w-4 h-4 mr-1.5" />คำนวณวันทุน</TabsTrigger>
             <TabsTrigger value="documents"><FolderOpen className="w-4 h-4 mr-1.5" />แฟ้มข้อมูล</TabsTrigger>

@@ -95,6 +95,7 @@ export default function PreDeparture() {
   const [activeTab, setActiveTab] = useState('scholars');
   const [requestDialogOpen, setRequestDialogOpen] = useState(false);
   const [selectedRequestType, setSelectedRequestType] = useState<RequestType | null>(null);
+  const [eformSelectionDialogOpen, setEformSelectionDialogOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
@@ -375,7 +376,7 @@ export default function PreDeparture() {
                    })()}
                  </div>
                  {/* Edit Actions */}
-                 {expandedSection !== 'documents' && (
+                 {expandedSection !== 'documents' && expandedSection !== 'eform' && expandedSection !== 'transition' && (
                    <div className="flex gap-2">
                      {editModes[expandedSection] ? (
                        <>
@@ -398,7 +399,7 @@ export default function PreDeparture() {
                  {sections.find(x => x.id === expandedSection)?.desc}
                </CardDescription>
              </CardHeader>
-             <CardContent className="p-6">
+             <CardContent className="p-6 pt-0">
                <div className="space-y-4">
                {expandedSection === 'personal' && (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
@@ -905,44 +906,15 @@ export default function PreDeparture() {
                )}
 
                {expandedSection === 'eform' && (
-                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                   {/* ส่วนยื่นคำขอใหม่ */}
-                   <div>
-                     <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800">
-                       <Send className="w-4 h-4 text-purple-500" />
-                       ยื่นคำขอใหม่
-                     </h4>
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                       {requestTypes.map(req => {
-                         const RIcon = req.icon;
-                         return (
-                           <div key={req.id} onClick={() => { setSelectedRequestType(req); setRequestDialogOpen(true); }} className="p-3 rounded-lg border border-gray-100 hover:border-purple-200 bg-white hover:bg-purple-50 transition-all cursor-pointer group shadow-sm hover:shadow-md">
-                             <div className="flex items-start gap-3">
-                               <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                                 <RIcon className="w-4 h-4" />
-                               </div>
-                               <div>
-                                 <p className="text-sm font-medium text-gray-800 group-hover:text-purple-700">{req.label}</p>
-                                 <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-1">{req.description}</p>
-                               </div>
-                             </div>
-                           </div>
-                         );
-                       })}
-                     </div>
+                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+                   <div className="flex items-center justify-between">
+                     <p className="text-sm text-gray-500">ยื่นคำขอในระยะก่อนเดินทาง สำหรับ <span className="font-medium text-gray-700">{selectedScholar?.name}</span></p>
+                     <Button size="sm" onClick={() => setEformSelectionDialogOpen(true)}><Plus className="w-4 h-4 mr-1" />ยื่นคำขอใหม่</Button>
                    </div>
-
-                   {/* ประวัติคำขอ */}
-                   <div>
-                     <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800">
-                       <FileText className="w-4 h-4 text-gray-500" />
-                       ประวัติคำขอที่ยื่น
-                     </h4>
-                     <div className="p-6 border border-dashed border-gray-200 rounded-lg text-center text-gray-400">
-                       <FileText className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-                       <p className="text-sm font-medium">ยังไม่มีคำขอที่ยื่น</p>
-                       <p className="text-[10px] mt-1">เลือกประเภทคำขอด้านบนเพื่อยื่นคำขอใหม่</p>
-                     </div>
+                   <div className="p-6 border border-dashed border-gray-200 rounded-lg text-center text-gray-400">
+                     <FileText className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                     <p className="text-sm font-medium">ยังไม่มีคำขอที่ยื่น</p>
+                     <p className="text-[10px] mt-1">กดปุ่ม "ยื่นคำขอใหม่" เพื่อเลือกประเภทแบบฟอร์มและกรอกข้อมูล</p>
                    </div>
                  </motion.div>
                )}
@@ -1160,6 +1132,47 @@ export default function PreDeparture() {
             </div>
           </DialogContent>
         )}
+      </Dialog>
+
+      {/* e-Form Selection Dialog */}
+      <Dialog open={eformSelectionDialogOpen} onOpenChange={setEformSelectionDialogOpen}>
+        <DialogContent className="sm:max-w-3xl p-0 max-h-[85vh] overflow-y-auto">
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-6 py-5 text-white">
+            <DialogTitle className="text-white text-lg flex items-center gap-2">
+              <Send className="w-5 h-5" />
+              เลือกประเภทคำขอ e-Form (ระยะก่อนเดินทาง)
+            </DialogTitle>
+            <DialogDescription className="text-purple-100 mt-1">กรุณาเลือกประเภทคำขอที่ต้องการยื่น เพื่อดำเนินการต่อไป</DialogDescription>
+          </div>
+          <div className="p-6 bg-slate-50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {requestTypes.map((rt) => {
+                const Icon = rt.icon;
+                return (
+                  <div key={rt.id}
+                    className="p-3 border rounded-xl bg-white hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group flex items-start gap-3"
+                    onClick={() => {
+                      setEformSelectionDialogOpen(false);
+                      setSelectedRequestType(rt);
+                      setRequestDialogOpen(true);
+                    }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center shrink-0 group-hover:bg-purple-100">
+                      <Icon className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">{rt.label}</p>
+                      <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-2">{rt.description}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="border-t bg-white px-6 py-3 flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setEformSelectionDialogOpen(false)}>ยกเลิก</Button>
+          </div>
+        </DialogContent>
       </Dialog>
 
       {/* Import Preview Full-screen Dialog */}

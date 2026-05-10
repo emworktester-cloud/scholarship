@@ -163,12 +163,19 @@ export function ScholarshipSources() {
               <DialogTrigger asChild>
                 <Button size="sm"><Plus className="w-4 h-4 mr-1" /> เพิ่มแหล่งทุน</Button>
               </DialogTrigger>
-              <DialogContent className="max-w-2xl">
-                <DialogHeader>
-                  <DialogTitle>เพิ่มแหล่งทุนใหม่</DialogTitle>
-                  <DialogDescription>กรอกข้อมูลแหล่งทุนและเงื่อนไข</DialogDescription>
-                </DialogHeader>
-                <div className="grid grid-cols-2 gap-4 py-4">
+              <DialogContent className="max-w-2xl p-0 gap-0 overflow-hidden">
+                <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-white">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <Award className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <DialogTitle className="text-white text-lg">เพิ่มแหล่งทุนใหม่</DialogTitle>
+                      <DialogDescription className="text-blue-100 mt-1">กรอกข้อมูลแหล่งทุนและเงื่อนไข</DialogDescription>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 px-6 py-5 max-h-[60vh] overflow-y-auto">
                   <div className="space-y-2">
                     <Label>รหัสแหล่งทุน</Label>
                     <Input placeholder="SRC-XXX" />
@@ -221,10 +228,10 @@ export function ScholarshipSources() {
                     <Textarea placeholder="รายละเอียดเพิ่มเติม..." />
                   </div>
                 </div>
-                <DialogFooter>
+                <div className="border-t bg-gray-50 px-6 py-4 flex items-center justify-end gap-2">
                   <Button variant="outline" onClick={() => setAddDialogOpen(false)}>ยกเลิก</Button>
-                  <Button onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มแหล่งทุนใหม่เรียบร้อย'); }}>บันทึก</Button>
-                </DialogFooter>
+                  <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => { setAddDialogOpen(false); toast.success('เพิ่มแหล่งทุนใหม่เรียบร้อย'); }}>บันทึก</Button>
+                </div>
               </DialogContent>
             </Dialog>
           </div>
