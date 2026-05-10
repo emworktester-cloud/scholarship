@@ -94,7 +94,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'คำขอ/ใบสมัครใหม่', eventCategory: 'คำขอ', eventIcon: FileText, eventColor: 'text-blue-600',
     channels: { web: true, mobile: true, email: true }, timing: 'immediate',
     recipients: ['เจ้าหน้าที่ทุน', 'ผู้จัดการส่วน'], recipientType: 'role', enabled: true,
-    lastTriggered: '24 ก.พ. 2569 14:30', triggerCount: 342, priority: 'high',
+    lastTriggered: '24/02/2569 14:30', triggerCount: 342, priority: 'high',
     template: 'มีคำขอใหม่ {{request_code}} จาก {{applicant_name}} รอดำเนินการ',
   },
   {
@@ -102,7 +102,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ครบกำหนดรับทุน/ต่อสัญญา', eventCategory: 'ทุน/สัญญา', eventIcon: Award, eventColor: 'text-amber-600',
     channels: { web: true, mobile: true, email: true }, timing: 'advance', advanceDays: 30,
     recipients: ['นักเรียนทุน', 'เจ้าหน้าที่ทุน'], recipientType: 'role', enabled: true,
-    lastTriggered: '20 ก.พ. 2569 08:00', triggerCount: 156, priority: 'high',
+    lastTriggered: '20/02/2569 08:00', triggerCount: 156, priority: 'high',
     template: 'ทุน {{scholarship_code}} ของ {{scholar_name}} จะครบกำหนดในอีก {{days_remaining}} วัน',
   },
   {
@@ -110,7 +110,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ส่งรายงานเดินทางไปศึกษา', eventCategory: 'รายงาน', eventIcon: Plane, eventColor: 'text-cyan-600',
     channels: { web: true, mobile: false, email: true }, timing: 'immediate',
     recipients: ['เจ้าหน้าที่ทุน', 'ผู้จัดการส่วน'], recipientType: 'role', enabled: true,
-    lastTriggered: '18 ก.พ. 2569 10:15', triggerCount: 89, priority: 'medium',
+    lastTriggered: '18/02/2569 10:15', triggerCount: 89, priority: 'medium',
     template: '{{scholar_name}} ส่งรายงานเดินทางไปศึกษา ณ {{destination_country}} เรียบร้อยแล้ว',
   },
   {
@@ -118,7 +118,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ส่งรายงานกลับประเทศไทย', eventCategory: 'รายงาน', eventIcon: Plane, eventColor: 'text-emerald-600',
     channels: { web: true, mobile: true, email: true }, timing: 'immediate',
     recipients: ['เจ้าหน้าที่ทุน', 'ผู้จัดการส่วน', 'ผู้บริหาร'], recipientType: 'role', enabled: true,
-    lastTriggered: '15 ก.พ. 2569 14:00', triggerCount: 45, priority: 'medium',
+    lastTriggered: '15/02/2569 14:00', triggerCount: 45, priority: 'medium',
     template: '{{scholar_name}} ส่งรายงานเดินทางกลับประเทศไทย วันที่ {{return_date}}',
   },
   {
@@ -126,7 +126,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ครบกำหนดส่งรายงานผลการเรียน', eventCategory: 'ติดตามผล', eventIcon: TrendingUp, eventColor: 'text-purple-600',
     channels: { web: true, mobile: true, email: true }, timing: 'advance', advanceDays: 14,
     recipients: ['นักเรียนทุน'], recipientType: 'role', enabled: true,
-    lastTriggered: '10 ก.พ. 2569 08:00', triggerCount: 210, priority: 'high',
+    lastTriggered: '10/02/2569 08:00', triggerCount: 210, priority: 'high',
     template: 'กรุณาส่งรายงานผลการเรียนประจำภาค {{semester}} ภายในวันที่ {{deadline}}',
   },
   {
@@ -134,7 +134,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ผลการอนุมัติ', eventCategory: 'อนุมัติ', eventIcon: ClipboardCheck, eventColor: 'text-green-600',
     channels: { web: true, mobile: true, email: true }, timing: 'immediate',
     recipients: ['ผู้ยื่นคำขอ', 'เจ้าหน้าที่ที่รับผิดชอบ'], recipientType: 'specific', enabled: true,
-    lastTriggered: '24 ก.พ. 2569 11:00', triggerCount: 567, priority: 'high',
+    lastTriggered: '24/02/2569 11:00', triggerCount: 567, priority: 'high',
     template: 'คำขอ {{request_code}} ได้รับ{{result}} โดย {{approver_name}}',
   },
   {
@@ -142,7 +142,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ครบกำหนดเบิกจ่าย', eventCategory: 'การเงิน', eventIcon: DollarSign, eventColor: 'text-green-600',
     channels: { web: true, mobile: false, email: true }, timing: 'advance', advanceDays: 7,
     recipients: ['เจ้าหน้าที่การเงิน', 'เจ้าหน้าที่ทุน'], recipientType: 'role', enabled: true,
-    lastTriggered: '18 ก.พ. 2569 08:00', triggerCount: 120, priority: 'medium',
+    lastTriggered: '18/02/2569 08:00', triggerCount: 120, priority: 'medium',
     template: 'ครบรอบเบิกจ่ายประจำเดือน {{month}} สำหรับนักเรียนทุน {{count}} ราย',
   },
   {
@@ -150,7 +150,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'Traffic Light เปลี่ยนเป็นแดง', eventCategory: 'ติดตามผล', eventIcon: AlertTriangle, eventColor: 'text-red-600',
     channels: { web: true, mobile: true, email: true }, timing: 'immediate',
     recipients: ['เจ้าหน้าที่ทุน', 'ผู้จัดการส่วน', 'ผู้บริหาร'], recipientType: 'role', enabled: true,
-    lastTriggered: '22 ก.พ. 2569 09:30', triggerCount: 28, priority: 'critical',
+    lastTriggered: '22/02/2569 09:30', triggerCount: 28, priority: 'critical',
     template: '{{scholar_name}} เปลี่ยนเป็น Traffic Light สีแดง - หมวด: {{category}} เหตุ: {{reason}}',
   },
   {
@@ -158,7 +158,7 @@ const notificationRules: NotificationRule[] = [
     eventType: 'ข่าวประชาสัมพันธ์ใหม่', eventCategory: 'ประชาสัมพันธ์', eventIcon: Megaphone, eventColor: 'text-indigo-600',
     channels: { web: true, mobile: true, email: false }, timing: 'immediate',
     recipients: ['นักเรียนทุนทุกคน'], recipientType: 'all', enabled: true,
-    lastTriggered: '23 ก.พ. 2569 10:00', triggerCount: 35, priority: 'low',
+    lastTriggered: '23/02/2569 10:00', triggerCount: 35, priority: 'low',
     template: 'ข่าวใหม่จาก สำนักงาน ก.พ.: {{announcement_title}}',
   },
   {
@@ -173,16 +173,16 @@ const notificationRules: NotificationRule[] = [
 
 // ===== Mock Data: Notification Logs =====
 const notificationLogs: NotificationLog[] = [
-  { id: 'NL-001', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'web', recipient: 'นางสาวพิมพ์พร เจ้าหน้าที่', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่ APP-2569-0085 จาก นายสมชาย ใจดี รอดำเนินการ', sentAt: '24 ก.พ. 2569 14:30', status: 'read', priority: 'high' },
-  { id: 'NL-002', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'email', recipient: 'pimporn@scholarship.go.th', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่ APP-2569-0085 จาก นายสมชาย ใจดี รอดำเนินการ', sentAt: '24 ก.พ. 2569 14:30', status: 'delivered', priority: 'high' },
-  { id: 'NL-003', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'mobile', recipient: 'นางสาวพิมพ์พร เจ้าหน้าที่', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่รอดำเนินการ', sentAt: '24 ก.พ. 2569 14:30', status: 'delivered', priority: 'high' },
-  { id: 'NL-004', ruleId: 'NR-006', ruleName: 'การอนุมัติ/ปฏิเสธ', channel: 'web', recipient: 'นายสมศักดิ์ ผู้จัดการ', title: 'อนุมัติคำขอ APP-2569-0080', message: 'คำขอ APP-2569-0080 ได้รับการอนุมัติโดย ผู้บริหาร', sentAt: '24 ก.พ. 2569 11:00', status: 'read', priority: 'high' },
-  { id: 'NL-005', ruleId: 'NR-008', ruleName: 'Traffic Light แดง', channel: 'web', recipient: 'นายสมศักดิ์ ผู้จัดการ', title: 'Traffic Light แดง: น.ส.วิไล สมหวัง', message: 'น.ส.วิไล สมหวัง เปลี่ยนเป็น Traffic Light สีแดง - หมวด: ผลการเรียน', sentAt: '22 ก.พ. 2569 09:30', status: 'read', priority: 'critical' },
-  { id: 'NL-006', ruleId: 'NR-008', ruleName: 'Traffic Light แดง', channel: 'email', recipient: 'somsak@scholarship.go.th', title: 'Traffic Light แดง: น.ส.วิไล สมหวัง', message: 'น.ส.วิไล สมหวัง เปลี่ยนเป็น Traffic Light สีแดง', sentAt: '22 ก.พ. 2569 09:30', status: 'delivered', priority: 'critical' },
-  { id: 'NL-007', ruleId: 'NR-002', ruleName: 'ครบกำหนดรับทุน', channel: 'email', recipient: 'scholar001@mail.com', title: 'ทุนใกล้ครบกำหนด', message: 'ทุน SCH-2567-012 ของคุณจะครบกำหนดในอีก 30 วัน', sentAt: '20 ก.พ. 2569 08:00', status: 'delivered', priority: 'high' },
-  { id: 'NL-008', ruleId: 'NR-005', ruleName: 'ครบกำหนดส่งรายงาน', channel: 'mobile', recipient: 'นายวิชัย นักเรียนทุน', title: 'ใกล้ครบกำหนดส่งรายงาน', message: 'กรุณาส่งรายงานผลการเรียนภายใน 14 วัน', sentAt: '10 ก.พ. 2569 08:00', status: 'sent', priority: 'high' },
-  { id: 'NL-009', ruleId: 'NR-003', ruleName: 'รายงานเดินทางไปศึกษา', channel: 'web', recipient: 'นางสาวกนกวรรณ นักวิเคราะห์', title: 'รายงานเดินทาง: น.ส.พรพิมล', message: 'น.ส.พรพิมล ส่งรายงานเดินทางไปศึกษา ณ สหราชอาณาจักร', sentAt: '18 ก.พ. 2569 10:15', status: 'read', priority: 'medium' },
-  { id: 'NL-010', ruleId: 'NR-007', ruleName: 'ครบกำหนดเบิกจ่าย', channel: 'email', recipient: 'rattana@scholarship.go.th', title: 'ครบรอบเบิกจ่าย มี.ค. 2569', message: 'ครบรอบเบิกจ่ายประจำเดือน มี.ค. 2569 สำหรับนักเรียนทุน 45 ราย', sentAt: '18 ก.พ. 2569 08:00', status: 'delivered', priority: 'medium' },
+  { id: 'NL-001', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'web', recipient: 'นางสาวพิมพ์พร เจ้าหน้าที่', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่ APP-2569-0085 จาก นายสมชาย ใจดี รอดำเนินการ', sentAt: '24/02/2569 14:30', status: 'read', priority: 'high' },
+  { id: 'NL-002', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'email', recipient: 'pimporn@scholarship.go.th', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่ APP-2569-0085 จาก นายสมชาย ใจดี รอดำเนินการ', sentAt: '24/02/2569 14:30', status: 'delivered', priority: 'high' },
+  { id: 'NL-003', ruleId: 'NR-001', ruleName: 'คำขอใหม่เข้าระบบ', channel: 'mobile', recipient: 'นางสาวพิมพ์พร เจ้าหน้าที่', title: 'คำขอใหม่ APP-2569-0085', message: 'มีคำขอใหม่รอดำเนินการ', sentAt: '24/02/2569 14:30', status: 'delivered', priority: 'high' },
+  { id: 'NL-004', ruleId: 'NR-006', ruleName: 'การอนุมัติ/ปฏิเสธ', channel: 'web', recipient: 'นายสมศักดิ์ ผู้จัดการ', title: 'อนุมัติคำขอ APP-2569-0080', message: 'คำขอ APP-2569-0080 ได้รับการอนุมัติโดย ผู้บริหาร', sentAt: '24/02/2569 11:00', status: 'read', priority: 'high' },
+  { id: 'NL-005', ruleId: 'NR-008', ruleName: 'Traffic Light แดง', channel: 'web', recipient: 'นายสมศักดิ์ ผู้จัดการ', title: 'Traffic Light แดง: น.ส.วิไล สมหวัง', message: 'น.ส.วิไล สมหวัง เปลี่ยนเป็น Traffic Light สีแดง - หมวด: ผลการเรียน', sentAt: '22/02/2569 09:30', status: 'read', priority: 'critical' },
+  { id: 'NL-006', ruleId: 'NR-008', ruleName: 'Traffic Light แดง', channel: 'email', recipient: 'somsak@scholarship.go.th', title: 'Traffic Light แดง: น.ส.วิไล สมหวัง', message: 'น.ส.วิไล สมหวัง เปลี่ยนเป็น Traffic Light สีแดง', sentAt: '22/02/2569 09:30', status: 'delivered', priority: 'critical' },
+  { id: 'NL-007', ruleId: 'NR-002', ruleName: 'ครบกำหนดรับทุน', channel: 'email', recipient: 'scholar001@mail.com', title: 'ทุนใกล้ครบกำหนด', message: 'ทุน SCH-2567-012 ของคุณจะครบกำหนดในอีก 30 วัน', sentAt: '20/02/2569 08:00', status: 'delivered', priority: 'high' },
+  { id: 'NL-008', ruleId: 'NR-005', ruleName: 'ครบกำหนดส่งรายงาน', channel: 'mobile', recipient: 'นายวิชัย นักเรียนทุน', title: 'ใกล้ครบกำหนดส่งรายงาน', message: 'กรุณาส่งรายงานผลการเรียนภายใน 14 วัน', sentAt: '10/02/2569 08:00', status: 'sent', priority: 'high' },
+  { id: 'NL-009', ruleId: 'NR-003', ruleName: 'รายงานเดินทางไปศึกษา', channel: 'web', recipient: 'นางสาวกนกวรรณ นักวิเคราะห์', title: 'รายงานเดินทาง: น.ส.พรพิมล', message: 'น.ส.พรพิมล ส่งรายงานเดินทางไปศึกษา ณ สหราชอาณาจักร', sentAt: '18/02/2569 10:15', status: 'read', priority: 'medium' },
+  { id: 'NL-010', ruleId: 'NR-007', ruleName: 'ครบกำหนดเบิกจ่าย', channel: 'email', recipient: 'rattana@scholarship.go.th', title: 'ครบรอบเบิกจ่าย มี.ค. 2569', message: 'ครบรอบเบิกจ่ายประจำเดือน มี.ค. 2569 สำหรับนักเรียนทุน 45 ราย', sentAt: '18/02/2569 08:00', status: 'delivered', priority: 'medium' },
 ];
 
 // ===== Mock Data: Announcements =====
@@ -191,42 +191,42 @@ const announcements: Announcement[] = [
     id: 'ANN-001', title: 'ประกาศรับสมัครทุนรัฐบาลประจำปี 2569', excerpt: 'สำนักงาน ก.พ. เปิดรับสมัครทุนรัฐบาลเพื่อศึกษาต่อระดับปริญญาโท-เอก ในต่างประเทศ ประจำปี 2569',
     content: 'รายละเอียดทุนและคุณสมบัติผู้สมัคร...', category: 'ทุนการศึกษา', categoryColor: 'text-blue-600',
     image: 'https://images.unsplash.com/photo-1686030323326-63991462052e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwc2Nob2xhcnNoaXAlMjBlZHVjYXRpb24lMjBhbm5vdW5jZW1lbnR8ZW58MXx8fHwxNzcxOTkzODExfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    author: 'สำนักงาน ก.พ.', publishDate: '20 ก.พ. 2569', status: 'published', pinned: true,
+    author: 'สำนักงาน ก.พ.', publishDate: '20/02/2569', status: 'published', pinned: true,
     targetAudience: ['นักเรียนทุนทุกคน', 'ผู้สนใจทั่วไป'], viewCount: 1250, tags: ['ทุนรัฐบาล', 'ปี2569', 'ต่างประเทศ'],
   },
   {
-    id: 'ANN-002', title: 'กำหนดการปฐมนิเทศนักเรียนทุนรุ่นใหม่ ประจำปี 2569', excerpt: 'ขอเรียนเชิญนักเรียนทุนรุ่นใหม่ทุกท่านเข้าร่วมปฐมนิเทศ วันที่ 15 มี.ค. 2569 ณ สำนักงาน ก.พ.',
+    id: 'ANN-002', title: 'กำหนดการปฐมนิเทศนักเรียนทุนรุ่นใหม่ ประจำปี 2569', excerpt: 'ขอเรียนเชิญนักเรียนทุนรุ่นใหม่ทุกท่านเข้าร่วมปฐมนิเทศ วันที่ 15/03/2569 ณ สำนักงาน ก.พ.',
     content: 'กำหนดการและรายละเอียด...', category: 'กิจกรรม', categoryColor: 'text-green-600',
     image: 'https://images.unsplash.com/photo-1760420940953-3958ad9f6287?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25mZXJlbmNlJTIwc2VtaW5hciUyMHdvcmtzaG9wJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc3MTk5MzgyMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    author: 'ฝ่ายพัฒนาทรัพยากรบุคคล', publishDate: '18 ก.พ. 2569', status: 'published', pinned: true,
+    author: 'ฝ่ายพัฒนาทรัพยากรบุคคล', publishDate: '18/02/2569', status: 'published', pinned: true,
     targetAudience: ['นักเรียนทุนรุ่น 2569'], viewCount: 890, tags: ['ปฐมนิเทศ', 'รุ่นใหม่'],
   },
   {
-    id: 'ANN-003', title: 'แจ้งเปลี่ยนแปลงระเบียบการเบิกจ่ายค่าใช้จ่ายประจำเดือน', excerpt: 'มีการปรับปรุงระเบียบการเบิกจ่ายค่าครองชีพและค่าเล่าเรียน มีผลตั้งแต่ 1 เม.ย. 2569 เป็นต้นไป',
+    id: 'ANN-003', title: 'แจ้งเปลี่ยนแปลงระเบียบการเบิกจ่ายค่าใช้จ่ายประจำเดือน', excerpt: 'มีการปรับปรุงระเบียบการเบิกจ่ายค่าครองชีพและค่าเล่าเรียน มีผลตั้งแต่ 01/04/2569 เป็นต้นไป',
     content: 'รายละเอียดการเปลี่ยนแปลง...', category: 'ระเบียบ/ข้อบังคับ', categoryColor: 'text-amber-600',
     image: '',
-    author: 'ฝ่ายการเงิน', publishDate: '15 ก.พ. 2569', status: 'published', pinned: false,
+    author: 'ฝ่ายการเงิน', publishDate: '15/02/2569', status: 'published', pinned: false,
     targetAudience: ['นักเรียนทุนทุกคน'], viewCount: 650, tags: ['ระเบียบ', 'เบิกจ่าย', 'ค่าใช้จ่าย'],
   },
   {
     id: 'ANN-004', title: 'ผลงานนักเรียนทุนดีเด่น ประจำปี 2568', excerpt: 'ขอแสดงความยินดีกับนักเรียนทุนดีเด่นที่ได้รับรางวัลจากงาน International Research Awards 2568',
     content: 'รายชื่อและผลงาน...', category: 'ข่าวสาร', categoryColor: 'text-purple-600',
     image: 'https://images.unsplash.com/photo-1660485345088-c398363c1f45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9uJTIwY2VyZW1vbnklMjBjZWxlYnJhdGlvbnxlbnwxfHx8fDE3NzE5MzkxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    author: 'สำนักงาน ก.พ.', publishDate: '10 ก.พ. 2569', status: 'published', pinned: false,
+    author: 'สำนักงาน ก.พ.', publishDate: '10/02/2569', status: 'published', pinned: false,
     targetAudience: ['นักเรียนทุนทุกคน', 'ผู้สนใจทั่วไป'], viewCount: 1520, tags: ['ผลงาน', 'รางวัล', 'นักเรียนทุนดีเด่น'],
   },
   {
     id: 'ANN-005', title: 'แนวทางการส่งรายงานผลการเรียนภาคเรียนที่ 2/2568', excerpt: 'ขอให้นักเรียนทุนทุกท่านส่งรายงานผลการเรียนภายในกำหนด พร้อมแนบเอกสารตามรายการ',
     content: 'เอกสารที่ต้องแนบ...', category: 'คู่มือ/แนวทาง', categoryColor: 'text-teal-600',
     image: 'https://images.unsplash.com/photo-1767567469222-530e72995026?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkeSUyMGFicm9hZCUyMHVuaXZlcnNpdHklMjBjYW1wdXN8ZW58MXx8fHwxNzcxOTkzODE0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    author: 'กองทุนการศึกษา', publishDate: '5 ก.พ. 2569', status: 'published', pinned: false,
+    author: 'กองทุนการศึกษา', publishDate: '05/02/2569', status: 'published', pinned: false,
     targetAudience: ['นักเรียนทุนทุกคน'], viewCount: 980, tags: ['รายงานผลการเรียน', 'แนวทาง'],
   },
   {
     id: 'ANN-006', title: 'งานสัมมนา "นักเรียนทุนกับการขับเคลื่อนประเทศ" ครั้งที่ 5', excerpt: 'เตรียมพบกับงานสัมมนาประจำปี มี.ค. 2569 (กำลังจัดเตรียม)',
     content: 'กำลังจัดเตรียม...', category: 'กิจกรรม', categoryColor: 'text-green-600',
     image: '',
-    author: 'ฝ่ายพัฒนาทรัพยากรบุคคล', publishDate: '1 มี.ค. 2569', status: 'scheduled', pinned: false,
+    author: 'ฝ่ายพัฒนาทรัพยากรบุคคล', publishDate: '01/03/2569', status: 'scheduled', pinned: false,
     targetAudience: ['นักเรียนทุนทุกคน', 'ศิษย์เก่าทุนรัฐบาล'], viewCount: 0, tags: ['สัมมนา'],
   },
   {
@@ -305,7 +305,7 @@ export default function Notifications() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {[
             { label: 'กฎแจ้งเตือน', value: notificationRules.length, sub: `เปิดใช้ ${enabledRules}`, icon: Zap, bg: 'from-blue-500 to-blue-600', bgLight: 'from-blue-50 to-blue-100' },
-            { label: 'ส่งวันนี้', value: 6, sub: '24 ก.พ. 2569', icon: Send, bg: 'from-cyan-500 to-cyan-600', bgLight: 'from-cyan-50 to-cyan-100' },
+            { label: 'ส่งวันนี้', value: 6, sub: '24/02/2569', icon: Send, bg: 'from-cyan-500 to-cyan-600', bgLight: 'from-cyan-50 to-cyan-100' },
             { label: 'ส่งทั้งหมด', value: `${totalSent}+`, sub: 'ประวัติรวม', icon: Bell, bg: 'from-indigo-500 to-indigo-600', bgLight: 'from-indigo-50 to-indigo-100' },
             { label: 'ข่าวประชาสัมพันธ์', value: publishedAnn, sub: `จากทั้งหมด ${announcements.length}`, icon: Megaphone, bg: 'from-green-500 to-emerald-500', bgLight: 'from-green-50 to-emerald-50' },
             { label: 'ข่าวปักหมุด', value: announcements.filter(a => a.pinned).length, sub: 'แสดงด้านบน', icon: Pin, bg: 'from-amber-500 to-orange-500', bgLight: 'from-amber-50 to-orange-50' },

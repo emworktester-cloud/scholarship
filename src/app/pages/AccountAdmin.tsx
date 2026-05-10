@@ -92,93 +92,93 @@ const accounts: Account[] = [
   {
     id: 'ACC-001', employeeId: 'EMP-10045', name: 'นายประสิทธิ์ ผู้ดูแล', email: 'prasit@scholarship.go.th', phone: '02-123-4567 ต่อ 101',
     department: 'ศูนย์เทคโนโลยีสารสนเทศ', position: 'ผู้ดูแลระบบอาวุโส', role: 'ผู้ดูแลระบบ', roleCode: 'ADMIN', groups: ['GRP-ADMIN', 'GRP-IT'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '15 ม.ค. 2567',
-    lastLogin: '24 ก.พ. 2569 15:45', lastLoginIp: '192.168.1.100', lastLoginDevice: 'Chrome 120 / Windows 11',
-    passwordChangedDate: '1 ก.พ. 2569', passwordExpireDate: '1 พ.ค. 2569', failedLoginAttempts: 0, activeSessions: 2, loginCount: 1245, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '15/01/2567',
+    lastLogin: '24/02/2569 15:45', lastLoginIp: '192.168.1.100', lastLoginDevice: 'Chrome 120 / Windows 11',
+    passwordChangedDate: '01/02/2569', passwordExpireDate: '01/05/2569', failedLoginAttempts: 0, activeSessions: 2, loginCount: 1245, notes: '',
   },
   {
     id: 'ACC-002', employeeId: 'EMP-10032', name: 'นางสาวพิมพ์พร เจ้าหน้าที่', email: 'pimporn@scholarship.go.th', phone: '02-123-4567 ต่อ 201',
     department: 'กองทุนการศึกษา', position: 'เจ้าหน้าที่ทุนอาวุโส', role: 'เจ้าหน้าที่ทุน', roleCode: 'STAFF', groups: ['GRP-STAFF', 'GRP-OVERSEAS'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '1 มี.ค. 2567',
-    lastLogin: '24 ก.พ. 2569 14:30', lastLoginIp: '192.168.1.45', lastLoginDevice: 'Safari 17 / macOS Sonoma',
-    passwordChangedDate: '15 ม.ค. 2569', passwordExpireDate: '15 เม.ย. 2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 890, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '01/03/2567',
+    lastLogin: '24/02/2569 14:30', lastLoginIp: '192.168.1.45', lastLoginDevice: 'Safari 17 / macOS Sonoma',
+    passwordChangedDate: '15/01/2569', passwordExpireDate: '15/04/2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 890, notes: '',
   },
   {
     id: 'ACC-003', employeeId: 'EMP-10028', name: 'นายสมศักดิ์ ผู้จัดการ', email: 'somsak@scholarship.go.th', phone: '02-123-4567 ต่อ 301',
     department: 'กองทุนการศึกษา', position: 'ผู้จัดการส่วนทุนการศึกษา', role: 'ผู้จัดการส่วน', roleCode: 'MANAGER', groups: ['GRP-MANAGER'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'SMS OTP', avatar: '', createdDate: '10 ก.พ. 2567',
-    lastLogin: '24 ก.พ. 2569 10:15', lastLoginIp: '192.168.1.50', lastLoginDevice: 'Chrome 120 / Windows 11',
-    passwordChangedDate: '20 ธ.ค. 2568', passwordExpireDate: '20 มี.ค. 2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 1032, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'SMS OTP', avatar: '', createdDate: '10/02/2567',
+    lastLogin: '24/02/2569 10:15', lastLoginIp: '192.168.1.50', lastLoginDevice: 'Chrome 120 / Windows 11',
+    passwordChangedDate: '20/12/2568', passwordExpireDate: '20/03/2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 1032, notes: '',
   },
   {
     id: 'ACC-004', employeeId: 'EMP-10055', name: 'ศ.ดร.วิภา นักวิชาการ', email: 'wipa@scholarship.go.th', phone: '02-123-4567 ต่อ 401',
     department: 'คณะกรรมการพิจารณาทุน', position: 'กรรมการพิจารณา', role: 'กรรมการพิจารณา', roleCode: 'REVIEWER', groups: ['GRP-COMMITTEE'],
-    status: 'active', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '1 ก.ค. 2567',
-    lastLogin: '19 ก.พ. 2569 16:00', lastLoginIp: '10.0.0.55', lastLoginDevice: 'Chrome 120 / macOS',
-    passwordChangedDate: '5 พ.ย. 2568', passwordExpireDate: '5 ก.พ. 2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 156, notes: 'รหัสผ่านหมดอายุ ต้องเปลี่ยน',
+    status: 'active', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '01/07/2567',
+    lastLogin: '19/02/2569 16:00', lastLoginIp: '10.0.0.55', lastLoginDevice: 'Chrome 120 / macOS',
+    passwordChangedDate: '05/11/2568', passwordExpireDate: '05/02/2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 156, notes: 'รหัสผ่านหมดอายุ ต้องเปลี่ยน',
   },
   {
     id: 'ACC-005', employeeId: 'EMP-10061', name: 'นายวิชัย สมบูรณ์', email: 'wichai@scholarship.go.th', phone: '02-123-4567 ต่อ 100',
     department: 'สำนักผู้บริหาร', position: 'รองผู้อำนวยการ', role: 'ผู้บริหาร', roleCode: 'EXEC', groups: ['GRP-EXEC'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'Hardware Key (YubiKey)', avatar: '', createdDate: '1 ม.ค. 2567',
-    lastLogin: '18 ก.พ. 2569 11:30', lastLoginIp: '192.168.1.1', lastLoginDevice: 'Chrome 120 / Windows 11',
-    passwordChangedDate: '10 ม.ค. 2569', passwordExpireDate: '10 เม.ย. 2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 420, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'Hardware Key (YubiKey)', avatar: '', createdDate: '01/01/2567',
+    lastLogin: '18/02/2569 11:30', lastLoginIp: '192.168.1.1', lastLoginDevice: 'Chrome 120 / Windows 11',
+    passwordChangedDate: '10/01/2569', passwordExpireDate: '10/04/2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 420, notes: '',
   },
   {
     id: 'ACC-006', employeeId: 'EMP-10070', name: 'นางสาวกนกวรรณ นักวิเคราะห์', email: 'kanokwan@scholarship.go.th', phone: '02-123-4567 ต่อ 202',
     department: 'กองทุนวิจัย', position: 'นักวิเคราะห์นโยบาย', role: 'เจ้าหน้าที่ทุน', roleCode: 'STAFF', groups: ['GRP-STAFF', 'GRP-RESEARCH'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '15 เม.ย. 2567',
-    lastLogin: '24 ก.พ. 2569 09:00', lastLoginIp: '192.168.1.78', lastLoginDevice: 'Firefox 122 / Ubuntu',
-    passwordChangedDate: '28 ม.ค. 2569', passwordExpireDate: '28 เม.ย. 2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 645, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Google Authenticator)', avatar: '', createdDate: '15/04/2567',
+    lastLogin: '24/02/2569 09:00', lastLoginIp: '192.168.1.78', lastLoginDevice: 'Firefox 122 / Ubuntu',
+    passwordChangedDate: '28/01/2569', passwordExpireDate: '28/04/2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 645, notes: '',
   },
   {
     id: 'ACC-007', employeeId: 'EMP-10082', name: 'นางสมใจ ทดสอบ', email: 'somjai@scholarship.go.th', phone: '02-123-4567 ต่อ 203',
     department: 'กองทุนพัฒนา', position: 'เจ้าหน้าที่ทุน', role: 'เจ้าหน้าที่ทุน', roleCode: 'STAFF', groups: ['GRP-STAFF'],
-    status: 'locked', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '1 มิ.ย. 2567',
-    lastLogin: '10 ก.พ. 2569 08:00', lastLoginIp: '103.45.67.89', lastLoginDevice: 'Firefox 120 / Linux',
-    passwordChangedDate: '1 ก.ย. 2568', passwordExpireDate: '1 ธ.ค. 2568', failedLoginAttempts: 5, activeSessions: 0, loginCount: 234, notes: 'บัญชีถูกล็อกเนื่องจากล็อกอินล้มเหลว 5 ครั้ง IP ต้นทางไม่ตรงกับปกติ',
+    status: 'locked', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '01/06/2567',
+    lastLogin: '10/02/2569 08:00', lastLoginIp: '103.45.67.89', lastLoginDevice: 'Firefox 120 / Linux',
+    passwordChangedDate: '01/09/2568', passwordExpireDate: '01/12/2568', failedLoginAttempts: 5, activeSessions: 0, loginCount: 234, notes: 'บัญชีถูกล็อกเนื่องจากล็อกอินล้มเหลว 5 ครั้ง IP ต้นทางไม่ตรงกับปกติ',
   },
   {
     id: 'ACC-008', employeeId: 'EMP-10090', name: 'นายทดสอบ ระบบ', email: 'test@scholarship.go.th', phone: '-',
     department: 'ศูนย์เทคโนโลยีสารสนเทศ', position: 'บัญชีทดสอบ', role: 'เจ้าหน้าที่ทุน', roleCode: 'STAFF', groups: [],
-    status: 'inactive', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '1 ม.ค. 2569',
-    lastLogin: '1 ม.ค. 2569 10:00', lastLoginIp: '127.0.0.1', lastLoginDevice: 'Chrome / Windows',
-    passwordChangedDate: '1 ม.ค. 2569', passwordExpireDate: '1 เม.ย. 2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 5, notes: 'บัญชีทดสอบ ปิดใช้งานหลังเสร็จสิ้น UAT',
+    status: 'inactive', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '01/01/2569',
+    lastLogin: '01/01/2569 10:00', lastLoginIp: '127.0.0.1', lastLoginDevice: 'Chrome / Windows',
+    passwordChangedDate: '01/01/2569', passwordExpireDate: '01/04/2569', failedLoginAttempts: 0, activeSessions: 0, loginCount: 5, notes: 'บัญชีทดสอบ ปิดใช้งานหลังเสร็จสิ้น UAT',
   },
   {
     id: 'ACC-009', employeeId: 'EMP-10095', name: 'นายธนกฤต พัฒนา', email: 'thanakrit@scholarship.go.th', phone: '02-123-4567 ต่อ 205',
     department: 'กองทุนพัฒนา', position: 'เจ้าหน้าที่ทุน', role: 'เจ้าหน้าที่ทุน', roleCode: 'STAFF', groups: ['GRP-STAFF'],
-    status: 'pending', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '20 ก.พ. 2569',
+    status: 'pending', mfaEnabled: false, mfaMethod: '-', avatar: '', createdDate: '20/02/2569',
     lastLogin: '-', lastLoginIp: '-', lastLoginDevice: '-',
     passwordChangedDate: '-', passwordExpireDate: '-', failedLoginAttempts: 0, activeSessions: 0, loginCount: 0, notes: 'บัญชีใหม่ รอผู้ใช้ยืนยันอีเมลและตั้งรหัสผ่าน',
   },
   {
     id: 'ACC-010', employeeId: 'EMP-10042', name: 'นางสาวรัตนา การเงิน', email: 'rattana@scholarship.go.th', phone: '02-123-4567 ต่อ 501',
     department: 'ฝ่ายการเงิน', position: 'หัวหน้าฝ่ายการเงิน', role: 'เจ้าหน้าที่การเงิน', roleCode: 'FINANCE', groups: ['GRP-FINANCE'],
-    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Microsoft Authenticator)', avatar: '', createdDate: '1 ม.ค. 2567',
-    lastLogin: '24 ก.พ. 2569 08:45', lastLoginIp: '192.168.1.92', lastLoginDevice: 'Edge 120 / Windows 11',
-    passwordChangedDate: '5 ก.พ. 2569', passwordExpireDate: '5 พ.ค. 2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 1100, notes: '',
+    status: 'active', mfaEnabled: true, mfaMethod: 'TOTP (Microsoft Authenticator)', avatar: '', createdDate: '01/01/2567',
+    lastLogin: '24/02/2569 08:45', lastLoginIp: '192.168.1.92', lastLoginDevice: 'Edge 120 / Windows 11',
+    passwordChangedDate: '05/02/2569', passwordExpireDate: '05/05/2569', failedLoginAttempts: 0, activeSessions: 1, loginCount: 1100, notes: '',
   },
 ];
 
 const mockSessions: SessionInfo[] = [
-  { id: 'SES-001', userId: 'ACC-001', device: 'Desktop', browser: 'Chrome 120 / Windows 11', ip: '192.168.1.100', location: 'สำนักงาน กทม.', loginTime: '24 ก.พ. 2569 08:30', lastActivity: '24 ก.พ. 2569 15:45', status: 'active' },
-  { id: 'SES-002', userId: 'ACC-001', device: 'Mobile', browser: 'Safari / iOS 17', ip: '10.0.0.15', location: 'สำนักงาน กทม. (Wi-Fi)', loginTime: '24 ก.พ. 2569 12:00', lastActivity: '24 ก.พ. 2569 14:20', status: 'idle' },
-  { id: 'SES-003', userId: 'ACC-002', device: 'Desktop', browser: 'Safari 17 / macOS', ip: '192.168.1.45', location: 'สำนักงาน กทม.', loginTime: '24 ก.พ. 2569 09:00', lastActivity: '24 ก.พ. 2569 14:30', status: 'active' },
-  { id: 'SES-004', userId: 'ACC-003', device: 'Desktop', browser: 'Chrome 120 / Windows', ip: '192.168.1.50', location: 'สำนักงาน กทม.', loginTime: '24 ก.พ. 2569 08:15', lastActivity: '24 ก.พ. 2569 10:15', status: 'idle' },
-  { id: 'SES-005', userId: 'ACC-006', device: 'Desktop', browser: 'Firefox 122 / Ubuntu', ip: '192.168.1.78', location: 'สำนักงาน กทม.', loginTime: '24 ก.พ. 2569 08:55', lastActivity: '24 ก.พ. 2569 09:00', status: 'active' },
-  { id: 'SES-006', userId: 'ACC-010', device: 'Desktop', browser: 'Edge 120 / Windows', ip: '192.168.1.92', location: 'สำนักงาน กทม.', loginTime: '24 ก.พ. 2569 08:40', lastActivity: '24 ก.พ. 2569 08:45', status: 'active' },
+  { id: 'SES-001', userId: 'ACC-001', device: 'Desktop', browser: 'Chrome 120 / Windows 11', ip: '192.168.1.100', location: 'สำนักงาน กทม.', loginTime: '24/02/2569 08:30', lastActivity: '24/02/2569 15:45', status: 'active' },
+  { id: 'SES-002', userId: 'ACC-001', device: 'Mobile', browser: 'Safari / iOS 17', ip: '10.0.0.15', location: 'สำนักงาน กทม. (Wi-Fi)', loginTime: '24/02/2569 12:00', lastActivity: '24/02/2569 14:20', status: 'idle' },
+  { id: 'SES-003', userId: 'ACC-002', device: 'Desktop', browser: 'Safari 17 / macOS', ip: '192.168.1.45', location: 'สำนักงาน กทม.', loginTime: '24/02/2569 09:00', lastActivity: '24/02/2569 14:30', status: 'active' },
+  { id: 'SES-004', userId: 'ACC-003', device: 'Desktop', browser: 'Chrome 120 / Windows', ip: '192.168.1.50', location: 'สำนักงาน กทม.', loginTime: '24/02/2569 08:15', lastActivity: '24/02/2569 10:15', status: 'idle' },
+  { id: 'SES-005', userId: 'ACC-006', device: 'Desktop', browser: 'Firefox 122 / Ubuntu', ip: '192.168.1.78', location: 'สำนักงาน กทม.', loginTime: '24/02/2569 08:55', lastActivity: '24/02/2569 09:00', status: 'active' },
+  { id: 'SES-006', userId: 'ACC-010', device: 'Desktop', browser: 'Edge 120 / Windows', ip: '192.168.1.92', location: 'สำนักงาน กทม.', loginTime: '24/02/2569 08:40', lastActivity: '24/02/2569 08:45', status: 'active' },
 ];
 
 const mockActivityLogs: ActivityLog[] = [
-  { id: 'AL-001', userId: 'ACC-001', action: 'เข้าสู่ระบบ', detail: 'เข้าสู่ระบบสำเร็จ (MFA: TOTP)', ip: '192.168.1.100', time: '24 ก.พ. 2569 08:30', risk: 'low' },
-  { id: 'AL-002', userId: 'ACC-001', action: 'แก้ไขผู้ใช้', detail: 'เปลี่ยนบทบาท ACC-006 จาก STAFF เป็น SENIOR_STAFF', ip: '192.168.1.100', time: '24 ก.พ. 2569 09:15', risk: 'medium' },
-  { id: 'AL-003', userId: 'ACC-001', action: 'สร้างบัญชี', detail: 'สร้างบัญชีใหม่ ACC-009 (นายธนกฤต พัฒนา)', ip: '192.168.1.100', time: '20 ก.พ. 2569 14:00', risk: 'medium' },
-  { id: 'AL-004', userId: 'ACC-007', action: 'ล็อกอินล้มเหลว', detail: 'ล็อกอินล้มเหลว 5 ครั้งติดต่อกัน - บัญชีถูกล็อก', ip: '103.45.67.89', time: '10 ก.พ. 2569 08:00', risk: 'high' },
-  { id: 'AL-005', userId: 'ACC-002', action: 'ดูข้อมูลผู้สมัคร', detail: 'เข้าดูข้อมูล APP-2569-0042 (ข้อมูล PII)', ip: '192.168.1.45', time: '24 ก.พ. 2569 10:30', risk: 'medium' },
-  { id: 'AL-006', userId: 'ACC-003', action: 'อนุมัติทุน', detail: 'อนุมัติใบสมัครทุน AWD-2569-015', ip: '192.168.1.50', time: '24 ก.พ. 2569 10:00', risk: 'medium' },
-  { id: 'AL-007', userId: 'ACC-001', action: 'ปลดล็อกบัญชี', detail: 'ปลดล็อกบัญชี ACC-007 (นางสมใจ ทดสอบ)', ip: '192.168.1.100', time: '24 ก.พ. 2569 11:00', risk: 'medium' },
-  { id: 'AL-008', userId: 'ACC-005', action: 'ส่งออกรายงาน', detail: 'ส่งออกรายงานสรุปทุนประจำปี 2568', ip: '192.168.1.1', time: '18 ก.พ. 2569 11:30', risk: 'low' },
+  { id: 'AL-001', userId: 'ACC-001', action: 'เข้าสู่ระบบ', detail: 'เข้าสู่ระบบสำเร็จ (MFA: TOTP)', ip: '192.168.1.100', time: '24/02/2569 08:30', risk: 'low' },
+  { id: 'AL-002', userId: 'ACC-001', action: 'แก้ไขผู้ใช้', detail: 'เปลี่ยนบทบาท ACC-006 จาก STAFF เป็น SENIOR_STAFF', ip: '192.168.1.100', time: '24/02/2569 09:15', risk: 'medium' },
+  { id: 'AL-003', userId: 'ACC-001', action: 'สร้างบัญชี', detail: 'สร้างบัญชีใหม่ ACC-009 (นายธนกฤต พัฒนา)', ip: '192.168.1.100', time: '20/02/2569 14:00', risk: 'medium' },
+  { id: 'AL-004', userId: 'ACC-007', action: 'ล็อกอินล้มเหลว', detail: 'ล็อกอินล้มเหลว 5 ครั้งติดต่อกัน - บัญชีถูกล็อก', ip: '103.45.67.89', time: '10/02/2569 08:00', risk: 'high' },
+  { id: 'AL-005', userId: 'ACC-002', action: 'ดูข้อมูลผู้สมัคร', detail: 'เข้าดูข้อมูล APP-2569-0042 (ข้อมูล PII)', ip: '192.168.1.45', time: '24/02/2569 10:30', risk: 'medium' },
+  { id: 'AL-006', userId: 'ACC-003', action: 'อนุมัติทุน', detail: 'อนุมัติใบสมัครทุน AWD-2569-015', ip: '192.168.1.50', time: '24/02/2569 10:00', risk: 'medium' },
+  { id: 'AL-007', userId: 'ACC-001', action: 'ปลดล็อกบัญชี', detail: 'ปลดล็อกบัญชี ACC-007 (นางสมใจ ทดสอบ)', ip: '192.168.1.100', time: '24/02/2569 11:00', risk: 'medium' },
+  { id: 'AL-008', userId: 'ACC-005', action: 'ส่งออกรายงาน', detail: 'ส่งออกรายงานสรุปทุนประจำปี 2568', ip: '192.168.1.1', time: '18/02/2569 11:30', risk: 'low' },
 ];
 
 const roleColors: Record<string, { bg: string; text: string }> = {
@@ -412,7 +412,7 @@ export default function AccountAdmin() {
                         const sc = getStatusConfig(acc.status);
                         const rc = roleColors[acc.roleCode] || { bg: 'bg-gray-100', text: 'text-gray-700' };
                         const isSelected = selectedAccounts.includes(acc.id);
-                        const isPasswordExpired = acc.passwordExpireDate !== '-' && acc.passwordExpireDate < '24 ก.พ. 2569';
+                        const isPasswordExpired = acc.passwordExpireDate !== '-' && acc.passwordExpireDate < '24/02/2569';
                         return (
                           <motion.tr key={acc.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.02 }} className={`hover:bg-blue-50/50 cursor-pointer ${isSelected ? 'bg-blue-50' : ''} ${acc.status === 'locked' ? 'bg-red-50/30' : ''}`}>
                             <TableCell><Checkbox checked={isSelected} onCheckedChange={() => toggleSelectAccount(acc.id)} /></TableCell>
@@ -736,9 +736,9 @@ export default function AccountAdmin() {
                         <CardContent>
                           <div className="grid grid-cols-2 gap-3">
                             <div className="p-3 bg-slate-50 rounded-lg border"><Label className="text-[10px] text-gray-400">เปลี่ยนล่าสุด</Label><p className="text-sm font-medium mt-1">{selectedAccount.passwordChangedDate}</p></div>
-                            <div className={`p-3 rounded-lg border ${selectedAccount.passwordExpireDate !== '-' && selectedAccount.passwordExpireDate < '24 ก.พ. 2569' ? 'bg-red-50 border-red-200' : 'bg-slate-50'}`}>
+                            <div className={`p-3 rounded-lg border ${selectedAccount.passwordExpireDate !== '-' && selectedAccount.passwordExpireDate < '24/02/2569' ? 'bg-red-50 border-red-200' : 'bg-slate-50'}`}>
                               <Label className="text-[10px] text-gray-400">หมดอายุ</Label>
-                              <p className={`text-sm font-medium mt-1 ${selectedAccount.passwordExpireDate !== '-' && selectedAccount.passwordExpireDate < '24 ก.พ. 2569' ? 'text-red-600' : ''}`}>{selectedAccount.passwordExpireDate}</p>
+                              <p className={`text-sm font-medium mt-1 ${selectedAccount.passwordExpireDate !== '-' && selectedAccount.passwordExpireDate < '24/02/2569' ? 'text-red-600' : ''}`}>{selectedAccount.passwordExpireDate}</p>
                             </div>
                           </div>
                           <div className="flex gap-2 mt-3">

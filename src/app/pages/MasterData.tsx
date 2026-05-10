@@ -70,15 +70,15 @@ const masterDataMenu = [
 
 // Legacy data for the original tabs that are still simple enough to keep inline
 const scholarshipTypes = [
-  { id: 1, name: 'ทุนการศึกษาระดับปริญญาเอก', code: 'PHD', status: 'active', description: 'ทุนสำหรับศึกษาระดับปริญญาเอก', updatedDate: '15 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 2, name: 'ทุนการศึกษาระดับปริญญาโท', code: 'MASTER', status: 'active', description: 'ทุนสำหรับศึกษาระดับปริญญาโท', updatedDate: '15 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 3, name: 'ทุนวิจัย', code: 'RESEARCH', status: 'active', description: 'ทุนสำหรับการวิจัย', updatedDate: '15 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 4, name: 'ทุนฝึกอบรม', code: 'TRAINING', status: 'active', description: 'ทุนสำหรับการฝึกอบรม', updatedDate: '15 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 5, name: 'ทุนพัฒนาบุคลากร', code: 'DEV', status: 'active', description: 'ทุนพัฒนาบุคลากรภาครัฐ', updatedDate: '10 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 6, name: 'ทุนโครงการพิเศษ', code: 'SPECIAL', status: 'active', description: 'ทุนโครงการพิเศษตามนโยบาย', updatedDate: '10 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 7, name: 'ทุนแลกเปลี่ยน', code: 'EXCHANGE', status: 'active', description: 'ทุนแลกเปลี่ยนนักศึกษา', updatedDate: '05 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 8, name: 'ทุนดุษฎีบัณฑิต', code: 'POSTDOC', status: 'active', description: 'ทุนหลังปริญญาเอก', updatedDate: '05 ม.ค. 2026', updatedBy: 'admin' },
-  { id: 9, name: 'ทุนวิจัยหลังปริญญา', code: 'POSTGRAD', status: 'inactive', description: 'ทุนวิจัยหลังปริญญา (เลิกใช้แล้ว)', updatedDate: '01 ม.ค. 2025', updatedBy: 'admin' },
+  { id: 1, name: 'ทุนการศึกษาระดับปริญญาเอก', code: 'PHD', status: 'active', description: 'ทุนสำหรับศึกษาระดับปริญญาเอก', updatedDate: '15/01/2026', updatedBy: 'admin' },
+  { id: 2, name: 'ทุนการศึกษาระดับปริญญาโท', code: 'MASTER', status: 'active', description: 'ทุนสำหรับศึกษาระดับปริญญาโท', updatedDate: '15/01/2026', updatedBy: 'admin' },
+  { id: 3, name: 'ทุนวิจัย', code: 'RESEARCH', status: 'active', description: 'ทุนสำหรับการวิจัย', updatedDate: '15/01/2026', updatedBy: 'admin' },
+  { id: 4, name: 'ทุนฝึกอบรม', code: 'TRAINING', status: 'active', description: 'ทุนสำหรับการฝึกอบรม', updatedDate: '15/01/2026', updatedBy: 'admin' },
+  { id: 5, name: 'ทุนพัฒนาบุคลากร', code: 'DEV', status: 'active', description: 'ทุนพัฒนาบุคลากรภาครัฐ', updatedDate: '10/01/2026', updatedBy: 'admin' },
+  { id: 6, name: 'ทุนโครงการพิเศษ', code: 'SPECIAL', status: 'active', description: 'ทุนโครงการพิเศษตามนโยบาย', updatedDate: '10/01/2026', updatedBy: 'admin' },
+  { id: 7, name: 'ทุนแลกเปลี่ยน', code: 'EXCHANGE', status: 'active', description: 'ทุนแลกเปลี่ยนนักศึกษา', updatedDate: '05/01/2026', updatedBy: 'admin' },
+  { id: 8, name: 'ทุนดุษฎีบัณฑิต', code: 'POSTDOC', status: 'active', description: 'ทุนหลังปริญญาเอก', updatedDate: '05/01/2026', updatedBy: 'admin' },
+  { id: 9, name: 'ทุนวิจัยหลังปริญญา', code: 'POSTGRAD', status: 'inactive', description: 'ทุนวิจัยหลังปริญญา (เลิกใช้แล้ว)', updatedDate: '01/01/2025', updatedBy: 'admin' },
 ];
 
 const statuses = [

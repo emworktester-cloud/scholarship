@@ -69,7 +69,7 @@ const awards = [
     paymentType: 'installment',
     contractStatus: 'signed',
     university: 'Stanford University',
-    createdDate: '15 ก.พ. 2026',
+    createdDate: '15/02/2026',
   },
   {
     id: 'AWD-2026-002',
@@ -83,7 +83,7 @@ const awards = [
     paymentType: 'lumpsum',
     contractStatus: 'pending',
     university: 'MIT',
-    createdDate: '10 ก.พ. 2026',
+    createdDate: '10/02/2026',
   },
   {
     id: 'AWD-2026-003',
@@ -97,7 +97,7 @@ const awards = [
     paymentType: 'lumpsum',
     contractStatus: 'signed',
     university: 'University of Oxford',
-    createdDate: '5 ก.พ. 2026',
+    createdDate: '05/02/2026',
   },
 ];
 

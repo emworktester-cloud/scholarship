@@ -45,8 +45,9 @@ export function FilterCombobox({
 
   // Ensure "all" is treated properly
   const isAll = value === "all" || !value;
+  const prefix = placeholder && placeholder !== "เลือก..." ? `${placeholder}: ` : "";
   const selectedLabel = isAll && showAllOption 
-    ? allLabel 
+    ? `${prefix}${allLabel}` 
     : options.find((opt) => opt.value === value)?.label || placeholder;
 
   const displayOptions = showAllOption 

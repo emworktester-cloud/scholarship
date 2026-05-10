@@ -61,7 +61,7 @@ const users = [
     email: 'pimporn@example.com',
     role: 'staff',
     status: 'active',
-    lastLogin: '20 ก.พ. 2026 14:30',
+    lastLogin: '20/02/2026 14:30',
     mfaEnabled: true,
   },
   {
@@ -70,7 +70,7 @@ const users = [
     email: 'somchai.m@example.com',
     role: 'approver',
     status: 'active',
-    lastLogin: '20 ก.พ. 2026 09:15',
+    lastLogin: '20/02/2026 09:15',
     mfaEnabled: true,
   },
   {
@@ -79,7 +79,7 @@ const users = [
     email: 'wipa@example.com',
     role: 'executive',
     status: 'active',
-    lastLogin: '19 ก.พ. 2026 16:45',
+    lastLogin: '19/02/2026 16:45',
     mfaEnabled: false,
   },
   {
@@ -88,7 +88,7 @@ const users = [
     email: 'prayut.admin@example.com',
     role: 'admin',
     status: 'active',
-    lastLogin: '20 ก.พ. 2026 15:00',
+    lastLogin: '20/02/2026 15:00',
     mfaEnabled: true,
   },
 ];

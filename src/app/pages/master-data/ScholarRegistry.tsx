@@ -34,7 +34,7 @@ const scholars = [
     firstNameEn: 'Somchai',
     lastNameEn: 'Wongsuwan',
     idCard: '1-1001-XXXXX-XX-X',
-    birthDate: '15 มี.ค. 2538',
+    birthDate: '15/03/2538',
     gender: 'ชาย',
     email: 'somchai.w@example.com',
     phone: '081-234-5678',
@@ -54,7 +54,7 @@ const scholars = [
     firstNameEn: 'Supaporn',
     lastNameEn: 'Charoensri',
     idCard: '1-1002-XXXXX-XX-X',
-    birthDate: '22 ก.ค. 2537',
+    birthDate: '22/07/2537',
     gender: 'หญิง',
     email: 'supaporn.c@example.com',
     phone: '089-876-5432',
@@ -73,7 +73,7 @@ const scholars = [
     firstNameEn: 'Weerapong',
     lastNameEn: 'Thanaphan',
     idCard: '1-1003-XXXXX-XX-X',
-    birthDate: '05 ม.ค. 2536',
+    birthDate: '05/01/2536',
     gender: 'ชาย',
     email: 'weerapong.t@example.com',
     phone: '092-111-2233',
@@ -92,7 +92,7 @@ const scholars = [
     firstNameEn: 'Piyamat',
     lastNameEn: 'Saengarun',
     idCard: '1-1004-XXXXX-XX-X',
-    birthDate: '18 ก.ย. 2539',
+    birthDate: '18/09/2539',
     gender: 'หญิง',
     email: 'piyamat.s@example.com',
     phone: '086-444-5566',
@@ -111,7 +111,7 @@ const scholars = [
     firstNameEn: 'Thanakorn',
     lastNameEn: 'Pitaktham',
     idCard: '1-1005-XXXXX-XX-X',
-    birthDate: '30 พ.ย. 2535',
+    birthDate: '30/11/2535',
     gender: 'ชาย',
     email: 'thanakorn.p@example.com',
     phone: '095-777-8899',
@@ -719,7 +719,7 @@ export function ScholarRegistry() {
                           <p className="text-xs text-green-700 font-medium uppercase tracking-wide">ประกันสุขภาพ</p>
                         </div>
                         <p className="text-sm text-gray-800 font-medium">ประกันสุขภาพจากทุน</p>
-                        <p className="text-xs text-gray-500 mt-1">มีผลถึง 31 ธ.ค. 2570</p>
+                        <p className="text-xs text-gray-500 mt-1">มีผลถึง 31/12/2570</p>
                       </div>
                       <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
                         <div className="flex items-center gap-2 mb-2">
@@ -758,7 +758,7 @@ export function ScholarRegistry() {
                           <TableRow className="hover:bg-blue-50/30">
                             <TableCell><Badge variant="outline" className="font-mono bg-gray-50">CTR-2567-0045</Badge></TableCell>
                             <TableCell className="font-medium">ทุน ก.พ. ปริญญาโท</TableCell>
-                            <TableCell>15 มิ.ย. 2567</TableCell>
+                            <TableCell>15/06/2567</TableCell>
                             <TableCell>2 เท่าของระยะเวลารับทุน</TableCell>
                             <TableCell><Badge className="bg-green-100 text-green-700 border border-green-200">มีผลบังคับ</Badge></TableCell>
                           </TableRow>
@@ -808,7 +808,7 @@ export function ScholarRegistry() {
                         </TableHeader>
                         <TableBody>
                           <TableRow className="hover:bg-blue-50/30">
-                            <TableCell>10 มิ.ย. 2565</TableCell>
+                            <TableCell>10/06/2565</TableCell>
                             <TableCell className="text-gray-500">สมชาย ทองดี</TableCell>
                             <TableCell className="font-medium">สมชาย วงศ์สุวรรณ</TableCell>
                             <TableCell>เปลี่ยนนามสกุลตามบิดา</TableCell>
@@ -827,7 +827,7 @@ export function ScholarRegistry() {
 
               {/* Dialog Footer */}
               <div className="border-t bg-gray-50 px-6 py-3 flex items-center justify-between">
-                <p className="text-xs text-gray-400">อัปเดตล่าสุด: 24 ก.พ. 2569 เวลา 14:30 น.</p>
+                <p className="text-xs text-gray-400">อัปเดตล่าสุด: 24/02/2569 เวลา 14:30 น.</p>
                 <div className="flex gap-2">
                   <Button variant="outline" size="sm" onClick={() => setDetailDialogOpen(false)}>ปิด</Button>
                   <Button size="sm" className="bg-blue-600 hover:bg-blue-700">

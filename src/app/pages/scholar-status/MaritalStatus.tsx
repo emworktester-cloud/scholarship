@@ -55,10 +55,10 @@ interface MaritalRecord {
 }
 
 const maritalRecords: MaritalRecord[] = [
-  { id: 'MR-001', scholarId: 'SCH-2569-001', scholarName: 'น.ส.พรพิมล สุขใจ', maritalStatus: 'โสด', maritalCode: 'SINGLE', spouseName: '-', changeDate: '-', updatedBy: 'ระบบ', updatedDate: '1 ม.ค. 2569', hasDocument: false },
-  { id: 'MR-002', scholarId: 'SCH-2568-015', scholarName: 'นายกิตติพงษ์ เรียนดี', maritalStatus: 'สมรส', maritalCode: 'MARRIED', spouseName: 'น.ส.ปรียา รักดี', changeDate: '14 ก.พ. 2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '20 ก.พ. 2568', hasDocument: true },
-  { id: 'MR-003', scholarId: 'SCH-2567-030', scholarName: 'น.ส.นวลจันทร์ ผ่องใส', maritalStatus: 'หย่า', maritalCode: 'DIVORCED', spouseName: 'นายสมชาย (อดีตคู่สมรส)', changeDate: '10 ส.ค. 2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '15 ส.ค. 2568', hasDocument: true },
-  { id: 'MR-004', scholarId: 'SCH-2566-020', scholarName: 'นายวีระ กล้าหาญ', maritalStatus: 'หม้าย', maritalCode: 'WIDOWED', spouseName: 'น.ส.สุดา (ผู้วายชนม์)', changeDate: '5 มี.ค. 2567', updatedBy: 'เจ้าหน้าที่ สนร.', updatedDate: '10 มี.ค. 2567', hasDocument: true },
+  { id: 'MR-001', scholarId: 'SCH-2569-001', scholarName: 'น.ส.พรพิมล สุขใจ', maritalStatus: 'โสด', maritalCode: 'SINGLE', spouseName: '-', changeDate: '-', updatedBy: 'ระบบ', updatedDate: '01/01/2569', hasDocument: false },
+  { id: 'MR-002', scholarId: 'SCH-2568-015', scholarName: 'นายกิตติพงษ์ เรียนดี', maritalStatus: 'สมรส', maritalCode: 'MARRIED', spouseName: 'น.ส.ปรียา รักดี', changeDate: '14/02/2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '20/02/2568', hasDocument: true },
+  { id: 'MR-003', scholarId: 'SCH-2567-030', scholarName: 'น.ส.นวลจันทร์ ผ่องใส', maritalStatus: 'หย่า', maritalCode: 'DIVORCED', spouseName: 'นายสมชาย (อดีตคู่สมรส)', changeDate: '10/08/2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '15/08/2568', hasDocument: true },
+  { id: 'MR-004', scholarId: 'SCH-2566-020', scholarName: 'นายวีระ กล้าหาญ', maritalStatus: 'หม้าย', maritalCode: 'WIDOWED', spouseName: 'น.ส.สุดา (ผู้วายชนม์)', changeDate: '05/03/2567', updatedBy: 'เจ้าหน้าที่ สนร.', updatedDate: '10/03/2567', hasDocument: true },
 ];
 
 export function MaritalStatus() {

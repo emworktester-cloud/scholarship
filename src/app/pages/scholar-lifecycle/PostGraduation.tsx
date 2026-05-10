@@ -6,7 +6,7 @@ import {
   GraduationCap, Building, Calendar, Award, Calculator,
   Plane, Send, MapPin, FileCheck, Briefcase, Shield,
   ArrowRight, ChevronRight, Bell, ClipboardList, Flag,
-  Scale, Info, AlertTriangle, Search,
+  Scale, Info, AlertTriangle, Search, Edit, Trash2, Globe,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -47,10 +47,10 @@ interface GraduatingScholar {
 }
 
 const graduatingScholars: GraduatingScholar[] = [
-  { id: 'SCH-015', name: 'นายกิตติพงษ์ เรียนดี', scholarshipType: 'ทุน ก.พ.', degree: 'Ph.D. Computer Science', country: 'สหรัฐอเมริกา', completionDate: '15 ธ.ค. 2568', returnDate: '5 ม.ค. 2569', status: 'service-started', hasAffiliation: true, affiliationAgency: 'สำนักงานพัฒนาธุรกรรมทางอิเล็กทรอนิกส์ (ETDA)' },
-  { id: 'SCH-022', name: 'น.ส.อรุณี ก้าวหน้า', scholarshipType: 'ทุน ก.พ. (บุคคลทั่วไป)', degree: 'M.Sc. Data Science', country: 'สหราชอาณาจักร', completionDate: '30 ก.ย. 2568', returnDate: '20 ต.ค. 2568', status: 'qualification-review', hasAffiliation: false, affiliationAgency: '' },
-  { id: 'SCH-030', name: 'นายพิชิต ชนะ', scholarshipType: 'ทุน กต. (บุคคลทั่วไป)', degree: 'M.A. International Relations', country: 'ฝรั่งเศส', completionDate: '20 ม.ค. 2569', returnDate: '10 ก.พ. 2569', status: 'reported', hasAffiliation: false, affiliationAgency: '' },
-  { id: 'SCH-040', name: 'น.ส.มณีรัตน์ รุ่งเรือง', scholarshipType: 'ทุน ก.พ. (ข้าราชการ)', degree: 'Ph.D. Public Policy', country: 'ออสเตรเลีย', completionDate: '28 ก.พ. 2569', returnDate: '-', status: 'pending-report', hasAffiliation: true, affiliationAgency: 'สำนักงาน ก.พ.' },
+  { id: 'SCH-015', name: 'นายกิตติพงษ์ เรียนดี', scholarshipType: 'ทุน ก.พ.', degree: 'Ph.D. Computer Science', country: 'สหรัฐอเมริกา', completionDate: '15/12/2568', returnDate: '05/01/2569', status: 'service-started', hasAffiliation: true, affiliationAgency: 'สำนักงานพัฒนาธุรกรรมทางอิเล็กทรอนิกส์ (ETDA)' },
+  { id: 'SCH-022', name: 'น.ส.อรุณี ก้าวหน้า', scholarshipType: 'ทุน ก.พ. (บุคคลทั่วไป)', degree: 'M.Sc. Data Science', country: 'สหราชอาณาจักร', completionDate: '30/09/2568', returnDate: '20/10/2568', status: 'qualification-review', hasAffiliation: false, affiliationAgency: '' },
+  { id: 'SCH-030', name: 'นายพิชิต ชนะ', scholarshipType: 'ทุน กต. (บุคคลทั่วไป)', degree: 'M.A. International Relations', country: 'ฝรั่งเศส', completionDate: '20/01/2569', returnDate: '10/02/2569', status: 'reported', hasAffiliation: false, affiliationAgency: '' },
+  { id: 'SCH-040', name: 'น.ส.มณีรัตน์ รุ่งเรือง', scholarshipType: 'ทุน ก.พ. (ข้าราชการ)', degree: 'Ph.D. Public Policy', country: 'ออสเตรเลีย', completionDate: '28/02/2569', returnDate: '-', status: 'pending-report', hasAffiliation: true, affiliationAgency: 'สำนักงาน ก.พ.' },
 ];
 
 const statusConfig = {
@@ -66,8 +66,23 @@ export default function PostGraduation() {
   const [completionDialogOpen, setCompletionDialogOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('completion');
 
+  const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+
+  // Filtered scholars
+  const filteredGraduatingScholars = graduatingScholars.filter(s => {
+    const q = searchQuery.toLowerCase().trim();
+    if (q && !s.name.toLowerCase().includes(q) && !s.id.toLowerCase().includes(q)) return false;
+    if (filterType !== 'all') {
+      if (filterType === 'ocsc' && !s.scholarshipType.includes('ก.พ.')) return false;
+      if (filterType === 'ministry' && !s.scholarshipType.includes('กต.')) return false;
+    }
+    if (filterStatus !== 'all') {
+      if (filterStatus !== s.status) return false;
+    }
+    return true;
+  });
 
   const postGradSections = [
     { id: 'completion', label: '1. แจ้งสำเร็จการศึกษา', icon: GraduationCap, desc: 'แจ้งสำเร็จหรือเสร็จสิ้นการศึกษากับ สนร./สอท./ก.พ.' },
@@ -110,7 +125,7 @@ export default function PostGraduation() {
             <>
               <div className="relative">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-56 pl-9 bg-white" />
+                <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-56 pl-9 bg-white" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               </div>
               <FilterCombobox
                 className="w-40"
@@ -119,7 +134,7 @@ export default function PostGraduation() {
                 onChange={setFilterType}
                 options={[
                   { value: "ocsc", label: "ทุน ก.พ." },
-                  { value: "ministry", label: "ทุนกระทรวง" }
+                  { value: "ministry", label: "ทุน กต." }
                 ]}
               />
               <FilterCombobox
@@ -129,9 +144,10 @@ export default function PostGraduation() {
                 onChange={setFilterStatus}
                 options={[
                   { value: "pending-report", label: "รอรายงานตัว" },
-                  { value: "pending-degree", label: "พิจารณาคุณวุฒิ" },
-                  { value: "pending-placement", label: "จัดสรรสังกัด" },
-                  { value: "service-started", label: "เริ่มชดใช้ทุน" }
+                  { value: "reported", label: "รายงานตัวแล้ว" },
+                  { value: "qualification-review", label: "พิจารณาคุณวุฒิ" },
+                  { value: "assigned", label: "จัดสรรสังกัดแล้ว" },
+                  { value: "service-started", label: "เริ่มปฏิบัติราชการ" }
                 ]}
               />
             </>
@@ -143,51 +159,83 @@ export default function PostGraduation() {
       </div>
 
       {!selectedScholar ? (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <Award className="w-5 h-5 text-amber-600" />
+        <Card className="overflow-hidden border-0 shadow-lg shadow-amber-900/5">
+          <CardHeader className="pb-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-t-xl">
+            <CardTitle className="text-base flex items-center gap-2 text-white">
+              <Award className="w-5 h-5" />
               รายชื่อผู้รับทุน (สำเร็จการศึกษา)
             </CardTitle>
-            <CardDescription className="text-xs">แสดงรายชื่อผู้รับทุนที่สำเร็จการศึกษาและอยู่ระหว่างดำเนินการชดใช้ทุน</CardDescription>
+            <CardDescription className="text-xs text-amber-100">แสดงรายชื่อผู้รับทุนที่สำเร็จการศึกษาและอยู่ระหว่างดำเนินการชดใช้ทุน • {filteredGraduatingScholars.length}/{graduatingScholars.length} ราย</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <Table>
-              <TableHeader className="bg-slate-50 border-b border-slate-200">
-                <TableRow className="hover:bg-slate-50">
-                  <TableHead className="font-semibold text-slate-700 py-3 rounded-tl-lg">รหัสนักเรียนทุน / ชื่อ-สกุล</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">ประเภททุน</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">คุณวุฒิที่สำเร็จ / ประเทศ</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">วันที่สำเร็จ</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">สถานะ</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3 text-right rounded-tr-lg">จัดการ</TableHead>
+              <TableHeader className="bg-gradient-to-r from-slate-50 to-amber-50/30 border-b border-slate-200">
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="font-bold text-slate-700 py-3.5">รหัส / ชื่อ-สกุล</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">ประเภททุน</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">คุณวุฒิที่สำเร็จ / ประเทศ</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">วันที่สำเร็จ</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">สถานะ</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5 text-center">จัดการ</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {graduatingScholars.map(s => {
+                {filteredGraduatingScholars.map((s, idx) => {
                   const st = statusConfig[s.status];
+                  const StIcon = st.icon;
                   return (
-                    <TableRow key={s.id} className="hover:bg-amber-50/50 cursor-pointer" onClick={() => setSelectedScholar(s)}>
-                      <TableCell>
-                        <p className="text-sm font-semibold text-amber-900">{s.name}</p>
-                        <p className="text-[10px] text-gray-500 font-mono">{s.id}</p>
+                    <TableRow key={s.id} className={cn(
+                      "group transition-all duration-200 cursor-pointer border-b border-gray-100",
+                      idx % 2 === 0 ? "bg-white hover:bg-amber-50/60" : "bg-slate-50/40 hover:bg-amber-50/60"
+                    )} onClick={() => setSelectedScholar(s)}>
+                      <TableCell className="py-3.5">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-9 w-9 shrink-0">
+                            <AvatarFallback className={cn(
+                              "text-white text-xs font-bold",
+                              s.status === 'service-started' ? "bg-gradient-to-br from-emerald-500 to-green-600" :
+                              s.status === 'pending-report' ? "bg-gradient-to-br from-amber-500 to-orange-600" :
+                              s.status === 'qualification-review' ? "bg-gradient-to-br from-purple-500 to-indigo-600" :
+                              "bg-gradient-to-br from-blue-500 to-indigo-600"
+                            )}>{s.name.slice(0, 2)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="text-sm font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">{s.name}</p>
+                            <p className="text-[10px] text-gray-400 font-mono">{s.id}</p>
+                          </div>
+                        </div>
                       </TableCell>
-                      <TableCell className="text-xs text-gray-700">{s.scholarshipType}</TableCell>
                       <TableCell>
-                        <p className="text-xs text-gray-700">{s.degree}</p>
-                        <p className="text-[10px] text-gray-500">{s.country}</p>
+                        <Badge variant="outline" className="text-[10px] bg-amber-50 text-amber-700 border-amber-200 font-medium">{s.scholarshipType}</Badge>
                       </TableCell>
-                      <TableCell className="text-xs text-gray-500">{s.completionDate}</TableCell>
                       <TableCell>
-                        <Badge className={`text-[9px] ${st.bg} ${st.color} border`}>
+                        <p className="text-xs font-medium text-gray-800">{s.degree}</p>
+                        <p className="text-[10px] text-gray-400 flex items-center gap-1 mt-0.5"><Globe className="w-3 h-3" />{s.country}</p>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-xs text-gray-600">{s.completionDate}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge className={cn("text-[10px] font-medium border shadow-sm", st.bg, st.color)}>
+                          <StIcon className="w-3 h-3 mr-1" />
                           {st.label}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right">
-                        <Button size="sm" variant="outline" className="text-xs" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }}>
-                          <FileText className="w-3.5 h-3.5 mr-1" />
-                          รายละเอียด
-                        </Button>
+                      <TableCell>
+                        <div className="flex items-center justify-center gap-1">
+                          <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-lg" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }} title="ดูข้อมูล">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-amber-600 hover:text-amber-800 hover:bg-amber-100 rounded-lg" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }} title="แก้ไข">
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-lg" onClick={(e) => { e.stopPropagation(); toast.error(`ลบข้อมูล ${s.name}`, { description: 'ฟีเจอร์นี้ยังไม่เปิดใช้งานในโหมดทดสอบ' }); }} title="ลบ">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   );
@@ -374,11 +422,11 @@ export default function PostGraduation() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <Label className="text-[9px] text-blue-500">วันเริ่มรับทุน</Label>
-                <p className="text-sm font-semibold text-blue-700 mt-1">1 ส.ค. 2563</p>
+                <p className="text-sm font-semibold text-blue-700 mt-1">01/08/2563</p>
               </div>
               <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <Label className="text-[9px] text-blue-500">วันสิ้นสุดรับทุน</Label>
-                <p className="text-sm font-semibold text-blue-700 mt-1">15 ธ.ค. 2568</p>
+                <p className="text-sm font-semibold text-blue-700 mt-1">15/12/2568</p>
               </div>
               <div className="p-3 bg-purple-50 rounded-lg border border-purple-200">
                 <Label className="text-[9px] text-purple-500">จำนวนวันรับทุน</Label>
@@ -392,8 +440,8 @@ export default function PostGraduation() {
             <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center"><p className="text-[9px] text-green-500">วันชดใช้ทุนทั้งหมด</p><p className="text-2xl font-bold text-green-700">3,926 <span className="text-xs font-normal">วัน</span></p><p className="text-[10px] text-green-500">≈ 10.8 ปี</p></div>
-                <div className="text-center"><p className="text-[9px] text-green-500">วันเริ่มชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">5 ม.ค. 2569</p></div>
-                <div className="text-center"><p className="text-[9px] text-green-500">วันสิ้นสุดชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">22 ก.ย. 2579</p></div>
+                <div className="text-center"><p className="text-[9px] text-green-500">วันเริ่มชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">05/01/2569</p></div>
+                <div className="text-center"><p className="text-[9px] text-green-500">วันสิ้นสุดชดใช้ทุน</p><p className="text-sm font-bold text-green-700 mt-2">22/09/2579</p></div>
               </div>
             </div>
             <div className="space-y-1.5"><Label className="text-xs">หมายเหตุเงื่อนไขสัญญา</Label><Textarea placeholder="เงื่อนไขพิเศษตามสัญญา..." className="min-h-[50px]" /></div>

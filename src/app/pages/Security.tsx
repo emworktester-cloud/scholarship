@@ -37,14 +37,14 @@ import { toast } from 'sonner';
 
 // ===== Users =====
 const users = [
-  { id: 1, name: 'นางสาวพิมพ์พร เจ้าหน้าที่', email: 'pimporn@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนการศึกษา', status: 'active', lastLogin: '20 ก.พ. 2569 14:30', mfa: true, loginAttempts: 0, groups: ['GRP-STAFF', 'GRP-OVERSEAS'] },
-  { id: 2, name: 'นายสมศักดิ์ ผู้จัดการ', email: 'somsak@scholarship.go.th', role: 'ผู้จัดการส่วน', department: 'กองทุนการศึกษา', status: 'active', lastLogin: '20 ก.พ. 2569 10:15', mfa: true, loginAttempts: 0, groups: ['GRP-MANAGER'] },
-  { id: 3, name: 'ศ.ดร.วิภา นักวิชาการ', email: 'wipa@scholarship.go.th', role: 'กรรมการพิจารณา', department: 'คณะกรรมการ', status: 'active', lastLogin: '19 ก.พ. 2569 16:00', mfa: false, loginAttempts: 0, groups: ['GRP-COMMITTEE'] },
-  { id: 4, name: 'นายประสิทธิ์ ผู้ดูแล', email: 'prasit@scholarship.go.th', role: 'ผู้ดูแลระบบ', department: 'IT', status: 'active', lastLogin: '20 ก.พ. 2569 15:45', mfa: true, loginAttempts: 0, groups: ['GRP-ADMIN'] },
-  { id: 5, name: 'นางสาวกนกวรรณ นักวิเคราะห์', email: 'kanokwan@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนวิจัย', status: 'active', lastLogin: '20 ก.พ. 2569 09:00', mfa: true, loginAttempts: 0, groups: ['GRP-STAFF', 'GRP-RESEARCH'] },
-  { id: 6, name: 'นายวิชัย สมบูรณ์', email: 'wichai@scholarship.go.th', role: 'ผู้บริหาร', department: 'ผู้บริหาร', status: 'active', lastLogin: '18 ก.พ. 2569 11:30', mfa: true, loginAttempts: 0, groups: ['GRP-EXEC'] },
-  { id: 7, name: 'นางสมใจ ทดสอบ', email: 'somjai@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนพัฒนา', status: 'suspended', lastLogin: '10 ก.พ. 2569 08:00', mfa: false, loginAttempts: 5, groups: ['GRP-STAFF'] },
-  { id: 8, name: 'นายทดสอบ ระบบ', email: 'test@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'IT', status: 'inactive', lastLogin: '01 ม.ค. 2569', mfa: false, loginAttempts: 0, groups: [] },
+  { id: 1, name: 'นางสาวพิมพ์พร เจ้าหน้าที่', email: 'pimporn@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนการศึกษา', status: 'active', lastLogin: '20/02/2569 14:30', mfa: true, loginAttempts: 0, groups: ['GRP-STAFF', 'GRP-OVERSEAS'] },
+  { id: 2, name: 'นายสมศักดิ์ ผู้จัดการ', email: 'somsak@scholarship.go.th', role: 'ผู้จัดการส่วน', department: 'กองทุนการศึกษา', status: 'active', lastLogin: '20/02/2569 10:15', mfa: true, loginAttempts: 0, groups: ['GRP-MANAGER'] },
+  { id: 3, name: 'ศ.ดร.วิภา นักวิชาการ', email: 'wipa@scholarship.go.th', role: 'กรรมการพิจารณา', department: 'คณะกรรมการ', status: 'active', lastLogin: '19/02/2569 16:00', mfa: false, loginAttempts: 0, groups: ['GRP-COMMITTEE'] },
+  { id: 4, name: 'นายประสิทธิ์ ผู้ดูแล', email: 'prasit@scholarship.go.th', role: 'ผู้ดูแลระบบ', department: 'IT', status: 'active', lastLogin: '20/02/2569 15:45', mfa: true, loginAttempts: 0, groups: ['GRP-ADMIN'] },
+  { id: 5, name: 'นางสาวกนกวรรณ นักวิเคราะห์', email: 'kanokwan@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนวิจัย', status: 'active', lastLogin: '20/02/2569 09:00', mfa: true, loginAttempts: 0, groups: ['GRP-STAFF', 'GRP-RESEARCH'] },
+  { id: 6, name: 'นายวิชัย สมบูรณ์', email: 'wichai@scholarship.go.th', role: 'ผู้บริหาร', department: 'ผู้บริหาร', status: 'active', lastLogin: '18/02/2569 11:30', mfa: true, loginAttempts: 0, groups: ['GRP-EXEC'] },
+  { id: 7, name: 'นางสมใจ ทดสอบ', email: 'somjai@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'กองทุนพัฒนา', status: 'suspended', lastLogin: '10/02/2569 08:00', mfa: false, loginAttempts: 5, groups: ['GRP-STAFF'] },
+  { id: 8, name: 'นายทดสอบ ระบบ', email: 'test@scholarship.go.th', role: 'เจ้าหน้าที่ทุน', department: 'IT', status: 'inactive', lastLogin: '01/01/2569', mfa: false, loginAttempts: 0, groups: [] },
 ];
 
 // ===== Roles =====
@@ -281,14 +281,14 @@ const formACLs: FormACL[] = [
 
 // ===== Security Logs =====
 const securityLogs = [
-  { id: 1, time: '20 ก.พ. 2569 15:45', event: 'เข้าสู่ระบบสำเร็จ', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'low' },
-  { id: 2, time: '20 ก.พ. 2569 14:30', event: 'เข้าสู่ระบบสำเร็จ', user: 'นางสาวพิมพ์พร เจ้าหน้าที่', ip: '192.168.1.45', device: 'Safari / macOS', risk: 'low' },
-  { id: 3, time: '20 ก.พ. 2569 12:15', event: 'เปลี่ยนรหัสผ่าน', user: 'นายสมศักดิ์ ผู้จัดการ', ip: '192.168.1.50', device: 'Chrome / Windows', risk: 'medium' },
-  { id: 4, time: '20 ก.พ. 2569 10:00', event: 'ล็อกอินล้มเหลว (5 ครั้ง)', user: 'นางสมใจ ทดสอบ', ip: '103.45.67.89', device: 'Firefox / Linux', risk: 'high' },
-  { id: 5, time: '20 ก.พ. 2569 09:30', event: 'บัญชีถูกระงับอัตโนมัติ', user: 'นางสมใจ ทดสอบ', ip: '103.45.67.89', device: 'ระบบ', risk: 'high' },
-  { id: 6, time: '19 ก.พ. 2569 16:00', event: 'เข้าสู่ระบบสำเร็จ (MFA)', user: 'ศ.ดร.วิภา นักวิชาการ', ip: '10.0.0.55', device: 'Chrome / macOS', risk: 'low' },
-  { id: 7, time: '19 ก.พ. 2569 14:20', event: 'แก้ไขสิทธิ์ผู้ใช้', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'medium' },
-  { id: 8, time: '19 ก.พ. 2569 11:00', event: 'เพิ่มผู้ใช้ใหม่', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'medium' },
+  { id: 1, time: '20/02/2569 15:45', event: 'เข้าสู่ระบบสำเร็จ', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'low' },
+  { id: 2, time: '20/02/2569 14:30', event: 'เข้าสู่ระบบสำเร็จ', user: 'นางสาวพิมพ์พร เจ้าหน้าที่', ip: '192.168.1.45', device: 'Safari / macOS', risk: 'low' },
+  { id: 3, time: '20/02/2569 12:15', event: 'เปลี่ยนรหัสผ่าน', user: 'นายสมศักดิ์ ผู้จัดการ', ip: '192.168.1.50', device: 'Chrome / Windows', risk: 'medium' },
+  { id: 4, time: '20/02/2569 10:00', event: 'ล็อกอินล้มเหลว (5 ครั้ง)', user: 'นางสมใจ ทดสอบ', ip: '103.45.67.89', device: 'Firefox / Linux', risk: 'high' },
+  { id: 5, time: '20/02/2569 09:30', event: 'บัญชีถูกระงับอัตโนมัติ', user: 'นางสมใจ ทดสอบ', ip: '103.45.67.89', device: 'ระบบ', risk: 'high' },
+  { id: 6, time: '19/02/2569 16:00', event: 'เข้าสู่ระบบสำเร็จ (MFA)', user: 'ศ.ดร.วิภา นักวิชาการ', ip: '10.0.0.55', device: 'Chrome / macOS', risk: 'low' },
+  { id: 7, time: '19/02/2569 14:20', event: 'แก้ไขสิทธิ์ผู้ใช้', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'medium' },
+  { id: 8, time: '19/02/2569 11:00', event: 'เพิ่มผู้ใช้ใหม่', user: 'นายประสิทธิ์ ผู้ดูแล', ip: '192.168.1.100', device: 'Chrome / Windows', risk: 'medium' },
 ];
 
 const defaultPolicies = {

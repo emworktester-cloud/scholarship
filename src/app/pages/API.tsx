@@ -38,44 +38,44 @@ import APIMonitoring from './api/APIMonitoring';
 
 // ===== External Connections (enhanced) =====
 const connections = [
-  { id: 1, name: 'ระบบ SEIS (สำนักงาน ก.พ.)', desc: 'ระบบ Scholarship Executive Information System', endpoint: 'https://api.seis.ocsc.go.th/v2', status: 'active', calls: 1250, lastCall: '25 ก.พ. 2569 14:30', errorRate: '0.2%', avgLatency: '110ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'internal' },
-  { id: 2, name: 'ระบบ DPIS (สำนักงาน ก.พ.)', desc: 'ระบบฐานข้อมูลบุคลากรภาครัฐ', endpoint: 'https://api.dpis.ocsc.go.th/v1', status: 'active', calls: 680, lastCall: '25 ก.พ. 2569 14:15', errorRate: '0.1%', avgLatency: '95ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'internal' },
-  { id: 3, name: 'Microsoft 365 (Identity Provider)', desc: 'SSO ด้วย Azure AD / Microsoft 365', endpoint: 'https://login.microsoftonline.com/tenant', status: 'active', calls: 2400, lastCall: '25 ก.พ. 2569 15:00', errorRate: '0.05%', avgLatency: '45ms', auth: 'OpenID Connect', protocol: 'OIDC', category: 'identity' },
-  { id: 4, name: 'ThaiID (กรมการปกครอง)', desc: 'ยืนยันตัวตนผ่านบัตรประชาชนดิจิทัล', endpoint: 'https://api.thaiid.dopa.go.th/v1', status: 'active', calls: 520, lastCall: '25 ก.พ. 2569 13:45', errorRate: '0.3%', avgLatency: '280ms', auth: 'Mutual TLS + OAuth 2.0', protocol: 'REST', category: 'identity' },
-  { id: 5, name: 'ระบบ GFMIS (กรมบัญชีกลาง)', desc: 'ระบบบริหารการเงินการคลังภาครัฐ', endpoint: 'https://api.gfmis.go.th/v2', status: 'active', calls: 340, lastCall: '25 ก.พ. 2569 14:25', errorRate: '0.1%', avgLatency: '85ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'finance' },
-  { id: 6, name: 'ระบบทะเบียนนักศึกษา', desc: 'เชื่อมข้อมูลผลการเรียนจากสถาบันศึกษา', endpoint: 'https://api.studentreg.go.th/v1', status: 'active', calls: 248, lastCall: '25 ก.พ. 2569 12:00', errorRate: '0.5%', avgLatency: '120ms', auth: 'API Key + OAuth 2.0', protocol: 'REST', category: 'education' },
-  { id: 7, name: 'ระบบ Email (SMTP)', desc: 'ส่งอีเมลแจ้งเตือนอัตโนมัติ', endpoint: 'smtp://mail.scholarship.go.th:587', status: 'active', calls: 890, lastCall: '25 ก.พ. 2569 15:00', errorRate: '0.3%', avgLatency: '50ms', auth: 'SMTP Auth', protocol: 'SMTP', category: 'notification' },
-  { id: 8, name: 'ระบบ SMS Gateway', desc: 'ส่ง SMS แจ้งเตือน OTP', endpoint: 'https://api.sms.go.th/v1', status: 'active', calls: 150, lastCall: '25 ก.พ. 2569 10:15', errorRate: '1.2%', avgLatency: '300ms', auth: 'API Key', protocol: 'REST', category: 'notification' },
+  { id: 1, name: 'ระบบ SEIS (สำนักงาน ก.พ.)', desc: 'ระบบ Scholarship Executive Information System', endpoint: 'https://api.seis.ocsc.go.th/v2', status: 'active', calls: 1250, lastCall: '25/02/2569 14:30', errorRate: '0.2%', avgLatency: '110ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'internal' },
+  { id: 2, name: 'ระบบ DPIS (สำนักงาน ก.พ.)', desc: 'ระบบฐานข้อมูลบุคลากรภาครัฐ', endpoint: 'https://api.dpis.ocsc.go.th/v1', status: 'active', calls: 680, lastCall: '25/02/2569 14:15', errorRate: '0.1%', avgLatency: '95ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'internal' },
+  { id: 3, name: 'Microsoft 365 (Identity Provider)', desc: 'SSO ด้วย Azure AD / Microsoft 365', endpoint: 'https://login.microsoftonline.com/tenant', status: 'active', calls: 2400, lastCall: '25/02/2569 15:00', errorRate: '0.05%', avgLatency: '45ms', auth: 'OpenID Connect', protocol: 'OIDC', category: 'identity' },
+  { id: 4, name: 'ThaiID (กรมการปกครอง)', desc: 'ยืนยันตัวตนผ่านบัตรประชาชนดิจิทัล', endpoint: 'https://api.thaiid.dopa.go.th/v1', status: 'active', calls: 520, lastCall: '25/02/2569 13:45', errorRate: '0.3%', avgLatency: '280ms', auth: 'Mutual TLS + OAuth 2.0', protocol: 'REST', category: 'identity' },
+  { id: 5, name: 'ระบบ GFMIS (กรมบัญชีกลาง)', desc: 'ระบบบริหารการเงินการคลังภาครัฐ', endpoint: 'https://api.gfmis.go.th/v2', status: 'active', calls: 340, lastCall: '25/02/2569 14:25', errorRate: '0.1%', avgLatency: '85ms', auth: 'OAuth 2.0', protocol: 'REST', category: 'finance' },
+  { id: 6, name: 'ระบบทะเบียนนักศึกษา', desc: 'เชื่อมข้อมูลผลการเรียนจากสถาบันศึกษา', endpoint: 'https://api.studentreg.go.th/v1', status: 'active', calls: 248, lastCall: '25/02/2569 12:00', errorRate: '0.5%', avgLatency: '120ms', auth: 'API Key + OAuth 2.0', protocol: 'REST', category: 'education' },
+  { id: 7, name: 'ระบบ Email (SMTP)', desc: 'ส่งอีเมลแจ้งเตือนอัตโนมัติ', endpoint: 'smtp://mail.scholarship.go.th:587', status: 'active', calls: 890, lastCall: '25/02/2569 15:00', errorRate: '0.3%', avgLatency: '50ms', auth: 'SMTP Auth', protocol: 'SMTP', category: 'notification' },
+  { id: 8, name: 'ระบบ SMS Gateway', desc: 'ส่ง SMS แจ้งเตือน OTP', endpoint: 'https://api.sms.go.th/v1', status: 'active', calls: 150, lastCall: '25/02/2569 10:15', errorRate: '1.2%', avgLatency: '300ms', auth: 'API Key', protocol: 'REST', category: 'notification' },
   { id: 9, name: 'ระบบ HR ภาครัฐ', desc: 'ข้อมูลการชดใช้ทุนและการรับราชการ', endpoint: 'https://api.hr.go.th/v1', status: 'pending', calls: 0, lastCall: '-', errorRate: '-', avgLatency: '-', auth: 'OAuth 2.0', protocol: 'REST', category: 'internal' },
 ];
 
 const apiKeys = [
-  { id: 1, name: 'Production Web App', key: 'sk_prod_xxxx...7f4a', created: '01 ม.ค. 2569', lastUsed: '25 ก.พ. 2569 15:00', status: 'active', permissions: 'Full Access', scope: 'Web Application', expiresAt: '01 ม.ค. 2570', createdBy: 'ADMIN' },
-  { id: 2, name: 'Mobile App (iOS/Android)', key: 'sk_mob_xxxx...9d3e', created: '15 ม.ค. 2569', lastUsed: '25 ก.พ. 2569 14:30', status: 'active', permissions: 'Mobile Scope', scope: 'Mobile Application', expiresAt: '15 ม.ค. 2570', createdBy: 'ADMIN' },
-  { id: 3, name: 'SEIS Integration', key: 'sk_seis_xxxx...2b1c', created: '01 ม.ค. 2569', lastUsed: '25 ก.พ. 2569 14:15', status: 'active', permissions: 'SEIS Read/Write', scope: 'External System', expiresAt: '01 ม.ค. 2570', createdBy: 'ADMIN' },
-  { id: 4, name: 'DPIS Integration', key: 'sk_dpis_xxxx...4f2a', created: '01 ม.ค. 2569', lastUsed: '25 ก.พ. 2569 14:15', status: 'active', permissions: 'DPIS Read Only', scope: 'External System', expiresAt: '01 ม.ค. 2570', createdBy: 'ADMIN' },
-  { id: 5, name: 'Staging Key', key: 'sk_stag_xxxx...8c3d', created: '01 ม.ค. 2569', lastUsed: '20 ก.พ. 2569 16:00', status: 'active', permissions: 'Read Only', scope: 'Staging Environment', expiresAt: '01 เม.ย. 2569', createdBy: 'ADMIN' },
-  { id: 6, name: 'Old Integration Key', key: 'sk_old_xxxx...4a2f', created: '01 มิ.ย. 2568', lastUsed: '01 ม.ค. 2569', status: 'revoked', permissions: 'Full Access', scope: 'Deprecated', expiresAt: '-', createdBy: 'ADMIN' },
+  { id: 1, name: 'Production Web App', key: 'sk_prod_xxxx...7f4a', created: '01/01/2569', lastUsed: '25/02/2569 15:00', status: 'active', permissions: 'Full Access', scope: 'Web Application', expiresAt: '01/01/2570', createdBy: 'ADMIN' },
+  { id: 2, name: 'Mobile App (iOS/Android)', key: 'sk_mob_xxxx...9d3e', created: '15/01/2569', lastUsed: '25/02/2569 14:30', status: 'active', permissions: 'Mobile Scope', scope: 'Mobile Application', expiresAt: '15/01/2570', createdBy: 'ADMIN' },
+  { id: 3, name: 'SEIS Integration', key: 'sk_seis_xxxx...2b1c', created: '01/01/2569', lastUsed: '25/02/2569 14:15', status: 'active', permissions: 'SEIS Read/Write', scope: 'External System', expiresAt: '01/01/2570', createdBy: 'ADMIN' },
+  { id: 4, name: 'DPIS Integration', key: 'sk_dpis_xxxx...4f2a', created: '01/01/2569', lastUsed: '25/02/2569 14:15', status: 'active', permissions: 'DPIS Read Only', scope: 'External System', expiresAt: '01/01/2570', createdBy: 'ADMIN' },
+  { id: 5, name: 'Staging Key', key: 'sk_stag_xxxx...8c3d', created: '01/01/2569', lastUsed: '20/02/2569 16:00', status: 'active', permissions: 'Read Only', scope: 'Staging Environment', expiresAt: '01/04/2569', createdBy: 'ADMIN' },
+  { id: 6, name: 'Old Integration Key', key: 'sk_old_xxxx...4a2f', created: '01/06/2568', lastUsed: '01/01/2569', status: 'revoked', permissions: 'Full Access', scope: 'Deprecated', expiresAt: '-', createdBy: 'ADMIN' },
 ];
 
 const webhooks = [
-  { id: 1, name: 'แจ้งเตือนอนุมัติทุน', url: 'https://hooks.slack.com/xxx', events: ['award.approved', 'award.rejected'], status: 'active', lastTriggered: '25 ก.พ. 2569 12:00', successRate: '100%' },
-  { id: 2, name: 'Sync ระบบ GFMIS', url: 'https://gfmis.go.th/webhook', events: ['payment.created', 'payment.completed'], status: 'active', lastTriggered: '24 ก.พ. 2569 16:30', successRate: '98%' },
-  { id: 3, name: 'Sync ระบบ SEIS', url: 'https://seis.ocsc.go.th/webhook', events: ['scholar.updated', 'application.status_changed'], status: 'active', lastTriggered: '25 ก.พ. 2569 14:15', successRate: '99%' },
-  { id: 4, name: 'แจ้งเตือน LINE Bot', url: 'https://api.line.me/v2/bot/xxx', events: ['application.submitted', 'application.status_changed'], status: 'active', lastTriggered: '25 ก.พ. 2569 09:30', successRate: '95%' },
+  { id: 1, name: 'แจ้งเตือนอนุมัติทุน', url: 'https://hooks.slack.com/xxx', events: ['award.approved', 'award.rejected'], status: 'active', lastTriggered: '25/02/2569 12:00', successRate: '100%' },
+  { id: 2, name: 'Sync ระบบ GFMIS', url: 'https://gfmis.go.th/webhook', events: ['payment.created', 'payment.completed'], status: 'active', lastTriggered: '24/02/2569 16:30', successRate: '98%' },
+  { id: 3, name: 'Sync ระบบ SEIS', url: 'https://seis.ocsc.go.th/webhook', events: ['scholar.updated', 'application.status_changed'], status: 'active', lastTriggered: '25/02/2569 14:15', successRate: '99%' },
+  { id: 4, name: 'แจ้งเตือน LINE Bot', url: 'https://api.line.me/v2/bot/xxx', events: ['application.submitted', 'application.status_changed'], status: 'active', lastTriggered: '25/02/2569 09:30', successRate: '95%' },
 ];
 
 const apiLogs = [
-  { time: '25 ก.พ. 2569 15:00:15', caller: 'Web App', user: 'นายประสิทธิ์', endpoint: 'GET /api/v1/scholars?page=1', status: 200, duration: '120ms', size: '2.3KB', ip: '192.168.1.100' },
-  { time: '25 ก.พ. 2569 14:55:42', caller: 'SEIS', user: 'system', endpoint: 'POST /api/v1/scholars/sync', status: 201, duration: '85ms', size: '1.1KB', ip: '10.0.1.50' },
-  { time: '25 ก.พ. 2569 14:50:18', caller: 'Mobile App', user: 'น.ส.พิมพ์พร', endpoint: 'GET /api/v1/notifications', status: 200, duration: '65ms', size: '0.8KB', ip: '203.150.x.x' },
-  { time: '25 ก.พ. 2569 14:45:33', caller: 'Web App', user: 'นายสมศักดิ์', endpoint: 'POST /api/v1/applications', status: 201, duration: '180ms', size: '1.5KB', ip: '192.168.1.50' },
-  { time: '25 ก.พ. 2569 14:40:21', caller: 'ThaiID', user: 'system', endpoint: 'POST /api/v1/auth/verify-thaiid', status: 200, duration: '280ms', size: '0.5KB', ip: '10.100.x.x' },
-  { time: '25 ก.พ. 2569 14:35:08', caller: 'Web App', user: 'นายประสิทธิ์', endpoint: 'POST /api/v1/reports/generate', status: 202, duration: '50ms', size: '0.3KB', ip: '192.168.1.100' },
-  { time: '25 ก.พ. 2569 14:30:55', caller: 'DPIS', user: 'system', endpoint: 'GET /api/v1/scholars/SCH-001/service-debt', status: 200, duration: '95ms', size: '0.7KB', ip: '10.0.1.55' },
-  { time: '25 ก.พ. 2569 14:25:12', caller: 'Mobile App', user: 'นายวิชัย', endpoint: 'GET /api/v1/announcements', status: 200, duration: '55ms', size: '2.1KB', ip: '203.155.x.x' },
-  { time: '25 ก.พ. 2569 14:20:45', caller: 'MS365', user: 'system', endpoint: 'POST /api/v1/auth/callback/microsoft', status: 200, duration: '45ms', size: '0.4KB', ip: '13.107.x.x' },
-  { time: '25 ก.พ. 2569 14:15:30', caller: 'Web App', user: 'น.ส.รัตนา', endpoint: 'GET /api/v1/payments/summary', status: 401, duration: '15ms', size: '0.2KB', ip: '192.168.1.92' },
+  { time: '25/02/2569 15:00:15', caller: 'Web App', user: 'นายประสิทธิ์', endpoint: 'GET /api/v1/scholars?page=1', status: 200, duration: '120ms', size: '2.3KB', ip: '192.168.1.100' },
+  { time: '25/02/2569 14:55:42', caller: 'SEIS', user: 'system', endpoint: 'POST /api/v1/scholars/sync', status: 201, duration: '85ms', size: '1.1KB', ip: '10.0.1.50' },
+  { time: '25/02/2569 14:50:18', caller: 'Mobile App', user: 'น.ส.พิมพ์พร', endpoint: 'GET /api/v1/notifications', status: 200, duration: '65ms', size: '0.8KB', ip: '203.150.x.x' },
+  { time: '25/02/2569 14:45:33', caller: 'Web App', user: 'นายสมศักดิ์', endpoint: 'POST /api/v1/applications', status: 201, duration: '180ms', size: '1.5KB', ip: '192.168.1.50' },
+  { time: '25/02/2569 14:40:21', caller: 'ThaiID', user: 'system', endpoint: 'POST /api/v1/auth/verify-thaiid', status: 200, duration: '280ms', size: '0.5KB', ip: '10.100.x.x' },
+  { time: '25/02/2569 14:35:08', caller: 'Web App', user: 'นายประสิทธิ์', endpoint: 'POST /api/v1/reports/generate', status: 202, duration: '50ms', size: '0.3KB', ip: '192.168.1.100' },
+  { time: '25/02/2569 14:30:55', caller: 'DPIS', user: 'system', endpoint: 'GET /api/v1/scholars/SCH-001/service-debt', status: 200, duration: '95ms', size: '0.7KB', ip: '10.0.1.55' },
+  { time: '25/02/2569 14:25:12', caller: 'Mobile App', user: 'นายวิชัย', endpoint: 'GET /api/v1/announcements', status: 200, duration: '55ms', size: '2.1KB', ip: '203.155.x.x' },
+  { time: '25/02/2569 14:20:45', caller: 'MS365', user: 'system', endpoint: 'POST /api/v1/auth/callback/microsoft', status: 200, duration: '45ms', size: '0.4KB', ip: '13.107.x.x' },
+  { time: '25/02/2569 14:15:30', caller: 'Web App', user: 'น.ส.รัตนา', endpoint: 'GET /api/v1/payments/summary', status: 401, duration: '15ms', size: '0.2KB', ip: '192.168.1.92' },
 ];
 
 const categoryConfig: Record<string, { label: string; color: string }> = {

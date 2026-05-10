@@ -33,7 +33,7 @@ const repaymentConditions = [
     penaltyRate: 10,
     applicableScholarships: ['ทุน ก.พ.', 'ทุนพัฒนาข้าราชการ'],
     status: 'active',
-    effectiveDate: '01 ม.ค. 2550',
+    effectiveDate: '01/01/2550',
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ const repaymentConditions = [
     penaltyRate: 15,
     applicableScholarships: ['ทุนโครงการพิเศษ AI'],
     status: 'active',
-    effectiveDate: '01 ม.ค. 2566',
+    effectiveDate: '01/01/2566',
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const repaymentConditions = [
     penaltyRate: 7.5,
     applicableScholarships: ['กรณีผิดสัญญา'],
     status: 'active',
-    effectiveDate: '01 ม.ค. 2550',
+    effectiveDate: '01/01/2550',
   },
   {
     id: 4,
@@ -69,7 +69,7 @@ const repaymentConditions = [
     penaltyRate: 12,
     applicableScholarships: ['ทุนกระทรวงวิทย์', 'ทุน สกอ.'],
     status: 'active',
-    effectiveDate: '01 ก.ค. 2555',
+    effectiveDate: '01/07/2555',
   },
   {
     id: 5,
@@ -81,7 +81,7 @@ const repaymentConditions = [
     penaltyRate: 5,
     applicableScholarships: ['ทุนฝึกอบรมระยะสั้น'],
     status: 'active',
-    effectiveDate: '01 ม.ค. 2560',
+    effectiveDate: '01/01/2560',
   },
   {
     id: 6,
@@ -93,14 +93,14 @@ const repaymentConditions = [
     penaltyRate: 0,
     applicableScholarships: ['กรณีพิเศษ'],
     status: 'inactive',
-    effectiveDate: '01 ม.ค. 2560',
+    effectiveDate: '01/01/2560',
   },
 ];
 
 const repaymentTracking = [
-  { id: 1, scholarName: 'นายสมชาย วงศ์สุวรรณ', scholarship: 'ทุน ก.พ. ปริญญาโท', condition: 'RC-001', startDate: '01 ก.ค. 2563', endDate: '30 มิ.ย. 2567', remaining: '1 ปี 5 เดือน', status: 'กำลังชดใช้' },
-  { id: 2, scholarName: 'นางสาวสุภาพร เจริญศรี', scholarship: 'ทุนกระทรวงวิทย์', condition: 'RC-004', startDate: '01 ม.ค. 2565', endDate: '31 ธ.ค. 2570', remaining: '4 ปี 10 เดือน', status: 'กำลังชดใช้' },
-  { id: 3, scholarName: 'นายวีรพงษ์ ธนาพรรณ', scholarship: 'ทุนรัฐบาล ปริญญาเอก', condition: 'RC-001', startDate: '01 ม.ค. 2560', endDate: '31 ธ.ค. 2565', remaining: '-', status: 'ชดใช้ครบแล้ว' },
+  { id: 1, scholarName: 'นายสมชาย วงศ์สุวรรณ', scholarship: 'ทุน ก.พ. ปริญญาโท', condition: 'RC-001', startDate: '01/07/2563', endDate: '30/06/2567', remaining: '1 ปี 5 เดือน', status: 'กำลังชดใช้' },
+  { id: 2, scholarName: 'นางสาวสุภาพร เจริญศรี', scholarship: 'ทุนกระทรวงวิทย์', condition: 'RC-004', startDate: '01/01/2565', endDate: '31/12/2570', remaining: '4 ปี 10 เดือน', status: 'กำลังชดใช้' },
+  { id: 3, scholarName: 'นายวีรพงษ์ ธนาพรรณ', scholarship: 'ทุนรัฐบาล ปริญญาเอก', condition: 'RC-001', startDate: '01/01/2560', endDate: '31/12/2565', remaining: '-', status: 'ชดใช้ครบแล้ว' },
   { id: 4, scholarName: 'นายธนากร พิทักษ์ธรรม', scholarship: 'ทุนพัฒนาข้าราชการ', condition: 'RC-003', startDate: '-', endDate: '-', remaining: '-', status: 'ผิดสัญญา' },
 ];
 

@@ -61,9 +61,9 @@ interface ScholarPhysicalRecord {
 }
 
 const scholarRecords: ScholarPhysicalRecord[] = [
-  { id: 'PR-001', scholarId: 'SCH-2569-005', scholarName: 'นายจิรวัฒน์ แสงทอง', physicalStatus: 'พิการทางการมองเห็น', physicalStatusCode: 'VISUAL', detailDescription: 'สายตาเลือนราง ข้างซ้าย — ใช้แว่นขยายช่วยในการอ่าน', certNo: 'พก.0032/2568', certDate: '15 ม.ค. 2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '10 ก.พ. 2569', hasDocument: true },
-  { id: 'PR-002', scholarId: 'SCH-2568-022', scholarName: 'น.ส.มณีรัตน์ รุ่งเรือง', physicalStatus: 'พิการทางการเคลื่อนไหว', physicalStatusCode: 'MOBILITY', detailDescription: 'อัมพาตขาข้างขวาจากอุบัติเหตุ — ใช้รถเข็น', certNo: 'พก.0081/2567', certDate: '20 มี.ค. 2567', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '5 ก.พ. 2569', hasDocument: true },
-  { id: 'PR-003', scholarId: 'SCH-2569-010', scholarName: 'นายภูมิพัฒน์ ดีเลิศ', physicalStatus: 'พิการทางการได้ยิน/การสื่อสาร', physicalStatusCode: 'HEARING', detailDescription: 'หูตึงทั้งสองข้าง — ใช้เครื่องช่วยฟัง', certNo: 'พก.0045/2568', certDate: '8 มิ.ย. 2568', updatedBy: 'เจ้าหน้าที่ สนร.', updatedDate: '1 ก.พ. 2569', hasDocument: true },
+  { id: 'PR-001', scholarId: 'SCH-2569-005', scholarName: 'นายจิรวัฒน์ แสงทอง', physicalStatus: 'พิการทางการมองเห็น', physicalStatusCode: 'VISUAL', detailDescription: 'สายตาเลือนราง ข้างซ้าย — ใช้แว่นขยายช่วยในการอ่าน', certNo: 'พก.0032/2568', certDate: '15/01/2568', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '10/02/2569', hasDocument: true },
+  { id: 'PR-002', scholarId: 'SCH-2568-022', scholarName: 'น.ส.มณีรัตน์ รุ่งเรือง', physicalStatus: 'พิการทางการเคลื่อนไหว', physicalStatusCode: 'MOBILITY', detailDescription: 'อัมพาตขาข้างขวาจากอุบัติเหตุ — ใช้รถเข็น', certNo: 'พก.0081/2567', certDate: '20/03/2567', updatedBy: 'เจ้าหน้าที่ ก.พ.', updatedDate: '05/02/2569', hasDocument: true },
+  { id: 'PR-003', scholarId: 'SCH-2569-010', scholarName: 'นายภูมิพัฒน์ ดีเลิศ', physicalStatus: 'พิการทางการได้ยิน/การสื่อสาร', physicalStatusCode: 'HEARING', detailDescription: 'หูตึงทั้งสองข้าง — ใช้เครื่องช่วยฟัง', certNo: 'พก.0045/2568', certDate: '08/06/2568', updatedBy: 'เจ้าหน้าที่ สนร.', updatedDate: '01/02/2569', hasDocument: true },
 ];
 
 export function PhysicalStatus() {
@@ -239,8 +239,8 @@ export function PhysicalStatus() {
           </div>
           <div className="p-6 space-y-3">
             {[
-              { date: '10 ก.พ. 2569', action: 'อัปเดตรายละเอียด', by: 'เจ้าหน้าที่ ก.พ.', detail: 'เพิ่มข้อมูลเครื่องช่วยฟัง' },
-              { date: '15 ม.ค. 2568', action: 'บันทึกครั้งแรก', by: 'เจ้าหน้าที่ สนร.', detail: 'สถานภาพ: พิการทางการได้ยิน' },
+              { date: '10/02/2569', action: 'อัปเดตรายละเอียด', by: 'เจ้าหน้าที่ ก.พ.', detail: 'เพิ่มข้อมูลเครื่องช่วยฟัง' },
+              { date: '15/01/2568', action: 'บันทึกครั้งแรก', by: 'เจ้าหน้าที่ สนร.', detail: 'สถานภาพ: พิการทางการได้ยิน' },
             ].map((h, i) => (
               <div key={i} className="p-3 border rounded-lg">
                 <div className="flex items-center justify-between mb-1">

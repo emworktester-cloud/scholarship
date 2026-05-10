@@ -37,11 +37,11 @@ interface Signer {
 }
 
 const signers: Signer[] = [
-  { id: 'SIG-001', name: 'นายสุรพล ศรีสุข', position: 'เลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '1 ม.ค. 2569', usedInForms: ['EF-01', 'EF-02', 'EF-05', 'EF-10'], status: 'active', authorityLevel: 'ระดับสูงสุด' },
-  { id: 'SIG-002', name: 'นางวรรณา พิทักษ์', position: 'รองเลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '1 ม.ค. 2569', usedInForms: ['EF-03', 'EF-04', 'EF-06'], status: 'active', authorityLevel: 'ระดับรอง' },
-  { id: 'SIG-003', name: 'นายประสิทธิ์ ผู้ดูแล', position: 'ผู้อำนวยการกอง', department: 'กองทุนการศึกษา', hasSignature: true, signatureDate: '15 ม.ค. 2569', usedInForms: ['EF-07', 'EF-08', 'EF-09'], status: 'active', authorityLevel: 'ระดับกอง' },
-  { id: 'SIG-004', name: 'นางสาวรัตนา การเงิน', position: 'หัวหน้าฝ่ายการเงิน', department: 'ฝ่ายการเงิน', hasSignature: true, signatureDate: '1 ก.พ. 2569', usedInForms: ['EF-11', 'EF-12', 'EF-13'], status: 'active', authorityLevel: 'ระดับฝ่าย' },
-  { id: 'SIG-005', name: 'นายวิชัย อดีตอธิบดี', position: 'อดีตเลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '1 มิ.ย. 2567', usedInForms: [], status: 'expired', authorityLevel: 'ระดับสูงสุด (เดิม)' },
+  { id: 'SIG-001', name: 'นายสุรพล ศรีสุข', position: 'เลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '01/01/2569', usedInForms: ['EF-01', 'EF-02', 'EF-05', 'EF-10'], status: 'active', authorityLevel: 'ระดับสูงสุด' },
+  { id: 'SIG-002', name: 'นางวรรณา พิทักษ์', position: 'รองเลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '01/01/2569', usedInForms: ['EF-03', 'EF-04', 'EF-06'], status: 'active', authorityLevel: 'ระดับรอง' },
+  { id: 'SIG-003', name: 'นายประสิทธิ์ ผู้ดูแล', position: 'ผู้อำนวยการกอง', department: 'กองทุนการศึกษา', hasSignature: true, signatureDate: '15/01/2569', usedInForms: ['EF-07', 'EF-08', 'EF-09'], status: 'active', authorityLevel: 'ระดับกอง' },
+  { id: 'SIG-004', name: 'นางสาวรัตนา การเงิน', position: 'หัวหน้าฝ่ายการเงิน', department: 'ฝ่ายการเงิน', hasSignature: true, signatureDate: '01/02/2569', usedInForms: ['EF-11', 'EF-12', 'EF-13'], status: 'active', authorityLevel: 'ระดับฝ่าย' },
+  { id: 'SIG-005', name: 'นายวิชัย อดีตอธิบดี', position: 'อดีตเลขาธิการ ก.พ.', department: 'สำนักงาน ก.พ.', hasSignature: true, signatureDate: '01/06/2567', usedInForms: [], status: 'expired', authorityLevel: 'ระดับสูงสุด (เดิม)' },
   { id: 'SIG-006', name: 'นายสมชาย ผู้จัดการ', position: 'หัวหน้างานทุน', department: 'งานทุนการศึกษา', hasSignature: false, signatureDate: '-', usedInForms: [], status: 'inactive', authorityLevel: 'ระดับงาน' },
 ];
 

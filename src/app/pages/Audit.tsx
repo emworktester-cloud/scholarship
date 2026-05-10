@@ -44,7 +44,7 @@ import { toast } from 'sonner';
 const auditLogs = [
   {
     id: 1,
-    timestamp: '20 ก.พ. 2026 15:30:25',
+    timestamp: '20/02/2026 15:30:25',
     user: 'นางสาวพิมพ์พร เจ้าหน้าที่',
     action: 'export',
     target: 'รายงานภาพรวมทุน',
@@ -54,7 +54,7 @@ const auditLogs = [
   },
   {
     id: 2,
-    timestamp: '20 ก.พ. 2026 14:15:10',
+    timestamp: '20/02/2026 14:15:10',
     user: 'นายสมชาย ผู้จัดการ',
     action: 'approve',
     target: 'APP-2026-001',
@@ -64,7 +64,7 @@ const auditLogs = [
   },
   {
     id: 3,
-    timestamp: '20 ก.พ. 2026 13:45:30',
+    timestamp: '20/02/2026 13:45:30',
     user: 'นายประยุทธ์ ผู้ดูแลระบบ',
     action: 'edit',
     target: 'User Settings',
@@ -74,7 +74,7 @@ const auditLogs = [
   },
   {
     id: 4,
-    timestamp: '20 ก.พ. 2026 12:20:15',
+    timestamp: '20/02/2026 12:20:15',
     user: 'นางสาววิภา ผู้บริหาร',
     action: 'view',
     target: 'AWD-2026-001',
@@ -84,7 +84,7 @@ const auditLogs = [
   },
   {
     id: 5,
-    timestamp: '20 ก.พ. 2026 11:30:00',
+    timestamp: '20/02/2026 11:30:00',
     user: 'Unknown',
     action: 'login',
     target: 'Authentication',
@@ -94,7 +94,7 @@ const auditLogs = [
   },
   {
     id: 6,
-    timestamp: '20 ก.พ. 2026 10:15:45',
+    timestamp: '20/02/2026 10:15:45',
     user: 'นางสาวพิมพ์พร เจ้าหน้าที่',
     action: 'download',
     target: 'Document-001.pdf',
@@ -104,7 +104,7 @@ const auditLogs = [
   },
   {
     id: 7,
-    timestamp: '20 ก.พ. 2026 09:00:12',
+    timestamp: '20/02/2026 09:00:12',
     user: 'นายสมชาย ผู้จัดการ',
     action: 'login',
     target: 'Authentication',

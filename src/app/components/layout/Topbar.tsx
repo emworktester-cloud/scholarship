@@ -43,8 +43,13 @@ export function Topbar({ onToggleSidebar, onOpenQuickSearch }: TopbarProps) {
           <Menu className="h-5 w-5" />
         </Button>
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 md:w-9 md:h-9 shrink-0 rounded-xl bg-gradient-to-br from-[#1e3a8a] to-blue-600 flex items-center justify-center shadow-sm shadow-blue-900/20">
-            <Shield className="w-4 h-4 md:w-5 md:h-5 text-white" />
+          <div className="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-200/60 p-1 relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-b from-[#d4af37]/30 to-transparent rounded-xl opacity-50"></div>
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJzzlznCNplmnHso-nCCJ9P6iGRJMDTdSeiw&s" 
+              alt="Government Logo" 
+              className="w-full h-full object-contain relative z-10"
+            />
           </div>
           <div className="hidden sm:flex flex-col">
             <h1 className="text-base font-bold text-slate-900 leading-none tracking-tight font-k2d whitespace-nowrap">

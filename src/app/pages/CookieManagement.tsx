@@ -74,14 +74,14 @@ interface ConsentLog {
 }
 
 const consentLogs: ConsentLog[] = [
-  { id: 'CL-001', userId: 'USR-001', userName: 'นายประสิทธิ์ ผู้ดูแล', action: 'accepted_all', timestamp: '25 ก.พ. 2569 15:30:12', ip: '192.168.1.100', userAgent: 'Chrome/122 Windows', necessary: true, analytics: true, functional: true, marketing: true },
-  { id: 'CL-002', userId: 'USR-002', userName: 'น.ส.พิมพ์พร เจ้าหน้าที่', action: 'custom', timestamp: '25 ก.พ. 2569 14:22:45', ip: '192.168.1.50', userAgent: 'Chrome/122 Windows', necessary: true, analytics: true, functional: true, marketing: false },
-  { id: 'CL-003', userId: 'USR-003', userName: 'นายสมชาย ผู้จัดการ', action: 'rejected_optional', timestamp: '25 ก.พ. 2569 13:15:30', ip: '192.168.1.75', userAgent: 'Safari/17 macOS', necessary: true, analytics: false, functional: false, marketing: false },
-  { id: 'CL-004', userId: 'USR-004', userName: 'น.ส.วิภา ผู้บริหาร', action: 'accepted_all', timestamp: '24 ก.พ. 2569 16:40:05', ip: '10.0.1.25', userAgent: 'Edge/122 Windows', necessary: true, analytics: true, functional: true, marketing: true },
-  { id: 'CL-005', userId: 'USR-005', userName: 'นายวิชัย สมบูรณ์', action: 'withdrawn', timestamp: '24 ก.พ. 2569 11:05:18', ip: '203.150.x.x', userAgent: 'Chrome/122 Android', necessary: true, analytics: false, functional: false, marketing: false },
-  { id: 'CL-006', userId: 'USR-005', userName: 'นายวิชัย สมบูรณ์', action: 'custom', timestamp: '24 ก.พ. 2569 11:10:22', ip: '203.150.x.x', userAgent: 'Chrome/122 Android', necessary: true, analytics: true, functional: false, marketing: false },
-  { id: 'CL-007', userId: 'USR-006', userName: 'น.ส.รัตนา การเงิน', action: 'accepted_all', timestamp: '23 ก.พ. 2569 09:30:55', ip: '192.168.1.92', userAgent: 'Firefox/123 Windows', necessary: true, analytics: true, functional: true, marketing: true },
-  { id: 'CL-008', userId: 'USR-007', userName: 'นายสมศักดิ์ มุ่งมั่น', action: 'rejected_optional', timestamp: '22 ก.พ. 2569 10:20:33', ip: '192.168.1.110', userAgent: 'Chrome/122 Windows', necessary: true, analytics: false, functional: false, marketing: false },
+  { id: 'CL-001', userId: 'USR-001', userName: 'นายประสิทธิ์ ผู้ดูแล', action: 'accepted_all', timestamp: '25/02/2569 15:30:12', ip: '192.168.1.100', userAgent: 'Chrome/122 Windows', necessary: true, analytics: true, functional: true, marketing: true },
+  { id: 'CL-002', userId: 'USR-002', userName: 'น.ส.พิมพ์พร เจ้าหน้าที่', action: 'custom', timestamp: '25/02/2569 14:22:45', ip: '192.168.1.50', userAgent: 'Chrome/122 Windows', necessary: true, analytics: true, functional: true, marketing: false },
+  { id: 'CL-003', userId: 'USR-003', userName: 'นายสมชาย ผู้จัดการ', action: 'rejected_optional', timestamp: '25/02/2569 13:15:30', ip: '192.168.1.75', userAgent: 'Safari/17 macOS', necessary: true, analytics: false, functional: false, marketing: false },
+  { id: 'CL-004', userId: 'USR-004', userName: 'น.ส.วิภา ผู้บริหาร', action: 'accepted_all', timestamp: '24/02/2569 16:40:05', ip: '10.0.1.25', userAgent: 'Edge/122 Windows', necessary: true, analytics: true, functional: true, marketing: true },
+  { id: 'CL-005', userId: 'USR-005', userName: 'นายวิชัย สมบูรณ์', action: 'withdrawn', timestamp: '24/02/2569 11:05:18', ip: '203.150.x.x', userAgent: 'Chrome/122 Android', necessary: true, analytics: false, functional: false, marketing: false },
+  { id: 'CL-006', userId: 'USR-005', userName: 'นายวิชัย สมบูรณ์', action: 'custom', timestamp: '24/02/2569 11:10:22', ip: '203.150.x.x', userAgent: 'Chrome/122 Android', necessary: true, analytics: true, functional: false, marketing: false },
+  { id: 'CL-007', userId: 'USR-006', userName: 'น.ส.รัตนา การเงิน', action: 'accepted_all', timestamp: '23/02/2569 09:30:55', ip: '192.168.1.92', userAgent: 'Firefox/123 Windows', necessary: true, analytics: true, functional: true, marketing: true },
+  { id: 'CL-008', userId: 'USR-007', userName: 'นายสมศักดิ์ มุ่งมั่น', action: 'rejected_optional', timestamp: '22/02/2569 10:20:33', ip: '192.168.1.110', userAgent: 'Chrome/122 Windows', necessary: true, analytics: false, functional: false, marketing: false },
 ];
 
 const actionLabels: Record<string, { text: string; color: string }> = {

@@ -4,6 +4,7 @@ import {
   User, GraduationCap, Award, FileText, Heart, Shield, Mail, Phone, MapPin, Calendar,
   Building, Globe, ChevronRight, Stethoscope, ClipboardList, FileCheck, CalendarClock,
   BookOpen, AlertTriangle, Send, Eye, Edit, Clock, CheckCircle, Camera, Upload,
+  Plane, Wallet, Briefcase, DollarSign,
 } from 'lucide-react';
 import { Card, CardContent } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -22,11 +23,18 @@ interface AwardData {
   degree_level: string; field_of_study: string; university: string; country: string;
   start_date: string; end_date: string; total_budget: number;
 }
+interface TravelDocJson { passport_number: string; passport_expiry: string; visa_type: string; visa_expiry: string; }
+interface FinancialJson { bank_name: string; account_number: string; account_name: string; branch: string; }
+interface AcademicProgressJson { current_gpax: number | string; advisor_name: string; advisor_email: string; thesis_topic: string | null; next_report_due: string; }
+interface BondJson { graduation_date: string; bond_status: string; bond_start_date: string; bond_end_date: string; workplace_department: string; workplace_ministry: string; }
+
 interface ScholarProfile {
   id: string; first_name: string; last_name: string; citizen_id: string;
   email: string; phone_number: string; date_of_birth: string; gender: string;
   nationality: string; avatar_url: string | null;
   address_json: AddressJson; emergency_contact_json: EmergencyJson; award: AwardData;
+  travel_doc_json: TravelDocJson; financial_json: FinancialJson;
+  academic_progress_json: AcademicProgressJson; bond_json: BondJson;
   current_status: string; lifecycle_phase: string; completeness: number;
   health_check_date: string | null; health_check_result: string | null;
   military_exemption: boolean; military_expiry: string | null;
@@ -35,7 +43,7 @@ interface ScholarProfile {
 const mockScholar: ScholarProfile = {
   id: 'SCH-2569-001', first_name: 'พรพิมล', last_name: 'สุขใจ',
   citizen_id: '1-1234-56789-01-2', email: 'pornpimon@example.com',
-  phone_number: '081-234-5678', date_of_birth: '15 มิ.ย. 2540',
+  phone_number: '081-234-5678', date_of_birth: '15/06/2540',
   gender: 'หญิง', nationality: 'ไทย', avatar_url: null,
   address_json: { line1: '123/45 ซอยลาดพร้าว 87', district: 'บางกะปิ', province: 'กรุงเทพมหานคร', postal_code: '10240' },
   emergency_contact_json: { name: 'นายสมชาย สุขใจ', relation: 'บิดา', phone: '089-876-5432' },
@@ -45,8 +53,12 @@ const mockScholar: ScholarProfile = {
     university: 'Stanford University', country: 'สหรัฐอเมริกา',
     start_date: 'ส.ค. 2569', end_date: 'ก.ค. 2573', total_budget: 5000000,
   },
+  travel_doc_json: { passport_number: 'AA1234567', passport_expiry: '20/01/2575', visa_type: 'F-1 Student', visa_expiry: '15/08/2573' },
+  financial_json: { bank_name: 'ธนาคารกรุงไทย', account_number: '123-4-56789-0', account_name: 'นางสาวพรพิมล สุขใจ', branch: 'สาขาเซ็นทรัลพลาซา แกรนด์ พระราม 9' },
+  academic_progress_json: { current_gpax: 3.85, advisor_name: 'Prof. John Doe', advisor_email: 'johndoe@stanford.edu', thesis_topic: 'AI in Healthcare', next_report_due: '30/11/2569' },
+  bond_json: { graduation_date: '-', bond_status: 'กำลังศึกษา', bond_start_date: '-', bond_end_date: '-', workplace_department: '-', workplace_ministry: '-' },
   current_status: 'กำลังดำเนินการ', lifecycle_phase: 'ก่อนเดินทาง', completeness: 72,
-  health_check_date: '10 ม.ค. 2569', health_check_result: 'ผ่าน',
+  health_check_date: '10/01/2569', health_check_result: 'ผ่าน',
   military_exemption: false, military_expiry: null,
 };
 
@@ -62,6 +74,10 @@ const contextualActions = [
 const sections = [
   { id: 'personal', label: 'ข้อมูลส่วนบุคคล', icon: User },
   { id: 'scholarship', label: 'ข้อมูลทุน', icon: Award },
+  { id: 'travel', label: 'เอกสารเดินทาง', icon: Plane },
+  { id: 'financial', label: 'ข้อมูลการเงิน', icon: Wallet },
+  { id: 'academic', label: 'ผลการศึกษา', icon: BookOpen },
+  { id: 'bond', label: 'ชดใช้ทุน/ทำงาน', icon: Briefcase },
   { id: 'health', label: 'สุขภาพ', icon: Stethoscope },
   { id: 'military', label: 'ผ่อนผันทหาร', icon: Shield },
   { id: 'contract', label: 'สัญญา', icon: FileCheck },
@@ -201,6 +217,52 @@ export default function ScholarProfileView() {
                   <Field label="วงเงินทุนรวม" value={<span className="text-emerald-700 font-bold">{fmt(s.award.total_budget)}</span>} icon={Award} />
                   <Field label="เริ่มศึกษา" value={s.award.start_date} icon={Calendar} />
                   <Field label="สิ้นสุด" value={s.award.end_date} icon={Calendar} />
+                </div>
+              </div>)}
+
+              {activeSection === 'travel' && (<div className="space-y-6">
+                <div><h2 className="text-lg font-bold text-gray-900 tracking-tight">เอกสารเดินทาง (Visa & Passport)</h2><p className="text-sm text-gray-400 mt-0.5">ข้อมูลหนังสือเดินทางและวีซ่าเพื่อการศึกษาต่างประเทศ</p></div>
+                <div className="grid grid-cols-2 gap-x-12">
+                  <Field label="หมายเลข Passport" value={s.travel_doc_json.passport_number} icon={ClipboardList} />
+                  <Field label="วันหมดอายุ Passport" value={s.travel_doc_json.passport_expiry} icon={Calendar} />
+                  <Field label="ประเภท Visa" value={s.travel_doc_json.visa_type} icon={FileText} />
+                  <Field label="วันหมดอายุ Visa" value={s.travel_doc_json.visa_expiry} icon={Calendar} />
+                </div>
+              </div>)}
+
+              {activeSection === 'financial' && (<div className="space-y-6">
+                <div><h2 className="text-lg font-bold text-gray-900 tracking-tight">ข้อมูลการเงิน (บัญชีรับเงินทุน)</h2><p className="text-sm text-gray-400 mt-0.5">บัญชีธนาคารสำหรับรับโอนเงินงวด</p></div>
+                <div className="grid grid-cols-2 gap-x-12">
+                  <Field label="ธนาคาร" value={s.financial_json.bank_name} icon={Building} />
+                  <Field label="สาขา" value={s.financial_json.branch} icon={MapPin} />
+                  <Field label="ชื่อบัญชี" value={s.financial_json.account_name} icon={User} />
+                  <Field label="เลขที่บัญชี" value={<span className="font-mono text-blue-700">{s.financial_json.account_number}</span>} icon={Wallet} />
+                </div>
+              </div>)}
+
+              {activeSection === 'academic' && (<div className="space-y-6">
+                <div><h2 className="text-lg font-bold text-gray-900 tracking-tight">ผลการศึกษา (ระหว่างศึกษา)</h2><p className="text-sm text-gray-400 mt-0.5">การติดตามผลการเรียนและอาจารย์ที่ปรึกษา</p></div>
+                <div className="grid grid-cols-2 gap-x-12">
+                  <Field label="GPAX ปัจจุบัน" value={<span className="text-lg font-bold text-gray-900">{s.academic_progress_json.current_gpax}</span>} icon={Award} />
+                  <Field label="กำหนดส่งรายงานครั้งต่อไป" value={s.academic_progress_json.next_report_due} icon={CalendarClock} />
+                  <Field label="ชื่ออาจารย์ที่ปรึกษา" value={s.academic_progress_json.advisor_name} icon={User} />
+                  <Field label="อีเมลอาจารย์ที่ปรึกษา" value={s.academic_progress_json.advisor_email} icon={Mail} />
+                </div>
+                <Separator />
+                <div>
+                  <Field label="หัวข้อวิทยานิพนธ์ (Thesis Topic)" value={s.academic_progress_json.thesis_topic || 'ยังไม่ระบุ'} icon={BookOpen} />
+                </div>
+              </div>)}
+
+              {activeSection === 'bond' && (<div className="space-y-6">
+                <div><h2 className="text-lg font-bold text-gray-900 tracking-tight">ข้อมูลการชดใช้ทุน (หลังสำเร็จการศึกษา)</h2><p className="text-sm text-gray-400 mt-0.5">การปฏิบัติราชการหรือทำงานชดใช้ทุน</p></div>
+                <div className="grid grid-cols-2 gap-x-12">
+                  <Field label="สถานะชดใช้ทุน" value={<Badge className="bg-amber-50 text-amber-700 border border-amber-200">{s.bond_json.bond_status}</Badge>} icon={CheckCircle} />
+                  <Field label="วันที่จบการศึกษา" value={s.bond_json.graduation_date} icon={GraduationCap} />
+                  <Field label="กระทรวง/ต้นสังกัด" value={s.bond_json.workplace_ministry} icon={Building} />
+                  <Field label="กรม/หน่วยงานย่อย" value={s.bond_json.workplace_department} icon={Building} />
+                  <Field label="วันที่เริ่มชดใช้ทุน" value={s.bond_json.bond_start_date} icon={Calendar} />
+                  <Field label="วันที่สิ้นสุดชดใช้ทุน" value={s.bond_json.bond_end_date} icon={Calendar} />
                 </div>
               </div>)}
 

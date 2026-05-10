@@ -156,57 +156,57 @@ export default function ApplicationDetail() {
     sla: {
       remaining: '2 ชั่วโมง',
       status: 'critical',
-      dueDate: '20 ก.พ. 2026 17:00',
+      dueDate: '20/02/2026 17:00',
     },
     assignee: 'คุณ',
-    submittedDate: '18 ก.พ. 2026 09:30',
-    updatedDate: '20 ก.พ. 2026 14:30',
+    submittedDate: '18/02/2026 09:30',
+    updatedDate: '20/02/2026 14:30',
   };
 
   const documents = [
-    { id: 1, name: 'ใบสมัคร', status: 'complete', uploadDate: '18 ก.พ. 2026', size: '2.3 MB' },
-    { id: 2, name: 'สำเนาบัตรประชาชน', status: 'complete', uploadDate: '18 ก.พ. 2026', size: '1.1 MB' },
-    { id: 3, name: 'ระเบียนแสดงผลการเรียน', status: 'complete', uploadDate: '18 ก.พ. 2026', size: '0.8 MB' },
+    { id: 1, name: 'ใบสมัคร', status: 'complete', uploadDate: '18/02/2026', size: '2.3 MB' },
+    { id: 2, name: 'สำเนาบัตรประชาชน', status: 'complete', uploadDate: '18/02/2026', size: '1.1 MB' },
+    { id: 3, name: 'ระเบียนแสดงผลการเรียน', status: 'complete', uploadDate: '18/02/2026', size: '0.8 MB' },
     { id: 4, name: 'จดหมายตอบรับจากสถาบัน', status: 'pending', uploadDate: null, size: null },
-    { id: 5, name: 'แผนการศึกษา', status: 'complete', uploadDate: '18 ก.พ. 2026', size: '1.5 MB' },
-    { id: 6, name: 'หนังสือรับรอง GPA', status: 'complete', uploadDate: '18 ก.พ. 2026', size: '0.5 MB' },
+    { id: 5, name: 'แผนการศึกษา', status: 'complete', uploadDate: '18/02/2026', size: '1.5 MB' },
+    { id: 6, name: 'หนังสือรับรอง GPA', status: 'complete', uploadDate: '18/02/2026', size: '0.5 MB' },
   ];
 
   const timeline = [
-    { date: '20 ก.พ. 2026 14:30', event: 'เจ้าหน้าที่เปิดดูเคส', user: 'นางสาวพิมพ์พร เจ้าหน้าที่', type: 'view' },
-    { date: '19 ก.พ. 2026 16:20', event: 'ผู้สมัครอัปโหลดเอกสารเพิ่มเติม', user: 'นายสมชาย ใจดี', type: 'upload' },
-    { date: '19 ก.พ. 2026 10:15', event: 'ระบบแจ้งเตือนผู้สมัครเอกสารไม่ครบ', user: 'ระบบ', type: 'notification' },
-    { date: '18 ก.พ. 2026 09:30', event: 'ส่งใบสมัครเข้าระบบ', user: 'นายสมชาย ใจดี', type: 'submit' },
+    { date: '20/02/2026 14:30', event: 'เจ้าหน้าที่เปิดดูเคส', user: 'นางสาวพิมพ์พร เจ้าหน้าที่', type: 'view' },
+    { date: '19/02/2026 16:20', event: 'ผู้สมัครอัปโหลดเอกสารเพิ่มเติม', user: 'นายสมชาย ใจดี', type: 'upload' },
+    { date: '19/02/2026 10:15', event: 'ระบบแจ้งเตือนผู้สมัครเอกสารไม่ครบ', user: 'ระบบ', type: 'notification' },
+    { date: '18/02/2026 09:30', event: 'ส่งใบสมัครเข้าระบบ', user: 'นายสมชาย ใจดี', type: 'submit' },
   ];
 
   const communications = [
-    { id: 1, type: 'email', direction: 'out', subject: 'แจ้งเตือน: เอกสารไม่ครบถ้วน', to: 'somchai@example.com', date: '19 ก.พ. 2026 10:15', status: 'sent', body: 'เรียนผู้สมัคร กรุณาจัดส่งจดหมายตอบรับจากสถาบัน...' },
-    { id: 2, type: 'sms', direction: 'out', subject: 'แจ้งเตือน SMS', to: '08-1234-5678', date: '19 ก.พ. 2026 10:16', status: 'sent', body: 'ระบบทุนรัฐบาล: กรุณาจัดส่งเอกสารเพิ่มเติมภายใน 3 วัน' },
-    { id: 3, type: 'internal', direction: 'in', subject: 'หมายเหตุภายใน', to: 'ทีมงาน', date: '19 ก.พ. 2026 11:00', status: 'read', body: 'ผู้สมัครแจ้งว่าจดหมายตอบรับอยู่ระหว่างจัดส่ง คาดว่าจะได้ภายใน 2 วัน' },
-    { id: 4, type: 'email', direction: 'in', subject: 'ตอบกลับ: เอกสารไม่ครบถ้วน', to: 'staff@scholarship.go.th', date: '19 ก.พ. 2026 15:30', status: 'read', body: 'เรียนเจ้าหน้าที่ ผมได้จัดส่งจดหมายตอบรับแล้วครับ กรุณาตรวจสอบ...' },
+    { id: 1, type: 'email', direction: 'out', subject: 'แจ้งเตือน: เอกสารไม่ครบถ้วน', to: 'somchai@example.com', date: '19/02/2026 10:15', status: 'sent', body: 'เรียนผู้สมัคร กรุณาจัดส่งจดหมายตอบรับจากสถาบัน...' },
+    { id: 2, type: 'sms', direction: 'out', subject: 'แจ้งเตือน SMS', to: '08-1234-5678', date: '19/02/2026 10:16', status: 'sent', body: 'ระบบทุนรัฐบาล: กรุณาจัดส่งเอกสารเพิ่มเติมภายใน 3 วัน' },
+    { id: 3, type: 'internal', direction: 'in', subject: 'หมายเหตุภายใน', to: 'ทีมงาน', date: '19/02/2026 11:00', status: 'read', body: 'ผู้สมัครแจ้งว่าจดหมายตอบรับอยู่ระหว่างจัดส่ง คาดว่าจะได้ภายใน 2 วัน' },
+    { id: 4, type: 'email', direction: 'in', subject: 'ตอบกลับ: เอกสารไม่ครบถ้วน', to: 'staff@scholarship.go.th', date: '19/02/2026 15:30', status: 'read', body: 'เรียนเจ้าหน้าที่ ผมได้จัดส่งจดหมายตอบรับแล้วครับ กรุณาตรวจสอบ...' },
   ];
 
   const casePayments = [
-    { id: 1, installment: 1, amount: 625000, dueDate: '31 มี.ค. 2027', condition: 'ลงทะเบียนเรียน + ส่งรายงาน', status: 'scheduled' },
-    { id: 2, installment: 2, amount: 625000, dueDate: '30 ก.ย. 2027', condition: 'GPA >= 3.0 + ส่งรายงาน', status: 'scheduled' },
-    { id: 3, installment: 3, amount: 625000, dueDate: '31 มี.ค. 2028', condition: 'ส่งรายงานความก้าวหน้า', status: 'scheduled' },
-    { id: 4, installment: 4, amount: 625000, dueDate: '30 ก.ย. 2028', condition: 'GPA >= 3.0 + ส่งรายงาน', status: 'scheduled' },
-    { id: 5, installment: 5, amount: 625000, dueDate: '31 มี.ค. 2029', condition: 'ส่งรายงานความก้าวหน้า', status: 'scheduled' },
-    { id: 6, installment: 6, amount: 625000, dueDate: '30 ก.ย. 2029', condition: 'GPA >= 3.0 + Qualifying Exam', status: 'scheduled' },
-    { id: 7, installment: 7, amount: 625000, dueDate: '31 มี.ค. 2030', condition: 'ส่งรายงานวิทยานิพนธ์', status: 'scheduled' },
-    { id: 8, installment: 8, amount: 625000, dueDate: '31 ก.ค. 2030', condition: 'สำเร็จการศึกษา', status: 'scheduled' },
+    { id: 1, installment: 1, amount: 625000, dueDate: '31/03/2027', condition: 'ลงทะเบียนเรียน + ส่งรายงาน', status: 'scheduled' },
+    { id: 2, installment: 2, amount: 625000, dueDate: '30/09/2027', condition: 'GPA >= 3.0 + ส่งรายงาน', status: 'scheduled' },
+    { id: 3, installment: 3, amount: 625000, dueDate: '31/03/2028', condition: 'ส่งรายงานความก้าวหน้า', status: 'scheduled' },
+    { id: 4, installment: 4, amount: 625000, dueDate: '30/09/2028', condition: 'GPA >= 3.0 + ส่งรายงาน', status: 'scheduled' },
+    { id: 5, installment: 5, amount: 625000, dueDate: '31/03/2029', condition: 'ส่งรายงานความก้าวหน้า', status: 'scheduled' },
+    { id: 6, installment: 6, amount: 625000, dueDate: '30/09/2029', condition: 'GPA >= 3.0 + Qualifying Exam', status: 'scheduled' },
+    { id: 7, installment: 7, amount: 625000, dueDate: '31/03/2030', condition: 'ส่งรายงานวิทยานิพนธ์', status: 'scheduled' },
+    { id: 8, installment: 8, amount: 625000, dueDate: '31/07/2030', condition: 'สำเร็จการศึกษา', status: 'scheduled' },
   ];
 
   const caseTrackingHistory = [
-    { period: 'ภาคเรียนที่ 1/2026', gpa: null, status: 'pending', dueDate: '31 มี.ค. 2027', submittedDate: null },
+    { period: 'ภาคเรียนที่ 1/2026', gpa: null, status: 'pending', dueDate: '31/03/2027', submittedDate: null },
   ];
 
   const auditLogs = [
-    { timestamp: '20 ก.พ. 2026 14:30:25', user: 'นางสาวพิมพ์พร', action: 'เปิดดูเคส', detail: 'เปิดดูข้อมูลใบสมัคร', ip: '192.168.1.45' },
-    { timestamp: '19 ก.พ. 2026 16:20:10', user: 'นายสมชาย ใจดี', action: 'อัปโหลดเอกสาร', detail: 'อัปโหลดจดหมายตอบรับจากสถาบัน', ip: '103.45.67.89' },
-    { timestamp: '19 ก.พ. 2026 10:16:00', user: 'ระบบ', action: 'ส่ง SMS', detail: 'แจ้งเตือนเอกสารไม่ครบ → 08-1234-5678', ip: '-' },
-    { timestamp: '19 ก.พ. 2026 10:15:30', user: 'ระบบ', action: 'ส่งอีเมล', detail: 'แจ้งเตือนเอกสารไม่ครบ → somchai@example.com', ip: '-' },
-    { timestamp: '18 ก.พ. 2026 09:30:00', user: 'นายสมชาย ใจดี', action: 'ส่งใบสมัคร', detail: 'ส่งใบสมัครทุนปริญญาเอก', ip: '103.45.67.89' },
+    { timestamp: '20/02/2026 14:30:25', user: 'นางสาวพิมพ์พร', action: 'เปิดดูเคส', detail: 'เปิดดูข้อมูลใบสมัคร', ip: '192.168.1.45' },
+    { timestamp: '19/02/2026 16:20:10', user: 'นายสมชาย ใจดี', action: 'อัปโหลดเอกสาร', detail: 'อัปโหลดจดหมายตอบรับจากสถาบัน', ip: '103.45.67.89' },
+    { timestamp: '19/02/2026 10:16:00', user: 'ระบบ', action: 'ส่ง SMS', detail: 'แจ้งเตือนเอกสารไม่ครบ → 08-1234-5678', ip: '-' },
+    { timestamp: '19/02/2026 10:15:30', user: 'ระบบ', action: 'ส่งอีเมล', detail: 'แจ้งเตือนเอกสารไม่ครบ → somchai@example.com', ip: '-' },
+    { timestamp: '18/02/2026 09:30:00', user: 'นายสมชาย ใจดี', action: 'ส่งใบสมัคร', detail: 'ส่งใบสมัครทุนปริญญาเอก', ip: '103.45.67.89' },
   ];
 
   const reviewCommittee = [

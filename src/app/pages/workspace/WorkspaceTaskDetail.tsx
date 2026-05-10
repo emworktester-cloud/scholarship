@@ -27,16 +27,16 @@ interface ApprovalLog { id: string; actor_name: string; action: string; comment:
 const mockTask: TaskDetail = {
   id: '42', form_type: 'EXTENSION', form_type_label: 'ขอขยายเวลาการศึกษา (EF-06)',
   current_status: 'PENDING', scholar_name: 'น.ส.พรพิมล สุขใจ', scholar_id: 'SCH-2569-001',
-  submitted_at: '25 เม.ย. 2569 10:30', submitted_by: 'น.ส.พรพิมล สุขใจ', zone: 'สนร. วอชิงตัน',
+  submitted_at: '25/04/2569 10:30', submitted_by: 'น.ส.พรพิมล สุขใจ', zone: 'สนร. วอชิงตัน',
   payload: {
     เหตุผล: 'ต้องการขยายเวลาเพื่อเก็บข้อมูลวิจัยเพิ่มเติม เนื่องจากมีการเปลี่ยนแปลงหัวข้อวิทยานิพนธ์บางส่วน',
-    จำนวนเดือนที่ขอขยาย: 6, วันสิ้นสุดเดิม: '31 ก.ค. 2573', วันสิ้นสุดใหม่: '31 ม.ค. 2574',
+    จำนวนเดือนที่ขอขยาย: 6, วันสิ้นสุดเดิม: '31/07/2573', วันสิ้นสุดใหม่: '31/01/2574',
     อาจารย์ที่ปรึกษาอนุมัติ: true, ชื่ออาจารย์ที่ปรึกษา: 'Prof. Andrew Ng',
   },
 };
 
 const mockLogs: ApprovalLog[] = [
-  { id: '1', actor_name: 'เจ้าหน้าที่ สนร. วอชิงตัน', action: 'ตรวจสอบเอกสาร', comment: 'ตรวจสอบเอกสารเรียบร้อย ส่งต่อส่วนกลาง', created_at: '26 เม.ย. 2569 14:20' },
+  { id: '1', actor_name: 'เจ้าหน้าที่ สนร. วอชิงตัน', action: 'ตรวจสอบเอกสาร', comment: 'ตรวจสอบเอกสารเรียบร้อย ส่งต่อส่วนกลาง', created_at: '26/04/2569 14:20' },
 ];
 
 const statusCfg: Record<string, { label: string; cls: string }> = {

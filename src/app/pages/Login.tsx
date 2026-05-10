@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap, Fingerprint } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -231,6 +231,33 @@ export default function Login() {
               )}
             </Button>
           </form>
+
+          <div className="mt-8 flex items-center justify-center">
+            <div className="w-full h-px bg-slate-200"></div>
+            <span className="px-4 text-sm text-slate-500 font-k2d whitespace-nowrap">หรือเข้าสู่ระบบด้วย</span>
+            <div className="w-full h-px bg-slate-200"></div>
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              className="flex-1 h-12 bg-white hover:bg-slate-50 border-slate-200 text-slate-700 rounded-2xl transition-all flex items-center justify-center gap-2 font-k2d font-medium shadow-sm"
+              onClick={() => setIsRoleDialogOpen(true)}
+            >
+              <Fingerprint className="w-5 h-5 text-[#1e3a8a]" />
+              ThaID
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="flex-1 h-12 bg-white hover:bg-slate-50 border-slate-200 text-slate-700 rounded-2xl transition-all flex items-center justify-center gap-2 font-k2d font-medium shadow-sm"
+              onClick={() => setIsRoleDialogOpen(true)}
+            >
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" className="w-5 h-5" />
+              Microsoft Login
+            </Button>
+          </div>
 
           <div className="mt-12 pt-8 border-t border-slate-100/60 text-center">
             <p className="text-sm text-slate-400 font-k2d">

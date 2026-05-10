@@ -32,14 +32,14 @@ interface ScholarPhoto {
 }
 
 const scholars: ScholarPhoto[] = [
-  { id: 'P-001', scholarId: 'SCH-001', scholarName: 'น.ส.พรพิมล สุขใจ', hasPhoto: true, photoDate: '1 ส.ค. 2566', size: '450 KB', dimensions: '400×500' },
-  { id: 'P-002', scholarId: 'SCH-002', scholarName: 'นายวิชัย สมบูรณ์', hasPhoto: true, photoDate: '15 ก.ย. 2565', size: '380 KB', dimensions: '400×500' },
+  { id: 'P-001', scholarId: 'SCH-001', scholarName: 'น.ส.พรพิมล สุขใจ', hasPhoto: true, photoDate: '01/08/2566', size: '450 KB', dimensions: '400×500' },
+  { id: 'P-002', scholarId: 'SCH-002', scholarName: 'นายวิชัย สมบูรณ์', hasPhoto: true, photoDate: '15/09/2565', size: '380 KB', dimensions: '400×500' },
   { id: 'P-003', scholarId: 'SCH-003', scholarName: 'น.ส.นภา รักเรียน', hasPhoto: false, photoDate: '-', size: '-', dimensions: '-' },
-  { id: 'P-004', scholarId: 'SCH-004', scholarName: 'นายสมศักดิ์ มุ่งมั่น', hasPhoto: true, photoDate: '10 ต.ค. 2564', size: '520 KB', dimensions: '400×500' },
-  { id: 'P-005', scholarId: 'SCH-005', scholarName: 'น.ส.วิไล สมหวัง', hasPhoto: true, photoDate: '20 ก.พ. 2565', size: '410 KB', dimensions: '400×500' },
+  { id: 'P-004', scholarId: 'SCH-004', scholarName: 'นายสมศักดิ์ มุ่งมั่น', hasPhoto: true, photoDate: '10/10/2564', size: '520 KB', dimensions: '400×500' },
+  { id: 'P-005', scholarId: 'SCH-005', scholarName: 'น.ส.วิไล สมหวัง', hasPhoto: true, photoDate: '20/02/2565', size: '410 KB', dimensions: '400×500' },
   { id: 'P-006', scholarId: 'SCH-006', scholarName: 'นายกิตติ ปัญญาดี', hasPhoto: false, photoDate: '-', size: '-', dimensions: '-' },
-  { id: 'P-007', scholarId: 'SCH-007', scholarName: 'น.ส.สุภาพร เก่งกาจ', hasPhoto: true, photoDate: '5 ก.ย. 2563', size: '390 KB', dimensions: '400×500' },
-  { id: 'P-008', scholarId: 'SCH-008', scholarName: 'นายธนกฤต ประสบผล', hasPhoto: true, photoDate: '1 ต.ค. 2562', size: '480 KB', dimensions: '400×500' },
+  { id: 'P-007', scholarId: 'SCH-007', scholarName: 'น.ส.สุภาพร เก่งกาจ', hasPhoto: true, photoDate: '05/09/2563', size: '390 KB', dimensions: '400×500' },
+  { id: 'P-008', scholarId: 'SCH-008', scholarName: 'นายธนกฤต ประสบผล', hasPhoto: true, photoDate: '01/10/2562', size: '480 KB', dimensions: '400×500' },
 ];
 
 const resizePresets = [

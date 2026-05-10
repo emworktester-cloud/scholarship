@@ -36,9 +36,9 @@ interface CalculationResult {
 }
 
 const mockResults: CalculationResult[] = [
-  { scholarName: 'น.ส.พรพิมล สุขใจ', scholarId: 'SCH-001', scholarshipType: 'ทุน ก.พ. (ศึกษาต่อ)', degree: 'Ph.D.', startDate: '1 ส.ค. 2566', endDate: '31 ก.ค. 2570', totalScholarshipDays: 1461, multiplier: 2, totalServiceDays: 2922, serviceStartDate: '-', serviceEndDate: '-', daysServed: 0, daysRemaining: 2922, percentComplete: 0, status: 'not-started' },
-  { scholarName: 'นายธนกฤต ประสบผล', scholarId: 'SCH-008', scholarshipType: 'ทุน ก.พ. (ศึกษาต่อ)', degree: 'Ph.D.', startDate: '1 ต.ค. 2562', endDate: '30 ก.ย. 2567', totalScholarshipDays: 1827, multiplier: 2, totalServiceDays: 3654, serviceStartDate: '1 พ.ย. 2567', serviceEndDate: '31 ต.ค. 2577', daysServed: 482, daysRemaining: 3172, percentComplete: 13.2, status: 'in-progress' },
-  { scholarName: 'นายกิตติพงษ์ เรียนดี', scholarId: 'SCH-015', scholarshipType: 'ทุน ก.พ. (ฝึกอบรม)', degree: 'ฝึกอบรม 6 เดือน', startDate: '1 มี.ค. 2566', endDate: '31 ส.ค. 2566', totalScholarshipDays: 184, multiplier: 2, totalServiceDays: 368, serviceStartDate: '1 ต.ค. 2566', serviceEndDate: '4 ต.ค. 2567', daysServed: 368, daysRemaining: 0, percentComplete: 100, status: 'completed' },
+  { scholarName: 'น.ส.พรพิมล สุขใจ', scholarId: 'SCH-001', scholarshipType: 'ทุน ก.พ. (ศึกษาต่อ)', degree: 'Ph.D.', startDate: '01/08/2566', endDate: '31/07/2570', totalScholarshipDays: 1461, multiplier: 2, totalServiceDays: 2922, serviceStartDate: '-', serviceEndDate: '-', daysServed: 0, daysRemaining: 2922, percentComplete: 0, status: 'not-started' },
+  { scholarName: 'นายธนกฤต ประสบผล', scholarId: 'SCH-008', scholarshipType: 'ทุน ก.พ. (ศึกษาต่อ)', degree: 'Ph.D.', startDate: '01/10/2562', endDate: '30/09/2567', totalScholarshipDays: 1827, multiplier: 2, totalServiceDays: 3654, serviceStartDate: '01/11/2567', serviceEndDate: '31/10/2577', daysServed: 482, daysRemaining: 3172, percentComplete: 13.2, status: 'in-progress' },
+  { scholarName: 'นายกิตติพงษ์ เรียนดี', scholarId: 'SCH-015', scholarshipType: 'ทุน ก.พ. (ฝึกอบรม)', degree: 'ฝึกอบรม 6 เดือน', startDate: '01/03/2566', endDate: '31/08/2566', totalScholarshipDays: 184, multiplier: 2, totalServiceDays: 368, serviceStartDate: '01/10/2566', serviceEndDate: '04/10/2567', daysServed: 368, daysRemaining: 0, percentComplete: 100, status: 'completed' },
 ];
 
 const conditionRules = [

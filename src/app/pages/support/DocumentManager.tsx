@@ -48,19 +48,19 @@ interface DocFile {
 }
 
 const scholarFolders: ScholarFolder[] = [
-  { id: 'F-001', scholarId: 'SCH-001', scholarName: 'น.ส.พรพิมล สุขใจ', totalFiles: 24, totalSize: '128 MB', lastModified: '25 ก.พ. 2569', categories: [{ name: 'สัญญา', count: 3 }, { name: 'ผลการเรียน', count: 8 }, { name: 'รายงาน', count: 6 }, { name: 'เบิกจ่าย', count: 5 }, { name: 'อื่นๆ', count: 2 }] },
-  { id: 'F-002', scholarId: 'SCH-002', scholarName: 'นายวิชัย สมบูรณ์', totalFiles: 32, totalSize: '245 MB', lastModified: '24 ก.พ. 2569', categories: [{ name: 'สัญญา', count: 4 }, { name: 'ผลการเรียน', count: 12 }, { name: 'รายงาน', count: 8 }, { name: 'เบิกจ่าย', count: 6 }, { name: 'อื่นๆ', count: 2 }] },
-  { id: 'F-003', scholarId: 'SCH-003', scholarName: 'น.ส.นภา รักเรียน', totalFiles: 12, totalSize: '65 MB', lastModified: '23 ก.พ. 2569', categories: [{ name: 'สัญญา', count: 2 }, { name: 'ผลการเรียน', count: 4 }, { name: 'รายงาน', count: 3 }, { name: 'เบิกจ่าย', count: 2 }, { name: 'อื่นๆ', count: 1 }] },
-  { id: 'F-004', scholarId: 'SCH-004', scholarName: 'นายสมศักดิ์ มุ่งมั่น', totalFiles: 28, totalSize: '180 MB', lastModified: '22 ก.พ. 2569', categories: [{ name: 'สัญญา', count: 3 }, { name: 'ผลการเรียน', count: 10 }, { name: 'รายงาน', count: 7 }, { name: 'เบิกจ่าย', count: 5 }, { name: 'อื่นๆ', count: 3 }] },
+  { id: 'F-001', scholarId: 'SCH-001', scholarName: 'น.ส.พรพิมล สุขใจ', totalFiles: 24, totalSize: '128 MB', lastModified: '25/02/2569', categories: [{ name: 'สัญญา', count: 3 }, { name: 'ผลการเรียน', count: 8 }, { name: 'รายงาน', count: 6 }, { name: 'เบิกจ่าย', count: 5 }, { name: 'อื่นๆ', count: 2 }] },
+  { id: 'F-002', scholarId: 'SCH-002', scholarName: 'นายวิชัย สมบูรณ์', totalFiles: 32, totalSize: '245 MB', lastModified: '24/02/2569', categories: [{ name: 'สัญญา', count: 4 }, { name: 'ผลการเรียน', count: 12 }, { name: 'รายงาน', count: 8 }, { name: 'เบิกจ่าย', count: 6 }, { name: 'อื่นๆ', count: 2 }] },
+  { id: 'F-003', scholarId: 'SCH-003', scholarName: 'น.ส.นภา รักเรียน', totalFiles: 12, totalSize: '65 MB', lastModified: '23/02/2569', categories: [{ name: 'สัญญา', count: 2 }, { name: 'ผลการเรียน', count: 4 }, { name: 'รายงาน', count: 3 }, { name: 'เบิกจ่าย', count: 2 }, { name: 'อื่นๆ', count: 1 }] },
+  { id: 'F-004', scholarId: 'SCH-004', scholarName: 'นายสมศักดิ์ มุ่งมั่น', totalFiles: 28, totalSize: '180 MB', lastModified: '22/02/2569', categories: [{ name: 'สัญญา', count: 3 }, { name: 'ผลการเรียน', count: 10 }, { name: 'รายงาน', count: 7 }, { name: 'เบิกจ่าย', count: 5 }, { name: 'อื่นๆ', count: 3 }] },
 ];
 
 const mockFiles: DocFile[] = [
-  { id: 'DOC-001', name: 'สัญญารับทุน ก.พ. 2566.pdf', category: 'สัญญา', type: 'PDF', size: '2.3 MB', uploadedBy: 'นายประสิทธิ์ ผู้ดูแล', uploadedDate: '15 ส.ค. 2566', version: 1, status: 'verified' },
-  { id: 'DOC-002', name: 'ผลการเรียน Semester 1-2568.pdf', category: 'ผลการเรียน', type: 'PDF', size: '1.1 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '20 ก.พ. 2569', version: 2, status: 'verified' },
-  { id: 'DOC-003', name: 'รายงานความก้าวหน้า Q4-2568.docx', category: 'รายงาน', type: 'DOCX', size: '3.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '15 ม.ค. 2569', version: 1, status: 'verified' },
-  { id: 'DOC-004', name: 'ใบเสร็จค่าเทอม Term 5.pdf', category: 'เบิกจ่าย', type: 'PDF', size: '0.8 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '10 ม.ค. 2569', version: 1, status: 'pending' },
-  { id: 'DOC-005', name: 'หนังสือเดินทาง (สำเนา).jpg', category: 'อื่นๆ', type: 'JPG', size: '1.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '1 ส.ค. 2566', version: 1, status: 'expired' },
-  { id: 'DOC-006', name: 'ใบรับรอง Enrollment Letter.pdf', category: 'ผลการเรียน', type: 'PDF', size: '0.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '5 ก.พ. 2569', version: 1, status: 'verified' },
+  { id: 'DOC-001', name: 'สัญญารับทุน ก.พ. 2566.pdf', category: 'สัญญา', type: 'PDF', size: '2.3 MB', uploadedBy: 'นายประสิทธิ์ ผู้ดูแล', uploadedDate: '15/08/2566', version: 1, status: 'verified' },
+  { id: 'DOC-002', name: 'ผลการเรียน Semester 1-2568.pdf', category: 'ผลการเรียน', type: 'PDF', size: '1.1 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '20/02/2569', version: 2, status: 'verified' },
+  { id: 'DOC-003', name: 'รายงานความก้าวหน้า Q4-2568.docx', category: 'รายงาน', type: 'DOCX', size: '3.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '15/01/2569', version: 1, status: 'verified' },
+  { id: 'DOC-004', name: 'ใบเสร็จค่าเทอม Term 5.pdf', category: 'เบิกจ่าย', type: 'PDF', size: '0.8 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '10/01/2569', version: 1, status: 'pending' },
+  { id: 'DOC-005', name: 'หนังสือเดินทาง (สำเนา).jpg', category: 'อื่นๆ', type: 'JPG', size: '1.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '01/08/2566', version: 1, status: 'expired' },
+  { id: 'DOC-006', name: 'ใบรับรอง Enrollment Letter.pdf', category: 'ผลการเรียน', type: 'PDF', size: '0.5 MB', uploadedBy: 'น.ส.พรพิมล สุขใจ', uploadedDate: '05/02/2569', version: 1, status: 'verified' },
 ];
 
 const fileTypeIcon: Record<string, { icon: typeof FileText; color: string }> = {

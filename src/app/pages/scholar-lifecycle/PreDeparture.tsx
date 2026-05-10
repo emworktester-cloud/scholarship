@@ -67,12 +67,38 @@ const sections = [
 export default function PreDeparture() {
   const [selectedScholar, setSelectedScholar] = useState<Scholar | null>(null);
   const [importDialogOpen, setImportDialogOpen] = useState(false);
+  const [importPreviewDialogOpen, setImportPreviewDialogOpen] = useState(false);
   const [addScholarOpen, setAddScholarOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string>('personal');
 
+  const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
   const [filterCountry, setFilterCountry] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+
+  // Filtered scholars
+  const filteredScholars = scholars.filter(s => {
+    const q = searchQuery.toLowerCase().trim();
+    if (q && !s.name.toLowerCase().includes(q) && !s.id.toLowerCase().includes(q)) return false;
+    if (filterType !== 'all') {
+      if (filterType === 'ocsc' && s.scholarshipType !== 'ทุน ก.พ.') return false;
+      if (filterType === 'ministry' && !s.scholarshipType.includes('ทุนกระทรวง')) return false;
+      if (filterType === 'mfa' && s.scholarshipType !== 'ทุน กต.') return false;
+    }
+    if (filterCountry !== 'all') {
+      if (filterCountry === 'us' && s.destination !== 'สหรัฐอเมริกา') return false;
+      if (filterCountry === 'uk' && s.destination !== 'สหราชอาณาจักร') return false;
+      if (filterCountry === 'au' && s.destination !== 'ออสเตรเลีย') return false;
+      if (filterCountry === 'fr' && s.destination !== 'ฝรั่งเศส') return false;
+      if (filterCountry === 'jp' && s.destination !== 'ญี่ปุ่น') return false;
+    }
+    if (filterStatus !== 'all') {
+      if (filterStatus === 'processing' && s.status !== 'กำลังดำเนินการ') return false;
+      if (filterStatus === 'waiting' && s.status !== 'รอเอกสารเพิ่ม') return false;
+      if (filterStatus === 'ready' && s.status !== 'ครบถ้วน') return false;
+    }
+    return true;
+  });
   
   // Track edit mode for each section
   const [editModes, setEditModes] = useState<Record<string, boolean>>({});
@@ -105,15 +131,15 @@ export default function PreDeparture() {
       <div className="flex items-center justify-between mb-2">
         <div className="flex gap-2 items-center flex-1">
           {selectedScholar ? (
-            <Button variant="ghost" className="text-blue-600 hover:text-blue-800 hover:bg-blue-50" onClick={() => setSelectedScholar(null)}>
-              <ChevronDown className="w-4 h-4 mr-1 rotate-90" />
+            <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 shadow-sm transition-all" onClick={() => setSelectedScholar(null)}>
+              <ChevronDown className="w-4 h-4 mr-1.5 rotate-90 text-gray-500" />
               กลับไปหน้ารายชื่อ
             </Button>
           ) : (
             <>
               <div className="relative">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-64 pl-9 bg-white" />
+                <Input placeholder="ค้นหาชื่อ/รหัส..." className="w-64 pl-9 bg-white" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               </div>
               <FilterCombobox
                 className="w-40"
@@ -122,7 +148,8 @@ export default function PreDeparture() {
                 onChange={setFilterType}
                 options={[
                   { value: "ocsc", label: "ทุน ก.พ." },
-                  { value: "ministry", label: "ทุนกระทรวง" }
+                  { value: "ministry", label: "ทุนกระทรวง" },
+                  { value: "mfa", label: "ทุน กต." }
                 ]}
               />
               <FilterCombobox
@@ -133,6 +160,8 @@ export default function PreDeparture() {
                 options={[
                   { value: "us", label: "สหรัฐอเมริกา" },
                   { value: "uk", label: "สหราชอาณาจักร" },
+                  { value: "au", label: "ออสเตรเลีย" },
+                  { value: "fr", label: "ฝรั่งเศส" },
                   { value: "jp", label: "ญี่ปุ่น" }
                 ]}
               />
@@ -143,65 +172,112 @@ export default function PreDeparture() {
                 onChange={setFilterStatus}
                 options={[
                   { value: "processing", label: "กำลังดำเนินการ" },
-                  { value: "waiting", label: "รอเอกสาร" },
-                  { value: "ready", label: "พร้อมเดินทาง" }
+                  { value: "waiting", label: "รอเอกสารเพิ่ม" },
+                  { value: "ready", label: "ครบถ้วน" }
                 ]}
               />
             </>
           )}
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="bg-white" onClick={() => setImportDialogOpen(true)}><Upload className="w-4 h-4 mr-1.5" />นำเข้า Excel</Button>
+          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border-0" onClick={() => setImportDialogOpen(true)}><Upload className="w-4 h-4 mr-1.5" />นำเข้า Excel</Button>
           <Button onClick={() => setAddScholarOpen(true)}><Plus className="w-4 h-4 mr-1.5" />บันทึกรายบุคคล</Button>
         </div>
       </div>
 
       {!selectedScholar ? (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <User className="w-5 h-5 text-blue-600" />
+        <Card className="overflow-hidden border-0 shadow-lg shadow-blue-900/5">
+          <CardHeader className="pb-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-xl">
+            <CardTitle className="text-base flex items-center gap-2 text-white">
+              <User className="w-5 h-5" />
               รายชื่อผู้รับทุน (ก่อนเดินทาง)
             </CardTitle>
-            <CardDescription className="text-xs">แสดงรายชื่อผู้รับทุนที่อยู่ระหว่างเตรียมตัวก่อนออกเดินทาง</CardDescription>
+            <CardDescription className="text-xs text-blue-100">แสดงรายชื่อผู้รับทุนที่อยู่ระหว่างเตรียมตัวก่อนออกเดินทาง • {filteredScholars.length}/{scholars.length} ราย</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <Table>
-              <TableHeader className="bg-slate-50 border-b border-slate-200">
-                <TableRow className="hover:bg-slate-50">
-                  <TableHead className="font-semibold text-slate-700 py-3 rounded-tl-lg">รหัสนักเรียนทุน / ชื่อ-สกุล</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">ประเภททุน</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">ประเทศปลายทาง</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">ความสมบูรณ์</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3">สถานะ</TableHead>
-                  <TableHead className="font-semibold text-slate-700 py-3 text-right rounded-tr-lg">จัดการ</TableHead>
+              <TableHeader className="bg-gradient-to-r from-slate-50 to-blue-50/30 border-b border-slate-200">
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="font-bold text-slate-700 py-3.5">รหัส / ชื่อ-สกุล</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">ประเภททุน</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">ประเทศปลายทาง</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">ความสมบูรณ์</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5">สถานะ</TableHead>
+                  <TableHead className="font-bold text-slate-700 py-3.5 text-center">จัดการ</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {scholars.map(s => (
-                  <TableRow key={s.id} className="hover:bg-blue-50/50 cursor-pointer" onClick={() => setSelectedScholar(s)}>
-                    <TableCell>
-                      <p className="text-sm font-semibold text-blue-900">{s.name}</p>
-                      <p className="text-[10px] text-gray-500 font-mono">{s.id}</p>
-                    </TableCell>
-                    <TableCell className="text-xs text-gray-700">{s.scholarshipType}</TableCell>
-                    <TableCell className="text-xs text-gray-700">{s.destination}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Progress value={s.completeness} className="h-1.5 w-16" />
-                        <span className="text-[10px] text-gray-500">{s.completeness}%</span>
+                {filteredScholars.map((s, idx) => (
+                  <TableRow key={s.id} className={cn(
+                    "group transition-all duration-200 cursor-pointer border-b border-gray-100",
+                    idx % 2 === 0 ? "bg-white hover:bg-blue-50/60" : "bg-slate-50/40 hover:bg-blue-50/60"
+                  )} onClick={() => setSelectedScholar(s)}>
+                    <TableCell className="py-3.5">
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-9 w-9 shrink-0">
+                          <AvatarFallback className={cn(
+                            "text-white text-xs font-bold",
+                            s.completeness === 100 ? "bg-gradient-to-br from-emerald-500 to-green-600" :
+                            s.completeness >= 60 ? "bg-gradient-to-br from-blue-500 to-indigo-600" :
+                            "bg-gradient-to-br from-amber-500 to-orange-600"
+                          )}>{s.name.slice(0, 2)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">{s.name}</p>
+                          <p className="text-[10px] text-gray-400 font-mono">{s.id}</p>
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge className={`text-[9px] ${s.completeness === 100 ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'} border`}>
+                      <Badge variant="outline" className="text-[10px] bg-indigo-50 text-indigo-700 border-indigo-200 font-medium">{s.scholarshipType}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1.5">
+                        <Globe className="w-3.5 h-3.5 text-blue-400" />
+                        <span className="text-xs text-gray-700">{s.destination}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-20 h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div className={cn(
+                            "h-full rounded-full transition-all",
+                            s.completeness === 100 ? "bg-gradient-to-r from-emerald-400 to-green-500" :
+                            s.completeness >= 60 ? "bg-gradient-to-r from-blue-400 to-indigo-500" :
+                            "bg-gradient-to-r from-amber-400 to-orange-500"
+                          )} style={{ width: `${s.completeness}%` }} />
+                        </div>
+                        <span className={cn(
+                          "text-xs font-bold",
+                          s.completeness === 100 ? "text-emerald-600" : s.completeness >= 60 ? "text-blue-600" : "text-amber-600"
+                        )}>{s.completeness}%</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={cn(
+                        "text-[10px] font-medium border shadow-sm",
+                        s.completeness === 100 ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                        s.status === 'รอเอกสารเพิ่ม' ? "bg-red-50 text-red-700 border-red-200" :
+                        "bg-amber-50 text-amber-700 border-amber-200"
+                      )}>
+                        {s.completeness === 100 && <CheckCircle className="w-3 h-3 mr-1" />}
+                        {s.status === 'รอเอกสารเพิ่ม' && <AlertTriangle className="w-3 h-3 mr-1" />}
+                        {s.status === 'กำลังดำเนินการ' && <Clock className="w-3 h-3 mr-1" />}
                         {s.status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-right">
-                      <Button size="sm" variant="outline" className="text-xs" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }}>
-                        <Edit className="w-3.5 h-3.5 mr-1" />
-                        รายละเอียด
-                      </Button>
+                    <TableCell>
+                      <div className="flex items-center justify-center gap-1">
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-lg" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }} title="ดูข้อมูล">
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-amber-600 hover:text-amber-800 hover:bg-amber-100 rounded-lg" onClick={(e) => { e.stopPropagation(); setSelectedScholar(s); }} title="แก้ไข">
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-lg" onClick={(e) => { e.stopPropagation(); toast.error(`ลบข้อมูล ${s.name}`, { description: 'ฟีเจอร์นี้ยังไม่เปิดใช้งานในโหมดทดสอบ' }); }} title="ลบ">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -288,23 +364,24 @@ export default function PreDeparture() {
                      return <><Icon className="w-5 h-5 text-blue-600" />{s.label.split('. ')[1]}</>;
                    })()}
                  </div>
-                 {/* Edit Button */}
+                 {/* Edit Actions */}
                  {expandedSection !== 'documents' && (
-                   <Button 
-                     size="sm" 
-                     variant={editModes[expandedSection] ? "default" : "outline"}
-                     onClick={() => toggleEditMode(expandedSection)}
-                     className={cn(
-                       "h-8 text-xs", 
-                       editModes[expandedSection] ? "bg-blue-600 hover:bg-blue-700" : "bg-white"
-                     )}
-                   >
+                   <div className="flex gap-2">
                      {editModes[expandedSection] ? (
-                       <><CheckCircle className="w-3.5 h-3.5 mr-1.5" />บันทึกข้อมูล</>
+                       <>
+                         <Button size="sm" variant="outline" onClick={() => toggleEditMode(expandedSection)} className="h-8 text-xs text-gray-600 border-gray-300 shadow-sm transition-all">
+                           <X className="w-3.5 h-3.5 mr-1.5" />ยกเลิก
+                         </Button>
+                         <Button size="sm" onClick={() => { toast.success('บันทึกข้อมูลเรียบร้อย'); toggleEditMode(expandedSection); }} className="h-8 text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm border-0 transition-all">
+                           <CheckCircle className="w-3.5 h-3.5 mr-1.5" />บันทึกข้อมูล
+                         </Button>
+                       </>
                      ) : (
-                       <><Edit className="w-3.5 h-3.5 mr-1.5" />แก้ไขข้อมูล</>
+                       <Button size="sm" variant="outline" onClick={() => toggleEditMode(expandedSection)} className="h-8 text-xs border-blue-200 text-blue-700 hover:bg-blue-50 bg-white shadow-sm transition-all">
+                         <Edit className="w-3.5 h-3.5 mr-1.5 text-blue-600" />แก้ไขข้อมูล
+                       </Button>
                      )}
-                   </Button>
+                   </div>
                  )}
                </CardTitle>
                <CardDescription>
@@ -316,7 +393,14 @@ export default function PreDeparture() {
                {expandedSection === 'personal' && (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
             {/* Photo + Basic Info */}
-            <div className="flex gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <User className="w-4 h-4 text-blue-600" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-800 tracking-tight">ข้อมูลส่วนบุคคล</h4>
+              </div>
+              <div className="flex gap-6">
               <div className="shrink-0">
                 <div className={cn("w-32 h-40 border-2 border-dashed rounded-xl flex flex-col items-center justify-center bg-gray-50 transition-colors", editModes['personal'] ? "border-gray-300 cursor-pointer hover:border-blue-400" : "border-gray-200")} onClick={() => editModes['personal'] && toast.info('เลือกรูปถ่าย')}>
                   <Camera className="w-8 h-8 text-gray-300 mb-1" />
@@ -338,26 +422,31 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">สัญชาติ</Label><Input defaultValue="ไทย" className="border-gray-300 focus-visible:ring-blue-500" /></div>
                   </>
                 ) : (
-                  <>
-                    <FieldView label="คำนำหน้า" value="นางสาว" />
-                    <FieldView label="ชื่อ (ไทย)" value="พรพิมล" />
-                    <FieldView label="นามสกุล (ไทย)" value="สุขใจ" />
-                    <FieldView label="ชื่อ (อังกฤษ)" value="Pornpimon" />
-                    <FieldView label="นามสกุล (อังกฤษ)" value="Sukjai" />
-                    <FieldView label="เลขบัตรประชาชน" value="1-1234-56789-01-2" />
-                    <FieldView label="วัน/เดือน/ปีเกิด" value="15 มิ.ย. 2540" />
-                    <FieldView label="เพศ" value="หญิง" />
-                    <FieldView label="สัญชาติ" value="ไทย" />
-                  </>
+                  <div className="col-span-3 bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+                    <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                      <FieldView label="ชื่อ-นามสกุล (ไทย)" value="น.ส. พรพิมล สุขใจ" className="text-blue-900" />
+                      <FieldView label="ชื่อ-นามสกุล (อังกฤษ)" value="Ms. Pornpimon Sukjai" />
+                      <FieldView label="เลขประจำตัวประชาชน" value="1-1234-56789-01-2" />
+                      <FieldView label="วัน/เดือน/ปีเกิด (อายุ)" value="15/06/2540 (28 ปี)" />
+                      <FieldView label="เพศ" value="หญิง" />
+                      <FieldView label="สัญชาติ" value="ไทย" />
+                    </div>
+                  </div>
                 )}
               </div>
+            </div>
             </div>
 
             <Separator className="bg-gray-100" />
 
             {/* Education History */}
             <div>
-              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800"><GraduationCap className="w-4 h-4 text-blue-600" />ประวัติการศึกษา</h4>
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center">
+                  <GraduationCap className="w-4 h-4 text-indigo-600" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-800 tracking-tight">ประวัติการศึกษา</h4>
+              </div>
               <div className="grid grid-cols-3 gap-x-6 gap-y-4">
                 {editModes['personal'] ? (
                   <>
@@ -368,13 +457,15 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">ปีที่จบ (พ.ศ.)</Label><Input placeholder="พ.ศ." className="border-gray-300" defaultValue="2562" /></div>
                   </>
                 ) : (
-                  <>
-                    <FieldView label="ระดับการศึกษาล่าสุด" value="ปริญญาตรี" />
-                    <FieldView label="สถาบัน" value="จุฬาลงกรณ์มหาวิทยาลัย" />
-                    <FieldView label="สาขาวิชา" value="วิศวกรรมคอมพิวเตอร์" />
-                    <FieldView label="GPA" value="3.85" />
-                    <FieldView label="ปีที่จบ (พ.ศ.)" value="2562" />
-                  </>
+                  <div className="col-span-3 bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+                    <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                      <FieldView label="ระดับการศึกษาล่าสุด" value="ปริญญาตรี" />
+                      <FieldView label="สถาบัน" value="จุฬาลงกรณ์มหาวิทยาลัย" />
+                      <FieldView label="สาขาวิชา" value="วิศวกรรมคอมพิวเตอร์" />
+                      <FieldView label="GPA" value="3.85" />
+                      <FieldView label="ปีที่จบ (พ.ศ.)" value="2562" />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -383,7 +474,12 @@ export default function PreDeparture() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800"><Phone className="w-4 h-4 text-green-600" />ช่องทางการติดต่อ</h4>
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-emerald-600" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-800 tracking-tight">ช่องทางการติดต่อ</h4>
+              </div>
               <div className="grid grid-cols-3 gap-x-6 gap-y-4">
                 {editModes['personal'] ? (
                   <>
@@ -393,12 +489,14 @@ export default function PreDeparture() {
                     <div className="col-span-3 space-y-1.5"><Label className="text-xs text-gray-700">ที่อยู่ปัจจุบัน</Label><Textarea placeholder="ที่อยู่" className="min-h-[60px] border-gray-300" defaultValue="123/45 ซอยลาดพร้าว 87 บางกะปิ กรุงเทพมหานคร 10240" /></div>
                   </>
                 ) : (
-                  <>
-                    <FieldView label="โทรศัพท์มือถือ" value="081-234-5678" />
-                    <FieldView label="อีเมลส่วนตัว" value="pornpimon@example.com" />
-                    <FieldView label="LINE ID" value="pornpimon.s" />
-                    <div className="col-span-3"><FieldView label="ที่อยู่ปัจจุบัน" value="123/45 ซอยลาดพร้าว 87 บางกะปิ กรุงเทพมหานคร 10240" /></div>
-                  </>
+                  <div className="col-span-3 bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+                    <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                      <FieldView label="โทรศัพท์มือถือ" value="081-234-5678" />
+                      <FieldView label="อีเมลส่วนตัว" value="pornpimon@example.com" />
+                      <FieldView label="LINE ID" value="pornpimon.s" />
+                      <FieldView label="ที่อยู่ปัจจุบัน" value="123/45 ซอยลาดพร้าว 87 บางกะปิ กรุงเทพมหานคร 10240" className="col-span-2" />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -407,7 +505,12 @@ export default function PreDeparture() {
 
             {/* English Score */}
             <div>
-              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800"><Languages className="w-4 h-4 text-purple-600" />ผลคะแนนภาษาอังกฤษ</h4>
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center">
+                  <Languages className="w-4 h-4 text-purple-600" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-800 tracking-tight">ผลคะแนนภาษาอังกฤษ</h4>
+              </div>
               <div className="grid grid-cols-4 gap-x-6 gap-y-4">
                 {editModes['personal'] ? (
                   <>
@@ -417,12 +520,14 @@ export default function PreDeparture() {
                     <div className="space-y-1.5"><Label className="text-xs text-gray-700">วันหมดอายุ</Label><Input type="date" className="border-gray-300" defaultValue="2027-01-10" /></div>
                   </>
                 ) : (
-                  <>
-                    <FieldView label="ประเภทการสอบ" value="IELTS" />
-                    <FieldView label="คะแนนรวม" value="7.5" />
-                    <FieldView label="วันที่สอบ" value="10 ม.ค. 2568" />
-                    <FieldView label="วันหมดอายุ" value="10 ม.ค. 2570" />
-                  </>
+                  <div className="col-span-4 bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+                    <div className="grid grid-cols-4 gap-y-6 gap-x-8">
+                      <FieldView label="ประเภทการสอบ" value="IELTS" />
+                      <FieldView label="คะแนนรวม" value={<span className="text-lg font-bold text-purple-700">7.5</span>} />
+                      <FieldView label="วันที่สอบ" value="10/01/2568" />
+                      <FieldView label="วันหมดอายุ" value="10/01/2570" />
+                    </div>
+                  </div>
                 )}
               </div>
               {editModes['personal'] && <FileUploadArea label="อัปโหลดผลคะแนน" accept=".pdf,.jpg,.png" />}
@@ -432,7 +537,14 @@ export default function PreDeparture() {
 
                {expandedSection === 'scholarship' && (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-            <div className="grid grid-cols-3 gap-x-6 gap-y-4">
+            <div>
+              <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+                  <Award className="w-4 h-4 text-amber-600" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-800 tracking-tight">ข้อมูลการรับทุน</h4>
+              </div>
+              <div className="grid grid-cols-3 gap-x-6 gap-y-4">
               {editModes['scholarship'] ? (
                 <>
                   <div className="space-y-1.5"><Label className="text-xs text-gray-700">แหล่งทุน <span className="text-red-500">*</span></Label><Select defaultValue="ocsc"><SelectTrigger className="border-gray-300 focus:ring-blue-500"><SelectValue placeholder="เลือกแหล่งทุน" /></SelectTrigger><SelectContent><SelectItem value="ocsc">ทุน ก.พ.</SelectItem><SelectItem value="ministry">ทุนกระทรวง</SelectItem><SelectItem value="china">ทุนรัฐบาลจีน</SelectItem><SelectItem value="mext">ทุน MEXT</SelectItem><SelectItem value="other">อื่นๆ</SelectItem></SelectContent></Select></div>
@@ -464,10 +576,11 @@ export default function PreDeparture() {
                   <FieldView label="ประเทศ" value="สหรัฐอเมริกา" />
                   <FieldView label="เมือง/รัฐ" value="California" />
                   <FieldView label="ระยะเวลารับทุน" value="4 ปี" />
-                  <FieldView label="วันที่เริ่มรับทุน" value="1 ส.ค. 2569" />
-                  <FieldView label="วันที่สิ้นสุดรับทุน" value="31 ก.ค. 2573" />
+                  <FieldView label="วันที่เริ่มรับทุน" value="01/08/2569" />
+                  <FieldView label="วันที่สิ้นสุดรับทุน" value="31/07/2573" />
                 </>
               )}
+            </div>
             </div>
                  </motion.div>
                )}
@@ -487,7 +600,7 @@ export default function PreDeparture() {
                   ) : (
                     <div className="grid grid-cols-2 gap-4">
                       <FieldView label="เลขที่สัญญา" value="สญ. 1234/2569" />
-                      <FieldView label="วันที่ลงนาม" value="15 เม.ย. 2569" />
+                      <FieldView label="วันที่ลงนาม" value="15/04/2569" />
                       <div className="col-span-2">
                          <div className="mt-2 border border-indigo-200 rounded-lg p-3 bg-white flex items-center gap-3 cursor-pointer hover:border-indigo-400">
                            <FileText className="w-5 h-5 text-indigo-500" />
@@ -567,9 +680,9 @@ export default function PreDeparture() {
                 </>
               ) : (
                 <>
-                  <FieldView label="วันที่ตรวจสุขภาพ" value="20 มี.ค. 2569" />
+                  <FieldView label="วันที่ตรวจสุขภาพ" value="20/03/2569" />
                   <FieldView label="สถานพยาบาล" value="โรงพยาบาลศิริราช" />
-                  <FieldView label="วันที่หมดอายุ" value={<span className="text-amber-600 font-medium">20 มี.ค. 2570</span>} />
+                  <FieldView label="วันที่หมดอายุ" value={<span className="text-amber-600 font-medium">20/03/2570</span>} />
                 </>
               )}
             </div>
@@ -735,31 +848,127 @@ export default function PreDeparture() {
           </div>
           <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">
             <Button variant="outline" onClick={() => setImportDialogOpen(false)}>ยกเลิก</Button>
-            <Button onClick={() => { setImportDialogOpen(false); toast.success('นำเข้าข้อมูลเรียบร้อย 4 รายการ'); }}>นำเข้า</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => { setImportDialogOpen(false); setImportPreviewDialogOpen(true); }}>นำเข้า</Button>
           </div>
         </DialogContent>
       </Dialog>
 
       {/* Add Individual Dialog */}
       <Dialog open={addScholarOpen} onOpenChange={setAddScholarOpen}>
-        <DialogContent className="sm:max-w-lg p-0 gap-0 overflow-hidden">
-          <div className="bg-gradient-to-r from-green-600 to-emerald-700 px-6 py-5 text-white">
-            <DialogTitle className="text-white text-lg flex items-center gap-2"><Plus className="w-5 h-5" />บันทึกผู้รับทุนรายบุคคล</DialogTitle>
-            <DialogDescription className="text-green-100 mt-1">สร้างรายการผู้รับทุนใหม่ในระบบ</DialogDescription>
+        <DialogContent className="sm:max-w-2xl p-0 gap-0 overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5 text-white">
+            <DialogTitle className="text-white text-lg flex items-center gap-2"><User className="w-5 h-5" />บันทึกข้อมูลนักเรียนทุนใหม่</DialogTitle>
+            <DialogDescription className="text-blue-100 mt-1">เพิ่มประวัติส่วนบุคคลและข้อมูลรับทุน</DialogDescription>
           </div>
-          <div className="px-6 py-5 space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5"><Label className="text-xs">ชื่อ-นามสกุล (ไทย) <span className="text-red-500">*</span></Label><Input placeholder="ชื่อ-นามสกุล" /></div>
-              <div className="space-y-1.5"><Label className="text-xs">ชื่อ-นามสกุล (อังกฤษ)</Label><Input placeholder="Full Name" /></div>
-              <div className="space-y-1.5"><Label className="text-xs">เลขบัตรประชาชน <span className="text-red-500">*</span></Label><Input placeholder="x-xxxx-xxxxx-xx-x" /></div>
-              <div className="space-y-1.5"><Label className="text-xs">แหล่งทุน <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="ocsc">ทุน ก.พ.</SelectItem><SelectItem value="ministry">ทุนกระทรวง</SelectItem></SelectContent></Select></div>
-              <div className="space-y-1.5"><Label className="text-xs">ปีที่ได้รับทุน</Label><Input placeholder="พ.ศ." /></div>
-              <div className="space-y-1.5"><Label className="text-xs">ระดับการศึกษา</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="master">ปริญญาโท</SelectItem><SelectItem value="phd">ปริญญาเอก</SelectItem></SelectContent></Select></div>
+          <div className="px-6 py-5 space-y-6 max-h-[70vh] overflow-y-auto">
+            
+            {/* ข้อมูลส่วนตัว */}
+            <div>
+              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800"><User className="w-4 h-4 text-blue-600" />ข้อมูลส่วนบุคคล</h4>
+              <div className="grid grid-cols-12 gap-3">
+                <div className="col-span-3 space-y-1.5"><Label className="text-xs">คำนำหน้า <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="mr">นาย</SelectItem><SelectItem value="ms">นางสาว</SelectItem><SelectItem value="mrs">นาง</SelectItem></SelectContent></Select></div>
+                <div className="col-span-4 space-y-1.5"><Label className="text-xs">ชื่อ (ไทย) <span className="text-red-500">*</span></Label><Input placeholder="ชื่อ" /></div>
+                <div className="col-span-5 space-y-1.5"><Label className="text-xs">นามสกุล (ไทย) <span className="text-red-500">*</span></Label><Input placeholder="นามสกุล" /></div>
+                
+                <div className="col-span-3 space-y-1.5"><Label className="text-xs">Prefix</Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="mr">Mr.</SelectItem><SelectItem value="ms">Ms.</SelectItem><SelectItem value="mrs">Mrs.</SelectItem></SelectContent></Select></div>
+                <div className="col-span-4 space-y-1.5"><Label className="text-xs">First Name</Label><Input placeholder="First Name" /></div>
+                <div className="col-span-5 space-y-1.5"><Label className="text-xs">Last Name</Label><Input placeholder="Last Name" /></div>
+                
+                <div className="col-span-6 space-y-1.5"><Label className="text-xs">เลขประจำตัวประชาชน <span className="text-red-500">*</span></Label><Input placeholder="x-xxxx-xxxxx-xx-x" /></div>
+                <div className="col-span-6 space-y-1.5"><Label className="text-xs">อีเมลติดต่อ <span className="text-red-500">*</span></Label><Input type="email" placeholder="email@example.com" /></div>
+              </div>
+            </div>
+
+            <Separator className="bg-gray-100" />
+
+            {/* ข้อมูลทุน */}
+            <div>
+              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800"><Award className="w-4 h-4 text-indigo-600" />ข้อมูลการรับทุน</h4>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5"><Label className="text-xs">แหล่งทุน <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="ocsc">ทุน ก.พ.</SelectItem><SelectItem value="ministry">ทุนกระทรวง</SelectItem></SelectContent></Select></div>
+                <div className="space-y-1.5"><Label className="text-xs">ระดับการศึกษา <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="bachelor">ปริญญาตรี</SelectItem><SelectItem value="master">ปริญญาโท</SelectItem><SelectItem value="phd">ปริญญาเอก</SelectItem></SelectContent></Select></div>
+                <div className="space-y-1.5"><Label className="text-xs">ประเทศเป้าหมาย <span className="text-red-500">*</span></Label><Select><SelectTrigger><SelectValue placeholder="เลือก" /></SelectTrigger><SelectContent><SelectItem value="us">สหรัฐอเมริกา</SelectItem><SelectItem value="uk">สหราชอาณาจักร</SelectItem><SelectItem value="jp">ญี่ปุ่น</SelectItem></SelectContent></Select></div>
+                <div className="space-y-1.5"><Label className="text-xs">ปีที่ได้รับทุน (พ.ศ.) <span className="text-red-500">*</span></Label><Input placeholder="พ.ศ." defaultValue="2569" /></div>
+              </div>
+            </div>
+
+          </div>
+          <div className="border-t bg-gray-50 px-6 py-4 flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setAddScholarOpen(false)}>ยกเลิก</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => { setAddScholarOpen(false); toast.success('บันทึกข้อมูลนักเรียนทุนใหม่เรียบร้อย'); }}>บันทึกข้อมูล</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Import Preview Full-screen Dialog */}
+      <Dialog open={importPreviewDialogOpen} onOpenChange={setImportPreviewDialogOpen}>
+        <DialogContent className="max-w-[100vw] sm:max-w-none sm:w-screen sm:h-screen w-screen h-screen max-h-[100vh] m-0 p-0 sm:p-0 rounded-none border-0 flex flex-col overflow-hidden bg-gray-50">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-4 flex items-center justify-between shadow-md z-10 shrink-0">
+            <div>
+              <DialogTitle className="text-white text-xl flex items-center gap-2"><Upload className="w-6 h-6" />ตรวจสอบข้อมูลนำเข้าจาก Excel</DialogTitle>
+              <DialogDescription className="text-emerald-100 mt-1">ระบบตรวจพบข้อมูลซ้ำซ้อน 1 รายการ กรุณาตรวจสอบก่อนยืนยันนำเข้า</DialogDescription>
+            </div>
+            <div className="flex items-center gap-3 bg-white/10 rounded-lg p-2 px-4 backdrop-blur-sm">
+              <div className="text-center"><p className="text-[10px] text-emerald-200 uppercase">พร้อมนำเข้า</p><p className="text-xl font-bold text-white">3</p></div>
+              <div className="w-px h-8 bg-white/20 mx-2"></div>
+              <div className="text-center"><p className="text-[10px] text-rose-300 uppercase">พบข้อมูลซ้ำ</p><p className="text-xl font-bold text-rose-400">1</p></div>
             </div>
           </div>
-          <div className="border-t bg-gray-50 px-6 py-3 flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setAddScholarOpen(false)}>ยกเลิก</Button>
-            <Button onClick={() => { setAddScholarOpen(false); toast.success('สร้างรายการผู้รับทุนใหม่เรียบร้อย'); }}>สร้างรายการ</Button>
+          
+          <div className="flex-1 overflow-auto p-6">
+            <div className="bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+              <div className="overflow-x-auto flex-1 relative">
+                <Table className="whitespace-nowrap">
+                  <TableHeader className="bg-slate-50 sticky top-0 z-10 shadow-sm">
+                    <TableRow>
+                      <TableHead className="w-[100px] text-center font-bold">สถานะ</TableHead>
+                      <TableHead className="font-bold">เลขบัตรประชาชน</TableHead>
+                      <TableHead className="font-bold">รหัส นทร.</TableHead>
+                      <TableHead className="font-bold">ชื่อ-นามสกุล</TableHead>
+                      <TableHead className="font-bold">ประเภททุน</TableHead>
+                      <TableHead className="font-bold">ประเทศเป้าหมาย</TableHead>
+                      <TableHead className="font-bold">สถานศึกษา</TableHead>
+                      <TableHead className="font-bold">อีเมลติดต่อ</TableHead>
+                      <TableHead className="font-bold">วันที่อนุมัติทุน</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { citizenId: '1-1002-00341-22-1', scholarId: 'SCH-041', name: 'นายภูวิช แจ่มใส', type: 'ทุน ก.พ.', country: 'สหรัฐอเมริกา', university: 'MIT', email: 'phuwich@example.com', approvedDate: '15/05/2568', isDuplicate: false },
+                      { citizenId: '3-1001-55521-11-2', scholarId: 'SCH-042', name: 'น.ส.มาลินี สุขขี', type: 'ทุนกระทรวง', country: 'สหราชอาณาจักร', university: 'Oxford', email: 'malinee@example.com', approvedDate: '15/05/2568', isDuplicate: false },
+                      { citizenId: '1-2005-44211-99-9', scholarId: 'SCH-001', name: 'น.ส.พรพิมล สุขใจ', type: 'ทุน ก.พ.', country: 'สหรัฐอเมริกา', university: 'MIT', email: 'pornpa@example.com', approvedDate: '10/05/2568', isDuplicate: true },
+                      { citizenId: '5-9999-12345-67-8', scholarId: 'SCH-043', name: 'นายธนาทร รักษา', type: 'ทุน กต.', country: 'ฝรั่งเศส', university: 'Sorbonne', email: 'thanat@example.com', approvedDate: '20/05/2568', isDuplicate: false },
+                    ].map((row, idx) => (
+                      <TableRow key={idx} className={row.isDuplicate ? 'bg-rose-50/50 hover:bg-rose-50/80' : ''}>
+                        <TableCell className="text-center">
+                          {row.isDuplicate ? (
+                            <Badge className="bg-rose-100 text-rose-700 border-rose-200"><AlertTriangle className="w-3 h-3 mr-1" />ข้อมูลซ้ำ</Badge>
+                          ) : (
+                            <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200"><CheckCircle className="w-3 h-3 mr-1" />พร้อม</Badge>
+                          )}
+                        </TableCell>
+                        <TableCell className={cn("font-mono text-sm", row.isDuplicate && "text-rose-600 font-bold")}>{row.citizenId}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.scholarId}</TableCell>
+                        <TableCell className="text-sm font-medium">{row.name}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.type}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.country}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.university}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.email}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{row.approvedDate}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white border-t p-4 flex justify-end gap-3 shrink-0 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+            <Button variant="outline" size="lg" onClick={() => setImportPreviewDialogOpen(false)}>ยกเลิกการนำเข้า</Button>
+            <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 shadow-md text-white" onClick={() => { setImportPreviewDialogOpen(false); toast.success('นำเข้าข้อมูลสำเร็จ 3 รายการ (ข้ามรายการซ้ำ 1 รายการ)'); }}>
+              <CheckCircle className="w-4 h-4 mr-2" />
+              ยืนยันการนำเข้าข้อมูล (ข้ามรายการซ้ำ)
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -38,7 +38,7 @@ const workflows = [
     version: '2.1',
     status: 'active' as const,
     states: 9,
-    updatedDate: '15 ก.พ. 2569',
+    updatedDate: '15/02/2569',
     updatedBy: 'admin',
   },
   {
@@ -48,7 +48,7 @@ const workflows = [
     version: '1.5',
     status: 'active' as const,
     states: 7,
-    updatedDate: '10 ก.พ. 2569',
+    updatedDate: '10/02/2569',
     updatedBy: 'admin',
   },
   {
@@ -58,7 +58,7 @@ const workflows = [
     version: '1.0',
     status: 'draft' as const,
     states: 5,
-    updatedDate: '05 ก.พ. 2569',
+    updatedDate: '05/02/2569',
     updatedBy: 'admin',
   },
   {
@@ -68,7 +68,7 @@ const workflows = [
     version: '1.2',
     status: 'active' as const,
     states: 6,
-    updatedDate: '18 ก.พ. 2569',
+    updatedDate: '18/02/2569',
     updatedBy: 'admin',
   },
   {
@@ -78,7 +78,7 @@ const workflows = [
     version: '1.0',
     status: 'active' as const,
     states: 4,
-    updatedDate: '12 ก.พ. 2569',
+    updatedDate: '12/02/2569',
     updatedBy: 'admin',
   },
 ];
@@ -125,19 +125,19 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-01', code: 'EF-01', name: 'แบบฟอร์มสมัครทุนการศึกษาต่างประเทศ', nameEn: 'Overseas Scholarship Application',
     categoryId: 'application', fields: 24, status: 'active', version: '3.0', linkedWorkflow: 'Workflow ทุนการศึกษาต่างประเทศ',
-    approvalSteps: 5, usageCount: 342, lastUsed: '24 ก.พ. 2569', updatedDate: '15 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 342, lastUsed: '24/02/2569', updatedDate: '15/02/2569',
     description: 'แบบฟอร์มหลักสำหรับสมัครทุนการศึกษาระดับปริญญาโท/เอก ในต่างประเทศ ครอบคลุมข้อมูลส่วนบุคคล ประวัติการศึกษา แผนการศึกษา',
   },
   {
     id: 'EF-02', code: 'EF-02', name: 'แบบฟอร์มสมัครทุนวิจัยระยะสั้น', nameEn: 'Short-term Research Grant Application',
     categoryId: 'application', fields: 18, status: 'active', version: '2.1', linkedWorkflow: 'Workflow ทุนวิจัย',
-    approvalSteps: 4, usageCount: 128, lastUsed: '22 ก.พ. 2569', updatedDate: '10 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 128, lastUsed: '22/02/2569', updatedDate: '10/02/2569',
     description: 'แบบฟอร์มสำหรับทุนวิจัยระยะสั้น 3-12 เดือน รวมแผนวิจัย งบประมาณ สถาบันปลายทาง',
   },
   {
     id: 'EF-03', code: 'EF-03', name: 'แบบฟอร์มสมัครทุนพัฒนาบุคลากรภาครัฐ', nameEn: 'Government Personnel Development Application',
     categoryId: 'application', fields: 20, status: 'active', version: '1.5', linkedWorkflow: 'Workflow ทุนพัฒนาบุคลากร',
-    approvalSteps: 4, usageCount: 215, lastUsed: '20 ก.พ. 2569', updatedDate: '05 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 215, lastUsed: '20/02/2569', updatedDate: '05/02/2569',
     description: 'แบบฟอร์มสำหรับข้าราชการที่ต้องการขอทุนพัฒนาบุคลากร ฝึกอบรม หรือดูงานต่างประเทศ',
   },
 
@@ -145,31 +145,31 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-04', code: 'EF-04', name: 'แบบฟอร์มรายงานผลการศึกษาประจำภาค', nameEn: 'Semester Academic Report',
     categoryId: 'study', fields: 14, status: 'active', version: '2.0', linkedWorkflow: '-',
-    approvalSteps: 2, usageCount: 876, lastUsed: '24 ก.พ. 2569', updatedDate: '01 ก.พ. 2569',
+    approvalSteps: 2, usageCount: 876, lastUsed: '24/02/2569', updatedDate: '01/02/2569',
     description: 'แบบฟอร์มรายงานผลการเรียนประจำภาคการศึกษา รายวิชา เกรด ผลงานวิจัย และแผนการศึกษาภาคถัดไป',
   },
   {
     id: 'EF-05', code: 'EF-05', name: 'แบบฟอร์มรายงานความก้าวหน้าวิทยานิพนธ์', nameEn: 'Thesis/Dissertation Progress Report',
     categoryId: 'study', fields: 12, status: 'active', version: '1.8', linkedWorkflow: '-',
-    approvalSteps: 2, usageCount: 534, lastUsed: '23 ก.พ. 2569', updatedDate: '08 ก.พ. 2569',
+    approvalSteps: 2, usageCount: 534, lastUsed: '23/02/2569', updatedDate: '08/02/2569',
     description: 'แบบฟอร์มรายงานความก้าวหน้าของวิทยานิพนธ์/ดุษฎีนิพนธ์ รวมถึงเอกสารรับรองจากอาจารย์ที่ปรึกษา',
   },
   {
     id: 'EF-06', code: 'EF-06', name: 'แบบฟอร์มขอขยายเวลาการศึกษา', nameEn: 'Study Period Extension Request',
     categoryId: 'study', fields: 10, status: 'active', version: '2.2', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 4, usageCount: 89, lastUsed: '18 ก.พ. 2569', updatedDate: '12 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 89, lastUsed: '18/02/2569', updatedDate: '12/02/2569',
     description: 'แบบฟอร์มสำหรับนักเรียนทุนที่ต้องการขยายเวลาการศึกษาเกินกว่าระยะเวลาที่กำหนด พร้อมเหตุผลและแผนที่ปรับปรุง',
   },
   {
     id: 'EF-07', code: 'EF-07', name: 'แบบฟอร์มขอลาพักการศึกษา', nameEn: 'Leave of Absence Request',
     categoryId: 'study', fields: 8, status: 'active', version: '1.3', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 3, usageCount: 45, lastUsed: '15 ก.พ. 2569', updatedDate: '10 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 45, lastUsed: '15/02/2569', updatedDate: '10/02/2569',
     description: 'แบบฟอร์มขอลาพักการศึกษาชั่วคราว เนื่องจากเหตุสุขภาพ ครอบครัว หรือเหตุจำเป็นอื่นๆ',
   },
   {
     id: 'EF-08', code: 'EF-08', name: 'แบบฟอร์มขอกลับมาศึกษาต่อ', nameEn: 'Return to Study Request',
     categoryId: 'study', fields: 8, status: 'active', version: '1.1', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 3, usageCount: 32, lastUsed: '10 ก.พ. 2569', updatedDate: '08 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 32, lastUsed: '10/02/2569', updatedDate: '08/02/2569',
     description: 'แบบฟอร์มแจ้งขอกลับเข้าศึกษาต่อหลังจากลาพักการศึกษา',
   },
 
@@ -177,25 +177,25 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-09', code: 'EF-09', name: 'แบบฟอร์มขอเปลี่ยนสาขาวิชา/สถาบัน', nameEn: 'Change of Major/Institution Request',
     categoryId: 'change', fields: 14, status: 'active', version: '1.4', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 5, usageCount: 56, lastUsed: '19 ก.พ. 2569', updatedDate: '14 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 56, lastUsed: '19/02/2569', updatedDate: '14/02/2569',
     description: 'แบบฟอร์มขอเปลี่ยนแปลงสาขาวิชา หลักสูตร หรือสถาบันการศึกษา พร้อมเหตุผลและการเปรียบเทียบ',
   },
   {
     id: 'EF-10', code: 'EF-10', name: 'แบบฟอร์มขอเปลี่ยนประเทศศึกษา', nameEn: 'Change of Study Country Request',
     categoryId: 'change', fields: 12, status: 'active', version: '1.2', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 5, usageCount: 23, lastUsed: '14 ก.พ. 2569', updatedDate: '10 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 23, lastUsed: '14/02/2569', updatedDate: '10/02/2569',
     description: 'แบบฟอร์มขอเปลี่ยนประเทศที่ศึกษา พร้อมสถาบันใหม่ เหตุผล และผลกระทบด้านงบประมาณ',
   },
   {
     id: 'EF-11', code: 'EF-11', name: 'แบบฟอร์มขอเปลี่ยนอาจารย์ที่ปรึกษา', nameEn: 'Change of Advisor Request',
     categoryId: 'change', fields: 10, status: 'active', version: '1.0', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 3, usageCount: 18, lastUsed: '12 ก.พ. 2569', updatedDate: '05 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 18, lastUsed: '12/02/2569', updatedDate: '05/02/2569',
     description: 'แบบฟอร์มขอเปลี่ยนอาจารย์ที่ปรึกษาวิทยานิพนธ์/ดุษฎีนิพนธ์ พร้อมเหตุผลและหนังสือยินยอม',
   },
   {
     id: 'EF-12', code: 'EF-12', name: 'แบบฟอร์มขอเดินทางกลับประเทศไทยชั่วคราว', nameEn: 'Temporary Return to Thailand Request',
     categoryId: 'change', fields: 9, status: 'active', version: '1.5', linkedWorkflow: '-',
-    approvalSteps: 2, usageCount: 267, lastUsed: '24 ก.พ. 2569', updatedDate: '15 ก.พ. 2569',
+    approvalSteps: 2, usageCount: 267, lastUsed: '24/02/2569', updatedDate: '15/02/2569',
     description: 'แบบฟอร์มแจ้งขอเดินทางกลับประเทศไทยชั่วคราว ระบุวันเดินทาง เหตุผล และผลกระทบต่อการศึกษา',
   },
 
@@ -203,19 +203,19 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-13', code: 'EF-13', name: 'แบบฟอร์มขอเบิกค่าใช้จ่ายประจำเดือน', nameEn: 'Monthly Allowance Claim',
     categoryId: 'finance', fields: 11, status: 'active', version: '2.0', linkedWorkflow: '-',
-    approvalSteps: 3, usageCount: 1245, lastUsed: '24 ก.พ. 2569', updatedDate: '01 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 1245, lastUsed: '24/02/2569', updatedDate: '01/02/2569',
     description: 'แบบฟอร์มเบิกค่าใช้จ่ายประจำเดือน ค่าเล่าเรียน ค่าครองชีพ ค่าที่พัก ค่าประกันสุขภาพ',
   },
   {
     id: 'EF-14', code: 'EF-14', name: 'แบบฟอร์มขอเบิกค่าใช้จ่ายพิเศษ', nameEn: 'Special Expense Claim',
     categoryId: 'finance', fields: 13, status: 'active', version: '1.6', linkedWorkflow: '-',
-    approvalSteps: 4, usageCount: 198, lastUsed: '21 ก.พ. 2569', updatedDate: '10 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 198, lastUsed: '21/02/2569', updatedDate: '10/02/2569',
     description: 'แบบฟอร์มเบิกค่าใช้จ่ายพิเศษ เช่น ค่าเดินทางไปประชุมวิชาการ ค่าอุปกรณ์วิจัย ค่าตีพิมพ์ผลงาน',
   },
   {
     id: 'EF-15', code: 'EF-15', name: 'แบบฟอร์มขอต่อสัญญารับทุน', nameEn: 'Scholarship Contract Renewal',
     categoryId: 'finance', fields: 10, status: 'active', version: '1.3', linkedWorkflow: 'Workflow คำขอเปลี่ยนแปลง',
-    approvalSteps: 4, usageCount: 67, lastUsed: '16 ก.พ. 2569', updatedDate: '12 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 67, lastUsed: '16/02/2569', updatedDate: '12/02/2569',
     description: 'แบบฟอร์มขอต่ออายุสัญญารับทุน สำหรับกรณีที่ต้องขยายระยะเวลาการรับทุนตามสัญญา',
   },
 
@@ -223,25 +223,25 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-16', code: 'EF-16', name: 'แบบฟอร์มรายงานการเฝ้าระวัง (Watch List)', nameEn: 'Watch List Monitoring Report',
     categoryId: 'monitoring', fields: 15, status: 'active', version: '2.0', linkedWorkflow: '-',
-    approvalSteps: 3, usageCount: 156, lastUsed: '24 ก.พ. 2569', updatedDate: '18 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 156, lastUsed: '24/02/2569', updatedDate: '18/02/2569',
     description: 'แบบฟอร์มรายงานผลการเฝ้าระวังนักเรียนทุนที่อยู่ในกลุ่มเสี่ยง เช่น ผลการเรียนต่ำกว่าเกณฑ์ ขาดการติดต่อ พฤติกรรมผิดปกติ',
   },
   {
     id: 'EF-17', code: 'EF-17', name: 'แบบฟอร์มขอยุติการศึกษา', nameEn: 'Study Termination Request',
     categoryId: 'monitoring', fields: 12, status: 'active', version: '1.4', linkedWorkflow: 'Workflow ระงับ/ปิดทุน',
-    approvalSteps: 5, usageCount: 34, lastUsed: '10 ก.พ. 2569', updatedDate: '08 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 34, lastUsed: '10/02/2569', updatedDate: '08/02/2569',
     description: 'แบบฟอร์มสำหรับแจ้งยุติการศึกษาก่อนกำหนด พร้อมเหตุผล ผลกระทบ และแผนการชดใช้ทุน',
   },
   {
     id: 'EF-18', code: 'EF-18', name: 'แบบฟอร์มขอระงับทุนการศึกษา', nameEn: 'Scholarship Suspension Request',
     categoryId: 'monitoring', fields: 11, status: 'active', version: '1.2', linkedWorkflow: 'Workflow ระงับ/ปิดทุน',
-    approvalSteps: 5, usageCount: 28, lastUsed: '08 ก.พ. 2569', updatedDate: '05 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 28, lastUsed: '08/02/2569', updatedDate: '05/02/2569',
     description: 'แบบฟอร์มขอระงับการให้ทุนชั่วคราว กรณีนักเรียนทุนผิดเงื่อนไข หรือมีปัญหาที่ต้องสอบสวน',
   },
   {
     id: 'EF-19', code: 'EF-19', name: 'แบบฟอร์มแจ้งเตือนผิดเงื่อนไขสัญญา', nameEn: 'Contract Violation Notice',
     categoryId: 'monitoring', fields: 14, status: 'active', version: '1.1', linkedWorkflow: 'Workflow ระงับ/ปิดทุน',
-    approvalSteps: 4, usageCount: 42, lastUsed: '15 ก.พ. 2569', updatedDate: '12 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 42, lastUsed: '15/02/2569', updatedDate: '12/02/2569',
     description: 'แบบฟอร์มแจ้งเตือนกรณีนักเรียนทุนผิดเงื่อนไขสัญญา เช่น ไม่รายงานตัว ผลการเรียนไม่ถึงเกณฑ์ ทำกิจกรรมนอกเงื่อนไข',
   },
 
@@ -249,40 +249,40 @@ const presetForms: PresetForm[] = [
   {
     id: 'EF-20', code: 'EF-20', name: 'แบบฟอร์มแจ้งสำเร็จการศึกษา', nameEn: 'Graduation Notification',
     categoryId: 'completion', fields: 10, status: 'active', version: '2.0', linkedWorkflow: '-',
-    approvalSteps: 2, usageCount: 312, lastUsed: '22 ก.พ. 2569', updatedDate: '15 ก.พ. 2569',
+    approvalSteps: 2, usageCount: 312, lastUsed: '22/02/2569', updatedDate: '15/02/2569',
     description: 'แบบฟอร์มแจ้งสำเร็จการศึกษา แนบเอกสารจบการศึกษา ใบปริญญา ผลการเรียนสุดท้าย',
   },
   {
     id: 'EF-21', code: 'EF-21', name: 'แบบฟอร์มรายงานตัวกลับเข้าทำงาน', nameEn: 'Return to Work Report',
     categoryId: 'completion', fields: 12, status: 'active', version: '1.8', linkedWorkflow: '-',
-    approvalSteps: 3, usageCount: 278, lastUsed: '20 ก.พ. 2569', updatedDate: '14 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 278, lastUsed: '20/02/2569', updatedDate: '14/02/2569',
     description: 'แบบฟอร์มรายงานตัวเข้าปฏิบัติราชการ/ทำงานในหน่วยงานต้นสังกัดหลังสำเร็จการศึกษา ตามเงื่อนไขสัญญาทุน',
   },
   {
     id: 'EF-22', code: 'EF-22', name: 'แบบฟอร์มรายงานการชดใช้ทุน', nameEn: 'Scholarship Repayment Report',
     categoryId: 'completion', fields: 15, status: 'active', version: '1.5', linkedWorkflow: '-',
-    approvalSteps: 3, usageCount: 187, lastUsed: '18 ก.พ. 2569', updatedDate: '10 ก.พ. 2569',
+    approvalSteps: 3, usageCount: 187, lastUsed: '18/02/2569', updatedDate: '10/02/2569',
     description: 'แบบฟอร์มรายงานสถานะการชดใช้ทุน ระยะเวลาที่ปฏิบัติงาน จำนวนปีที่เหลือ และหลักฐานการปฏิบัติงาน',
   },
   {
     id: 'EF-23', code: 'EF-23', name: 'แบบฟอร์มขอคืนเงินทุน', nameEn: 'Scholarship Refund Request',
     categoryId: 'completion', fields: 13, status: 'active', version: '1.0', linkedWorkflow: 'Workflow ระงับ/ปิดทุน',
-    approvalSteps: 5, usageCount: 15, lastUsed: '05 ก.พ. 2569', updatedDate: '01 ก.พ. 2569',
+    approvalSteps: 5, usageCount: 15, lastUsed: '05/02/2569', updatedDate: '01/02/2569',
     description: 'แบบฟอร์มกรณีนักเรียนทุนต้องชดใช้เงินทุนคืน เนื่องจากไม่ปฏิบัติตามเงื่อนไข พร้อมแผนการชำระเงิน',
   },
   {
     id: 'EF-24', code: 'EF-24', name: 'แบบฟอร์มขอปิดทุนการศึกษา', nameEn: 'Scholarship Closure Request',
     categoryId: 'completion', fields: 8, status: 'active', version: '1.2', linkedWorkflow: 'Workflow ระงับ/ปิดทุน',
-    approvalSteps: 4, usageCount: 145, lastUsed: '19 ก.พ. 2569', updatedDate: '14 ก.พ. 2569',
+    approvalSteps: 4, usageCount: 145, lastUsed: '19/02/2569', updatedDate: '14/02/2569',
     description: 'แบบฟอร์มขอปิดทุนอย่างเป็นทางการ เมื่อนักเรียนทุนชดใช้ทุนครบตามสัญญาแล้ว',
   },
 ];
 
 // ===== Custom forms (existing) =====
 const customForms = [
-  { id: 1, name: 'แบบฟอร์มประเมินความพร้อมก่อนเดินทาง', fields: 15, status: 'active' as const, linkedWorkflow: '-', updatedDate: '15 ก.พ. 2569' },
-  { id: 2, name: 'แบบสอบถามความพึงพอใจนักเรียนทุน', fields: 20, status: 'active' as const, linkedWorkflow: '-', updatedDate: '10 ก.พ. 2569' },
-  { id: 3, name: 'แบบฟอร์มขอข้อมูลเพิ่มเติม (กรณีพิเศษ)', fields: 8, status: 'draft' as const, linkedWorkflow: '-', updatedDate: '05 ก.พ. 2569' },
+  { id: 1, name: 'แบบฟอร์มประเมินความพร้อมก่อนเดินทาง', fields: 15, status: 'active' as const, linkedWorkflow: '-', updatedDate: '15/02/2569' },
+  { id: 2, name: 'แบบสอบถามความพึงพอใจนักเรียนทุน', fields: 20, status: 'active' as const, linkedWorkflow: '-', updatedDate: '10/02/2569' },
+  { id: 3, name: 'แบบฟอร์มขอข้อมูลเพิ่มเติม (กรณีพิเศษ)', fields: 8, status: 'draft' as const, linkedWorkflow: '-', updatedDate: '05/02/2569' },
 ];
 
 // ===== Status helpers =====
