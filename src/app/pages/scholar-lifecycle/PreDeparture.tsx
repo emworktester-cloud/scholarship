@@ -80,7 +80,8 @@ const sections = [
   { id: 'health', label: '4. ผลการตรวจสุขภาพ', icon: Stethoscope, desc: 'ผลตรวจสุขภาพตามที่ ก.พ. กำหนด (อายุ 1 ปี)' },
   { id: 'military', label: '5. การผ่อนผันทหาร', icon: Shield, desc: 'ผ่อนผันทหาร แจ้งเตือนรายปี/ก่อน 6 เดือน' },
   { id: 'documents', label: '6. เอกสารต่างๆ', icon: FolderOpen, desc: 'หนังสือรับรอง วีซ่า CAS/COE/JW/DS ตั๋ว พาสปอร์ต' },
-  { id: 'transition', label: '7. การเปลี่ยนระยะ', icon: ArrowRightLeft, desc: 'ย้ายข้อมูลไประยะที่ 2 (ระหว่างศึกษา)' },
+  { id: 'eform', label: '7. คำขอ e-Form', icon: Send, desc: 'ขอเลื่อนเดินทาง เปลี่ยนประเทศ เปลี่ยนสาขา สละสิทธิ์' },
+  { id: 'transition', label: '8. การเปลี่ยนระยะ', icon: ArrowRightLeft, desc: 'ย้ายข้อมูลไประยะที่ 2 (ระหว่างศึกษา)' },
 ];
 
 export default function PreDeparture() {
@@ -210,14 +211,7 @@ export default function PreDeparture() {
       </div>
 
       {!selectedScholar ? (
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-5">
-          <TabsList className="flex flex-wrap h-auto gap-1 p-1">
-            <TabsTrigger value="scholars"><User className="w-3.5 h-3.5 mr-1" />รายชื่อผู้รับทุน</TabsTrigger>
-            <TabsTrigger value="requests"><Send className="w-3.5 h-3.5 mr-1" />คำขอ e-Form</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="scholars" className="space-y-4">
-            <Card className="overflow-hidden border-0 shadow-lg shadow-blue-900/5">
+        <Card className="overflow-hidden border-0 shadow-lg shadow-blue-900/5">
           <CardHeader className="pb-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-xl">
             <CardTitle className="text-base flex items-center gap-2 text-white">
               <User className="w-5 h-5" />
@@ -300,39 +294,7 @@ export default function PreDeparture() {
               </TableBody>
             </Table></div>
           </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* ===== Tab: Requests ===== */}
-          <TabsContent value="requests" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2"><Send className="w-5 h-5 text-purple-600" />คำขออนุมัติ/อนุญาตต่างๆ (ก่อนเดินทาง)</CardTitle>
-                <CardDescription className="text-xs">ยื่นคำขอในระยะก่อนเดินทาง ระบบตรวจสอบ พิจารณา และแจ้งผล</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {requestTypes.map(req => {
-                    const RIcon = req.icon;
-                    return (
-                      <div key={req.id} onClick={() => { setSelectedRequestType(req); setRequestDialogOpen(true); }} className="p-3 rounded-lg border border-gray-100 hover:border-purple-200 bg-white hover:bg-purple-50 transition-all cursor-pointer group shadow-sm hover:shadow-md">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                            <RIcon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-800 group-hover:text-purple-700">{req.label}</p>
-                            <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-1">{req.description}</p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        </Card>
       ) : (
         <div className="space-y-6">
 
@@ -939,6 +901,49 @@ export default function PreDeparture() {
                 </div>
               );
             })}
+                 </motion.div>
+               )}
+
+               {expandedSection === 'eform' && (
+                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+                   {/* ส่วนยื่นคำขอใหม่ */}
+                   <div>
+                     <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                       <Send className="w-4 h-4 text-purple-500" />
+                       ยื่นคำขอใหม่
+                     </h4>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                       {requestTypes.map(req => {
+                         const RIcon = req.icon;
+                         return (
+                           <div key={req.id} onClick={() => { setSelectedRequestType(req); setRequestDialogOpen(true); }} className="p-3 rounded-lg border border-gray-100 hover:border-purple-200 bg-white hover:bg-purple-50 transition-all cursor-pointer group shadow-sm hover:shadow-md">
+                             <div className="flex items-start gap-3">
+                               <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                 <RIcon className="w-4 h-4" />
+                               </div>
+                               <div>
+                                 <p className="text-sm font-medium text-gray-800 group-hover:text-purple-700">{req.label}</p>
+                                 <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-1">{req.description}</p>
+                               </div>
+                             </div>
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+
+                   {/* ประวัติคำขอ */}
+                   <div>
+                     <h4 className="text-sm font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                       <FileText className="w-4 h-4 text-gray-500" />
+                       ประวัติคำขอที่ยื่น
+                     </h4>
+                     <div className="p-6 border border-dashed border-gray-200 rounded-lg text-center text-gray-400">
+                       <FileText className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                       <p className="text-sm font-medium">ยังไม่มีคำขอที่ยื่น</p>
+                       <p className="text-[10px] mt-1">เลือกประเภทคำขอด้านบนเพื่อยื่นคำขอใหม่</p>
+                     </div>
+                   </div>
                  </motion.div>
                )}
 
