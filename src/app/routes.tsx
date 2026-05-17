@@ -53,6 +53,7 @@ import MobileInbox from "./pages/mobile/scholar/MobileInbox";
 import MobileProfile from "./pages/mobile/scholar/MobileProfile";
 import MobileRequestDetail from "./pages/mobile/scholar/MobileRequestDetail";
 import MobileAwardDetail from "./pages/mobile/scholar/MobileAwardDetail";
+import MobileSafetyCheckin from "./pages/mobile/scholar/MobileSafetyCheckin";
 
 const AnalyticsOverviewPage = () => (
   <div className="min-h-full">
@@ -141,6 +142,7 @@ export const router = createBrowserRouter([
       { path: "inbox", Component: MobileInbox },
       { path: "profile", Component: MobileProfile },
       { path: "awards/:id", Component: MobileAwardDetail },
+      { path: "safety", Component: MobileSafetyCheckin },
     ],
   },
   // ===== Login =====

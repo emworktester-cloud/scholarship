@@ -61,6 +61,22 @@ export default function MobileHome() {
             <p className="text-center font-bold text-blue-700 text-[15px]">กำลังศึกษา</p>
           </Link>
         </div>
+
+        {/* SOS Emergency Banner */}
+        <Link to="/mobile/scholar/safety" className="mt-4 bg-white/40 backdrop-blur-xl rounded-[24px] p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/60 flex items-center justify-between group hover:bg-white/50 transition-all">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-[14px] bg-red-50 flex items-center justify-center text-red-500 shrink-0 group-hover:scale-105 group-hover:bg-red-100 transition-all shadow-sm border border-red-100/50">
+              <AlertCircle size={20} strokeWidth={2.5} />
+            </div>
+            <div>
+              <p className="font-bold text-slate-800 text-[14px] leading-tight">แจ้งสถานะความปลอดภัย (SOS)</p>
+              <p className="text-slate-500 text-[11px] mt-0.5 font-medium">ในกรณีเกิดเหตุฉุกเฉิน/ภัยพิบัติ</p>
+            </div>
+          </div>
+          <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-white group-hover:text-red-500 transition-colors">
+            <ChevronRight size={16} strokeWidth={2.5} />
+          </div>
+        </Link>
       </div>
 
       {/* Main Content Area (Solid White rounded container at bottom) */}
@@ -93,7 +109,7 @@ export default function MobileHome() {
           {/* Upcoming To-Do */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-[17px] font-bold text-slate-800 tracking-tight">สิ่งที่ต้องทำในเวลาอันใกล้</h2>
+              <h2 className="text-[17px] font-bold text-slate-800 tracking-tight">สิ่งที่จะต้องดำเนินการเร็วๆ นี้</h2>
             </div>
             
             <Link to="/mobile/scholar/awards/AWD-001" className="block bg-blue-50/50 rounded-[20px] p-4 border border-blue-100/60 hover:bg-blue-50 transition-all duration-300 group">
