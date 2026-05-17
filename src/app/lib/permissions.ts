@@ -228,6 +228,26 @@ export const ROLES = {
       'reports:view',
     ] as Permission[],
   },
+  'oea': {
+    name: 'OEA Officer',
+    nameLocal: 'เจ้าหน้าที่ สนร.',
+    description: 'เจ้าหน้าที่ดูแลนักเรียนทุนในต่างประเทศ สามารถพิจารณาคำขอและอนุมัติ',
+    color: 'amber',
+    permissions: [
+      'applications:view',
+      'applications:check-documents',
+      'applications:request-info',
+      'review:view',
+      'review:submit',
+      'approval:view',
+      'approval:approve',
+      'approval:reject',
+      'awards:view',
+      'payment:view',
+      'tracking:view',
+      'reports:view',
+    ] as Permission[],
+  },
 } as const;
 
 export type RoleId = keyof typeof ROLES;

@@ -37,6 +37,7 @@ const megaModules: MegaModule[] = [
     id: 'workspace', thaiLabel: 'งานของฉัน', icon: Inbox,
     groups: [
       { id: '2.1', label: 'คิวงานของฉัน', items: [
+        { label: 'แดชบอร์ดรวม', path: '/', icon: LayoutDashboard },
         { label: 'งานรอดำเนินการ', path: '/workspace', icon: ClipboardList, badge: '12' },
         { label: 'คำร้องทั้งหมด', path: '/workspace/all', icon: Inbox },
       ]},
@@ -48,8 +49,11 @@ const megaModules: MegaModule[] = [
   {
     id: 'scholar-hub', thaiLabel: 'ทะเบียนนักเรียนทุน', icon: GraduationCap,
     groups: [
-      { id: '3.1', label: 'ข้อมูลส่วนบุคคล & สุขภาพ', items: [
-        { label: 'ระยะก่อนเดินทาง', path: '/scholar-hub', icon: Plane },
+      { id: '3.0', label: 'รายการนักเรียนทุน', items: [
+        { label: 'นักเรียนทุนทั้งหมด', path: '/scholars', icon: GraduationCap },
+      ]},
+      { id: '3.1', label: 'มุมมองตามระยะ', items: [
+        { label: 'ระยะก่อนเดินทาง', path: '/scholar-hub/pre-departure', icon: Plane },
         { label: 'ระยะระหว่างศึกษา', path: '/scholar-hub/during-study', icon: BookOpen },
         { label: 'ระยะสำเร็จการศึกษา', path: '/scholar-hub/post-graduation', icon: Award },
       ]},
@@ -94,9 +98,6 @@ const megaModules: MegaModule[] = [
   {
     id: 'analytics', thaiLabel: 'แดชบอร์ด & รายงาน', icon: BarChart3,
     groups: [
-      { id: '1.1', label: 'แดชบอร์ด', items: [
-        { label: 'แดชบอร์ดรวม', path: '/analytics', icon: LayoutDashboard },
-      ]},
       { id: '1.2', label: 'วิเคราะห์ & แนวโน้ม', items: [
         { label: 'ภาพรวมรายงาน', path: '/analytics/reports', icon: BarChart3 },
         { label: 'ความก้าวหน้า นทร.', path: '/analytics/progress', icon: TrendingUp },
@@ -127,13 +128,14 @@ const megaModules: MegaModule[] = [
 
 export function Sidebar() {
   const location = useLocation();
-  const { user } = useAuth(); // ADDED
+  const { user, setUserRole } = useAuth();
   
   // Define role-based access to modules
   const roleAccess: Record<string, string[]> = {
     staff: ['analytics', 'workspace', 'scholar-hub', 'finance', 'master-data', 'admin'],
     executive: ['analytics', 'workspace', 'scholar-hub', 'finance'],
     approver: ['workspace', 'scholar-hub'],
+    oea: ['workspace', 'scholar-hub', 'finance'], // OCSC Officer
     scholar: ['scholar-hub'] // Scholar sees only their hub
   };
 
@@ -283,6 +285,22 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Role Switcher for Development/Demo */}
+      <div className="mt-auto p-4 border-t border-white/10 bg-[#1e3a8a] shrink-0 sticky bottom-0">
+        <div className="flex flex-col gap-2">
+          <p className="text-[10px] text-white/50 uppercase tracking-widest font-bold">Demo Role Switcher</p>
+          <select 
+            className="bg-white/10 text-white text-xs border border-white/20 rounded-md p-1.5 focus:outline-none focus:ring-1 focus:ring-white/30"
+            value={user?.role || 'staff'}
+            onChange={(e) => setUserRole(e.target.value)}
+          >
+            <option value="staff" className="text-black">เจ้าหน้าที่ส่วนกลาง (Central)</option>
+            <option value="oea" className="text-black">เจ้าหน้าที่ สนร. (OCSC)</option>
+            <option value="scholar" className="text-black">นักเรียนทุน (Scholar)</option>
+          </select>
+        </div>
+      </div>
     </aside>
   );
 }

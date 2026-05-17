@@ -27,6 +27,9 @@ import ScholarStatus from "./pages/ScholarStatus";
 import MyPermissions from "./pages/MyPermissions";
 import NotFound from "./pages/NotFound";
 import ScholarProfileView from "./pages/scholar-hub/ScholarProfileView";
+import ScholarList from "./pages/scholars/ScholarList";
+import ScholarProfile from "./pages/scholars/ScholarProfile";
+import AwardDetail from "./pages/scholars/AwardDetail";
 import WorkspaceTaskDetail from "./pages/workspace/WorkspaceTaskDetail";
 import PublicLayout from "./pages/public/PublicLayout";
 import PublicHome from "./pages/public/PublicHome";
@@ -40,6 +43,16 @@ import ScholarProgress from "./pages/reports/ScholarProgress";
 import TrendAnalysis from "./pages/reports/TrendAnalysis";
 import ExportAuditTrail from "./pages/reports/ExportAuditTrail";
 import { PageHeader } from "./components/shared/PageHeader";
+
+// Mobile Pages
+import MobileLayout from "./pages/mobile/scholar/MobileLayout";
+import MobileHome from "./pages/mobile/scholar/MobileHome";
+import MobileForms from "./pages/mobile/scholar/MobileForms";
+import MobileTracking from "./pages/mobile/scholar/MobileTracking";
+import MobileInbox from "./pages/mobile/scholar/MobileInbox";
+import MobileProfile from "./pages/mobile/scholar/MobileProfile";
+import MobileRequestDetail from "./pages/mobile/scholar/MobileRequestDetail";
+import MobileAwardDetail from "./pages/mobile/scholar/MobileAwardDetail";
 
 const AnalyticsOverviewPage = () => (
   <div className="min-h-full">
@@ -116,6 +129,20 @@ export const router = createBrowserRouter([
       { path: "apply-steps", Component: ApplicationSteps },
     ],
   },
+  // ===== Mobile Prototype =====
+  {
+    path: "/mobile/scholar",
+    Component: MobileLayout,
+    children: [
+      { index: true, Component: MobileHome },
+      { path: "forms", Component: MobileForms },
+      { path: "tracking", Component: MobileTracking },
+      { path: "tracking/:id", Component: MobileRequestDetail },
+      { path: "inbox", Component: MobileInbox },
+      { path: "profile", Component: MobileProfile },
+      { path: "awards/:id", Component: MobileAwardDetail },
+    ],
+  },
   // ===== Login =====
   {
     path: "/login",
@@ -156,9 +183,14 @@ export const router = createBrowserRouter([
       // 2.2 ลายเซ็นอิเล็กทรอนิกส์
       { path: "workspace/e-sign", Component: ESignaturePage },
 
-      // ===== 3. Scholar Hub (ทะเบียน นทร.) =====
-      // 3.1 ข้อมูลส่วนบุคคล & สุขภาพ
-      { path: "scholar-hub", Component: ScholarLifecycle },
+      // ===== 3. Scholar Hub (ทะเบียน นทร.) — Person-Centric =====
+      // 3.0 รายการนักเรียนทุน (มุมมองคน)
+      { path: "scholars", Component: ScholarList },
+      { path: "scholars/:personId", Component: ScholarProfile },
+      { path: "scholars/:personId/awards/:awardId", Component: AwardDetail },
+      // 3.1 Legacy Phase-based views (still functional)
+      { path: "scholar-hub", Component: ScholarList },
+      { path: "scholar-hub/pre-departure", Component: ScholarLifecycle },
       { path: "scholar-hub/during-study", Component: ScholarLifecycle },
       { path: "scholar-hub/post-graduation", Component: ScholarLifecycle },
       { path: "scholar-hub/profile", Component: ScholarProfileView },

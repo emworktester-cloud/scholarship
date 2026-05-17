@@ -73,7 +73,7 @@ export default function ScholarLifecycle() {
 
   const handlePhaseChange = (phaseId: string) => {
     setActivePhase(phaseId);
-    if (phaseId === 'pre-departure') navigate('/scholar-hub');
+    if (phaseId === 'pre-departure') navigate('/scholar-hub/pre-departure');
     else navigate(`/scholar-hub/${phaseId}`);
   };
 

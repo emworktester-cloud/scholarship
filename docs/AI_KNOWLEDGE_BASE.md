@@ -1,20 +1,61 @@
-# AI Knowledge Base & Global Rules
+# AI KNOWLEDGE BASE & UI/UX GUIDELINES
+**สำหรับอ้างอิงในการพัฒนาระบบ Scholar Management System**
 
-## 1. Date Formatting (CRITICAL)
-- **Strict Rule**: ALL dates in the system MUST be formatted as `DD/MM/YYYY`.
-- **Buddhist Era (พ.ศ.)**: The `YYYY` component MUST always represent the Buddhist Era (พุทธศักราช).
-  - Example: For the year 2026, the format must be `2569`.
-  - Example output: `15/02/2569`
-- Do not use YYYY-MM-DD or standard Gregorian years in user-facing UI unless explicitly storing data to the backend in a standard format (and even then, the UI must show DD/MM/YYYY พ.ศ.).
+ไฟล์นี้ถูกสร้างขึ้นเพื่อป้องกันความผิดพลาดซ้ำซ้อนจาก AI Developer และเพื่อให้แน่ใจว่าระบบจะถูกพัฒนาไปในทิศทางเดียวกันตามความคาดหวังของผู้ใช้งาน (Project Manager)
 
-## 2. UX/UI & Modals
-- Never show empty Modals or Dialogs. Always ensure the state is populated before opening a Dialog.
-- If a user clicks "Add New Request", provide a selection list first if the exact type is not known.
+---
 
-## 3. Context-Aware Dialogs
-- **Strict Rule**: When opening an Add/Edit Dialog from a Detail View (where the parent context is already tied to a specific entity, e.g., a specific Scholar), DO NOT render a `<Select>` dropdown asking the user to choose the entity again.
-- Instead, render a static Label/Card showing the selected entity's information (e.g., `SCH-001 • น.ส.พรพิมล สุขใจ`). Redundant data entry is strictly prohibited for a premium UX.
+## 1. กฎการออกแบบ UI (User Interface) และการแสดงผลข้อมูล
 
-## 4. Full-screen Dialogs (Data Grids)
-- **Strict Rule**: When designing a Dialog that displays a large Data Grid or Table (e.g., Excel Import Previews), it MUST be a true edge-to-edge full-screen Dialog.
-- Do not use `max-w-[95vw] h-[95vh]`. You MUST use `className="max-w-[100vw] sm:max-w-none sm:w-screen sm:h-screen w-screen h-screen max-h-[100vh] m-0 p-0 sm:p-0 rounded-none border-0"` for the `DialogContent`. This explicitly overrides `shadcn/ui`'s default `sm:max-w-lg` constraints, ensuring maximum screen real estate for horizontal scrolling and a premium UX.
+### 1.1 ความแตกต่างระหว่าง View Mode และ Edit Mode
+- ❌ **ปัญหาที่พบ:** AI มักจะใส่เส้นขอบ (Borders) ให้กับฟิลด์ข้อมูลในหน้า View ทำให้ดูเหมือนฟอร์มที่กดแก้ไขไม่ได้ ซึ่งขัดกับหลัก UX/UI ที่ดีและทำให้หน้าจอดูรก
+- ✅ **วิธีการแก้ไข (Standard Rule):**
+  - **View Mode:** ข้อมูลต้องถูกแสดงผลแบบ **ข้อความธรรมดา (Plain Text)** ห้ามมีเส้นขอบใดๆ เด็ดขาด (ใช้แค่ Label สีเทา และ Value สีดำ/เข้ม)
+  - **Edit Mode:** เมื่อผู้ใช้กด "แก้ไขข้อมูล" ข้อมูลทั้งหมดถึงจะเปลี่ยนเป็น `<Input>` หรือ Form Components ที่มีเส้นขอบ (`border-gray-300`) สอดคล้องกับมาตรฐานของหน้า `pre-departure`
+
+### 1.2 การออกแบบรายการข้อมูล (List View) ใน Tabs
+- ❌ **ปัญหาที่พบ:** การใช้ UI แบบ Card ซ้อน Card ในรายการที่มีหลาย Item ทำให้พื้นที่หน้าจอดูอึดอัดและไม่สวยงาม
+- ✅ **วิธีการแก้ไข (Standard Rule):** 
+  - การแสดงผลข้อมูลที่มีหลายรายการ (เช่น ประวัติการศึกษา, คะแนนภาษา, สุขภาพ) ต้องใช้การแสดงผลแบบ **Clean List / Table Row** 
+  - ใช้เพียงการขีดเส้นใต้ (`border-b` หรือ `border-t`) เพื่อคั่นแต่ละรายการ (Row Separator) โดยไม่ต้องเอา Card ไปครอบแต่ละบรรทัด 
+  - ต้องดึงข้อมูลสำคัญๆ มาแสดงให้ครบถ้วนใน Row นั้นเลย ไม่ต้องซ่อนไว้ข้างในทั้งหมด
+
+### 1.3 การจัดการฟิลด์ "วันที่" (Date Fields)
+- ❌ **ปัญหาที่พบ:** การปล่อยให้ฟิลด์วันที่เป็นเพียงแค่ `<Input type="text">` ธรรมดา หรือแสดงวันที่ในรูปแบบ พ.ศ. หรือรูปแบบอื่นที่ไม่ใช่มาตรฐาน
+- ✅ **วิธีการแก้ไข (Standard Rule):** 
+  - ข้อมูลทุกประเภทที่เป็นวันที่ ต้องบังคับใช้ **Date Picker** เสมอ (หรือใช้ `<Input type="date">` หรือ Component วันที่ที่มี Calendar Icon ชัดเจน) เพื่อลดความผิดพลาดในการกรอกรูปแบบวันที่
+  - **รูปแบบวันที่มาตรฐาน (Global Date Format):** ต้องใช้รูปแบบ **DD/MM/YYYY** (ปี ค.ศ.) เสมอในทุกจุดของระบบ ไม่ว่าจะเป็น Input, Display, Table, Timeline, Notification, หรือ Log ข้อมูล (**ห้าม**ใช้ปี พ.ศ. หรือรูปแบบอื่นโดยเด็ดขาด)
+  - ตัวอย่างที่ถูกต้อง: `17/05/2026`, `01/01/2025`
+  - ตัวอย่างที่ผิด: `17 พ.ค. 2569`, `2026-05-17`, `May 17, 2026`
+
+### 1.4 การใช้สื่อสัญลักษณ์ (Icons & Flags)
+- ❌ **ปัญหาที่พบ:** การใช้ Emoji (เช่น 🇺🇸, 🇹🇭) หรือ Bullet (•) แทนภาพจริงเมื่อมี Component มาตรฐานอยู่แล้ว
+- ✅ **วิธีการแก้ไข (Standard Rule):** 
+  - ระบบมี Component `<CountryFlag />` อยู่ที่ `../../components/ui/country-flag` สำหรับการแสดงผลธงชาติ 
+  - ห้ามใช้ Emoji ในการแสดงธงชาติเด็ดขาด ต้อง Import และเรียกใช้ Component นี้แทนเสมอ
+
+### 1.5 การจัดการข้อมูลแบบมีหลายรายการ (Multi-item / List Tabs)
+- ❌ **ปัญหาที่พบ:** มีการนำปุ่ม "แก้ไขข้อมูล" (Global Edit Button) ไปแสดงรวมใน Tab ที่เป็นหน้าแสดงรายการข้อมูล (เช่น ผลการศึกษา, การเงินเบิกจ่าย, ประวัติสุขภาพ) และมีการนำปุ่ม "เพิ่ม" ไปซ่อนไว้ในโหมดแก้ไข ซึ่งทำให้ UX ผิดเพี้ยน และมีการใช้ Toast แทนการสร้าง Dialog เพิ่มข้อมูลจริงๆ
+- ✅ **วิธีการแก้ไข (Standard Rule):** 
+  - **ห้าม** แสดงปุ่ม "แก้ไขข้อมูล" (Global Edit) ใน Tab ที่เนื้อหาหลักเป็นรายการ (List/Table) อย่างเด็ดขาด
+  - ปุ่ม **"เพิ่มข้อมูล" (Add Item)** ต้องแยกเป็นอิสระ ใช้งานได้ทันทีโดยไม่ต้องเข้าสู่โหมดแก้ไขข้อมูล
+  - ข้อมูลในแต่ละรายการ (Row/Item) ต้องมีปุ่ม Action **"แก้ไข" (Edit)** และ **"ลบ" (Trash)** ประจำแต่ละรายการแยกกันอย่างชัดเจน โดยอาจซ่อนไว้เป็น Hover State เพื่อความสะอาดของ UI
+  - เมื่อกดปุ่ม "เพิ่ม" ข้อมูล จะต้องเปิดเป็น **Dialog (Popup)** ที่มีฟอร์มรองรับเสมอ (ห้ามใช้การแทรก Input ลงในหน้า UI ตรงๆ หรือใช้แค่ Toast แจ้งเตือนหลอกๆ)
+
+---
+
+## 2. กฎการเขียนโค้ด (Development & Bug Prevention)
+
+### 2.1 การตรวจสอบ Imports ก่อนแก้ไข UI
+- ❌ **ปัญหาที่พบ:** AI ทำการเขียนทับไฟล์หน้า UI หรือเปลี่ยน Icons แล้วลืม Import Component ตัวใหม่ ส่งผลให้ระบบพังจอขาว (`ReferenceError: X is not defined`)
+- ✅ **วิธีการแก้ไข (Standard Rule):** 
+  - ทุกครั้งที่มีการใช้ Icon จาก `lucide-react` หรือ Component จากภายนอก ต้องเลื่อนขึ้นไปตรวจสอบที่หัวไฟล์เสมอว่ามีการ Import เข้ามาแล้วหรือยัง 
+  - **The Iron Guard Rule:** ตรวจสอบโค้ดด้วยสายตา (Mental Compilation) ก่อน Submit เสมอ!
+
+### 2.2 การอ้างอิง Global Styles ของโครงการ
+- องค์ประกอบฟอร์มต่างๆ ต้องอิงรูปแบบจาก `http://localhost:9000/scholar-hub/pre-departure` เสมอ (เรื่องขนาด, สีเส้นขอบ, น้ำหนักฟอนต์)
+
+---
+
+> **ข้อความถึง AI:** 
+> "อ่านไฟล์นี้ทุกครั้งก่อนตัดสินใจเรื่อง UI/UX หรือก่อนจะปรับแต่ง Layout เพื่อไม่ให้ต้องถูกต่อว่าจากความมักง่ายแบบเดิมซ้ำๆ!"

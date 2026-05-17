@@ -3,19 +3,7 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
 import { Eye, EyeOff, Lock, Mail, ShieldCheck, FileText, CheckCircle2, ArrowRight, UserCog, User, Shield, GraduationCap, Fingerprint, Globe, Award, BookOpen } from 'lucide-react';
 
-/* ─── animated floating icon ─── */
-function FloatingIcon({ icon: Icon, className, delay = 0 }: { icon: React.ElementType; className?: string; delay?: number }) {
-    return (
-        <div
-            className={`absolute opacity-0 pointer-events-none ${className}`}
-            style={{
-                animation: `floatUp 12s ease-in-out ${delay}s infinite`,
-            }}
-        >
-            <Icon className="w-8 h-8 text-white/20" />
-        </div>
-    );
-}
+
 
 /* ─── animated particle ─── */
 function Particle({ size, x, y, delay, duration }: { size: number; x: string; y: string; delay: number; duration: number }) {
@@ -75,12 +63,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex bg-[#f8fafc]">
       <style>{`
-          @keyframes floatUp {
-              0%, 100% { opacity: 0; transform: translateY(0) rotate(0deg); }
-              10% { opacity: 0.3; }
-              50% { opacity: 0.15; transform: translateY(-200px) rotate(180deg); }
-              90% { opacity: 0.3; }
-          }
+
           @keyframes particleDrift {
               0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
               50% { opacity: 0.25; }
@@ -143,14 +126,7 @@ export default function Login() {
             <div className="absolute top-0 left-0 w-[200px] h-full" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)', animation: 'shimmer 8s ease-in-out infinite' }} />
         </div>
 
-        {/* Floating icons */}
-        <FloatingIcon icon={GraduationCap} className="bottom-[10%] left-[15%]" delay={0} />
-        <FloatingIcon icon={Globe} className="bottom-[5%] left-[45%]" delay={2} />
-        <FloatingIcon icon={FileText} className="bottom-[15%] left-[70%]" delay={4} />
-        <FloatingIcon icon={Award} className="bottom-[8%] left-[30%]" delay={6} />
-        <FloatingIcon icon={BookOpen} className="bottom-[12%] left-[60%]" delay={8} />
-        <FloatingIcon icon={GraduationCap} className="bottom-[20%] left-[85%]" delay={3} />
-        <FloatingIcon icon={Globe} className="bottom-[18%] left-[25%]" delay={7} />
+
 
         {/* Orbiting element */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
