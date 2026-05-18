@@ -58,25 +58,9 @@ export default function MobileHome() {
               <GraduationCap size={16} />
             </div>
             <p className="text-center text-[11px] text-slate-600 font-semibold uppercase tracking-wider mb-0.5">สถานะ</p>
-            <p className="text-center font-bold text-blue-700 text-[15px]">กำลังศึกษา</p>
+            <p className="text-center font-bold text-blue-700 text-[15px]">อยู่ระหว่างศึกษา</p>
           </Link>
         </div>
-
-        {/* SOS Emergency Banner */}
-        <Link to="/mobile/scholar/safety" className="mt-4 bg-white/40 backdrop-blur-xl rounded-[24px] p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white/60 flex items-center justify-between group hover:bg-white/50 transition-all">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-[14px] bg-red-50 flex items-center justify-center text-red-500 shrink-0 group-hover:scale-105 group-hover:bg-red-100 transition-all shadow-sm border border-red-100/50">
-              <AlertCircle size={20} strokeWidth={2.5} />
-            </div>
-            <div>
-              <p className="font-bold text-slate-800 text-[14px] leading-tight">แจ้งสถานะความปลอดภัย (SOS)</p>
-              <p className="text-slate-500 text-[11px] mt-0.5 font-medium">ในกรณีเกิดเหตุฉุกเฉิน/ภัยพิบัติ</p>
-            </div>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-white group-hover:text-red-500 transition-colors">
-            <ChevronRight size={16} strokeWidth={2.5} />
-          </div>
-        </Link>
       </div>
 
       {/* Main Content Area (Solid White rounded container at bottom) */}
@@ -125,6 +109,32 @@ export default function MobileHome() {
                   </div>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-white shadow-sm text-slate-400 flex items-center justify-center group-hover:text-blue-500 transition-colors duration-300 shrink-0">
+                  <ChevronRight size={16} />
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Latest News Section */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-[17px] font-bold text-slate-800 tracking-tight">ข่าวสารและประกาศล่าสุด</h2>
+              <Link to="#" className="text-[12px] font-bold text-blue-600">ดูทั้งหมด</Link>
+            </div>
+            
+            <Link to="/mobile/scholar/news/123" className="block bg-indigo-50/50 rounded-[20px] p-4 border border-indigo-100/60 hover:bg-indigo-50 transition-all duration-300 group">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-[16px] bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 text-indigo-500">
+                  <Sparkles size={20} strokeWidth={2.5} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-indigo-900 text-[15px] truncate">ระเบียบการเบิกจ่ายฉบับใหม่ 2569</h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[11px] font-semibold text-indigo-600 bg-indigo-100/50 px-2 py-0.5 rounded-md border border-indigo-200/50">ประกาศ</span>
+                    <span className="text-[11px] text-slate-500 flex items-center gap-1">18 พ.ค. 2569</span>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white shadow-sm text-slate-400 flex items-center justify-center group-hover:text-indigo-500 transition-colors duration-300 shrink-0">
                   <ChevronRight size={16} />
                 </div>
               </div>
@@ -180,6 +190,23 @@ export default function MobileHome() {
             </div>
           </div>
           
+          {/* SOS Emergency Banner (Moved to bottom) */}
+          <div className="mt-8">
+            <Link to="/mobile/scholar/safety" className="block bg-red-50/80 rounded-[20px] p-4 border border-red-100 hover:bg-red-50 transition-all duration-300 group">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-[16px] bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 text-red-500 border border-red-100">
+                  <AlertCircle size={20} strokeWidth={2.5} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-red-700 text-[15px]">แจ้งสถานะความปลอดภัย (SOS)</h3>
+                  <p className="text-[12px] text-red-500/80 mt-0.5">ในกรณีเกิดเหตุฉุกเฉิน/ภัยพิบัติ</p>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white shadow-sm text-slate-400 flex items-center justify-center group-hover:text-red-500 transition-colors duration-300 shrink-0">
+                  <ChevronRight size={16} strokeWidth={2.5} />
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

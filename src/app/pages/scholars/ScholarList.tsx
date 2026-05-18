@@ -21,6 +21,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '../../components/ui/table';
 import { toast } from 'sonner';
+import { FilterCombobox } from '../../components/ui/filter-combobox';
 
 // ===== Types =====
 interface ScholarAwardSummary {
@@ -50,17 +51,17 @@ const mockScholars: ScholarListItem[] = [
   { id: 'SCH-2569-001', title: 'น.ส.', firstName: 'พรพิมล', lastName: 'สุขใจ', workGroup: 'นทร.1',
     awards: [
       { awardId: 'AWD-001', scholarshipName: 'ทุนเล่าเรียนหลวง', yearReceived: '2563', startDate: 'ส.ค. 2563', endDate: 'มิ.ย. 2567', degreeLevel: 'ป.ตรี', country: 'สหราชอาณาจักร', university: 'Imperial College London', currentPhase: 'สำเร็จการศึกษา', status: 'completed' },
-      { awardId: 'AWD-002', scholarshipName: 'ทุนรัฐบาล (ก.พ.) พัฒนา', yearReceived: '2569', startDate: 'ส.ค. 2569', endDate: 'ก.ค. 2573', degreeLevel: 'ป.เอก', country: 'สหรัฐอเมริกา', university: 'Stanford University', currentPhase: 'ก่อนเดินทาง', status: 'active' },
+      { awardId: 'AWD-002', scholarshipName: 'ทุนรัฐบาล (ก.พ.) พัฒนา', yearReceived: '2569', startDate: 'ส.ค. 2569', endDate: 'ก.ค. 2573', degreeLevel: 'ป.เอก', country: 'สหรัฐอเมริกา', university: 'Stanford University', currentPhase: 'ระหว่างศึกษา', status: 'active' },
     ],
   },
   { id: 'SCH-2569-002', title: 'นาย', firstName: 'ธนวัฒน์', lastName: 'เจริญศรี', workGroup: 'นทร.1',
     awards: [{ awardId: 'AWD-003', scholarshipName: 'ทุนรัฐบาล (ก.พ.) ทั่วไป', yearReceived: '2568', startDate: 'ส.ค. 2568', endDate: 'พ.ค. 2570', degreeLevel: 'ป.โท', country: 'ญี่ปุ่น', university: 'University of Tokyo', currentPhase: 'ระหว่างศึกษา', status: 'active' }],
   },
   { id: 'SCH-2569-003', title: 'น.ส.', firstName: 'สิริกัญญา', lastName: 'วงศ์ประดิษฐ์', workGroup: 'นทร.2',
-    awards: [{ awardId: 'AWD-004', scholarshipName: 'ทุน KOSEN', yearReceived: '2569', startDate: 'ต.ค. 2569', endDate: 'มี.ค. 2573', degreeLevel: 'ป.ตรี', country: 'ญี่ปุ่น', university: 'National Institute of Technology', currentPhase: 'ก่อนเดินทาง', status: 'active' }],
+    awards: [{ awardId: 'AWD-004', scholarshipName: 'ทุน KOSEN', yearReceived: '2569', startDate: 'ต.ค. 2569', endDate: 'มี.ค. 2573', degreeLevel: 'ป.ตรี', country: 'ญี่ปุ่น', university: 'National Institute of Technology', currentPhase: 'ระหว่างศึกษา', status: 'active' }],
   },
   { id: 'SCH-2569-004', title: 'นาย', firstName: 'ปรัชญา', lastName: 'คงทอง', workGroup: 'นทร.1',
-    awards: [{ awardId: 'AWD-005', scholarshipName: 'ทุน UCAS', yearReceived: '2569', startDate: 'ก.ย. 2569', endDate: 'มิ.ย. 2573', degreeLevel: 'ป.ตรี', country: 'สหราชอาณาจักร', university: 'University of Oxford', currentPhase: 'ก่อนเดินทาง', status: 'active' }],
+    awards: [{ awardId: 'AWD-005', scholarshipName: 'ทุน UCAS', yearReceived: '2569', startDate: 'ก.ย. 2569', endDate: 'มิ.ย. 2573', degreeLevel: 'ป.ตรี', country: 'สหราชอาณาจักร', university: 'University of Oxford', currentPhase: 'ระหว่างศึกษา', status: 'active' }],
   },
   { id: 'SCH-2569-005', title: 'น.ส.', firstName: 'ณิชา', lastName: 'ศิริมงคล', workGroup: 'นทร.3',
     awards: [{ awardId: 'AWD-006', scholarshipName: 'ทุน สป.อว. เรียนดี', yearReceived: '2567', startDate: 'ต.ค. 2567', endDate: 'ก.ย. 2569', degreeLevel: 'ป.โท', country: 'เยอรมนี', university: 'TU Munich', currentPhase: 'ระหว่างศึกษา', status: 'active' }],
@@ -73,7 +74,7 @@ const mockScholars: ScholarListItem[] = [
   },
   { id: 'SCH-2569-008', title: 'นาย', firstName: 'วรินทร์', lastName: 'สุทธิวงศ์', workGroup: 'นทร.1',
     awards: [
-      { awardId: 'AWD-009', scholarshipName: 'ทุน ป.โดดเด่น', yearReceived: '2569', startDate: 'ก.ย. 2569', endDate: 'มิ.ย. 2573', degreeLevel: 'ป.เอก', country: 'สหรัฐอเมริกา', university: 'Caltech', currentPhase: 'ก่อนเดินทาง', status: 'active' },
+      { awardId: 'AWD-009', scholarshipName: 'ทุน ป.โดดเด่น', yearReceived: '2569', startDate: 'ก.ย. 2569', endDate: 'มิ.ย. 2573', degreeLevel: 'ป.เอก', country: 'สหรัฐอเมริกา', university: 'Caltech', currentPhase: 'ระหว่างศึกษา', status: 'active' },
       { awardId: 'AWD-010', scholarshipName: 'ทุนฝึกอบรม', yearReceived: '2562', startDate: 'ม.ค. 2562', endDate: 'มิ.ย. 2562', degreeLevel: 'ฝึกอบรม', country: 'สวิตเซอร์แลนด์', university: 'ETH Zurich', currentPhase: 'สำเร็จการศึกษา', status: 'completed' },
     ],
   },
@@ -83,6 +84,12 @@ const phaseColor: Record<string, string> = { 'ก่อนเดินทาง'
 const workGroups = ['ทั้งหมด', 'นทร.1', 'นทร.2', 'นทร.3', 'นทร.4'];
 const phaseFilters = ['ทั้งหมด', 'ก่อนเดินทาง', 'ระหว่างศึกษา', 'สำเร็จการศึกษา'];
 
+const uniqueTypes = Array.from(new Set(mockScholars.flatMap(s => s.awards.map(a => a.scholarshipName))));
+const typeFilters = ['ทั้งหมด', ...uniqueTypes];
+
+const uniqueCountries = Array.from(new Set(mockScholars.flatMap(s => s.awards.map(a => a.country)))).sort();
+const countryOptions = uniqueCountries.map(c => ({ value: c, label: c }));
+
 export default function ScholarList() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -90,6 +97,8 @@ export default function ScholarList() {
   const [selectedGroup, setSelectedGroup] = useState('ทั้งหมด');
   const [selectedPhase, setSelectedPhase] = useState('ทั้งหมด');
   const [selectedYear, setSelectedYear] = useState('ทั้งหมด');
+  const [selectedType, setSelectedType] = useState('ทั้งหมด');
+  const [selectedCountry, setSelectedCountry] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
 
   // Import Excel Dialogs
@@ -109,10 +118,12 @@ export default function ScholarList() {
     const matchGroup = selectedGroup === 'ทั้งหมด' || s.workGroup === selectedGroup;
     const matchPhase = selectedPhase === 'ทั้งหมด' || s.awards.some(a => a.currentPhase === selectedPhase);
     const matchYear = selectedYear === 'ทั้งหมด' || s.awards.some(a => a.yearReceived === selectedYear);
-    return matchSearch && matchGroup && matchPhase && matchYear;
+    const matchType = selectedType === 'ทั้งหมด' || s.awards.some(a => a.scholarshipName === selectedType);
+    const matchCountry = selectedCountry === 'all' || s.awards.some(a => a.country === selectedCountry);
+    return matchSearch && matchGroup && matchPhase && matchYear && matchType && matchCountry;
   });
 
-  const allAwards = mockScholars.flatMap(s => s.awards);
+  const filteredAwards = filtered.flatMap(s => s.awards);
 
   return (
     <div className="min-h-full">
@@ -125,12 +136,16 @@ export default function ScholarList() {
             <p className="text-sm text-gray-500 mt-1">ภาพรวมของนักเรียนทุนทุกระยะ และจัดการข้อมูลต่างๆ</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={() => setImportDialogOpen(true)} variant="outline" className="gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50 shadow-sm">
-              <Upload className="w-4 h-4" /> นำเข้าข้อมูล (Excel)
-            </Button>
-            <Button className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
-              <Plus className="w-4 h-4" /> เพิ่มนักเรียนทุน
-            </Button>
+            {user?.role !== 'oea' && (
+              <>
+                <Button onClick={() => setImportDialogOpen(true)} variant="outline" className="gap-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50 shadow-sm">
+                  <Upload className="w-4 h-4" /> นำเข้าข้อมูล (Excel)
+                </Button>
+                <Button className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
+                  <Plus className="w-4 h-4" /> เพิ่มนักเรียนทุน
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
@@ -143,7 +158,7 @@ export default function ScholarList() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-indigo-700">นักเรียนทุนทั้งหมด</p>
-                    <p className="text-3xl font-bold bg-gradient-to-br from-indigo-600 to-indigo-800 bg-clip-text text-transparent mt-1">{mockScholars.length}</p>
+                    <p className="text-3xl font-bold bg-gradient-to-br from-indigo-600 to-indigo-800 bg-clip-text text-transparent mt-1">{filtered.length}</p>
                     <p className="text-xs text-indigo-600 mt-1">คน (ทุกสถานะ)</p>
                   </div>
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/40">
@@ -162,7 +177,7 @@ export default function ScholarList() {
                   <div>
                     <p className="text-sm font-medium text-blue-700">ระยะก่อนเดินทาง</p>
                     <p className="text-3xl font-bold bg-gradient-to-br from-blue-600 to-blue-800 bg-clip-text text-transparent mt-1">
-                      {allAwards.filter(a => a.currentPhase === 'ก่อนเดินทาง' && a.status === 'active').length}
+                      {filteredAwards.filter(a => a.currentPhase === 'ก่อนเดินทาง' && a.status === 'active').length}
                     </p>
                     <p className="text-xs text-blue-600 mt-1">เตรียมความพร้อม</p>
                   </div>
@@ -182,7 +197,7 @@ export default function ScholarList() {
                   <div>
                     <p className="text-sm font-medium text-emerald-700">ระยะระหว่างศึกษา</p>
                     <p className="text-3xl font-bold bg-gradient-to-br from-emerald-600 to-emerald-800 bg-clip-text text-transparent mt-1">
-                      {allAwards.filter(a => a.currentPhase === 'ระหว่างศึกษา' && a.status === 'active').length}
+                      {filteredAwards.filter(a => a.currentPhase === 'ระหว่างศึกษา' && a.status === 'active').length}
                     </p>
                     <p className="text-xs text-emerald-600 mt-1">กำลังศึกษา</p>
                   </div>
@@ -202,7 +217,7 @@ export default function ScholarList() {
                   <div>
                     <p className="text-sm font-medium text-amber-700">สำเร็จการศึกษา</p>
                     <p className="text-3xl font-bold bg-gradient-to-br from-amber-600 to-amber-800 bg-clip-text text-transparent mt-1">
-                      {allAwards.filter(a => a.currentPhase === 'สำเร็จการศึกษา').length}
+                      {filteredAwards.filter(a => a.currentPhase === 'สำเร็จการศึกษา').length}
                     </p>
                     <p className="text-xs text-amber-700 font-medium mt-1">รอชดใช้ทุน/รายงานตัว</p>
                   </div>
@@ -232,26 +247,48 @@ export default function ScholarList() {
 
         <AnimatePresence>
           {showFilters && (
-            <motion.div initial={{ height: 0, opacity: 0, y: -10 }} animate={{ height: 'auto', opacity: 1, y: 0 }} exit={{ height: 0, opacity: 0, y: -10 }} className="flex gap-8 p-5 bg-white border border-gray-200/60 rounded-xl shadow-sm overflow-hidden">
-              <div>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">กลุ่มงานผู้ดูแล</p>
-                <div className="flex flex-wrap gap-2">{workGroups.map(g => (
-                  <button key={g} onClick={() => setSelectedGroup(g)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedGroup === g ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300 hover:text-blue-700')}>{g}</button>
-                ))}</div>
+            <motion.div initial={{ height: 0, opacity: 0, y: -10 }} animate={{ height: 'auto', opacity: 1, y: 0 }} exit={{ height: 0, opacity: 0, y: -10 }} className="flex flex-col gap-6 p-5 bg-white border border-gray-200/60 rounded-xl shadow-sm overflow-hidden">
+              <div className="flex gap-8">
+                <div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">กลุ่มงานผู้ดูแล</p>
+                  <div className="flex flex-wrap gap-2">{workGroups.map(g => (
+                    <button key={g} onClick={() => setSelectedGroup(g)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedGroup === g ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300 hover:text-blue-700')}>{g}</button>
+                  ))}</div>
+                </div>
+                <div className="w-px bg-gray-100" />
+                <div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ระยะการศึกษา</p>
+                  <div className="flex flex-wrap gap-2">{phaseFilters.map(p => (
+                    <button key={p} onClick={() => setSelectedPhase(p)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedPhase === p ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-700')}>{p}</button>
+                  ))}</div>
+                </div>
+                <div className="w-px bg-gray-100" />
+                <div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ปีที่ได้รับทุน</p>
+                  <div className="flex flex-wrap gap-2">{['ทั้งหมด', '2569', '2568', '2567', '2566', '2565'].map(y => (
+                    <button key={y} onClick={() => setSelectedYear(y)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedYear === y ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-emerald-300 hover:text-emerald-700')}>{y}</button>
+                  ))}</div>
+                </div>
               </div>
-              <div className="w-px bg-gray-100" />
-              <div>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ระยะการศึกษา</p>
-                <div className="flex flex-wrap gap-2">{phaseFilters.map(p => (
-                  <button key={p} onClick={() => setSelectedPhase(p)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedPhase === p ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-700')}>{p}</button>
-                ))}</div>
-              </div>
-              <div className="w-px bg-gray-100" />
-              <div>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ปีที่ได้รับทุน</p>
-                <div className="flex flex-wrap gap-2">{['ทั้งหมด', '2569', '2568', '2567', '2566', '2565'].map(y => (
-                  <button key={y} onClick={() => setSelectedYear(y)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedYear === y ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-emerald-300 hover:text-emerald-700')}>{y}</button>
-                ))}</div>
+              <div className="h-px bg-gray-100 w-full" />
+              <div className="flex gap-8">
+                <div>
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ประเภททุน</p>
+                  <div className="flex flex-wrap gap-2">{typeFilters.map(t => (
+                    <button key={t} onClick={() => setSelectedType(t)} className={cn('px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all border', selectedType === t ? 'bg-violet-600 text-white border-violet-600 shadow-md shadow-violet-500/20' : 'bg-white text-gray-600 border-gray-200 hover:border-violet-300 hover:text-violet-700')}>{t}</button>
+                  ))}</div>
+                </div>
+                <div className="w-px bg-gray-100" />
+                <div className="flex-1 max-w-sm">
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">ประเทศที่ศึกษา</p>
+                  <FilterCombobox 
+                    options={countryOptions}
+                    value={selectedCountry}
+                    onChange={setSelectedCountry}
+                    placeholder="ค้นหาประเทศ..."
+                    allLabel="ทุกประเทศ"
+                  />
+                </div>
               </div>
             </motion.div>
           )}

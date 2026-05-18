@@ -29,7 +29,7 @@ const tabs = [
   { id: 'contracts', label: 'สัญญา & ค้ำประกัน', icon: FileCheck },
   { id: 'progress', label: 'ผลการศึกษา', icon: BookOpen },
   { id: 'finance', label: 'การเงิน & เบิกจ่าย', icon: Wallet },
-  { id: 'requests', label: 'คำขอ & อนุมัติ', icon: ClipboardList },
+  { id: 'requests', label: 'รายการคำขอ', icon: ClipboardList },
   { id: 'health', label: 'สุขภาพ (กาย/จิต)', icon: Stethoscope },
   { id: 'bond', label: 'ชดใช้ทุน', icon: Briefcase },
   { id: 'workplace', label: 'สถานที่ทำงาน', icon: MapPin },
@@ -328,11 +328,7 @@ export default function AwardDetail() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {activeTab === 'requests' ? (
-                      <Button size="sm" onClick={() => setEformSelectionDialogOpen(true)} className="gap-1.5 bg-indigo-600 hover:bg-indigo-700 shadow-sm h-8 text-xs">
-                        <Plus className="w-3.5 h-3.5" /> ยื่นคำขอใหม่
-                      </Button>
-                    ) : (
+                    {activeTab !== 'requests' && (
                       ['overview', 'place-of-study', 'bond', 'workplace'].includes(activeTab) && (
                         !isEditing ? (
                           <Button size="sm" onClick={() => setIsEditing(true)} variant="outline" className="gap-1.5 border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800 h-8 text-xs bg-white shadow-sm">
@@ -605,46 +601,79 @@ export default function AwardDetail() {
                   )}
 
                   {activeTab === 'requests' && (
-                    <div className="space-y-4">
-                      <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex justify-between items-center">
-                        <div>
-                          <h4 className="font-semibold text-blue-900 text-sm">
-                            {user?.role === 'oea' ? 'คำขอที่รอการอนุมัติ (Pending Approvals)' : 'ประวัติคำขอ e-Form'}
+                    <div className="space-y-6">
+                      {/* Section: Pending Requests */}
+                      <div>
+                        <div className="mb-3">
+                          <h4 className="font-semibold text-blue-900 text-sm flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-blue-600" />
+                            คำขอที่รออนุมัติ
                           </h4>
-                          <p className="text-[11px] text-blue-700 mt-1">
-                            {user?.role === 'oea' ? 'รายการคำขอที่ต้องการการตรวจสอบและอนุมัติจาก สนร.' : 'รายการคำขออนุมัติ หรือแจ้งข้อมูลเพิ่มเติมทั้งหมดที่ได้ยื่นเข้ามาในระบบ'}
-                          </p>
                         </div>
-                        {user?.role !== 'oea' && (
-                          <Button size="sm" onClick={() => setEformSelectionDialogOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm h-8 text-xs gap-1.5"><Send className="w-3.5 h-3.5" /> ยื่นคำขอใหม่</Button>
-                        )}
+                        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+                          <table className="w-full text-left text-[13px]">
+                            <thead className="bg-slate-50 border-b border-gray-100 text-[11px] uppercase font-bold text-gray-500">
+                              <tr>
+                                <th className="px-4 py-3">รหัสคำขอ</th>
+                                <th className="px-4 py-3">ประเภทคำขอ</th>
+                                <th className="px-4 py-3">วันที่ส่ง</th>
+                                <th className="px-4 py-3 text-right">สถานะ</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-100">
+                              <tr className="hover:bg-gray-50/50 transition-colors">
+                                <td className="px-4 py-4 font-mono text-gray-500 text-xs">REQ-2026-001</td>
+                                <td className="px-4 py-4 font-medium">คำขออนุมัติการเดินทาง</td>
+                                <td className="px-4 py-4 text-gray-500">01/08/2569</td>
+                                <td className="px-4 py-4 text-right">
+                                  <Button size="sm" onClick={() => navigate('/applications/REQ-2026-001')} className="bg-amber-100 hover:bg-amber-200 text-amber-800 text-[10px] h-6 px-3 border border-amber-200 shadow-sm">
+                                    รอตรวจสอบ
+                                  </Button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                      
-                      <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                        <table className="w-full text-left text-[13px]">
-                          <thead className="bg-slate-50 border-b border-gray-100 text-[11px] uppercase font-bold text-gray-500">
-                            <tr>
-                              <th className="px-4 py-3">รหัสคำขอ</th>
-                              <th className="px-4 py-3">ประเภทคำขอ</th>
-                              <th className="px-4 py-3">วันที่ส่ง</th>
-                              <th className="px-4 py-3">สถานะ</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-gray-100">
-                            <tr className="hover:bg-gray-50/50 transition-colors">
-                              <td className="px-4 py-4 font-mono text-gray-500 text-xs">REQ-2026-001</td>
-                              <td className="px-4 py-4 font-medium">คำขออนุมัติการเดินทาง</td>
-                              <td className="px-4 py-4 text-gray-500">01/08/2569</td>
-                              <td className="px-4 py-4">
-                                {user?.role === 'oea' ? (
-                                  <Button size="sm" className="bg-amber-100 hover:bg-amber-200 text-amber-800 text-[10px] h-6 px-3 border border-amber-200">ตรวจสอบและอนุมัติ</Button>
-                                ) : (
+
+                      {/* Section: Recent Requests */}
+                      <div>
+                        <div className="mb-3">
+                          <h4 className="font-semibold text-gray-900 text-sm flex items-center gap-2">
+                            <ClipboardList className="w-4 h-4 text-gray-500" />
+                            คำขอล่าสุด
+                          </h4>
+                        </div>
+                        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm opacity-80 hover:opacity-100 transition-opacity">
+                          <table className="w-full text-left text-[13px]">
+                            <thead className="bg-slate-50 border-b border-gray-100 text-[11px] uppercase font-bold text-gray-500">
+                              <tr>
+                                <th className="px-4 py-3">รหัสคำขอ</th>
+                                <th className="px-4 py-3">ประเภทคำขอ</th>
+                                <th className="px-4 py-3">วันที่ส่ง</th>
+                                <th className="px-4 py-3 text-right">สถานะ</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-100">
+                              <tr className="hover:bg-gray-50/50 transition-colors">
+                                <td className="px-4 py-4 font-mono text-gray-500 text-xs">REQ-2025-089</td>
+                                <td className="px-4 py-4 font-medium">ขอหนังสือรับรองเพื่อประกอบการขอวีซ่า</td>
+                                <td className="px-4 py-4 text-gray-500">15/06/2568</td>
+                                <td className="px-4 py-4 text-right">
                                   <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px]">อนุมัติแล้ว</Badge>
-                                )}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                                </td>
+                              </tr>
+                              <tr className="hover:bg-gray-50/50 transition-colors">
+                                <td className="px-4 py-4 font-mono text-gray-500 text-xs">REQ-2025-012</td>
+                                <td className="px-4 py-4 font-medium">ขอให้ชำระค่าใช้จ่ายก่อนได้รับวีซ่า</td>
+                                <td className="px-4 py-4 text-gray-500">10/02/2568</td>
+                                <td className="px-4 py-4 text-right">
+                                  <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[10px]">อนุมัติแล้ว</Badge>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   )}

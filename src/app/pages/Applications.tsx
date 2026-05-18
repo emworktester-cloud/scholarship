@@ -49,7 +49,7 @@ const tasks = [
     id: 'REQ-2026-001',
     applicant: 'นายสมชาย ใจดี',
     requestType: 'ขอขยายระยะเวลาศึกษา',
-    status: 'รอตรวจเอกสาร',
+    status: 'รอตรวจสอบ',
     priority: 'high',
     sla: 'เหลือ 2 ชั่วโมง',
     slaStatus: 'critical',
@@ -105,7 +105,7 @@ const tasks = [
     id: 'REQ-2026-005',
     applicant: 'นายสมเกียรติ ยิ่งใหญ่',
     requestType: 'ลงนามลายเซ็นอิเล็กทรอนิกส์ (e-Sign)',
-    status: 'รอตรวจเอกสาร',
+    status: 'รอตรวจสอบ',
     priority: 'high',
     sla: 'เหลือ 1 ชั่วโมง',
     slaStatus: 'critical',
@@ -170,7 +170,7 @@ export default function Applications() {
     }
 
     if (activeTab !== 'all') {
-      if (activeTab === 'checking' && task.status !== 'รอตรวจเอกสาร') return false;
+      if (activeTab === 'checking' && task.status !== 'รอตรวจสอบ') return false;
       if (activeTab === 'requesting' && task.status !== 'รอตอบข้อมูลเพิ่ม') return false;
       if (activeTab === 'reviewing' && task.status !== 'รอพิจารณา') return false;
       if (activeTab === 'approving' && task.status !== 'รออนุมัติ') return false;
@@ -240,10 +240,10 @@ export default function Applications() {
   return (
     <div className="min-h-full">
       <PageHeader
-        title={location.pathname.includes('/e-sign') ? "ลายเซ็นอิเล็กทรอนิกส์" : location.pathname.endsWith('/all') ? "คำร้องทั้งหมด" : "งานรอดำเนินการ"}
+        title={location.pathname.includes('/e-sign') ? "ลายเซ็นอิเล็กทรอนิกส์" : location.pathname.endsWith('/all') ? "คำขอ & อนุมัติ ทั้งหมด" : "คำขอ & อนุมัติ (รอดำเนินการ)"}
         breadcrumbs={[
           { label: 'แดชบอร์ด', href: '/' },
-          { label: 'คิวงาน' }
+          { label: 'คำขอ & อนุมัติ' }
         ]}
         actions={
           <div className="flex gap-2">
@@ -391,7 +391,7 @@ export default function Applications() {
               <Badge variant="secondary" className="ml-2">5</Badge>
             </TabsTrigger>
             <TabsTrigger value="checking">
-              รอตรวจเอกสาร
+              รอตรวจสอบ
               <Badge variant="secondary" className="ml-2">8</Badge>
             </TabsTrigger>
             <TabsTrigger value="requesting">

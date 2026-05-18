@@ -5,7 +5,7 @@ import {
   User, GraduationCap, Award, Mail, Phone, MapPin, Calendar,
   Globe, ChevronRight, BookOpen, Edit, Plus, Plane, ChevronLeft,
   Camera, Languages, Stethoscope, Shield, FileCheck, ClipboardList, Save, X, Info, Trash2, Eye, Upload, Building,
-  Activity, MessageSquare, PhoneCall, FileText, CheckCircle
+  Activity, MessageSquare, PhoneCall, FileText, CheckCircle, Send
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -17,6 +17,10 @@ import { Input } from '../../components/ui/input';
 import { cn } from '../../components/ui/utils';
 import { CountryFlag } from '../../components/ui/country-flag';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../components/ui/dialog';
+import { Textarea } from '../../components/ui/textarea';
+import { Checkbox } from '../../components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
+import { toast } from 'sonner';
 
 // ===== Mock Data =====
 const mockPerson = {
@@ -41,7 +45,7 @@ const mockPerson = {
 
   awards: [
     { id: 'AWD-001', name: 'ทุนเล่าเรียนหลวง', type: 'พระราชทาน', degree: 'ป.ตรี', field: 'ฟิสิกส์ทฤษฎี', university: 'Imperial College London', country: 'สหราชอาณาจักร', start: 'ส.ค. 2563', end: 'มิ.ย. 2567', phase: 'สำเร็จการศึกษา' as const, status: 'completed' as const, completeness: 100, contracts: 2, requests: 3 },
-    { id: 'AWD-002', name: 'ทุนรัฐบาล (ก.พ.) พัฒนา', type: 'ทุน ก.พ.', degree: 'ป.เอก', field: 'วิศวกรรมคอมพิวเตอร์', university: 'Stanford University', country: 'สหรัฐอเมริกา', start: 'ส.ค. 2569', end: 'ก.ค. 2573', phase: 'ก่อนเดินทาง' as const, status: 'active' as const, completeness: 68, contracts: 1, requests: 0 },
+    { id: 'AWD-002', name: 'ทุนรัฐบาล (ก.พ.) พัฒนา', type: 'ทุน ก.พ.', degree: 'ป.เอก', field: 'วิศวกรรมคอมพิวเตอร์', university: 'Stanford University', country: 'สหรัฐอเมริกา', start: 'ส.ค. 2569', end: 'ก.ค. 2573', phase: 'ระหว่างศึกษา' as const, status: 'active' as const, completeness: 68, contracts: 1, requests: 0 },
   ],
 };
 
@@ -76,6 +80,7 @@ export default function ScholarProfile() {
   // List UI States
   const [listMode, setListMode] = useState<'list' | 'add' | 'edit' | 'view'>('list');
   const [activeItem, setActiveItem] = useState<any>(null);
+  const [broadcastDialogOpen, setBroadcastDialogOpen] = useState(false);
 
   const p = mockPerson;
 
@@ -159,7 +164,7 @@ export default function ScholarProfile() {
                       className="flex items-center gap-2 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:border-indigo-300 hover:shadow-sm cursor-pointer transition-all group"
                     >
                       <Award className="w-4 h-4 text-indigo-600 group-hover:scale-110 transition-transform" />
-                      <span className="font-bold text-indigo-700 text-[13px]">ทุนปัจจุบัน: {p.awards.find(a => a.status === 'active')?.name} ({p.awards.find(a => a.status === 'active')?.degree})</span>
+                      <span className="font-bold text-indigo-700 text-[13px]">ทุนปัจจุบัน: {p.awards.find(a => a.status === 'active')?.name}</span>
                     </div>
                   </div>
                 </div>
@@ -174,7 +179,7 @@ export default function ScholarProfile() {
             { id: 'awards' as const, label: 'ข้อมูลการรับทุน', icon: Award },
             { id: 'personal' as const, label: 'ข้อมูลส่วนบุคคล', icon: User },
             { id: 'contact_history' as const, label: 'ประวัติการติดต่อ', icon: Activity },
-            ...(user?.role === 'oea' ? [{ id: 'officer_notes' as const, label: 'บันทึกการดูแล (สนร.)', icon: ClipboardList }] : []),
+            ...(user?.role === 'oea' ? [{ id: 'officer_notes' as const, label: 'แจ้งข้อมูล (Broadcast)', icon: ClipboardList }] : []),
           ].map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -196,12 +201,12 @@ export default function ScholarProfile() {
                 <div>
                   <h3 className="font-bold text-indigo-900 flex items-center gap-2">
                     <ClipboardList className="w-5 h-5 text-indigo-600" />
-                    บันทึกการดูแลนักเรียนทุน (Officer Notes)
+                    การแจ้งข้อมูล (Broadcast) ไปยังนักเรียนทุน
                   </h3>
-                  <p className="text-xs text-indigo-600/70 mt-0.5">บันทึกข้อความนี้จะแสดงเฉพาะเจ้าหน้าที่ สนร. เท่านั้น (นักเรียนทุนไม่สามารถมองเห็นได้)</p>
+                  <p className="text-xs text-indigo-600/70 mt-0.5">ส่งข้อความแจ้งเตือนหรือข้อมูลสำคัญถึงนักเรียนทุนรายบุคคลผ่านระบบ</p>
                 </div>
-                <Button className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2 shadow-sm">
-                  <Plus className="w-4 h-4" /> เพิ่มบันทึกใหม่
+                <Button onClick={() => setBroadcastDialogOpen(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2 shadow-sm">
+                  <Plus className="w-4 h-4" /> แจ้งข้อมูล (Broadcast) ไปยังนักเรียนทุน
                 </Button>
               </div>
               <CardContent className="p-0">
@@ -210,13 +215,13 @@ export default function ScholarProfile() {
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center gap-2">
                         <Avatar className="w-6 h-6"><AvatarFallback className="text-[10px] bg-indigo-100 text-indigo-700">OEA</AvatarFallback></Avatar>
-                        <span className="text-sm font-semibold text-gray-900">เจ้าหน้าที่ สนร. (Destiny)</span>
+                        <span className="text-sm font-semibold text-gray-900">เจ้าหน้าที่ สนร.</span>
                         <span className="text-xs text-gray-400 border-l border-gray-200 pl-2">เมื่อ 2 วันที่แล้ว</span>
                       </div>
                       <Badge className="bg-amber-100 text-amber-800 border-amber-200 font-normal">ติดตามผลการเรียน</Badge>
                     </div>
                     <p className="text-sm text-gray-600 leading-relaxed pl-8">
-                      ได้โทรศัพท์พูดคุยกับนักเรียนทุนเบื้องต้นเกี่ยวกับการลงทะเบียนเรียนในเทอมหน้า นักเรียนทุนแจ้งว่าอาจจะต้องดรอปบางวิชาเนื่องจากปัญหาสุขภาพ แนะนำให้ส่งใบรับรองแพทย์เข้ามาในระบบผ่าน e-Form ทันที
+                      ได้ส่งข้อความแจ้งนักเรียนทุนเบื้องต้นเกี่ยวกับการลงทะเบียนเรียนในเทอมหน้า
                     </p>
                   </div>
                 </div>
@@ -593,7 +598,7 @@ export default function ScholarProfile() {
                 <div className="relative pl-8 space-y-10 border-l-2 border-gray-100 before:absolute before:inset-0 before:ml-[31px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0">
                   {[
                     { id: 1, date: '15/05/2569 14:30', type: 'email', title: 'ส่งอีเมลแจ้งเตือนการรายงานตัว', detail: 'ระบบส่งอีเมลอัตโนมัติแจ้งเตือนการรายงานตัวรอบ 6 เดือน', staff: 'ระบบอัตโนมัติ', icon: Mail, color: 'text-blue-500 bg-blue-50 border-blue-200' },
-                    { id: 2, date: '10/05/2569 09:15', type: 'call', title: 'นักเรียนทุนโทรสอบถามเรื่องการเบิกจ่าย', detail: 'สอบถามเรื่องเอกสารใบเสร็จค่าเทอมที่ต้องใช้เบิก แนะนำให้ใช้ฉบับจริงหรือสำเนาที่สถานศึกษารับรอง', staff: 'สมหญิง รักงาน', icon: PhoneCall, color: 'text-emerald-500 bg-emerald-50 border-emerald-200' },
+                    { id: 2, date: '10/05/2569 09:15', type: 'message', title: 'นักเรียนทุนสอบถามเรื่องการเบิกจ่ายผ่านระบบ', detail: 'ส่งข้อความสอบถามเรื่องเอกสารใบเสร็จค่าเทอมที่ต้องใช้เบิก แนะนำให้ใช้ฉบับจริงหรือสำเนาที่สถานศึกษารับรอง', staff: 'สมหญิง รักงาน', icon: MessageSquare, color: 'text-emerald-500 bg-emerald-50 border-emerald-200' },
                     { id: 3, date: '01/05/2569 11:00', type: 'system', title: 'อัปเดตสถานะเป็น "ระหว่างศึกษา"', detail: 'อัปเดตสถานะทุนเป็นระหว่างศึกษา เนื่องจากถึงกำหนดเดินทางและรายงานตัวเข้าศึกษาแล้ว', staff: 'ระบบอัตโนมัติ', icon: Activity, color: 'text-indigo-500 bg-indigo-50 border-indigo-200' },
                     { id: 4, date: '28/04/2569 15:45', type: 'document', title: 'รับเอกสารสัญญารับทุน', detail: 'ได้รับสัญญาฉบับจริงพร้อมลายเซ็นผู้ค้ำประกัน ตรวจสอบแล้วถูกต้องครบถ้วน อัปโหลดเข้าระบบเรียบร้อย', staff: 'สมหญิง รักงาน', icon: FileText, color: 'text-amber-500 bg-amber-50 border-amber-200' },
                     { id: 5, date: '20/04/2569 10:30', type: 'meeting', title: 'เข้าร่วมปฐมนิเทศนักเรียนทุน', detail: 'เข้าร่วมรับฟังการชี้แจงกฎระเบียบและข้อบังคับก่อนเดินทางไปศึกษาต่อต่างประเทศ ณ ห้องประชุมชั้น 5', staff: 'เจ้าหน้าที่ สนร.', icon: MessageSquare, color: 'text-purple-500 bg-purple-50 border-purple-200' }
@@ -645,6 +650,60 @@ export default function ScholarProfile() {
           <div className="border-t bg-white px-6 py-4 flex justify-end gap-3 sticky bottom-0 z-10">
             <Button variant="outline" onClick={() => setAddAwardOpen(false)}>ยกเลิก</Button>
             <Button className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm" onClick={() => setAddAwardOpen(false)}>บันทึกข้อมูลทุน</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={broadcastDialogOpen} onOpenChange={setBroadcastDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogTitle>แจ้งข้อมูล (Broadcast) ไปยังนักเรียนทุน</DialogTitle>
+          <DialogDescription>
+            ส่งข้อความแจ้งเตือนหรือข้อมูลสำคัญถึงนักเรียนทุนรายบุคคลผ่านระบบ
+          </DialogDescription>
+          
+          <div className="space-y-4 my-4">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium">ประเภทการแจ้งข้อมูล</label>
+              <Select defaultValue="ติดตามผลการเรียน">
+                <SelectTrigger className="border border-gray-300">
+                  <SelectValue placeholder="เลือกประเภท" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ติดตามผลการเรียน">ติดตามผลการเรียน</SelectItem>
+                  <SelectItem value="แจ้งเตือนเอกสาร">แจ้งเตือนเรื่องเอกสาร</SelectItem>
+                  <SelectItem value="เรื่องการเงิน">เรื่องการเงินและเบิกจ่าย</SelectItem>
+                  <SelectItem value="อื่นๆ">อื่นๆ</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium">ข้อความ (Message)</label>
+              <Textarea 
+                placeholder="พิมพ์ข้อความที่ต้องการแจ้งให้นักเรียนทุนทราบ..." 
+                className="min-h-[120px] border border-gray-300"
+              />
+            </div>
+            
+            <div className="flex items-center space-x-2 pt-2">
+              <Checkbox id="send-email" defaultChecked />
+              <label
+                htmlFor="send-email"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                ส่งสำเนาเข้าอีเมลนักเรียนทุนด้วย
+              </label>
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => setBroadcastDialogOpen(false)}>ยกเลิก</Button>
+            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white" onClick={() => {
+              toast.success('ส่งข้อมูล Broadcast เรียบร้อยแล้ว');
+              setBroadcastDialogOpen(false);
+            }}>
+              <Send className="w-4 h-4 mr-2" /> ส่งข้อความ
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

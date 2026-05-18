@@ -128,68 +128,6 @@ export default function MobileProfile() {
           </div>
         </div>
 
-        {/* Scholarship Info (Glassmorphic) */}
-        <div className="bg-white/90 backdrop-blur-2xl rounded-[32px] border border-white shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
-          <div className="px-5 py-4 bg-white/40 border-b border-blue-50/50">
-            <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider">ทุนการศึกษา</h2>
-          </div>
-          <div className="divide-y divide-slate-100">
-            {/* Active Award */}
-            <div className="p-5">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 flex items-center justify-center text-blue-500 shrink-0">
-                    <GraduationCap size={22} />
-                  </div>
-                  <div>
-                    <p className="text-[15px] font-bold text-slate-800 leading-snug">ทุนรัฐบาล (ก.พ.) ป.โท</p>
-                    <p className="text-xs text-slate-500 mt-1">University of Oxford</p>
-                  </div>
-                </div>
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">
-                  กำลังใช้งาน
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <Globe size={12} className="text-slate-400" />
-                    <span className="text-[10px] text-slate-500 font-medium">ประเทศ</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CountryFlag countryName="สหราชอาณาจักร" width="16px" height="12px" />
-                    <p className="text-[13px] font-semibold text-slate-700">สหราชอาณาจักร</p>
-                  </div>
-                </div>
-                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <Calendar size={12} className="text-slate-400" />
-                    <span className="text-[10px] text-slate-500 font-medium">เริ่มเรียน</span>
-                  </div>
-                  <p className="text-[13px] font-semibold text-slate-700">01/09/2025</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Completed Award */}
-            <div className="p-5 opacity-60">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400 shrink-0">
-                    <Briefcase size={22} />
-                  </div>
-                  <div>
-                    <p className="text-[15px] font-bold text-slate-800 leading-snug">ทุนเล่าเรียนหลวง ป.ตรี</p>
-                    <p className="text-xs text-slate-500 mt-1">University of Cambridge</p>
-                  </div>
-                </div>
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                  สำเร็จ
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* SNR Info (Glassmorphic) */}
         <div className="bg-white/90 backdrop-blur-2xl rounded-[32px] border border-white shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
@@ -203,6 +141,32 @@ export default function MobileProfile() {
             <div>
               <p className="text-[15px] font-bold text-slate-800">สนร. ลอนดอน</p>
               <p className="text-xs text-slate-500 mt-1">สำนักงานผู้ดูแลนักเรียนในสหราชอาณาจักร</p>
+            </div>
+          </div>
+          <div className="border-t border-slate-100 divide-y divide-slate-50 bg-slate-50/50">
+            <a href="https://maps.google.com/?q=28+Prince's+Gate,+London+SW7+1QF,+United+Kingdom" target="_blank" rel="noopener noreferrer" className="px-5 py-3.5 flex items-start gap-3 hover:bg-slate-100/80 transition-colors group">
+              <MapPin size={16} className="text-slate-400 shrink-0 mt-0.5 group-hover:text-blue-500 transition-colors" />
+              <div className="flex-1">
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-0.5">ที่อยู่ติดต่อ (นำทาง)</p>
+                <p className="text-[13px] text-slate-700 leading-snug font-medium group-hover:text-blue-600 transition-colors">28 Prince's Gate, London SW7 1QF, United Kingdom</p>
+              </div>
+              <div className="w-6 h-6 rounded-full bg-slate-200/50 flex items-center justify-center text-slate-400 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors shrink-0 mt-1">
+                <ChevronRight size={14} />
+              </div>
+            </a>
+            <div className="px-5 py-3.5 flex items-start gap-3">
+              <Phone size={16} className="text-slate-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-0.5">โทรศัพท์</p>
+                <p className="text-[13px] text-slate-700 font-medium">+44 (0) 20 7584 6666</p>
+              </div>
+            </div>
+            <div className="px-5 py-3.5 flex items-start gap-3">
+              <Mail size={16} className="text-slate-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-0.5">อีเมล</p>
+                <p className="text-[13px] text-slate-700 font-medium">info@oeauk.net</p>
+              </div>
             </div>
           </div>
         </div>
