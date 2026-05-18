@@ -210,7 +210,7 @@ export default function MobileAwardDetail() {
             onClick={() => setActiveTab("requests")}
             className={cn("px-4 py-2 rounded-full text-[13px] font-bold shrink-0 transition-colors shadow-sm", activeTab === "requests" ? "bg-blue-600 text-white border border-blue-600" : "bg-white text-slate-500 border border-slate-200 hover:bg-slate-50")}
           >
-            คำขอ & อนุมัติ
+            รายการคำขอ
           </button>
           <button 
             onClick={() => setActiveTab("health")}
@@ -293,13 +293,30 @@ export default function MobileAwardDetail() {
                 <p className="text-[11px] font-semibold text-slate-400 uppercase">ผู้ค้ำประกันคนที่ 2</p>
                 <p className="text-[14px] font-medium text-slate-800">นางสมศรี ใจดี (มารดา)</p>
               </div>
+              <div className="pt-2 border-t border-slate-100">
+                <h4 className="text-[11px] font-semibold text-slate-400 uppercase mb-3">เอกสารสัญญา</h4>
+                <a href="#" className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200 hover:border-blue-300 transition-all group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-red-50 text-red-500 flex items-center justify-center shrink-0">
+                      <span className="text-[10px] font-bold uppercase">PDF</span>
+                    </div>
+                    <div>
+                      <p className="text-[13px] font-bold text-slate-700 group-hover:text-blue-600">หนังสือสัญญาค้ำประกัน.pdf</p>
+                      <p className="text-[11px] text-slate-400">เซ็นชื่อเมื่อ: 15/08/2569</p>
+                    </div>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <FileCheck size={14} />
+                  </div>
+                </a>
+              </div>
             </div>
           )}
 
           {activeTab === "progress" && (
             <div className="space-y-4">
               <div className="space-y-1">
-                <p className="text-[11px] font-semibold text-slate-400 uppercase">เกรดเฉลี่ยสะสม (GPAX)</p>
+                <p className="text-[11px] font-semibold text-slate-400 uppercase">ผลการเรียน</p>
                 <p className="text-[20px] font-bold text-blue-600">3.85</p>
               </div>
               <div className="divide-y divide-slate-100 flex flex-col mt-4">
@@ -349,10 +366,17 @@ export default function MobileAwardDetail() {
               <div className="divide-y divide-slate-100 flex flex-col">
                 <div className="py-3 flex justify-between items-center">
                   <div>
-                    <p className="text-[13px] font-medium text-slate-800">ขอเบิกค่าคอมพิวเตอร์</p>
-                    <p className="text-[11px] text-slate-400">REQ-2026-0633</p>
+                    <p className="text-[13px] font-medium text-slate-800">ขออนุมัติเบิกจ่ายค่าอุปกรณ์การศึกษา</p>
+                    <p className="text-[11px] text-slate-400">แบบฟอร์ม DUR-32 • REQ-2026-0633</p>
                   </div>
-                  <span className="text-[10px] text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full">รอการตรวจสอบ</span>
+                  <span className="text-[10px] text-blue-600 font-medium bg-blue-50 px-2 py-0.5 rounded-full">รอตรวจสอบ</span>
+                </div>
+                <div className="py-3 flex justify-between items-center">
+                  <div>
+                    <p className="text-[13px] font-medium text-slate-800">รายงานผลการศึกษา ภาคเรียนที่ 1</p>
+                    <p className="text-[11px] text-slate-400">แบบฟอร์ม DUR-31 • REQ-2026-0512</p>
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">อนุมัติแล้ว</span>
                 </div>
               </div>
             </div>
@@ -360,8 +384,34 @@ export default function MobileAwardDetail() {
 
           {activeTab === "health" && (
             <div className="space-y-4">
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
-                <p className="text-[13px] text-slate-500">ไม่มีประวัติการแจ้งปัญหาสุขภาพ</p>
+              <h4 className="text-sm font-bold text-slate-800">ประวัติสุขภาพ (กาย/จิต)</h4>
+              <div className="space-y-3">
+                {[
+                  { title: 'ผลตรวจร่างกายประจำปี', date: '20/03/2569', hosp: 'รพ. ศิริราช', note: 'สุขภาพแข็งแรงดี ไม่มีโรคประจำตัว' },
+                  { title: 'ประเมินสุขภาพจิตเบื้องต้น', date: '20/03/2569', hosp: 'คลินิกจิตเวช', note: 'ปกติ ไม่มีความเครียดสะสม' },
+                ].map((h, i) => (
+                  <div key={i} className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
+                    <div className="flex items-center gap-3 mb-3 border-b border-slate-200/50 pb-2">
+                      <div className="w-8 h-8 bg-pink-50 rounded-lg flex items-center justify-center text-pink-500 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-[13px] font-bold text-slate-800">{h.title}</h4>
+                        <p className="text-[11px] text-slate-500 mt-0.5">{h.date}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-semibold text-slate-400 uppercase">สถานพยาบาล</span>
+                        <span className="text-[13px] font-medium text-slate-700">{h.hosp}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-semibold text-slate-400 uppercase">ผลการประเมิน</span>
+                        <span className="text-[13px] font-medium text-slate-700">{h.note}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
